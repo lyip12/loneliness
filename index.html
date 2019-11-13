@@ -1,0 +1,78 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>A Lonely Story | CS171</title>
+        <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
+
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/style.css">
+
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
+        <script src="/assets/data/boston_neighborhoods.json"></script>
+        <script src="/assets/data/boston_rodents.json"></script>
+    </head>
+    
+    <body style="background-color: #171d26">
+        <div class="section parallax">
+            <div class="row">
+                <div class="col-md-2"><p class="smalltext">CS171: Visualization</p></div>
+                <div class="col-md-4"><p class="smalltext"><b>Loneliness</b></p></div>
+                <div class="col-md-6"><div style="text-align-last: right;"><p class="smalltext">by Guangyu Du, Lucy Yip and Runjia Tian</p></div></div>
+            </div>
+
+            <div class="line"></div>
+            <div style="height:100px"></div>
+            <div class="row">
+                <div class="col-md-2">
+                    <!-- image from online sources 
+<img src="img/malaria.png" alt="COPYRIGHT INFO: The above image was found on flaticon.com" class="icon"> -->
+                </div>
+
+                <div class="col-md-3">
+                    <!-- toplevel headline -->
+                    <h1 class="bigtext">LONELINESS: A STORY</h1>
+                    <div style="height:50px"></div>
+                    <!-- paragraph text -->
+                    <p class="smalltext">
+                        <b>“But unlike personal memory, which seeks to reconcile or hide our interior conflicts, communal memory becomes contested public space. The stakes of this struggle are high because the outcome confers legitimacy, yet we also know that memory privileges what we want or need to believe. As a society, it means that we have often removed from our public memory the voices of dissent, and we have expunged from our physical and cultural landscape the ‘shadowed ground’ that reflects our shame. How then do we attempt to recover the unrecoverable and find our way through memory to identity and culture?” </b><em>- Bodenhamer, 26</em>
+                    </p>
+                </div>
+                <div class="col-md-1"></div>
+                <div class="col-md-3 containera"><p class="smalltext">
+                    <b>“We recognize our representations of space as value-laden guides to the world as we perceive it” </b><em>-David J. Bodenhamer, “The Potential of Spatial Humanities”</em><br><br> Monuments venerate a person or commemorate an event, relevant to a social group’s collective memory, history. In recent years communities are rethinking who and what they have memorialized, and if in fact the monuments are commemorating intolerance, violence and hate when viewed through a fuller understanding of history.
+                </div>
+                <div class="col-md-3 containera"><p class="smalltext">
+                    <b>Some memorials are being rethought, alteline or removed.</b> Once a memorial is removed, so is all visual evidence of the controversy. <b>This project preserves the memory, and journey of the debates, controversies and changes.</b><br><br><em>The geographic area is limited to Boston. </em></p>
+
+                </div>
+            </div>
+        </div>
+
+        <div style="height:100px"></div>
+
+
+        <!-- Load JS libraries -->
+        <script src="js/jquery.min.js"></script>
+        <script src="js/popper.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/queue.min.js"></script>
+        <script src="js/topojson.min.js"></script>
+        <script src="js/d3.min.js"></script>
+        <script src="js/d3-tip.js"></script>
+
+        <!-- Choropleth and second visualization -->
+        <script src="js/vis-choropleth.js"></script>
+        <script src="js/vis-second.js"></script>
+
+    </body>
+</html>

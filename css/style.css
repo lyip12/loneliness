@@ -1,0 +1,94 @@
+/* TEXT */
+
+h1.bigtext {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-size: 48px;
+    font-weight: 700;
+}
+
+h5 {
+    font-family: 'Roboto', sans-serif;
+    color: white;
+}
+
+p{
+    font-family: 'Roboto', sans-serif;
+}
+
+b{
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-weight: 700;
+}
+
+p.smalltext{
+    color: #FF5D5D;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+}
+
+p.smallertext{
+    color: white;
+    font-size: 8px;
+    font-weight: 300;
+    text-align: left;
+}
+
+a.hyprtxt{
+    color: crimson;
+    font-weight: 700;
+}
+
+#responsive-image {  
+    width: 90%;  height: auto; 
+} 
+
+/* IMAGES */
+
+img.icon{
+    width: 80%;
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+/* DIVS + FORMAT STUFF */
+
+div.section{
+    padding:100px;
+}
+
+.line{
+    margin-top: 2px;
+    margin-bottom: 15px;
+    height: 1px;
+    background: #FF3E63; 
+    margin-top: -5px;
+}
+
+
+/* CONTAINER */
+
+.svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%; /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+.svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 10px;
+    left: 0;
+}
+
+.containera {
+    align-items: flex-end;
+    display: flex;
+    justify-content: center;
+}
+
+
