@@ -11,6 +11,12 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
 
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.7.1/p5.min.js"></script>
+        <script src="libraries/p5.js" type="text/javascript"></script>
+        <script src="libraries/p5.dom.js" type="text/javascript"></script>
+        <script src="libraries/p5.sound.js" type="text/javascript"></script>
+        <script src="js/titlesketch.js" type="text/javascript"></script>
+
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -22,7 +28,9 @@
         <script src="/assets/data/boston_rodents.json"></script>
     </head>
     
-    <body style="background-color: #171d26">
+    <div id="p5Container"></div>
+    
+    <body style="background-color: #060d0f">
         <div class="section parallax">
             <div class="row">
                 <div class="col-md-2"><p class="smalltext">CS171: Visualization</p></div>
@@ -32,6 +40,7 @@
 
             <div class="line"></div>
             <div style="height:100px"></div>
+
             <div class="row">
                 <div class="col-md-2">
                     <!-- image from online sources 
@@ -41,16 +50,17 @@
                 <div class="col-md-3">
                     <!-- toplevel headline -->
                     <h1 class="bigtext">LONELINESS: A STORY</h1>
-                    <div style="height:50px"></div>
+                    <div style="height:25px"></div>
                     <!-- paragraph text -->
                     <p class="smalltext">
-                        <b>“But unlike personal memory, which seeks to reconcile or hide our interior conflicts, communal memory becomes contested public space. The stakes of this struggle are high because the outcome confers legitimacy, yet we also know that memory privileges what we want or need to believe. As a society, it means that we have often removed from our public memory the voices of dissent, and we have expunged from our physical and cultural landscape the ‘shadowed ground’ that reflects our shame. How then do we attempt to recover the unrecoverable and find our way through memory to identity and culture?” </b><em>- Bodenhamer, 26</em>
+                        <b>“Loneliness is defined as 'subjective distress’. It is  the discrepancy between the social relationships you want and the social relationships you have.” </b><em>- Dilip V. Jeste, M.D.</em>
                     </p>
                 </div>
                 <div class="col-md-1"></div>
-                <div class="col-md-3 containera"><p class="smalltext">
-                    <b>“We recognize our representations of space as value-laden guides to the world as we perceive it” </b><em>-David J. Bodenhamer, “The Potential of Spatial Humanities”</em><br><br> Monuments venerate a person or commemorate an event, relevant to a social group’s collective memory, history. In recent years communities are rethinking who and what they have memorialized, and if in fact the monuments are commemorating intolerance, violence and hate when viewed through a fuller understanding of history.
+                <div class="col-md-2 containera"><p class="smalltext">
+                    Loneliness is a sad reality of modern societies. Whether voluntary into solitude or forced into loneliness, we live in a multi-dimensional space with numerous factors that influence our social connections.We hope to use this project as an opportunity to explore the multitude of the subject through referencing and comparing existing quantitative and qualitative research data.
                 </div>
+                <div class="col-md-1"></div>
                 <div class="col-md-3 containera"><p class="smalltext">
                     <b>Some memorials are being rethought, alteline or removed.</b> Once a memorial is removed, so is all visual evidence of the controversy. <b>This project preserves the memory, and journey of the debates, controversies and changes.</b><br><br><em>The geographic area is limited to Boston. </em></p>
 

@@ -64,11 +64,11 @@ div.section{
     margin-bottom: 15px;
     height: 1px;
     background: #FF3E63; 
-    margin-top: -5px;
+    margin-top: -10px;
 }
 
 .parallax {
-  background-image: url("/assets/image/bokeh.jpg");
+  background-image: url("/img/bokeh.jpg");
   background-attachment: fixed;
   background-position: center;
   background-repeat: no-repeat;
