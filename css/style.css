@@ -5,49 +5,57 @@ h1.bigtext {
     color: white;
     font-size: 48px;
     font-weight: 700;
+    letter-spacing: 0.3em;
+    margin-right: -0.3em;
 }
 
-h5 {
-    font-family: 'Roboto', sans-serif;
+h3.cursive {
+    font-family: 'Sacramento', cursive;
     color: white;
+    font-size: 36px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    margin-right: -0.2em;
 }
 
-p{
+p {
     font-family: 'Roboto', sans-serif;
 }
 
-b{
+b {
     font-family: 'Roboto', sans-serif;
     color: white;
     font-weight: 700;
+    text-align: right;
 }
 
-p.smalltext{
-    color: #FF5D5D;
+p.smalltext {
+    color: #ff6666;
     font-size: 14px;
     font-weight: 300;
     text-align: left;
 }
 
-p.smallertext{
+p.smallertext {
     color: white;
     font-size: 8px;
     font-weight: 300;
     text-align: left;
 }
 
-a.hyprtxt{
-    color: crimson;
+a.hyprtxt {
+    color: #ff6666;
     font-weight: 700;
 }
 
-#responsive-image {  
-    width: 90%;  height: auto; 
-} 
+#responsive-image {
+    width: 90%;
+    height: auto;
+}
 
 /* IMAGES */
 
-img.icon{
+img.icon {
     width: 80%;
     margin-top: 5px;
     margin-bottom: 10px;
@@ -55,24 +63,24 @@ img.icon{
 
 /* DIVS + FORMAT STUFF */
 
-div.section{
-    padding:100px;
+div.section {
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
-.line{
-    margin-top: 2px;
-    margin-bottom: 15px;
+.line {
+    margin-top: 10px;
+    margin-bottom: 10px;
     height: 1px;
-    background: #FF3E63; 
-    margin-top: -10px;
+    background: #ff6666;
 }
 
 .parallax {
-  background-image: url("/img/bokeh.jpg");
-  background-attachment: fixed;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-size: cover;
+    background-image: url("/img/bokeh.jpg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 
@@ -82,10 +90,12 @@ div.section{
     display: inline-block;
     position: relative;
     width: 100%;
-    padding-bottom: 100%; /* aspect ratio */
+    padding-bottom: 100%;
+    /* aspect ratio */
     vertical-align: top;
     overflow: hidden;
 }
+
 .svg-content-responsive {
     display: inline-block;
     position: absolute;
@@ -99,4 +109,22 @@ div.section{
     justify-content: center;
 }
 
+.BeforeScroll
+{
+  height: 100px; /*Whatever you want*/
+  width: 100%; /*Whatever you want*/
+  .
+  .
+  display: none;
+}
 
+
+/*Use this class when you want your content to be shown after some scroll*/
+.AfterScroll
+{
+  height: 100px; /*Whatever you want*/
+  width: 100%; /*Whatever you want*/
+  .
+  .
+  display: block;
+}
