@@ -20,6 +20,7 @@ h3.cursive {
 
 p {
     font-family: 'Roboto', sans-serif;  
+    
 }
 
 em {
@@ -33,7 +34,8 @@ b {
     text-align: right;
 }
 
-p.smalltext {
+p.smalltext,
+label {
     color: #8293b6;
     font-size: 14px;
     font-weight: 300;
