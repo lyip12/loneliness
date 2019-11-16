@@ -19,8 +19,11 @@ h3.cursive {
 }
 
 p {
-    font-family: 'Roboto', sans-serif;
-    
+    font-family: 'Roboto', sans-serif;  
+}
+
+em {
+    color: #ff6666;
 }
 
 b {
@@ -37,7 +40,7 @@ p.smalltext {
     text-align: left;
 }
 
-p.smallertext {
+p.caption {
     color: white;
     font-size: 8px;
     font-weight: 300;
