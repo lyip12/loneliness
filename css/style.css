@@ -20,6 +20,7 @@ h3.cursive {
 
 p {
     font-family: 'Roboto', sans-serif;
+    
 }
 
 b {
@@ -30,7 +31,7 @@ b {
 }
 
 p.smalltext {
-    color: #ff6666;
+    color: #8293b6;
     font-size: 14px;
     font-weight: 300;
     text-align: left;
@@ -72,7 +73,7 @@ div.section {
     margin-top: 10px;
     margin-bottom: 10px;
     height: 1px;
-    background: #ff6666;
+    background: #8293b6;
 }
 
 .parallax {
