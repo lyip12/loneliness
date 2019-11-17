@@ -3,6 +3,7 @@ demographicschorovis() // for avoiding naming issue
 
 function demographicschorovis(){
     var toggle;
+    var cate = "minority"
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
     var svg = d3.select("#choro")
     .classed("svg-container", true)
@@ -19,23 +20,24 @@ function demographicschorovis(){
 
     var data = d3.map();
 
-    
-    
+
+
     updateChoropleth()
 
     d3.select("#stats").on("change", function () {
         updateChoropleth()
     });
 
-    
+
     //actual chorovis starts
     function updateChoropleth() {
 
-        var selector = d3.select("#stats").property("value");
+        //var selector = d3.select("#stats").property("value");
+        var selector = "Lonely_Frequent"
         //console.log(selector);
         d3.queue()
             .defer(d3.json, "data/world.geojson")
-            .defer(d3.csv, "data/global-malaria-2015.csv", function (d) {
+            .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
             data.set(d.Code, +d[selector]);
         })
             .await(ready);
@@ -59,9 +61,8 @@ function demographicschorovis(){
                     d3.select(this)
                         .transition()
                         .duration(800)
-//                    Tooltip
-//                        .style("opacity", 0)
-//                        .style("left", "-300px");
+                    Tooltip
+                        .style("opacity", 0)
 
                     toggle =1;
                     var t = label + gradients + " "
@@ -79,23 +80,15 @@ function demographicschorovis(){
                             .duration(800)
                             .style("opacity", 1)
                         console.log(d)
+                        tip = "&nbsp&nbspin " + d.properties.name + ", around " + d.data + "% of " + cate + " population is lonely.&nbsp&nbsp";
 
-                        if (selector == "At_high_risk") {
-                            var tip = d.properties.name + "<br>" + d.data + "% Population At High Risk";
-                        } else if (selector == "At_risk") {
-                            var tip = d.properties.name + "<br>" + d.data + "% Population At Risk";
-                        } else if (selector == "Malaria_cases") {
-                            var tip = d.properties.name + "<br>Diagnosed Malaria Population: " + d.data;
-                        } else {
-                            var tip = d.properties.name + "<br>Suspected Malaria Population: " + d.data;
-                        }
-
-//                        Tooltip
-//                            .style("opacity", 1)
-//                            .html(tip)
-//
-//                            .style("left", (d3.mouse(this)[0] * 2) + "px")
-//                            .style("top", (d3.mouse(this)[1] * 2) + "px");
+                        Tooltip
+                            .html(tip)
+                            .style("left", (d3.mouse(this)[0]*2) + "px")
+                            .style("top", (d3.mouse(this)[1]*2) + "px")
+                            .transition()
+                            .duration(800)
+                            .style("opacity", 1);
 
                         var t = label + gradients +
                             "<br><b>Country:</b> " + d.properties.name +
@@ -109,15 +102,15 @@ function demographicschorovis(){
 
             if (selector == "At_high_risk" || selector == "At_risk") {
                 var fill = d3.scaleThreshold()
-                .domain([10, 20, 30, 40, 50, 60, 70, 80, 90])
-                .range(d3.schemeBlues[9]);
+                .domain([5,10,15,20,25,30])
+                .range(d3.schemeBlues[7]);
                 var text = "Data (by Population Percentage):"
                 var label = "0%" + grid2 + "50%" + grid2 + "100%<br>";
                 var t = label + gradients;
                 document.getElementById("tooltip").innerHTML = t;
             } else {
                 var fill = d3.scaleThreshold()
-                .domain([10, 100, 1000, 10000, 1000000, 10000000])
+                .domain([5,10,15,20,25,30])
                 .range(d3.schemeBlues[7]);
                 var text = "Data (by Population Count): "
                 var label = "0" + grid + "1000" + grid + "10000000+<br>";
