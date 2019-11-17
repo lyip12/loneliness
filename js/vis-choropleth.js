@@ -1,3 +1,9 @@
+demographicschorovis() // for avoiding naming issue
+
+
+
+function demographicschorovis(){
+
 //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
 var svg = d3.select("#choro")
 .classed("svg-container", true)
@@ -153,3 +159,4 @@ function updateChoropleth() {
     var grid = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
 
 }
+};
