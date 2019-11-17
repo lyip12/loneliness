@@ -54,7 +54,33 @@ function demographicschorovis(){
             .style("border-radius", "5px")
             .style("padding", "5px")
 
-            let mouseOver = function (d) {
+            let mouseOver = function(d) {
+                if(toggle !== 0 && d.data !== "no data"){
+                    d3.selectAll(".Country")
+                        .transition()
+                        .duration(200)
+                        .style("opacity", .5)
+                    d3.select(this)
+                        .transition()
+                        .duration(200)
+                        .style("opacity", 1)
+                    console.log("tis is working")
+                }
+            }
+
+            let mouseLeave = function(d) {
+                if(toggle !== 0 && d.data !== "no data"){
+                    d3.selectAll(".Country")
+                        .transition()
+                        .duration(800)
+                        .style("opacity", 1)
+                    d3.select(this)
+                        .transition()
+                        .duration(800)
+                }
+            }
+
+            let mouseClick = function (d) {
                 if(toggle == 0) {
                     d3.selectAll(".Country")
                         .transition()
@@ -81,7 +107,7 @@ function demographicschorovis(){
                             .duration(800)
                             .style("opacity", 1)
                         console.log(d)
-                        tip = "&nbsp&nbspin " + d.properties.name + ", around " + d.data + "% of " + cate + " population is lonely.&nbsp&nbsp";
+                        tip = "in " + d.properties.name + ", around " + d.data + "% of " + cate + " population is lonely.";
 
                         Tooltip
                             .html(tip)
@@ -150,8 +176,9 @@ function demographicschorovis(){
                 return "Country"
             })
                 .style("opacity", 1)
-                .on("click", mouseOver)
-            //.on("mouseleave", mouseLeave)
+                .on("click", mouseClick)
+                .on("mouseover", mouseOver)
+                .on("mouseleave", mouseLeave)
 
 
         }
