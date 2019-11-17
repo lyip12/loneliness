@@ -1,0 +1,65 @@
+// Star Class
+class Star{
+	pos = new THREE.Vector3(0,0,0);
+	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.5,0.5),0);
+	acc = new THREE.Vector3(0,0,0);
+	wandertheta = 0;
+	static maxspeed = 1.5;
+	static maxforce = 0.05;
+
+	constructor(_x,_y,_z){
+	this.pos.x = _x;
+	this.pos.y = _y;
+	this.pos.z = _z;
+	}
+
+    wander(){
+        var wanderR = 2.5;
+        var wanderD = 8;
+        var change = 0.6;
+        //this.wandertheta = THREE.Math.randFloatSpread(change);
+    
+        this.wandertheta += THREE.Math.randFloat(-change,change);
+        var circlepos = this.vel.clone()
+        circlepos.normalize();
+        circlepos.multiplyScalar(wanderD);
+        circlepos.add(this.pos);
+    
+        var yvel = new THREE.Vector3(0,0,1);
+        yvel.cross(this.vel);  //perpendicular to velocity
+        yvel.normalize();
+        var target = new THREE.Vector3(0,0,0);
+        yvel.multiplyScalar(Math.cos(this.wandertheta));
+        var xvel = this.vel.clone();
+        xvel.multiplyScalar(Math.sin(this.wandertheta));
+        target.addVectors(yvel,xvel);
+        target.normalize();
+        target.multiplyScalar(wanderR);
+        target.add(circlepos);
+
+        this.seek(target);
+    
+    }
+
+	seek(target){
+        var desired = target.clone();
+        desired.sub(this.pos);
+        desired.normalize();
+		desired.multiplyScalar(Star.maxspeed);
+		desired.sub(this.vel);
+		desired.clampLength(0,Star.maxforce);
+		this.applyforce(desired)
+	}
+
+	applyforce(force){
+		this.acc.add(force);
+	}
+	update(){
+        this.vel.add(this.acc);
+        this.vel.clampLength(0,Star.maxspeed);
+		this.pos.add(this.vel);
+		this.acc.multiplyScalar(0);
+	}
+}
+
+
