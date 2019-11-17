@@ -6,12 +6,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>A Lonely Story | CS171</title>
         <script src="http://d3js.org/d3.v4.min.js" charset="utf-8"></script>
-        <link rel="stylesheet" href="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/style.css">
 
-        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js" type="text/javascript"></script>
         <script src="libraries/p5.js" type="text/javascript"></script>
         <script src="libraries/p5.dom.js" type="text/javascript"></script>
         <script src="libraries/p5.sound.js" type="text/javascript"></script>
@@ -25,19 +23,17 @@
         <script src="https://d3js.org/d3.v4.js"></script>
         <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
         <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-
-        <script src="/assets/data/boston_neighborhoods.json"></script>
-        <script src="/assets/data/boston_rodents.json"></script>
     </head>
 
     <body style="background-color: #161c26">
 
-        <div id="p5Container" style="z-index: -10;"></div>
-        <div class="section" style="padding-top: 35vh; padding-bottom: 40vh;" data-aos="fade-in">
-            <h1 class="bigtext" style="text-align: right;">LONELINESS</h1>
-            <h3 class="cursive" style="text-align: right;">a social story</h3>
-            <div style="padding-left: 60vw;" data-aos="fade-in">
-                <p class="smalltext" style="text-align: right;"><b style="color: #8293b6;"><br>“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”</b><em>- Dilip V. Jeste, M.D.</em></p>
+        <div class="section" style="background-image: url('/img/background.jpg'); background-position: center bottom; background-size: cover; padding-top: 35vh; padding-bottom: 40vh;">
+            <div data-aos="fade-in">
+                <h1 class="bigtext" style="text-align: right;">LONELINESS</h1>
+                <h3 class="cursive" style="text-align: right;">a social story</h3>
+                <div style="padding-left: 60vw;" data-aos="fade-in">
+                    <p class="smalltext" style="text-align: right;"><b style="color: #8293b6;"><br>“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”</b><em>- Dilip V. Jeste, M.D.</em></p>
+                </div>
             </div>
 
         </div>
@@ -121,15 +117,37 @@
             <div style="height:200px"></div>
         </div>
 
-        <div class="section">
-            <div class="line"></div>
-            <div style="height:200px"></div>
-            <p class="smalltext">Demographics of loneliness</p>
-            <div style="height:200px"></div>
+        <div>
+            <div style="background-color: #0c0e12;">
+                <div style="padding: 100px 0px 100px 100px !important;">
+                    <div class="row" style="margin: 0px !important;">
+                        <div class="col-md-4" style="padding: 0px !important;">
+                            <p class="smalltext">This is still based on Malaria Data because I'm lazy AF</p>
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <select class="form-control btn btn-change" id="stats" style="background-color: white">
+                                        <option value="Malaria_cases"> Number of Diagnosed Malaria Cases </option>
+                                        <option value="Suspected_malaria_cases"> Number of Suspected Malaria Cases </option>
+                                        <option value="At_risk"> Percentage Population at Risk </option>
+                                        <option value="At_high_risk"> Percentage Population at High Risk </option>
+                                    </select>
+                                </div>
+                            </form>
+                            <p class="t" id="tooltip"></p>
+                        </div>
+                        <div class="col-md-8" style="padding: 0px !important;">
+                            <div id="choro"  ></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="line"></div>
+                    <div style="height:200px"></div>
+                </div>
+            </div>
         </div>
 
         <div class="section">
-            <div class="line"></div>
             <div style="height:200px"></div>
             <p class="smalltext">Radar graph of odds ratio</p>
             <div style="height:200px"></div>
@@ -173,6 +191,7 @@
 
         <!-- OptionalJS -->
         <script src="js/titlesketch.js"></script>
+        <script src="js/vis-choropleth.js"></script>
         <script src="js/animate.js"></script>
 
     </body>
