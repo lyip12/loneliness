@@ -1,4 +1,3 @@
-
 demographicschorovis() // for avoiding naming issue
 
 function demographicschorovis(){
@@ -33,16 +32,19 @@ function demographicschorovis(){
     function updateChoropleth() {
 
         //var selector = d3.select("#stats").property("value");
-        var selector = "Lonely_Frequent"
+        var selector = "Lonely_Frequent",
+            a = [];
         //console.log(selector);
         d3.queue()
             .defer(d3.json, "data/world.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
             data.set(d.Code, +d[selector]);
+            a.push(+d[selector]);
         })
             .await(ready);
 
-        function ready(error, topo, malaria) {
+
+        function ready(error, topo, loneliness) {
 
             var Tooltip = d3.select("#choro")
             .append("div")
@@ -69,7 +71,6 @@ function demographicschorovis(){
                     document.getElementById("tooltip").innerHTML = t;
 
                 } else {  
-
                     if(d.data !== "no data"){
                         d3.selectAll(".Country")
                             .transition()
@@ -100,23 +101,35 @@ function demographicschorovis(){
                 }
             }
 
-            if (selector == "At_high_risk" || selector == "At_risk") {
-                var fill = d3.scaleThreshold()
-                .domain([5,10,15,20,25,30])
-                .range(d3.schemeBlues[7]);
-                var text = "Data (by Population Percentage):"
-                var label = "0%" + grid2 + "50%" + grid2 + "100%<br>";
-                var t = label + gradients;
-                document.getElementById("tooltip").innerHTML = t;
-            } else {
-                var fill = d3.scaleThreshold()
-                .domain([5,10,15,20,25,30])
-                .range(d3.schemeBlues[7]);
-                var text = "Data (by Population Count): "
-                var label = "0" + grid + "1000" + grid + "10000000+<br>";
-                var t = label + gradients;
-                document.getElementById("tooltip").innerHTML = t;
+            var k = (d3.max(a) - d3.min(a))/9;
+            var legend = []
+            for(var i = 0; i<9;i++){
+                legend.push(d3.min(a)+k*i);
+            };
+
+            console.log(legend)
+            var fill = d3.scaleThreshold()
+            .domain(legend)
+            .range(d3.schemeBlues[9]);
+
+            for(var i = 0; i<9;i++){
+                svg.append("rect")
+                    .attr("x", i*7+30)
+                    .attr("y", 0)
+                    .attr("width", 7)
+                    .attr("height", 7)
+                    .transition()
+                    .duration(800)
+                    .attr("fill", function(d){
+                    return fill(d3.min(a)+k*i);
+                }); 
             }
+
+
+            var text = "Data (by Population Percentage):"
+            var label = "0%" + grid2 + "50%" + grid2 + "100%<br>";
+            var t = label + gradients;
+            document.getElementById("tooltip").innerHTML = t;
 
             // Draw the map
             svg.append("g")
@@ -127,7 +140,6 @@ function demographicschorovis(){
                 .attr("d", d3.geoPath().projection(projection))
                 .attr("fill", function (d) {
                 d.data = data.get(d.id) || "no data";
-
                 if(d.data !== "no data"){
                     return fill(d.data);
                 };
