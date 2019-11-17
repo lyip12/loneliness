@@ -4,19 +4,21 @@
         <meta charset="utf-8">
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>A Lonely Story | CS171</title>
-        
+        <title>Lonliness: A Social Story | CS171</title>
+
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/bootstrap.min.css">
-
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
         <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-        
+
+        <script src="https://d3js.org/d3.v4.js"></script>
+        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+        <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
+
         <link rel="stylesheet" href="css/style.css">
 
     </head>
-
     <body>
         <div class="section" style="background-image: url('/img/background.jpg'); background-position: center bottom; background-size: cover; padding-top: 35vh; padding-bottom: 40vh;">
             <div data-aos="fade-in">
@@ -63,17 +65,12 @@
             </div>
             <div style="height:100px;"></div>
             <div class="line" style="margin: 50px 40vw 100px 40vw;"></div>
-            <div ><p class="smalltext" style="text-align: center;"><b>based on your answers to the above questions: <br><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.
-                </p>    
-
+            <div style="height: 400px;"><p id = "questionaire" class="smalltext" style="text-align: center;"></p>    
             </div>
-            <div style="height:100px"></div>
         </div>
 
 
         <div class="section">
-
-            <div style="height:200px"></div>
             <div class="row">
                 <div class="col-md-7">
                     <p class="smalltext" data-aos="fade-in">
@@ -173,12 +170,10 @@
 
 
         <!-- Load JS libraries -->
-
-
         <script src="libraries/p5.js" type="text/javascript"></script>
         <script src="libraries/p5.dom.js" type="text/javascript"></script>
         <script src="libraries/p5.sound.js" type="text/javascript"></script>
-        
+
         <script src="js/jquery.min.js"></script>
         <script src="js/popper.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
@@ -195,5 +190,9 @@
         <script src="js/vis-choropleth.js"></script>
         <script src="js/animate.js"></script>
 
+        <!-- Vis JS -->
+        <script src="js/questionaire.js"></script>
+        <script src="js/vis-choropleth.js"></script>
+        
     </body>
 </html>
