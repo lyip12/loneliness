@@ -140,6 +140,9 @@ div.section {
   .
   .
   display: block;
+<<<<<<< HEAD
+}
+=======
 }
 
 .form {
@@ -192,3 +195,54 @@ div.section {
         opacity: 1;
     }
 }
+
+
+
+/*the section changes the styles of scroll sections.*/
+#scroll {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+    height: 1000px;
+    top: 0px;
+    z-index: 0;
+    /*scroll-snap-type: y mandatory;*/
+    margin-bottom: 1000px;
+    scroll-snap-type: y proximity;
+}
+
+
+.step {
+    margin-bottom: 200px;
+    position: relative;
+    color: #8293b6;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+    width: 250px;
+    top: 20px;
+}
+
+#scrollb {
+    position: relative;
+    display: inline-block;
+    font-family: 'Roboto', sans-serif;
+    color: white;
+    font-weight: 700;
+    text-align: left;
+    width: 250px;
+    top: 60px;
+}
+
+
+#vis {
+    display: inline-block;
+    position: relative;
+    top: -600px;
+    left: 800px;
+    margin-left: 0;
+    height: 600px;
+    width: 600px;
+    background-color: #ddd;
+}
+>>>>>>> 2712fc2a16d3276423441a246f32bfb1c06771c1

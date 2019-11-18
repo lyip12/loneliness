@@ -37,28 +37,9 @@
                 <div class="col-md-3" style="padding-right: 40px;">
                     <p class="smalltext">Placeholder // How often do you feel that you have a lot in common with the people around you?(past question is light)
                     </p>
-
-                    <form class="form">
-                        <div id="question" class="form__group">
-                            <div class="form__radio-group">
-                                <input type="radio" class="form__radio-input" id="1" name="radiogroup">
-                                <label for="1" class="form__radio-label">
-                                    <span class="form__radio-button"></span>
-                                </label>
-                            </div>
-                            <div class="form__radio-group">
-                                <input type="radio" class="form__radio-input" id="2" name="radiogroup">
-                                <label for="2" class="form__radio-label">
-                                    <span class="form__radio-button"></span>
-                                </label>
-                            </div>
-                            <div class="form__radio-group">
-                                <input type="radio" class="form__radio-input" id="3" name="radiogroup">
-                                <label for="3" class="form__radio-label">
-                                    <span class="form__radio-button"></span>   
-                                </label>
-                            </div>
-                        </div>
+                    <form id="question">
+                        <input type="radio" value="grouped">grouped<br>
+                        <input type="radio" value="stacked">stacked
                     </form>
 
                     <div class="checkbox"><label><input type="checkbox" value=""> Option 1</label></div>
@@ -129,9 +110,24 @@
         <div class="section">
             <div class="line"></div>
             <div style="height:200px"></div>
-            <p class="smalltext">Cause (in 100) of loneliness</p>
-            <div style="height:200px"></div>
+            <div class="scroll", id = "scroll">
+                <div id = 'sections'>
+                    <section class = "step">
+                        <div id = "scrollb">Specific Events that Causes Loneliness</div>
+                        Sometimes loneliness are caused by specific events, such as loss of family members of unemployment.
+                    </section>
+                    <section class = "step">
+                        <div id = "scrollb">Loneliness can also be caused due to unemployment</div>
+                        Unemployment is the second most cause to loneliness
+                    </section>
+                </div>
+                <div id = 'vis'>
+
+                </div>
+            </div>
+
         </div>
+
 
         <div>
             <div style="background-color: #0c0e12;">
@@ -250,6 +246,9 @@
         <script src='js/particlevis.js'></script>
         <script src="js/questionaire.js"></script>
         <script src="js/vis-choropleth.js"></script>
+        <script src="js/animate.js"></script>
+        <script src="js/scroller.js"></script>
+        <script src="js/sections.js"></script>
 
     </body>
 </html>
