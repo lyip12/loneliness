@@ -1,3 +1,4 @@
+
 questionaire() // for avoiding naming issue
 
 
@@ -9,11 +10,11 @@ function questionaire(){
     var q3 = [3, "How often do you feel that people are around you but not with you?"];
     var q4 = [4, "How often do you feel that there are people you can talk to or turn to?"];
     var a = ["Never","Rare","Sometimes","Always"];
-
+    var section=0;
     if(section ==1){
         console.log("hello");
         document.getElementById("q1").innerHTML = "<p class='smalltext' style='color:#404040;'>"+q1[1]+"<br><br>"+a[an]+"</p>"
-        
+
         var q = "<p class='smalltext' data-aos='fade-in'><b>"+q2[1]+"</b></p><form id='question"+q2[0]+"'data-aos='fade-in'><input type='radio' name='q2' value=0> Never<br><input type='radio' name='q2' value=1> Rare<br><input type='radio' name='q2' value=2> Sometimes<br><input type='radio' name='q2' value=3> Always</form>"
         document.getElementById("q2").innerHTML = q;
 
@@ -27,9 +28,9 @@ function questionaire(){
             console.log(an);
         });
     }
-    
-    
-    
+
+
+
     d3.select("#question2").on("change", function () {
         var a2 = d3.select('input[name="q2"]:checked').property("value");
         console.log(a2);
