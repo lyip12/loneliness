@@ -10,20 +10,26 @@ function questionaire(){
     var q4 = [4, "How often do you feel that there are people you can talk to or turn to?"];
     var a = ["Never","Rare","Sometimes","Always"];
 
-    var q_1 = "<p class='smalltext' data-aos='fade-in'><b>"+q1[1]+"</b></p><form id='question"+q1[0]+"'data-aos='fade-in'><input type='radio' name='q1' value=0> Never<br><input type='radio' name='q1' value=1> Rare<br><input type='radio' name='q1' value=2> Sometimes<br><input type='radio' name='q1' value=3> Always</form>",
-        q_2, q_3, q_4;
-
-    document.getElementById("q1").innerHTML = q_1;
-
-    d3.select("#question1").on("change", function () {
-        var a1 = d3.select('input[name="q1"]:checked').property("value");
-        console.log(a1);
-        var q = "<p class='smalltext' style='color:#404040;'>"+q1[1]+"<br><br>"+a[a1]+"</p>"
-        document.getElementById("q1").innerHTML = q;
+    if(section ==1){
+        console.log("hello");
+        document.getElementById("q1").innerHTML = "<p class='smalltext' style='color:#404040;'>"+q1[1]+"<br><br>"+a[an]+"</p>"
+        
         var q = "<p class='smalltext' data-aos='fade-in'><b>"+q2[1]+"</b></p><form id='question"+q2[0]+"'data-aos='fade-in'><input type='radio' name='q2' value=0> Never<br><input type='radio' name='q2' value=1> Rare<br><input type='radio' name='q2' value=2> Sometimes<br><input type='radio' name='q2' value=3> Always</form>"
         document.getElementById("q2").innerHTML = q;
-    });
 
+    } else {
+        var q_1 = "<p class='smalltext' data-aos='fade-in'><b>"+q1[1]+"</b></p><form id='question"+q1[0]+"'data-aos='fade-in'><input type='radio' name='q1' value=0> Never<br><input type='radio' name='q1' value=1> Rare<br><input type='radio' name='q1' value=2> Sometimes<br><input type='radio' name='q1' value=3> Always</form>";
+        document.getElementById("q1").innerHTML = q_1;
+
+        d3.select("#question1").on("change", function () {
+            an = d3.select('input[name="q1"]:checked').property("value");
+            var section = 1;
+            console.log(an);
+        });
+    }
+    
+    
+    
     d3.select("#question2").on("change", function () {
         var a2 = d3.select('input[name="q2"]:checked').property("value");
         console.log(a2);
