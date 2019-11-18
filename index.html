@@ -12,10 +12,6 @@
         <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
         <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
 
-        <script src="https://d3js.org/d3.v4.js"></script>
-        <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
-        <script src="https://d3js.org/d3-geo-projection.v2.min.js"></script>
-
         <link rel="stylesheet" href="css/style.css">
 
     </head>
@@ -77,26 +73,29 @@
         </div>
 
         <div class="section">
-            <div class="line"></div>
-            <div style="height:200px"></div>
-            <div class="scroll", id = "scroll">
-                <div id = 'sections'>
-                    <section class = "step">
-                        <div id = "scrollb">Specific Events that Causes Loneliness</div>
-                        Sometimes loneliness are caused by specific events, such as loss of family members of unemployment.
-                    </section>
-                    <section class = "step">
-                        <div id = "scrollb">Loneliness can also be caused due to unemployment</div>
-                        Unemployment is the second most cause to loneliness
-                    </section>
-                </div>
-                <div id = 'vis'>
+            <div id="testerblock" style="height:50px;background:black;"></div>
+<!--
+<div class="line"></div>
+<div style="height:200px"></div>
+<div class="scroll", id = "scroll">
+<div id = 'sections'>
+<section class = "step">
+<div id = "scrollb">Specific Events that Causes Loneliness</div>
+Sometimes loneliness are caused by specific events, such as loss of family members of unemployment.
+</section>
+<section class = "step">
+<div id = "scrollb">Loneliness can also be caused due to unemployment</div>
+Unemployment is the second most cause to loneliness
+</section>
+</div>
+<div id = 'vis'>
 
-                </div>
-            </div>
-        </div>
-        <div class="section" id = "debugging">
-            <div class="line"></div>
+</div>
+</div>
+</div>
+<div class="section" id = "debugging">
+<div class="line"></div>
+-->
         </div>
 
         <div style="background-color: #0c0e12;">
@@ -205,6 +204,9 @@
         <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
 
         <script src="js/three.js"></script>
+        <script src="js/d3.v4.js"></script>
+        <script src="js/d3-scale-chromatic.v1.min.js"></script>
+        <script src="js/d3-geo-projection.v2.min.js"></script>
 
         <!-- OptionalJS -->
         <script src="js/titlesketch.js"></script>
@@ -219,6 +221,7 @@
         <script src="js/scroller.js"></script>
         <script src="js/matrix.js"></script>
         <script src="js/position.js"></script>
+        <script src="js/testscroll.js"></script>
 
     </body>
 </html>
