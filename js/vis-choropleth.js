@@ -31,10 +31,10 @@ function demographicschorovis(){
     //actual chorovis starts
     function updateChoropleth() {
 
-        //var selector = d3.select("#stats").property("value");
-        var selector = "Lonely_Frequent",
-            a = [];
-        //console.log(selector);
+        var selector = d3.select("#stats").property("value");
+        var selector2 = d3.select("#stats").property("value2");
+        a = [];
+        console.log(selector2);
         d3.queue()
             .defer(d3.json, "data/world.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
@@ -59,7 +59,7 @@ function demographicschorovis(){
                     d3.selectAll(".Country")
                         .transition()
                         .duration(200)
-                        .style("opacity", .5)
+                        .style("opacity", .1)
                     d3.select(this)
                         .transition()
                         .duration(200)
@@ -93,7 +93,7 @@ function demographicschorovis(){
                         .style("opacity", 0)
 
                     toggle =1;
-                    var t = label + gradients + " "
+                    var t = " "
                     document.getElementById("tooltip").innerHTML = t;
 
                 } else {  
@@ -101,7 +101,7 @@ function demographicschorovis(){
                         d3.selectAll(".Country")
                             .transition()
                             .duration(800)
-                            .style("opacity", .05)
+                            .style("opacity", .02)
                         d3.select(this)
                             .transition()
                             .duration(800)
@@ -117,10 +117,7 @@ function demographicschorovis(){
                             .duration(800)
                             .style("opacity", 1);
 
-                        var t = label + gradients +
-                            "<br><b>Country:</b> " + d.properties.name +
-                            "<br><b>Country ID:</b> " + d.id +
-                            "<br><b>" + text + "</b>" + d.data;
+                        var t = d.data;
                         document.getElementById("tooltip").innerHTML = t;
                         toggle = 0;
                     }
@@ -140,7 +137,7 @@ function demographicschorovis(){
 
             for(var i = 0; i<9;i++){
                 svg.append("rect")
-                    .attr("x", i*7+30)
+                    .attr("x", i*7+50)
                     .attr("y", 0)
                     .attr("width", 7)
                     .attr("height", 7)
@@ -160,22 +157,26 @@ function demographicschorovis(){
             // Draw the map
             svg.append("g")
                 .selectAll("path")
+                .remove()
                 .data(topo.features)
                 .enter()
                 .append("path")
                 .attr("d", d3.geoPath().projection(projection))
+                .style("stroke", "transparent")
+                .attr("class", "Country")
+                .style("opacity", 0)
+                .transition()
+                .duration(800)
                 .attr("fill", function (d) {
                 d.data = data.get(d.id) || "no data";
                 if(d.data !== "no data"){
                     return fill(d.data);
                 };
+            })
+                .style("opacity", 1);
 
-            })
-                .style("stroke", "transparent")
-                .attr("class", function (d) {
-                return "Country"
-            })
-                .style("opacity", 1)
+
+            d3.selectAll("path")
                 .on("click", mouseClick)
                 .on("mouseover", mouseOver)
                 .on("mouseleave", mouseLeave)
