@@ -141,3 +141,54 @@ div.section {
   .
   display: block;
 }
+
+.form {
+    &__group {
+        width: 25%;
+        height: 85px;
+        border-radius: 10px;
+        margin: 200px auto;
+    }
+    &__radio-group {
+        width: 30%;
+        display: inline-block;
+    }
+
+    &__radio-input {
+        display: none;
+    }
+
+    &__radio-label {
+        cursor: pointer;
+        position: relative;
+    }
+
+    &__radio-button {
+        height: 3rem;
+        width: 3rem;
+        border: 3px solid #ffecbc;
+        border-radius: 50%;
+        display: inline-block;
+        position: absolute;
+        left: 0;
+        top: 0;
+        &::after {
+            content: "";
+            display: block;
+            height: 1.7rem;
+            width: 1.7rem;
+            border-radius: 50%;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #ffe39e;
+            opacity: 0;
+            transition: opacity .5s;
+        }
+    }
+
+    &__radio-input:checked + &__radio-label &__radio-button::after {
+        opacity: 1;
+    }
+}
