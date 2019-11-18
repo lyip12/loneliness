@@ -1,11 +1,11 @@
 questionaire() // for avoiding naming issue
 
 function questionaire(){
-    var meep = d3.select("#question").property("value");
+    var meep = d3.select('input[name="q1"]:checked').property("value");
     console.log(meep);
     
     d3.select("#question").on("change", function () {
-        var meep = d3.select("#question").property("value");
+        var meep = d3.select('input[name="q1"]:checked').property("value");
         console.log(meep);
     });
 
