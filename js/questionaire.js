@@ -16,16 +16,16 @@ function questionaire(){
     document.getElementById("q1").innerHTML = q_1;
 
     d3.select("#question1").on("change", function () {
-        var a1 = d3.select('input[name="q1"]:checked').node().value;
+        var a1 = d3.select('input[name="q1"]:checked').property("value");
         console.log(a1);
         var q = "<p class='smalltext' style='color:#404040;'>"+q1[1]+"<br><br>"+a[a1]+"</p>"
         document.getElementById("q1").innerHTML = q;
         var q = "<p class='smalltext' data-aos='fade-in'><b>"+q2[1]+"</b></p><form id='question"+q2[0]+"'data-aos='fade-in'><input type='radio' name='q2' value=0> Never<br><input type='radio' name='q2' value=1> Rare<br><input type='radio' name='q2' value=2> Sometimes<br><input type='radio' name='q2' value=3> Always</form>"
+        document.getElementById("q2").innerHTML = q;
+    });
 
-        });
-    document.getElementById("q2").innerHTML = q;
     d3.select("#question2").on("change", function () {
-        var a2 = d3.select('input[name="q2"]:checked').node().value;
+        var a2 = d3.select('input[name="q2"]:checked').property("value");
         console.log(a2);
         var q = "<p class='smalltext' style='color:#404040;'>"+q2[1]+"<br><br>"+a[a2]+"</p>"
         document.getElementById("q2").innerHTML = q;
@@ -33,6 +33,7 @@ function questionaire(){
 
         });
     document.getElementById("q3").innerHTML = q_2;
+
     d3.select("#question3").on("change", function () {
         var a3 = d3.select('input[name="group-stack"]:checked').node().value;
         var q = "<p class='smalltext' style='color:#404040;'>"+q3[1]+"<br><br>"+a[a3]+"</p>"
@@ -41,6 +42,7 @@ function questionaire(){
 
         });
     document.getElementById("q4").innerHTML = q_3;
+
     d3.select("#question4").on("change", function () {
         var a4 = d3.select('input[name="group-stack"]:checked').node().value;
         var q_4 = "<p class='smalltext' style='color:#404040;'>"+q4[1]+"<br><br>"+a[a4]+"</p>"
