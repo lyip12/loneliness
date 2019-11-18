@@ -1,3 +1,6 @@
+var meep = d3.select("#questionaire").property("input");
+console.log(meep);
+
 questionaire() // for avoiding naming issue
 
 function questionaire(){
