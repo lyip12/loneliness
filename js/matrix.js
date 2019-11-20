@@ -1,23 +1,23 @@
-if(window.attachEvent) {
-    window.attachEvent('onresize', function() {
-        alert('attachEvent - resize');
-    });
-}
-else if(window.addEventListener) {
-    window.addEventListener('resize', function() {
-        console.log('addEventListener - resize');
-    }, true);
-}
-else {
-    //The browser does not support Javascript event binding
-}
+//if(window.attachEvent) {
+//    window.attachEvent('onresize', function() {
+//        alert('attachEvent - resize');
+//    });
+//}
+//else if(window.addEventListener) {
+//    window.addEventListener('resize', function() {
+//        console.log('addEventListener - resize');
+//    }, true);
+//}
+//else {
+//    //The browser does not support Javascript event binding
+//}
 
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 520;
-    var margin = { top: 0, left: 20, bottom: 40, right: 10 };
+    var height = 500;
+    var margin = { top: 0, left: 20, bottom: 40, right: 0 };
 
     // Keep track of which visualization
     // we are on and which was the last
@@ -87,7 +87,7 @@ var scrollVis = function () {
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
 
-            svg.attr('width', width + margin.left + margin.right);
+            svg.attr('width', width);
             svg.attr('height', height + margin.top + margin.bottom);
 
             svg.append('g');
@@ -96,7 +96,7 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                //.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
             var wordData = getWords(rawData);

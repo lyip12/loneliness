@@ -153,17 +153,18 @@ div.section {
 }
 
 #debugging{height:3000px}
+
 .step {
     margin-bottom: 200px;
-    position: relative;
+    /*position: relative;*/
     display: inline-block;
     color: #8293b6;
     font-size: 14px;
     font-weight: 300;
     text-align: left;
     width: 250px;
-    left: 750px;
-    top: 200px;
+    margin-left: 750px;
+    nargin-top: -200px;
 }
 
 #scrollb {
@@ -173,7 +174,7 @@ div.section {
     font-weight: 700;
     text-align: left;
     width: 250px;
-    /*top: 60px;8*/
+    top: 60px;8
 }
 
 
