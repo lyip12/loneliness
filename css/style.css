@@ -186,4 +186,7 @@ div.section {
     height: 600px;
     width: 600px;
     /*background-color: #ddd;*/
+    transition-property: transform;
+    transition-duration: 1s;
+    transition-timing-function: ease-in-out;
 }
