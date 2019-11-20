@@ -1,3 +1,17 @@
+if(window.attachEvent) {
+    window.attachEvent('onresize', function() {
+        alert('attachEvent - resize');
+    });
+}
+else if(window.addEventListener) {
+    window.addEventListener('resize', function() {
+        console.log('addEventListener - resize');
+    }, true);
+}
+else {
+    //The browser does not support Javascript event binding
+}
+
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
@@ -156,37 +170,6 @@ var scrollVis = function () {
             .call(xAxisBar);
         g.select('.x.axis').style('opacity', 0);
 
-        // count openvis title
-        g.append('text')
-            .attr('class', 'title openvis-title')
-            .attr('x', width / 2)
-            .attr('y', height / 3)
-            .text('2013');
-
-        g.append('text')
-            .attr('class', 'sub-title openvis-title')
-            .attr('x', width / 2)
-            .attr('y', (height / 3) + (height / 5))
-            .text('OpenVis Conf');
-
-        g.selectAll('.openvis-title')
-            .attr('opacity', 0);
-
-        // count filler word count title
-        g.append('text')
-            .attr('class', 'title count-title highlight')
-            .attr('x', width / 2)
-            .attr('y', height / 3)
-            .text('180');
-
-        g.append('text')
-            .attr('class', 'sub-title count-title')
-            .attr('x', width / 2)
-            .attr('y', (height / 3) + (height / 5))
-            .text('Filler Words');
-
-        g.selectAll('.count-title')
-            .attr('opacity', 0);
 
         // square grid
         // @v4 Using .merge here to ensure
@@ -204,32 +187,6 @@ var scrollVis = function () {
             .attr('y', function (d) { return d.y;})
             .attr('opacity', 0);
 
-        // barchart
-        // @v4 Using .merge here to ensure
-        // new and old data have same attrs applied
-        var bars = g.selectAll('.bar').data(fillerCounts);
-        var barsE = bars.enter()
-            .append('rect')
-            .attr('class', 'bar');
-        bars = bars.merge(barsE)
-            .attr('x', 0)
-            .attr('y', function (d, i) { return yBarScale(i);})
-            .attr('fill', function (d, i) { return barColors[i]; })
-            .attr('width', 0)
-            .attr('height', yBarScale.bandwidth());
-
-        var barText = g.selectAll('.bar-text').data(fillerCounts);
-        barText.enter()
-            .append('text')
-            .attr('class', 'bar-text')
-            .text(function (d) { return d.key + '…'; })
-            .attr('x', 0)
-            .attr('dx', 15)
-            .attr('y', function (d, i) { return yBarScale(i);})
-            .attr('dy', yBarScale.bandwidth() / 1.2)
-            .style('font-size', '110px')
-            .attr('fill', 'white')
-            .attr('opacity', 0);
 
         // histogram
         // @v4 Using .merge here to ensure
@@ -242,35 +199,6 @@ var scrollVis = function () {
             .attr('height', 0)
             .attr('width', xHistScale(histData[0].x1) - xHistScale(histData[0].x0) - 1)
             .attr('fill', barColors[0])
-            .attr('opacity', 0);
-
-        // cough title
-        g.append('text')
-            .attr('class', 'sub-title cough cough-title')
-            .attr('x', width / 2)
-            .attr('y', 60)
-            .text('cough')
-            .attr('opacity', 0);
-
-        // arrowhead from
-        // http://logogin.blogspot.com/2013/02/d3js-arrowhead-markers.html
-        svg.append('defs').append('marker')
-            .attr('id', 'arrowhead')
-            .attr('refY', 2)
-            .attr('markerWidth', 6)
-            .attr('markerHeight', 4)
-            .attr('orient', 'auto')
-            .append('path')
-            .attr('d', 'M 0,0 V 4 L6,2 Z');
-
-        g.append('path')
-            .attr('class', 'cough cough-arrow')
-            .attr('marker-end', 'url(#arrowhead)')
-            .attr('d', function () {
-                var line = 'M ' + ((width / 2) - 10) + ' ' + 80;
-                line += ' l 0 ' + 230;
-                return line;
-            })
             .attr('opacity', 0);
     };
 
@@ -294,11 +222,6 @@ var scrollVis = function () {
 
 
     function showGrid() {
-        g.selectAll('.count-title')
-            .transition()
-            .duration(0)
-            .attr('opacity', 0);
-
         g.selectAll('.square')
             .transition()
             .duration(600)
@@ -312,16 +235,6 @@ var scrollVis = function () {
 
     function highlightGrid() {
         hideAxis();
-        g.selectAll('.bar')
-            .transition()
-            .duration(600)
-            .attr('width', 0);
-
-        g.selectAll('.bar-text')
-            .transition()
-            .duration(0)
-            .attr('opacity', 0);
-
 
         g.selectAll('.square')
             .transition()
@@ -346,7 +259,7 @@ var scrollVis = function () {
             .transition()
             .duration(800)
             .attr('opacity', 1.0)
-            .attr('fill', function (d) { return d.filler ? '#008080' : '#ddd'; });
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
 

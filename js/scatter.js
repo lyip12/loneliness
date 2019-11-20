@@ -16,7 +16,7 @@ d3.csv("data/sample.csv", function(data){
         d.fltlnl = +d.fltlnl;
         d.agea = +d.agea;
     });
-    data.foreach(d, filter(d){return d.agea<100;})
+    //data.forEach(d,filter(d){return d.agea<100;})
     console.log(data);
     console.log("Countries: " + data.length);
 
