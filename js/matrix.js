@@ -44,18 +44,7 @@ var scrollVis = function () {
     // @v4 using new scale names
     var xBarScale = d3.scaleLinear()
         .range([0, width]);
-
-    // The bar chart display is horizontal
-    // so we can use an ordinal scale
-    // to get width and y locations.
-    // @v4 using new scale type
-    var yBarScale = d3.scaleBand()
-        .paddingInner(0.08)
-        .domain([0, 1, 2])
-        .range([0, height - 50], 0.1, 0.1);
-
-    // Color is determined just by the index of the bars
-    var barColors = { 0: '#008080', 1: '#399785', 2: '#5AAF8C' };
+    
 
     // The histogram display shows the
     // first 30 minutes of data
@@ -69,27 +58,9 @@ var scrollVis = function () {
     var yHistScale = d3.scaleLinear()
         .range([height, 0]);
 
-    // The color translation uses this
-    // scale to convert the progress
-    // through the section into a
-    // color value.
-    // @v4 using new scale name
-    var coughColorScale = d3.scaleLinear()
-        .domain([0, 1.0])
-        .range(['#008080', 'red']);
-
-    // You could probably get fancy and
-    // use just one axis, modifying the
-    // scale, but I will use two separate
-    // ones to keep things easy.
-    // @v4 using new axis name
     var xAxisBar = d3.axisBottom()
         .scale(xBarScale);
 
-    // @v4 using new axis name
-    var xAxisHist = d3.axisBottom()
-        .scale(xHistScale)
-        .tickFormat(function (d) { return d + ' min'; });
 
     // When scrolling to a new section
     // the activation function for that
@@ -178,6 +149,14 @@ var scrollVis = function () {
         var squaresE = squares.enter()
             .append('rect')
             .classed('square', true);
+
+        svg.append("defs")
+            .append("g")
+            .attr("id","iconCustom")
+            .append("path")
+            .attr("d","M3.5,2H2.7C3,1.8,3.3,1.5,3.3,1.1c0-0.6-0.4-1-1-1c-0.6,0-1,0.4-1,1c0,0.4,0.2,0.7,0.6,0.9H1.1C0.7,2,0.4,2.3,0.4,2.6v1.9c0,0.3,0.3,0.6,0.6,0.6h0.2c0,0,0,0.1,0,0.1v1.9c0,0.3,0.2,0.6,0.3,0.6h1.3c0.2,0,0.3-0.3,0.3-0.6V5.3c0,0,0-0.1,0-0.1h0.2c0.3,0,0.6-0.3,0.6-0.6V2.6C4.1,2.3,3.8,2,3.5,2z")
+            .attr("transform", "scale(4)")
+
         squares = squares.merge(squaresE)
             .attr('width', squareSize)
             .attr('height', squareSize)
@@ -187,19 +166,6 @@ var scrollVis = function () {
             .attr('y', function (d) { return d.y;})
             .attr('opacity', 0);
 
-
-        // histogram
-        // @v4 Using .merge here to ensure
-        // new and old data have same attrs applied
-        var hist = g.selectAll('.hist').data(histData);
-        var histE = hist.enter().append('rect')
-            .attr('class', 'hist');
-        hist = hist.merge(histE).attr('x', function (d) { return xHistScale(d.x0); })
-            .attr('y', height)
-            .attr('height', 0)
-            .attr('width', xHistScale(histData[0].x1) - xHistScale(histData[0].x0) - 1)
-            .attr('fill', barColors[0])
-            .attr('opacity', 0);
     };
 
 
