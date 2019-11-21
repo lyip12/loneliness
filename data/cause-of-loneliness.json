@@ -57,7 +57,14 @@
                         {
                             "name": "Culture",
                             "parent": "Community",
-                            "info": "language and lifestyle-based cohabitation"
+                            "info": "language and lifestyle-based cohabitation",
+                            "children": [
+                                {
+                                    "name": "Nativity",
+                                    "parent": "Culture",
+                                    "info": "local, immigrant, alien or visitor"
+                                }
+                            ]
                         }
                     ]
                 },
