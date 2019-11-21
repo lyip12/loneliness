@@ -4,7 +4,7 @@ function demographicschorovis(){
     var toggle;
     var cate = "minority"
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
-    var svg = d3.select("#choro")
+    var svg = d3.select("#yipchoro")
     .classed("svg-container", true)
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")
@@ -23,7 +23,7 @@ function demographicschorovis(){
 
     updateChoropleth()
 
-    d3.select("#stats").on("change", function () {
+    d3.select("#yipstats").on("change", function () {
         updateChoropleth()
     });
 
@@ -31,8 +31,8 @@ function demographicschorovis(){
     //actual chorovis starts
     function updateChoropleth() {
 
-        var selector = d3.select("#stats").property("value");
-        var selector2 = d3.select("#stats").property("value2");
+        var selector = d3.select("#yipstats").property("value");
+        var selector2 = d3.select("#yipstats").property("value2");
         a = [];
         console.log(selector2);
         d3.queue()
@@ -46,7 +46,7 @@ function demographicschorovis(){
 
         function ready(error, topo, loneliness) {
 
-            var Tooltip = d3.select("#choro")
+            var Tooltip = d3.select("#yipchoro")
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
@@ -94,7 +94,7 @@ function demographicschorovis(){
 
                     toggle =1;
                     var t = " "
-                    document.getElementById("tooltip").innerHTML = t;
+                    document.getElementById("yiptooltip").innerHTML = t;
 
                 } else {  
                     if(d.data !== "no data"){
@@ -118,7 +118,7 @@ function demographicschorovis(){
                             .style("opacity", 1);
 
                         var t = d.data;
-                        document.getElementById("tooltip").innerHTML = t;
+                        document.getElementById("yiptooltip").innerHTML = t;
                         toggle = 0;
                     }
                 }
@@ -152,7 +152,7 @@ function demographicschorovis(){
             var text = "Data (by Population Percentage):"
             var label = "0%" + grid2 + "50%" + grid2 + "100%<br>";
             var t = label + gradients;
-            document.getElementById("tooltip").innerHTML = t;
+            document.getElementById("yiptooltip").innerHTML = t;
 
             // Draw the map
             svg.append("g")

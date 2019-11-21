@@ -11,7 +11,7 @@ matrix.on("scroll", function(e) {
 
 });
 
-//https://github.com/vlandham/scroll_demo/blob/gh-pages/js/scroller.js
+//https://github.com/vlandham/_demo/blob/gh-pages/js/scroller.js
 function scroller() {
     var container = d3.select('body');
     // event dispatcher
