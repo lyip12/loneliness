@@ -43,7 +43,8 @@ b {
 }
 
 p,
-form {
+form,
+.yipnode text {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
     font-size: 16px !important;
@@ -105,6 +106,19 @@ div.section {
     background-size: cover;
 }
 
+
+/* TREE */
+.yipnode circle {
+    fill: #8293b6;
+    stroke: #8293b6;
+    stroke-width: 3px;
+}
+
+.yiplink {
+    fill: none;
+    stroke: #8293b6;
+    stroke-width: 2px;
+}
 
 /* CONTAINER */
 

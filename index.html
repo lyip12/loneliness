@@ -78,7 +78,18 @@
             <div style="height:200px"></div>
         </div>
 
-        <div class="section"></div>
+        <div class="section">
+            <div class="line"></div>
+            <div style="height:100px"></div>
+            <div class="row">
+                <div class="col-md-9">
+                    <div class="yiptree"></div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="line"></div>
+        </div>
+
         <!--<div id="theTarget" style="height:50px;background:black;"></div><div id="theTarget2" style="background:pink;"></div>-->
         <!--
 <div class="line"></div>
@@ -104,11 +115,11 @@
         <div style="background-color: #0c0e12;">
             <div style="padding: 100px 0px 100px 100px !important;">
                 <div class="row" style="margin: 0px !important;">
-                    <div class="col-md-3" style="padding: 0px !important;">
+                    <div class="col-md-4" style="padding: 0px !important;">
                         <p>In recent years its medical implications have brought loneliness to the centre of attention of mass media, government agents, and the general public. However, loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
                         <form class="form-inline">
                             <div class="form-group">
-                                <select class="form-control btn btn-change" id="yipstats" style="background-color: white">
+                                <select id="yipstats" style="background-color: white">
                                     <option value="Lonely_Frequent"> <p> something here </p></option>
 
                                     <option value="One_Person_Household_Frequent"> <p> something here </p></option>
@@ -149,7 +160,6 @@
                         </form>
                         <p id="yiptooltip"></p>
                     </div>
-                    <div class="col-md-1"></div>
                     <div class="col-md-8" style="padding: 0px !important;">
                         <div id="yipchoro"></div>
                     </div>
@@ -188,7 +198,7 @@
             <div class="row">
                 <div class="col-md-3"><p>Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>
                 <div class="col-md-5"><p>Data Sources:</p></div>
-                <div class="col-md-4"><p style="text-align-last: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> <br>from Harvard Graduate School of Design - M.Des Program</p></div>
+                <div class="col-md-4"><p style="text-align-last: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> <br>from Harvard Graduate School of Design</p></div>
             </div>
             <div style="height:100px"></div>
         </div>
@@ -199,18 +209,17 @@
         <script src="libraries/p5.dom.js" type="text/javascript"></script>
         <script src="libraries/p5.sound.js" type="text/javascript"></script>
 
-        <script src="js/jquery.min.js"></script>
-        <script src="js/popper.min.js"></script>
-        <script src="js/bootstrap.min.js"></script>
-        <script src="js/queue.min.js"></script>
-        <script src="js/topojson.min.js"></script>
-        <script src="js/d3.min.js"></script>
-        <script src="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.js"></script>
-
-        <script src="js/three.js"></script>
-        <script src="js/d3.v4.js"></script>
-        <script src="js/d3-scale-chromatic.v1.min.js"></script>
-        <script src="js/d3-geo-projection.v2.min.js"></script>
+        <script src="libraries/jquery.min.js"></script>
+        <script src="libraries/popper.min.js"></script>
+        <script src="libraries/bootstrap.min.js"></script>
+        <script src="libraries/queue.min.js"></script>
+        <script src="libraries/topojson.min.js"></script>
+        <script src="libraries/d3.min.js"></script>
+        <script src="libraries/aos.js"></script>
+        <script src="libraries/three.js"></script>
+        <script src="libraries/d3.v4.js"></script>
+        <script src="libraries/d3-scale-chromatic.v1.min.js"></script>
+        <script src="libraries/d3-geo-projection.v2.min.js"></script>
 
         <!-- OptionalJS -->
         <script src="js/titlesketch.js"></script>
@@ -220,7 +229,8 @@
         <script src='js/star.js'></script>
         <script src='js/particlevis.js'></script>
         <script src="js/questionaire.js"></script>
-        <script src="js/vis-choropleth.js"></script>
+        <script src="js/choropleth.js"></script>
+        <script src="js/tree.js"></script>
         <script src="js/animate.js"></script>
         <script src="js/scroller.js"></script>
         <script src="js/scroll.js"></script>

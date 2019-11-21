@@ -15,7 +15,7 @@ function demographicschorovis(){
     var projection = d3.geoMercator()
     .scale(230)
     .center([0, 0])
-    .translate([130, 380]);
+    .translate([130, 410]);
 
     var data = d3.map();
 

@@ -1,38 +1,142 @@
 {
-  "name": "Plasmodium (Malaria Parasites)",
-  "parent": "null",
-  "children": [
-    {
-      "name": "Human-Human Transmission",
-      "parent": "Plasmodium (Malaria Parasite)",
-      "children": [
+    "name": "Loneliness",
+    "info": "the state of feeling lonely",
+    "children": [
         {
-          "name": "P. falciparum",
-          "parent": "Human-Human Transmission"
+            "name": "Long-term or Chronic Loneliness",
+            "parent": "Loneliness",
+            "info": "from constant influences on the person",
+            "children": [
+                {
+                    "name": "Social Identity",
+                    "parent": "Long-term or Chronic Loneliness",
+                    "info": "constant influence on the person",
+                    "children": [
+                        {
+                            "name": "Gender and Sexuality",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Ethnicity and Race",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Personality",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        }
+                    ]
+                },
+                {
+                    "name": "Social Identity",
+                    "parent": "Long-term or Chronic Loneliness",
+                    "info": "constant influence on the person",
+                    "children": [
+                        {
+                            "name": "Gender and Sexuality",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Ethnicity and Race",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Personality",
+                            "parent": "Social Identity",
+                            "info": "constant influence on the person"
+                        }
+                    ]
+                },
+                {
+                    "name": "Family and Friends",
+                    "parent": "Long-term or Chronic Loneliness",
+                    "info": "constant influence on the person",
+                    "children": [
+                        {
+                            "name": "Gender and Sexuality",
+                            "parent": "Family and Friends",
+                            "info": "constant influence on the person",
+                            "children": [
+                                {
+                                    "name": "Gender and Sexuality",
+                                    "parent": "Social Identity",
+                                    "info": "constant influence on the person"
+                                },
+                                {
+                                    "name": "Ethnicity and Race",
+                                    "parent": "Social Identity",
+                                    "info": "constant influence on the person"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Ethnicity and Race",
+                            "parent": "Family and Friends",
+                            "info": "constant influence on the person",
+                            "children": [
+                                {
+                                    "name": "Gender and Sexuality",
+                                    "parent": "Social Identity",
+                                    "info": "constant influence on the person"
+                                },
+                                {
+                                    "name": "Ethnicity and Race",
+                                    "parent": "Social Identity",
+                                    "info": "constant influence on the person"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Personality",
+                            "parent": "Family and Friends",
+                            "info": "constant influence on the person"
+                        }
+                    ]
+                },
+                {
+                    "name": "Personal Health",
+                    "parent": "Long-term or Chronic Loneliness",
+                    "info": "constant influence on the person",
+                    "children": [
+                        {
+                            "name": "Gender and Sexuality",
+                            "parent": "Personal Health",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Ethnicity and Race",
+                            "parent": "Personal Health",
+                            "info": "constant influence on the person"
+                        },
+                        {
+                            "name": "Personality",
+                            "parent": "Personal Health",
+                            "info": "constant influence on the person"
+                        }
+                    ]
+                }
+            ]
         },
         {
-          "name": "P. vivax",
-          "parent": "Human-Human Transmission"
-        },
-        {
-          "name": "P. malariae",
-          "parent": "Human-Human Transmission"
-        },
-        {
-          "name": "P. ovale",
-          "parent": "Human-Human Transmission"
+            "name": "Short-term or Temporary Loneliness",
+            "parent": "Loneliness",
+            "info": "usually caused by a triggering event",
+            "children": [
+                {
+                    "name": "Change",
+                    "parent": "Short-term or Temporary Loneliness",
+                    "info": "e.g. moving to somewhere new"
+                },
+                {
+                    "name": "Extreme Experience",
+                    "parent": "Short-term or Temporary Loneliness",
+                    "info": "e.g. death of a close one, bankruptcy, etc."
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "Zoonotic Transmission",
-      "parent": "Plasmodium (Malaria Parasite)",
-      "children": [
-        {
-          "name": "P. knowlesi",
-          "parent": "Zoonotic Transmission"
-        }
-       ]
-    }
-  ]
+    ]
 }
