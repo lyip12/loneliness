@@ -112,7 +112,7 @@ function demographicschorovis(){
                         Tooltip
                             .html(tip)
                             .style("left", (d3.mouse(this)[0]*2) + "px")
-                            .style("top", (d3.mouse(this)[1]*2) + "px")
+                            .style("top", (d3.mouse(this)[1]*3) + "px")
                             .transition()
                             .duration(800)
                             .style("opacity", 1);

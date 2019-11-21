@@ -101,7 +101,7 @@ function tree(){
 
         // Update the node attributes and style
         nodeUpdate.select('circle.yipnode')
-            .attr('r', 10)
+            .attr('r', 5)
             .style("fill", function(d) {
             return d._children;
         })

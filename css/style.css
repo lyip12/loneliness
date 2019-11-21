@@ -117,6 +117,7 @@ div.section {
     fill: none;
     stroke: #8293b6;
     stroke-width: 1px;
+    opacity: 30%;
 }
 
 /* CONTAINER */

@@ -23,6 +23,11 @@
                             "info": "color and cultural background"
                         },
                         {
+                            "name": "Religion",
+                            "parent": "Social Identity",
+                            "info": "mentality by belief-systems"
+                        },
+                        {
                             "name": "Personality Attributes",
                             "parent": "Social Identity",
                             "info": "positivity, extravertedness and likability"
@@ -32,27 +37,36 @@
                 {
                     "name": "Community",
                     "parent": "Long-term or Chronic",
-                    "info": "constant influence on the person",
+                    "info": "group-based dynamics",
                     "children": [
-                        {
-                            "name": "Education",
-                            "parent": "Community",
-                            "info": "perceived knowledgableness"
-                        },
-                        {
-                            "name": "Income",
-                            "parent": "Community",
-                            "info": "degree of comfort in spending and saving"
-                        },
-                        {
-                            "name": "Social Class",
-                            "parent": "Community",
-                            "info": "targetted, aggregated assessment"
-                        },
-                        {
-                            "name": "Employment",
-                            "parent": "Community",
-                            "info": "worker, business owners, or others"
+                        { 
+                            "name": "Hierarchy",
+                            "parent": "Long-term or Chronic",
+                            "info": "power dynamics",
+                            "children": [
+                                {
+                                    "name": "Income",
+                                    "parent": "Community",
+                                    "info": "spending and saving",
+                                    "children": [
+                                        {
+                                            "name": "Employment",
+                                            "parent": "Community",
+                                            "info": "worker / business owners"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Education",
+                                    "parent": "Community",
+                                    "info": "perceived knowledgableness"
+                                },
+                                {
+                                    "name": "Social Class",
+                                    "parent": "Community",
+                                    "info": "targetted, aggregated assessment"
+                                }
+                            ]
                         },
                         {
                             "name": "Culture",
