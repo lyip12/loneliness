@@ -16,7 +16,7 @@ d3.csv("data/sample.csv", function(data){
         d.fltlnl = +d.fltlnl;
         d.agea = +d.agea;
     });
-    data.foreach(d, filter(d){return d.agea<100;})
+    //data.forEach(d,filter(d){return d.agea<100;})
     console.log(data);
     console.log("Countries: " + data.length);
 
@@ -58,9 +58,9 @@ d3.csv("data/sample.csv", function(data){
     var circle = svg.append("g").attr("class", "circle")
         .selectAll("circle").data(data).enter().append("circle")
         .attr("cx", function(d){return ageScale(d.agea)})
-        .attr("cy", function(d){return lonelinessScale(d.fltln)})
-        .attr("r", function (d){return rad(d.fltlnl)})
-        .attr("stroke", "black").attr("stroke-width", 0.5)
+        .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
+        .attr("r", function (d){return rad(d.fltlnl/2)})
+        .attr("fill", function(d){return "rgb(0, 120,"+d.agea*5+")"}).attr("stroke-width", 0.1)
         .style("opacity", 0.7)
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
