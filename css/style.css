@@ -12,15 +12,22 @@ h1 {
     font-weight: 700 !important;
     letter-spacing: 0.3em !important;
     margin-right: -0.3em !important;
+    text-align: right;
 }
 
 h3 {
-    font-family: 'Sacramento', cursive !important;
+    font-family: 'Roboto', sans-serif !important;
     color: white;
     font-size: 36px !important;
     font-weight: 400 !important;
     letter-spacing: 0.2em !important;
     margin-right: -0.2em !important;
+    text-align: right;
+}
+
+h3.cursive {
+    font-family: 'Sacramento', cursive !important;
+    font-weight: 700 !important;
 }
 
 em {
@@ -70,6 +77,13 @@ img.icon {
 
 /* DIVS + FORMAT STUFF */
 
+.short{
+    margin: 50px 30vw 50px 30vw;
+}
+
+.shortish{
+    margin: 50px 20vw 50px 20vw;
+}
 div.section {
     padding-left: 100px;
     padding-right: 100px;
@@ -120,8 +134,6 @@ div.section {
 {
     height: 100px; /*Whatever you want*/
     width: 100%; /*Whatever you want*/
-    .
-    .
     display: none;
 }
 
@@ -142,7 +154,7 @@ div.section {
     height: 1000px;
     /*margin-top: -10vh;*/
     margin-bottom: 1000px;
-    /*scroll-snap-type: y proximity;*/
+    scroll-snap-type: y proximity;
 }
 
 #debugging{height:3000px}
