@@ -16,7 +16,7 @@ var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 500;
+    var height = 520;
     var margin = { top: 0, left: 20, bottom: 40, right: 0 };
 
     // Keep track of which visualization
@@ -309,13 +309,13 @@ function display(data) {
     // create a new plot and
     // display it
     var plot = scrollVis();
-    d3.select('#vis')
+    d3.select('#matrixvis')
         .datum(data)
         .call(plot);
 
     // setup scroll functionality
     var scroll = scroller()
-        .container(d3.select('#vis'));
+        .container(d3.select('#matrixvis'));
 
     // pass in .step selection as the steps
     scroll(d3.selectAll('.step'));

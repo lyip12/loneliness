@@ -1,33 +1,26 @@
 /* General */
 body{
-    background-color: #161c26
+    background-color: #161c26 !important;
 }
-
-
 
 /* TEXT */
 
-h1.bigtext {
-    font-family: 'Roboto', sans-serif;
+h1 {
+    font-family: 'Roboto', sans-serif !important;
     color: white;
-    font-size: 48px;
-    font-weight: 700;
-    letter-spacing: 0.3em;
-    margin-right: -0.3em;
+    font-size: 48px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.3em !important;
+    margin-right: -0.3em !important;
 }
 
-h3.cursive {
-    font-family: 'Sacramento', cursive;
+h3 {
+    font-family: 'Sacramento', cursive !important;
     color: white;
-    font-size: 36px;
-    font-weight: 400;
-    letter-spacing: 0.2em;
-    margin-right: -0.2em;
-}
-
-p {
-    font-family: 'Roboto', sans-serif;  
-    
+    font-size: 36px !important;
+    font-weight: 400 !important;
+    letter-spacing: 0.2em !important;
+    margin-right: -0.2em !important;
 }
 
 em {
@@ -41,11 +34,12 @@ b {
     text-align: right;
 }
 
-p.smalltext,
+p,
 form {
-    color: #8293b6;
-    font-size: 14px;
-    font-weight: 300;
+    font-family: 'Roboto', sans-serif; 
+    color: #8293b6 !important;
+    font-size: 16px !important;
+    font-weight: 300 !important;
     text-align: left;
 }
 
@@ -124,20 +118,20 @@ div.section {
 
 .BeforeScroll
 {
-  height: 100px; /*Whatever you want*/
-  width: 100%; /*Whatever you want*/
-  .
-  .
-  display: none;
+    height: 100px; /*Whatever you want*/
+    width: 100%; /*Whatever you want*/
+    .
+    .
+    display: none;
 }
 
 
 /*Use this class when you want your content to be shown after some scroll*/
 .AfterScroll
 {
-  height: 100px; /*Whatever you want*/
-  width: 100%; /*Whatever you want*/
-  display: block;
+    height: 100px; /*Whatever you want*/
+    width: 100%; /*Whatever you want*/
+    display: block;
 }
 
 /*the section changes the styles of scroll sections.*/
@@ -146,42 +140,26 @@ div.section {
     display: inline-block;
     width: 250px;
     height: 1000px;
-    top: 0px;
-    /*scroll-snap-type: y mandatory;*/
+    /*margin-top: -10vh;*/
     margin-bottom: 1000px;
-    scroll-snap-type: y proximity;
+    /*scroll-snap-type: y proximity;*/
 }
 
 #debugging{height:3000px}
 
 .step {
-    margin-bottom: 200px;
-    /*position: relative;*/
+    padding-top: 100px;
     display: inline-block;
     color: #8293b6;
-    font-size: 14px;
-    font-weight: 300;
     text-align: left;
     width: 250px;
     margin-left: 750px;
-    nargin-top: -200px;
 }
 
-#scrollb {
-    font-family: 'Roboto', sans-serif;
-    left: 900px;
-    color: white;
-    font-weight: 700;
-    text-align: left;
-    width: 250px;
-    top: 60px;8
-}
-
-
-#vis {
+#matrixvis {
     display: inline-block;
     position: relative;
-    top: -400px;
+    top: -600px;
     left: 0px;
     margin-left: 0;
     height: 600px;

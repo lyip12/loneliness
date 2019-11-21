@@ -18,10 +18,10 @@
     <body>
         <div class="section" style="background-image: url('/img/background.jpg'); background-position: center bottom; background-size: cover; padding-top: 35vh; padding-bottom: 40vh;">
             <div data-aos="fade-in">
-                <h1 class="bigtext" style="text-align: right;">LONELINESS</h1>
-                <h3 class="cursive" style="text-align: right;">a social story</h3>
+                <h1 style="text-align: right;">LONELINESS</h1>
+                <h3 style="text-align: right;">a social story</h3>
                 <div style="padding-left: 60vw;" data-aos="fade-in">
-                    <p class="smalltext" style="text-align: right;"><b style="color: #8293b6;"><br>“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”</b><em>- Dilip V. Jeste, M.D.</em></p>
+                    <p style="text-align: right">“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”<br><em>- Dilip V. Jeste, M.D.</em></p>
                 </div>
             </div>
 
@@ -36,24 +36,24 @@
                 <div class="col-md-3" id="q4" style="padding-left: 40px;" data-aos="fade-in"></div>
             </div>
             <div style="height:100px;"></div>
-            <div style="height: 200px;"><p id = "questionaire" class="smalltext" style="text-align: center;"></p></div>
+            <div style="height: 200px;"><div id = "questionaire"></div></div>
         </div>
 
 
         <div class="section">
             <div class="line" style="margin: 50px 30vw 150px 30vw;" data-aos="fade-in"></div>
             <div class="row">
-                <div class="col-md-7">
-                    <p class="smalltext" data-aos="fade-in">
+                <div class="col-md-6">
+                    <p data-aos="fade-in">
                         <b>We are living through an epidemic of loneliness. </b><br><br>
                         It is a complex and usually unpleasant emotional response to isolation, typically includes anxious feelings about a lack of connection or communication with other beings, both in the present and extending into the future.<br><br>
                         <em style="color: #8293b6;">A growing body of longitudinal research indicates that loneliness predicts increased morbidity and mortality (Hawkley and Cacioppo, 2010). According to a study from the British Red Cross, over nine million adults in the U.K. feel the same way—that’s about 1/5 of the country’s population! Now even governments are getting involved—in 2018, the U.K. appointed a Loneliness Minister, Tracey Crouch, to help combat the country’s chronic loneliness problem.<br><br></em>
                     </p>
                     <div class="line" style="width: 50px;" data-aos="fade-in"></div>
 
-                    <p class="smalltext" data-aos="fade-in"><b><br>So, is loneliness a life sentence, or is it possible for some to break through it and come out the other side?</b></p></div>
+                    <p data-aos="fade-in"><b><br>So, is loneliness a life sentence, or is it possible for some to break through it and come out the other side?</b></p></div>
                 <div class="col-md-2"></div>
-                <div class="col-md-3" data-aos="fade-in"><p class="smalltext">some sort of image</p></div>
+                <div class="col-md-4" data-aos="fade-in"><p>some sort of image</p></div>
             </div>
             <div style="height:200px"></div>
         </div>
@@ -63,13 +63,14 @@
             <div style="height:600px">
                 <canvas id="dugy-c"></canvas>
             </div>
-            <div class="line" style="margin: 150px 30vw 50px 30vw;"></div>
-            <p class="smalltext" style="text-align: center;">partical visualization</p>    
-
+            <div data-aos="fade-in">
+                <p style="text-align: center; margin-top: 100px"><em>There are so many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>    
+                <div class="line" style="margin: 50px 30vw 50px 30vw;"></div>
+            </div>
             <div style="height:200px">
             </div>
             <div id = "scatter"></div>
-            <p class="smalltext">Loneliness correlation with Age</p>
+            <p>Loneliness correlation with Age</p>
             <div style="height:200px"></div>
         </div>
 
@@ -82,16 +83,13 @@
             <div class="scroll", id = "scroll">
                 <div id = 'sections'>
                     <section class = "step">
-                        <div id = "scrollb">Specific Events that Causes Loneliness</div>
-                        Sometimes loneliness are caused by specific events, such as loss of family members of unemployment.
+                        <p><b>Specific Events that Causes Loneliness</b><br>Sometimes loneliness are caused by specific events, such as loss of family members of unemployment.</p>
                     </section>
                     <section class = "step">
-                        <div id = "scrollb">Loneliness can also be caused due to unemployment</div>
-                        Unemployment is the second most cause to loneliness
+                        <p><b>Loneliness can also be caused due to unemployment</b><br>Unemployment is the second most cause to loneliness</p>
                     </section>
                 </div>
-                <div class = "sticky-top" id = 'vis'>
-
+                <div class = "sticky-top" id = 'matrixvis'>
                 </div>
             </div>
         </div>
@@ -102,51 +100,52 @@
         <div style="background-color: #0c0e12;">
             <div style="padding: 100px 0px 100px 100px !important;">
                 <div class="row" style="margin: 0px !important;">
-                    <div class="col-md-4" style="padding: 0px !important;">
-                        <p class="smalltext">In recent years its medical implications have brought loneliness to the centre of attention of mass media, government agents, and the general public. However, loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
+                    <div class="col-md-3" style="padding: 0px !important;">
+                        <p>In recent years its medical implications have brought loneliness to the centre of attention of mass media, government agents, and the general public. However, loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
                         <form class="form-inline">
                             <div class="form-group">
                                 <select class="form-control btn btn-change" id="stats" style="background-color: white">
-                                    <option value="Lonely_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Lonely_Frequent"> <p> something here </p></option>
 
-                                    <option value="One_Person_Household_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Mutiple_People_Household_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="One_Person_Household_Frequent"> <p> something here </p></option>
+                                    <option value="Mutiple_People_Household_Frequent"> <p> something here </p></option>
 
-                                    <option value="Conflict_Never_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Conflict_Sometimes_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Conflict_Often_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Conflict_Never_Frequent"> <p> something here </p></option>
+                                    <option value="Conflict_Sometimes_Frequent"> <p> something here </p></option>
+                                    <option value="Conflict_Often_Frequent"> <p> something here </p></option>
 
-                                    <option value="No_Confidant_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="At _Least_One_Confidant_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="No_Confidant_Frequent"> <p> something here </p></option>
+                                    <option value="At _Least_One_Confidant_Frequent"> <p> something here </p></option>
 
-                                    <option value="Native_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Immigrant_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Ethnic_Minority_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Ethnic_Majority_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Native_Frequent"> <p> something here </p></option>
+                                    <option value="Immigrant_Frequent"> <p> something here </p></option>
+                                    <option value="Ethnic_Minority_Frequent"> <p> something here </p></option>
+                                    <option value="Ethnic_Majority_Frequent"> <p> something here </p></option>
 
-                                    <option value="Religious_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Non_Religious_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Religious_Frequent"> <p> something here </p></option>
+                                    <option value="Non_Religious_Frequent"> <p> something here </p></option>
 
-                                    <option value="Big_City_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Suburb_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Small_City__Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Countryside_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Big_City_Frequent"> <p> something here </p></option>
+                                    <option value="Suburb_Frequent"> <p> something here </p></option>
+                                    <option value="Small_City__Frequent"> <p> something here </p></option>
+                                    <option value="Countryside_Frequent"> <p> something here </p></option>
 
-                                    <option value="Unemployed_Past_Year_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Unemployed_Past_Month_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Unemployed_Past_Days_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Employed_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Unemployed_Past_Year_Frequent"> <p> something here </p></option>
+                                    <option value="Unemployed_Past_Month_Frequent"> <p> something here </p></option>
+                                    <option value="Unemployed_Past_Days_Frequent"> <p> something here </p></option>
+                                    <option value="Employed_Frequent"> <p> something here </p></option>
 
-                                    <option value="Income_Comfortable_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Income_Coping_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Income_Difficult_Frequent"> <p class="smalltext"> something here </p></option>
-                                    <option value="Income_Very_Difficult_Frequent"> <p class="smalltext"> something here </p></option>
+                                    <option value="Income_Comfortable_Frequent"> <p> something here </p></option>
+                                    <option value="Income_Coping_Frequent"> <p> something here </p></option>
+                                    <option value="Income_Difficult_Frequent"> <p> something here </p></option>
+                                    <option value="Income_Very_Difficult_Frequent"> <p> something here </p></option>
 
                                 </select>
                             </div>
                         </form>
                         <p class="t" id="tooltip"></p>
                     </div>
+                    <div class="col-md-1"></div>
                     <div class="col-md-8" style="padding: 0px !important;">
                         <div id="choro"  ></div>
                     </div>
@@ -161,21 +160,21 @@
 
         <div class="section">
             <div style="height:200px"></div>
-            <p class="smalltext">Radar graph of odds ratio</p>
+            <p>Radar graph of odds ratio</p>
             <div style="height:200px"></div>
         </div>
 
         <div class="section">
             <div class="line"></div>
             <div style="height:200px"></div>
-            <p class="smalltext">Awareness of loneliness or  things you can do</p>
+            <p>Awareness of loneliness or  things you can do</p>
             <div style="height:200px"></div>
         </div>
 
         <div class="section">
             <div class="line"></div>
             <div style="height:400px"></div>
-            <p class="smalltext">We live in a lonely world, <b>but you are not alone.</b></p>
+            <p>We live in a lonely world, <b>but you are not alone.</b></p>
             <div style="height:200px"></div>
         </div>
 
@@ -183,9 +182,9 @@
         <div class="section">
             <div class="line"></div>
             <div class="row">
-                <div class="col-md-3"><p class="smalltext">Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>
-                <div class="col-md-5"><p class="smalltext">Data Sources:</p></div>
-                <div class="col-md-4"><p class="smalltext" style="text-align-last: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> <br>from Harvard Graduate School of Design - M.Des Program</p></div>
+                <div class="col-md-3"><p>Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>
+                <div class="col-md-5"><p>Data Sources:</p></div>
+                <div class="col-md-4"><p style="text-align-last: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> <br>from Harvard Graduate School of Design - M.Des Program</p></div>
             </div>
             <div style="height:100px"></div>
         </div>
@@ -222,13 +221,13 @@
         <script src="js/scroller.js"></script>
         <script src="js/matrix.js"></script>
         <script src="js/position.js"></script>
-<<<<<<< HEAD
-        <!-- <script src="js/scatter.js"></script> -->
+        <<<<<<< HEAD
+                   <!-- <script src="js/scatter.js"></script> -->
 
-=======
+        =======
 
         <script src="js/scatter.js"></script>
->>>>>>> aadc629a96bb5ba010458ff85ecdb3dd3d8c76db
+        >>>>>>> aadc629a96bb5ba010458ff85ecdb3dd3d8c76db
 
     </body>
 </html>
