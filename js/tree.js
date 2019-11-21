@@ -64,7 +64,7 @@ function tree(){
         // Add labels for the nodes
         nodeEnter.append('text')
             .attr("dy", function(d) {
-            return d.children || d._children ? 5 : 0;
+            return d.children || d._children ? 5 : 5;
         })
             .attr("x", function(d) {
             return d.children || d._children ? -30 : 30;
@@ -77,7 +77,7 @@ function tree(){
 
         nodeEnter.append('text')
             .attr("dy", function(d) {
-            return d.children || d._children ? 25 : 20;
+            return d.children || d._children ? 25 : 25;
         })
             .attr("x", function(d) {
             return d.children || d._children ? -30 : 30;

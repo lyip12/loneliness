@@ -3,137 +3,137 @@
     "info": "the state of feeling lonely",
     "children": [
         {
-            "name": "Long-term or Chronic Loneliness",
+            "name": "Long-term or Chronic",
             "parent": "Loneliness",
             "info": "from constant influences on the person",
             "children": [
                 {
                     "name": "Social Identity",
-                    "parent": "Long-term or Chronic Loneliness",
-                    "info": "constant influence on the person",
+                    "parent": "Long-term or Chronic",
+                    "info": "social group membership and markers",
                     "children": [
                         {
                             "name": "Gender and Sexuality",
                             "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "info": "binary / non-binary peception and orientation"
                         },
                         {
                             "name": "Ethnicity and Race",
                             "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "info": "color and cultural background"
                         },
                         {
-                            "name": "Personality",
+                            "name": "Personality Attributes",
                             "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "info": "positivity, extravertedness and likability"
                         }
                     ]
                 },
                 {
-                    "name": "Social Identity",
-                    "parent": "Long-term or Chronic Loneliness",
+                    "name": "Community",
+                    "parent": "Long-term or Chronic",
                     "info": "constant influence on the person",
                     "children": [
                         {
-                            "name": "Gender and Sexuality",
-                            "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "name": "Education",
+                            "parent": "Community",
+                            "info": "perceived knowledgableness"
                         },
                         {
-                            "name": "Ethnicity and Race",
-                            "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "name": "Income",
+                            "parent": "Community",
+                            "info": "degree of comfort in spending and saving"
                         },
                         {
-                            "name": "Personality",
-                            "parent": "Social Identity",
-                            "info": "constant influence on the person"
+                            "name": "Social Class",
+                            "parent": "Community",
+                            "info": "targetted, aggregated assessment"
+                        },
+                        {
+                            "name": "Employment",
+                            "parent": "Community",
+                            "info": "worker, business owners, or others"
+                        },
+                        {
+                            "name": "Culture",
+                            "parent": "Community",
+                            "info": "language and lifestyle-based cohabitation"
                         }
                     ]
                 },
                 {
                     "name": "Family and Friends",
-                    "parent": "Long-term or Chronic Loneliness",
-                    "info": "constant influence on the person",
+                    "parent": "Long-term or Chronic",
+                    "info": "direct and semi-indirect connections",
                     "children": [
                         {
-                            "name": "Gender and Sexuality",
+                            "name": "Connectedness",
                             "parent": "Family and Friends",
-                            "info": "constant influence on the person",
+                            "info": "degree of closeness",
                             "children": [
                                 {
-                                    "name": "Gender and Sexuality",
-                                    "parent": "Social Identity",
-                                    "info": "constant influence on the person"
+                                    "name": "Household and Social Circle Structure",
+                                    "parent": "Connectedness",
+                                    "info": "acceptance and mutual understanding"
                                 },
                                 {
-                                    "name": "Ethnicity and Race",
-                                    "parent": "Social Identity",
-                                    "info": "constant influence on the person"
+                                    "name": "Confidant",
+                                    "parent": "Connectedness",
+                                    "info": "trust within inner circle"
                                 }
                             ]
                         },
                         {
-                            "name": "Ethnicity and Race",
+                            "name": "Hierarchy (Alignment)",
                             "parent": "Family and Friends",
-                            "info": "constant influence on the person",
+                            "info": "balanceness in small group",
                             "children": [
                                 {
-                                    "name": "Gender and Sexuality",
-                                    "parent": "Social Identity",
-                                    "info": "constant influence on the person"
+                                    "name": "Generation Gap",
+                                    "parent": "Hierarchy (Alignment)",
+                                    "info": "age spread across elderlies and children"
                                 },
                                 {
-                                    "name": "Ethnicity and Race",
-                                    "parent": "Social Identity",
-                                    "info": "constant influence on the person"
+                                    "name": "Gender Gap",
+                                    "parent": "Hierarchy (Alignment)",
+                                    "info": "community or household powerholders and roles"
                                 }
                             ]
-                        },
-                        {
-                            "name": "Personality",
-                            "parent": "Family and Friends",
-                            "info": "constant influence on the person"
                         }
                     ]
                 },
                 {
                     "name": "Personal Health",
-                    "parent": "Long-term or Chronic Loneliness",
-                    "info": "constant influence on the person",
+                    "parent": "Long-term or Chronic",
+                    "info": "root of personal wellbeing",
                     "children": [
                         {
-                            "name": "Gender and Sexuality",
+                            "name": "Physical",
                             "parent": "Personal Health",
-                            "info": "constant influence on the person"
+                            "info": "physiology, age and fitness"
                         },
                         {
-                            "name": "Ethnicity and Race",
+                            "name": "Mental",
                             "parent": "Personal Health",
-                            "info": "constant influence on the person"
-                        },
-                        {
-                            "name": "Personality",
-                            "parent": "Personal Health",
-                            "info": "constant influence on the person"
+                            "info": "Mindfulness, attitude and non-apparent factors"
                         }
                     ]
                 }
             ]
         },
         {
-            "name": "Short-term or Temporary Loneliness",
+            "name": "Short-term or Temporary",
             "parent": "Loneliness",
             "info": "usually caused by a triggering event",
             "children": [
                 {
                     "name": "Change",
-                    "parent": "Short-term or Temporary Loneliness",
+                    "parent": "Short-term or Temporary",
                     "info": "e.g. moving to somewhere new"
                 },
                 {
                     "name": "Extreme Experience",
-                    "parent": "Short-term or Temporary Loneliness",
+                    "parent": "Short-term or Temporary",
                     "info": "e.g. death of a close one, bankruptcy, etc."
                 }
             ]

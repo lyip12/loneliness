@@ -110,14 +110,13 @@ div.section {
 /* TREE */
 .yipnode circle {
     fill: #8293b6;
-    stroke: #8293b6;
-    stroke-width: 3px;
+    stroke: none;
 }
 
 .yiplink {
     fill: none;
     stroke: #8293b6;
-    stroke-width: 2px;
+    stroke-width: 1px;
 }
 
 /* CONTAINER */
