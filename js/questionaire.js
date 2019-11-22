@@ -53,11 +53,11 @@ function questionaire(){
         
         const arrSum = arr => arr.reduce((a,b) => a + b, 0);
         if((arrSum(an))>6){
-            var answer = "<b>based on your answers to the above questions: <br><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.";
+            var answer = "<p style='text-align: center' data-aos='fade-in'><b>based on your answers to the above questions: <br><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.</p>";
             console.log(arrSum(an))
             document.getElementById("questionaire").innerHTML = answer;
         }else{
-            var answer = "<b>based on your answers to the above questions:</b><br><br>Everyone feels lonely sometimes,<br><b>you are among the lucky happy few.</b>";
+            var answer = "<p style='text-align: center' data-aos='fade-in'><b>based on your answers to the above questions:</b><br><br>Everyone feels lonely sometimes,<br><b>you are among the lucky happy few.</b></p>";
             document.getElementById("questionaire").innerHTML = answer;
             console.log(arrSum(an));
         }

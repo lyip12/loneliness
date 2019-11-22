@@ -1,22 +1,53 @@
-//if(window.attachEvent) {
-//    window.attachEvent('onresize', function() {
-//        alert('attachEvent - resize');
-//    });
-//}
-//else if(window.addEventListener) {
-//    window.addEventListener('resize', function() {
-//        console.log('addEventListener - resize');
-//    }, true);
-//}
-//else {
-//    //The browser does not support Javascript event binding
-//}
+// Position function, set the position of matrix when scrolled to a particular place
+
+$(function(){
+    // Check the initial Poistion of the Sticky Header
+    var scrollHeaderTop = $("#scroll").offset().top;
+    var mapTop = $("#choro").offset().top;
+    $(window).scroll(function(){
+        if( $(window).scrollTop() < scrollHeaderTop) {
+            $('#scroll').css(
+                {position: 'relative',
+                    display: 'inline-block',
+                    width: '250 px',
+                    height: '1000 px',
+                    top:'0px',
+                    'z-index':'90',
+                    'margin-bottom': '1000px',
+                    'scroll-snap-type': 'y proximity'});
+            //$('#stickyalias').css('display', 'block');
+        }
+        else if ($(window).scrollTop() >mapTop-3000)
+        {
+            $('#scroll').css(
+                {position: 'relative',
+                    display: 'inline-block',
+                    width: '250 px',
+                    height: '1000 px',
+                    top:'4000px',
+                    'z-index':'90',
+                    'margin-bottom': '1000px',
+                    'scroll-snap-type': 'y proximity'});
+        }
+        else {
+            $('#scroll').css({position: 'fixed',
+                display: 'inline-block',
+                width: '250 px',
+                height: '1000 px',
+                top:'0px',
+                'z-index':'90','margin-bottom': '1000px',
+                'scroll-snap-type': 'y proximity'});
+            //$('#stickyalias').css('display', 'none');
+        }
+    });
+});
+
 
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 500;
+    var height = 520;
     var margin = { top: 0, left: 20, bottom: 40, right: 0 };
 
     // Keep track of which visualization
@@ -309,13 +340,13 @@ function display(data) {
     // create a new plot and
     // display it
     var plot = scrollVis();
-    d3.select('#vis')
+    d3.select('#matrixvis')
         .datum(data)
         .call(plot);
 
     // setup scroll functionality
     var scroll = scroller()
-        .container(d3.select('#vis'));
+        .container(d3.select('#matrixvis'));
 
     // pass in .step selection as the steps
     scroll(d3.selectAll('.step'));

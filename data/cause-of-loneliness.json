@@ -1,38 +1,163 @@
 {
-  "name": "Plasmodium (Malaria Parasites)",
-  "parent": "null",
-  "children": [
-    {
-      "name": "Human-Human Transmission",
-      "parent": "Plasmodium (Malaria Parasite)",
-      "children": [
+    "name": "Loneliness",
+    "info": "the state of feeling lonely",
+    "children": [
         {
-          "name": "P. falciparum",
-          "parent": "Human-Human Transmission"
+            "name": "Long-term or Chronic",
+            "parent": "Loneliness",
+            "info": "from constant influences on the person",
+            "children": [
+                {
+                    "name": "Social Identity",
+                    "parent": "Long-term or Chronic",
+                    "info": "social group membership and markers",
+                    "children": [
+                        {
+                            "name": "Gender and Sexuality",
+                            "parent": "Social Identity",
+                            "info": "binary / non-binary peception and orientation"
+                        },
+                        {
+                            "name": "Ethnicity and Race",
+                            "parent": "Social Identity",
+                            "info": "color and cultural background"
+                        },
+                        {
+                            "name": "Religion",
+                            "parent": "Social Identity",
+                            "info": "mentality by belief-systems"
+                        },
+                        {
+                            "name": "Personality Attributes",
+                            "parent": "Social Identity",
+                            "info": "positivity, extravertedness and likability"
+                        }
+                    ]
+                },
+                {
+                    "name": "Community",
+                    "parent": "Long-term or Chronic",
+                    "info": "group-based dynamics",
+                    "children": [
+                        { 
+                            "name": "Hierarchy",
+                            "parent": "Long-term or Chronic",
+                            "info": "power dynamics",
+                            "children": [
+                                {
+                                    "name": "Income",
+                                    "parent": "Community",
+                                    "info": "spending and saving",
+                                    "children": [
+                                        {
+                                            "name": "Employment",
+                                            "parent": "Community",
+                                            "info": "worker / business owners"
+                                        }
+                                    ]
+                                },
+                                {
+                                    "name": "Education",
+                                    "parent": "Community",
+                                    "info": "perceived knowledgableness"
+                                },
+                                {
+                                    "name": "Social Class",
+                                    "parent": "Community",
+                                    "info": "targetted, aggregated assessment"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Culture",
+                            "parent": "Community",
+                            "info": "language and lifestyle-based cohabitation",
+                            "children": [
+                                {
+                                    "name": "Nativity",
+                                    "parent": "Culture",
+                                    "info": "local, immigrant, alien or visitor"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Family and Friends",
+                    "parent": "Long-term or Chronic",
+                    "info": "direct and semi-indirect connections",
+                    "children": [
+                        {
+                            "name": "Connectedness",
+                            "parent": "Family and Friends",
+                            "info": "degree of closeness",
+                            "children": [
+                                {
+                                    "name": "Household and Social Circle Structure",
+                                    "parent": "Connectedness",
+                                    "info": "acceptance and mutual understanding"
+                                },
+                                {
+                                    "name": "Confidant",
+                                    "parent": "Connectedness",
+                                    "info": "trust within inner circle"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "Alignment",
+                            "parent": "Family and Friends",
+                            "info": "balanceness in small group",
+                            "children": [
+                                {
+                                    "name": "Generation Gap",
+                                    "parent": "Hierarchy (Alignment)",
+                                    "info": "age spread across elderlies and children"
+                                },
+                                {
+                                    "name": "Gender Gap",
+                                    "parent": "Hierarchy (Alignment)",
+                                    "info": "community or household powerholders and roles"
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "name": "Personal Health",
+                    "parent": "Long-term or Chronic",
+                    "info": "root of personal wellbeing",
+                    "children": [
+                        {
+                            "name": "Physical",
+                            "parent": "Personal Health",
+                            "info": "physiology, age and fitness"
+                        },
+                        {
+                            "name": "Mental",
+                            "parent": "Personal Health",
+                            "info": "Mindfulness, attitude and non-apparent factors"
+                        }
+                    ]
+                }
+            ]
         },
         {
-          "name": "P. vivax",
-          "parent": "Human-Human Transmission"
-        },
-        {
-          "name": "P. malariae",
-          "parent": "Human-Human Transmission"
-        },
-        {
-          "name": "P. ovale",
-          "parent": "Human-Human Transmission"
+            "name": "Short-term or Temporary",
+            "parent": "Loneliness",
+            "info": "usually caused by a triggering event",
+            "children": [
+                {
+                    "name": "Change",
+                    "parent": "Short-term or Temporary",
+                    "info": "e.g. moving to somewhere new"
+                },
+                {
+                    "name": "Extreme Experience",
+                    "parent": "Short-term or Temporary",
+                    "info": "e.g. death of a close one, bankruptcy, etc."
+                }
+            ]
         }
-      ]
-    },
-    {
-      "name": "Zoonotic Transmission",
-      "parent": "Plasmodium (Malaria Parasite)",
-      "children": [
-        {
-          "name": "P. knowlesi",
-          "parent": "Zoonotic Transmission"
-        }
-       ]
-    }
-  ]
+    ]
 }

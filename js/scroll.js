@@ -1,17 +1,6 @@
-//when the matrix section came into the center of the viewport, change the style of vis position to fixed
-var matrix= $("#matrix");
-
-matrix.on("scroll", function(e) {
-
-    if (this.scrollTop > 147) {
-        matrix.addClass("fix-vis");
-    } else {
-        matrix.removeClass("fix-vis");
-    }
-
-});
 
 //https://github.com/vlandham/scroll_demo/blob/gh-pages/js/scroller.js
+
 function scroller() {
     var container = d3.select('body');
     // event dispatcher
