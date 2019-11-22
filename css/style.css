@@ -168,6 +168,7 @@ div.section {
     text-align: left;
     width: 250px;
     margin-left: 750px;
+<<<<<<< HEAD
 }
 
 
@@ -182,6 +183,8 @@ div.section {
 }
 .dugy-radial-axis path{
   fill: none;
+=======
+>>>>>>> 23be233ad74ac9d99ec1a08449d0eea71793bebe
   stroke:none;
 }
 .dugy-radial-axis text{
