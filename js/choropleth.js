@@ -11,7 +11,7 @@ function demographicschorovis(){
     .attr("viewBox", "0 0 300 400")
     .classed("svg-content-responsive", true);
 
-    var path = d3.geoPath();
+    var lucypath = d3.geoPath();
     var projection = d3.geoMercator()
     .scale(230)
     .center([0, 0])
@@ -156,14 +156,13 @@ function demographicschorovis(){
 
             // Draw the map
             svg.append("g")
-                .selectAll("path")
-                .remove()
+                .selectAll(".lucypath2")
                 .data(topo.features)
                 .enter()
                 .append("path")
+                .attr("class","lucypath2 Country")
                 .attr("d", d3.geoPath().projection(projection))
                 .style("stroke", "transparent")
-                .attr("class", "Country")
                 .style("opacity", 0)
                 .transition()
                 .duration(800)
@@ -176,7 +175,7 @@ function demographicschorovis(){
                 .style("opacity", 1);
 
 
-            d3.selectAll("path")
+            d3.selectAll(".lucypath2")
                 .on("click", mouseClick)
                 .on("mouseover", mouseOver)
                 .on("mouseleave", mouseLeave)
