@@ -52,11 +52,9 @@ form,
     text-align: left;
 }
 
-p.caption {
+p.small {
     color: white;
-    font-size: 8px;
-    font-weight: 300;
-    text-align: left;
+    font-size: 12px !important;
 }
 
 a.hyprtxt {
@@ -123,6 +121,16 @@ div.section {
 /* CONTAINER */
 
 .svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 50%;
+    /* aspect ratio */
+    vertical-align: top;
+    /*overflow: hidden;*/
+}
+
+.yipsvg-container {
     display: inline-block;
     position: relative;
     width: 100%;

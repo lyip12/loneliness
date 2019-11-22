@@ -5,7 +5,7 @@ function demographicschorovis(){
     var cate = "minority"
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
     var svg = d3.select("#yipchoro")
-    .classed("svg-container", true)
+    .classed("yipsvg-container", true)
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "0 0 300 400")

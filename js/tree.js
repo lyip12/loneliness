@@ -5,7 +5,7 @@ tree()
 function tree(){
 
     var svg2 = d3.select(".yiptree")
-    .classed("svg-container", true)
+    .classed("yipsvg-container", true)
     .append("svg")
     .attr("preserveAspectRatio", "xMinYMin meet")
     .attr("viewBox", "-220 0 1200 1000")
