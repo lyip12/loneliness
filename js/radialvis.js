@@ -28,7 +28,6 @@ function radialvisMain(){
                 }
             }
         })
-
         initRadialVis()
     }
     
@@ -52,22 +51,26 @@ function radialvisMain(){
         oddsRatioStacked = stack(oddsRatio);
         console.log(oddsRatioStacked);
 
+
+
         // scale
         var angleScale = d3.scaleLinear()
         .range([0, 2 * Math.PI])
         .domain([0, oddsRatioDimensions.length]);
 
         var rmax = d3.max(oddsRatioStacked, d=> {return d3.max(d, e=> e[1])});
-        var innerRadius = 50;
+        
+        var innerRadius = 40;
         var outerRadius = 150;
         
-        var radiusScale = d3.scaleLinear()
-                            .domain([0,rmax])
+        var radiusScale = d3.scalePow()
+                            .exponent(0.75)
+                            .domain([0,rmax+10])
                             .range([innerRadius,outerRadius]);
        
         // axes
 
-        radiusAxis = d3.axisLeft().scale(radiusScale);
+        radiusAxis = d3.axisLeft().scale(radiusScale).tickSize(1);
 
         svg.selectAll(".dugy-radial-axis")
             .data(d3.range(angleScale.domain()[1]))
@@ -81,7 +84,8 @@ function radialvisMain(){
             // .attr("text-anchor", "middle")
             // .text(function(d) { return formatDay(d); });
 
-
+        var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
+        var colorScheme = d3.quantize(colorInterpolator, oddsRatioCountries.length);
         // area paths                    
         radialArea = d3.areaRadial()
                        .curve(d3.curveCardinalClosed)
@@ -95,10 +99,13 @@ function radialvisMain(){
                     .attr("class", "dugy-radial-area")
                     .merge(countryAreaPaths)
                     .style("fill", function(d,i) {
-                        return '#ff6666';})
-                    .style("opacity",function(d,i){
-                        return (25-i) /30;
+                        return colorScheme[i];
+                        })
+                    .style("fill-opacity",function(d,i){
+                        return 0.8;
                     })
+                    //.style('stroke', '#dddddd')
+                    //.style('stroke-width', 0.25)
                     .attr("d", function(d) {
                             return radialArea(d);
                     })
@@ -106,9 +113,10 @@ function radialvisMain(){
                         d3.select(this).style("opacity", 1)})
                     .on('mouseleave', function(d,i) {
                         d3.select(this).style("opacity", 
-                            (25-i) /30
-                        )});
-        countryAreaPaths.exit().remove();    
+                           0.8)
+                    });
+        countryAreaPaths.exit().remove();
+               
     }
 
 }

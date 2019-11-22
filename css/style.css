@@ -52,8 +52,11 @@ form,
     text-align: left;
 }
 
-p.small {
-    font-size: 12px !important;
+p.caption {
+    color: white;
+    font-size: 8px;
+    font-weight: 300;
+    text-align: left;
 }
 
 a.hyprtxt {
@@ -159,6 +162,11 @@ div.section {
 }
 
 /*the section changes the styles of scroll sections.*/
+
+.step {
+    width: 250px;
+}
+
 
 
 /* radial area chart */
