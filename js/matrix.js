@@ -1,48 +1,5 @@
 // Position function, set the position of matrix when scrolled to a particular place
 
-$(function(){
-    // Check the initial Poistion of the Sticky Header
-    var scrollHeaderTop = $("#scroll").offset().top;
-    var mapTop = $("#choro").offset().top;
-    $(window).scroll(function(){
-        if( $(window).scrollTop() < scrollHeaderTop) {
-            $('#scroll').css(
-                {position: 'relative',
-                    display: 'inline-block',
-                    width: '250 px',
-                    height: '1000 px',
-                    top:'0px',
-                    'z-index':'90',
-                    'margin-bottom': '1000px',
-                    'scroll-snap-type': 'y proximity'});
-            //$('#stickyalias').css('display', 'block');
-        }
-        else if ($(window).scrollTop() >mapTop-3000)
-        {
-            $('#scroll').css(
-                {position: 'relative',
-                    display: 'inline-block',
-                    width: '250 px',
-                    height: '1000 px',
-                    top:'4000px',
-                    'z-index':'90',
-                    'margin-bottom': '1000px',
-                    'scroll-snap-type': 'y proximity'});
-        }
-        else {
-            $('#scroll').css({position: 'fixed',
-                display: 'inline-block',
-                width: '250 px',
-                height: '1000 px',
-                top:'0px',
-                'z-index':'90','margin-bottom': '1000px',
-                'scroll-snap-type': 'y proximity'});
-            //$('#stickyalias').css('display', 'none');
-        }
-    });
-});
-
-
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
@@ -294,13 +251,6 @@ var scrollVis = function () {
     function getHistogram(data) {
         // only get words from the first 30 minutes
         var thirtyMins = data.filter(function (d) { return d.min < 30; });
-        // bin data into 2 minutes chuncks
-        // from 0 - 31 minutes
-        // @v4 The d3.histogram() produces a significantly different
-        // data structure then the old d3.layout.histogram().
-        // Take a look at this block:
-        // https://bl.ocks.org/mbostock/3048450
-        // to inform how you use it. Its different!
         return d3.histogram()
             .thresholds(xHistScale.ticks(10))
             .value(function (d) { return d.min; })(thirtyMins);

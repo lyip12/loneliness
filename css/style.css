@@ -163,7 +163,7 @@ div.section {
 
 /*the section changes the styles of scroll sections.*/
 #scroll {
-    position: relative;
+    /*position: relative;*/
     display: inline-block;
     width: 250px;
     height: 1000px;
@@ -185,7 +185,6 @@ div.section {
 
 #matrixvis {
     display: inline-block;
-    position: relative;
     top: -600px;
     left: 0px;
     margin-left: 0;
