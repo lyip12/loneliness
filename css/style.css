@@ -196,3 +196,20 @@ div.section {
     transition-duration: 1s;
     transition-timing-function: ease-in-out;
 }
+
+/* radial area chart */
+
+.dugy-radial-axis line{
+    fill: none;
+    stroke:#8293b6;
+    opacity: 0.2;
+    stroke-width: 0.5;
+}
+.dugy-radial-axis path{
+  fill: none;
+  stroke:none;
+}
+.dugy-radial-axis text{
+  fill: none;
+  font-size:  6px;
+}
