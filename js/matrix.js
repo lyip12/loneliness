@@ -5,7 +5,7 @@ var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 600;
+    var height = 520;
     var margin = { top: 0, bottom: 40, right: 0 };
 
     // Keep track of which visualization
@@ -275,4 +275,4 @@ function display(data) {
 }
 
 // load data and display
-d3.csv('data/Cause of Specific Events.csv', display);
+d3.tsv('data/words.tsv', display);

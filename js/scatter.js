@@ -28,8 +28,6 @@ d3.csv("data/sample.csv", function(data){
         .classed("svg-container", true)
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 300 400")
-        .size([300,400])
         .classed("svg-content-responsive", true);
 
     var ageScale = d3.scaleLinear()
