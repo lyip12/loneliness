@@ -13,7 +13,7 @@ $(function(){
             $('#floatingarea').css(
                 {
                     position:'sticky',
-                    top:'25vh',
+                    top:'40vh',
                     'z-index':'90'});
         }
         //situation when scroller is beyond the matrix area
@@ -22,14 +22,13 @@ $(function(){
             $('#floatingarea').css(
                 {
                     position:'sticky',
-                    top:'25vh',
                     'z-index':'90'});
         }
         //situation when scroller is in the matrix area
         else {
             $('#floatingarea').css({
                 position: 'fixed',
-                top:'25vh',
+                top:'40vh',
                 'z-index':'90'});
         }
     });

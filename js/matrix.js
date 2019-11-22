@@ -89,24 +89,8 @@ var scrollVis = function () {
 
             // perform some preprocessing on raw data
             var wordData = getWords(rawData);
-            // filter to just include filler words
-            var fillerWords = getFillerWords(wordData);
 
-            // get the counts of filler words for the
-            // bar chart display
-            var fillerCounts = groupByWord(fillerWords);
-            // set the bar scale's domain
-            var countMax = d3.max(fillerCounts, function (d) { return d.value;});
-            xBarScale.domain([0, countMax]);
-
-            // get aggregated histogram data
-
-            var histData = getHistogram(fillerWords);
-            // set histogram's domain
-            var histMax = d3.max(histData, function (d) { return d.length; });
-            yHistScale.domain([0, histMax]);
-
-            setupVis(wordData, fillerCounts, histData);
+            setupVis(wordData);
 
             setupSections();
         });
@@ -122,7 +106,7 @@ var scrollVis = function () {
      *  element for each filler word type.
      * @param histData - binned histogram data
      */
-    var setupVis = function (wordData, fillerCounts, histData) {
+    var setupVis = function (wordData) {
         // axis
         g.append('g')
             .attr('class', 'x axis')
@@ -163,6 +147,7 @@ var scrollVis = function () {
         // time the active section changes
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightGrid;
+
 
         // updateFunctions are called while
         // in a particular section to update
@@ -244,34 +229,6 @@ var scrollVis = function () {
         });
     }
 
-
-    function getFillerWords(data) {
-        return data.filter(function (d) {return d.filler; });
-    }
-
-    function getHistogram(data) {
-        // only get words from the first 30 minutes
-        var thirtyMins = data.filter(function (d) { return d.min < 30; });
-        // bin data into 2 minutes chuncks
-        // from 0 - 31 minutes
-        // @v4 The d3.histogram() produces a significantly different
-        // data structure then the old d3.layout.histogram().
-        // Take a look at this block:
-        // https://bl.ocks.org/mbostock/3048450
-        // to inform how you use it. Its different!
-        return d3.histogram()
-            .thresholds(xHistScale.ticks(10))
-            .value(function (d) { return d.min; })(thirtyMins);
-    }
-
-
-    function groupByWord(words) {
-        return d3.nest()
-            .key(function (d) { return d.word; })
-            .rollup(function (v) { return v.length; })
-            .entries(words)
-            .sort(function (a, b) {return b.value - a.value;});
-    }
 
 
     chart.activate = function (index) {
