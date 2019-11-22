@@ -30,7 +30,8 @@ $(function(){
             $('#floatingarea').css({
                 position: 'fixed',
                 top:'10vh',
-                'z-index':'90'});
+                'z-index':'90'
+            });
         }
     });
 });
