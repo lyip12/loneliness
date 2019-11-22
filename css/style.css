@@ -160,9 +160,20 @@ div.section {
 
 /*the section changes the styles of scroll sections.*/
 
-.step {
-    padding-top: 100px;
-    text-align: left;
-    width: 250px;
-    margin-left: 750px;
+
+/* radial area chart */
+
+.dugy-radial-axis line{
+    fill: none;
+    stroke:#8293b6;
+    opacity: 0.2;
+    stroke-width: 0.5;
+}
+.dugy-radial-axis path{
+  fill: none;
+  stroke:none;
+}
+.dugy-radial-axis text{
+  fill: none;
+  font-size:  6px;
 }
