@@ -18,7 +18,7 @@ function tree(){
 
     d3.json("data/cause-of-loneliness.json", function(error, treeData) {
         root = d3.hierarchy(treeData, function(d) { return d.children; });
-        root.x0 = height / 2;
+        root.x0 = 500 / 2;
         root.y0 = 0;
         root.children.forEach(collapse);
         update(root);
