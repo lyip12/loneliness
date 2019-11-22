@@ -5,8 +5,8 @@ var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 520;
-    var margin = { top: 0, left: 20, bottom: 40, right: 0 };
+    var height = 600;
+    var margin = { top: 0, bottom: 40, right: 0 };
 
     // Keep track of which visualization
     // we are on and which was the last
@@ -17,9 +17,9 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var squareSize = 6;
-    var squarePad = 2;
-    var numPerRow = width / (squareSize + squarePad);
+    var squareSize = 8;
+    var squarePad = 3;
+    var numPerRow = 100;
 
     // main svg used for visualization
     var svg = null;
@@ -28,33 +28,9 @@ var scrollVis = function () {
     // for displaying visualizations
     var g = null;
 
-    // We will set the domain when the
-    // data is processed.
-    // @v4 using new scale names
-    var xBarScale = d3.scaleLinear()
-        .range([0, width]);
-    
-
-    // The histogram display shows the
-    // first 30 minutes of data
-    // so the range goes from 0 to 30
-    // @v4 using new scale name
-    var xHistScale = d3.scaleLinear()
-        .domain([0, 30])
-        .range([0, width - 20]);
-
-    // @v4 using new scale name
-    var yHistScale = d3.scaleLinear()
-        .range([height, 0]);
-
-    var xAxisBar = d3.axisBottom()
-        .scale(xBarScale);
-
-
-    // When scrolling to a new section
-    // the activation function for that
-    // section is called.
+    // When scrolling to a new section the activation function for that section is called.
     var activateFunctions = [];
+
     // If a section has an update function
     // then it is called while scrolling
     // through the section with the current
@@ -85,7 +61,7 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                .attr('transform', 'translate(' + 0 + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
             var displayData = getData(rawData);
@@ -107,14 +83,6 @@ var scrollVis = function () {
      * @param histData - binned histogram data
      */
     var setupVis = function (displayData) {
-        // axis
-        g.append('g')
-            .attr('class', 'x axis')
-            .attr('transform', 'translate(0,' + height + ')')
-            .call(xAxisBar);
-        g.select('.x.axis').style('opacity', 0);
-
-
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
@@ -148,12 +116,9 @@ var scrollVis = function () {
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightGrid;
 
-        // updateFunctions are called while
-        // in a particular section to update
-        // the scroll progress in that section.
-        // Most sections do not need to be updated
-        // for all scrolling and so are set to
-        // no-op functions.
+        // updateFunctions are called while in a particular section to update
+        // the scroll progress in that section. Most sections do not need to be updated
+        // for all scrolling and so are set to no-op functions.
         for (var i = 0; i < 9; i++) {
             updateFunctions[i] = function () {};
         }
@@ -310,4 +275,4 @@ function display(data) {
 }
 
 // load data and display
-d3.tsv('data/words.tsv', display);
+d3.csv('data/Cause of Specific Events.csv', display);
