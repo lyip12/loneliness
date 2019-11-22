@@ -104,7 +104,11 @@ div.section {
     background-size: cover;
 }
 
-
+.yipplaceholder {
+    height:20vw;
+    background-color: black;
+    margin-bottom: 20px;
+}
 /* TREE */
 .yipnode circle {
     fill: #8293b6;
@@ -174,8 +178,6 @@ div.section {
 .step {
     width: 250px;
 }
-
-
 
 /* radial area chart */
 
