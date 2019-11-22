@@ -85,7 +85,7 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                //.attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
             var wordData = getWords(rawData);
@@ -148,7 +148,6 @@ var scrollVis = function () {
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightGrid;
 
-
         // updateFunctions are called while
         // in a particular section to update
         // the scroll progress in that section.
@@ -174,6 +173,35 @@ var scrollVis = function () {
 
 
     function highlightGrid() {
+        hideAxis();
+
+        g.selectAll('.square')
+            .transition()
+            .duration(0)
+            .attr('opacity', 1.0)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.fill-square')
+            .transition('move-fills')
+            .duration(800)
+            .attr('x', function (d) {
+                return d.x;
+            })
+            .attr('y', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.fill-square')
+            .transition()
+            .duration(800)
+            .attr('opacity', 1.0)
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightisolation() {
         hideAxis();
 
         g.selectAll('.square')
@@ -261,7 +289,7 @@ function display(data) {
 
     // setup scroll functionality
     var scroll = scroller()
-        .container(d3.select('#matrixvis'));
+        .container(d3.select('#floatingarea'));
 
     // pass in .step selection as the steps
     scroll(d3.selectAll('.step'));

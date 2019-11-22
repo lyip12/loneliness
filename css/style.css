@@ -168,4 +168,9 @@ div.section {
     text-align: left;
     width: 250px;
     margin-left: 750px;
+  stroke:none;
+}
+.dugy-radial-axis text{
+  fill: none;
+  font-size:  6px;
 }
