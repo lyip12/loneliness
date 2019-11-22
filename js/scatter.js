@@ -24,11 +24,12 @@ d3.csv("data/sample.csv", function(data){
     data.sort(function(a, b){ return b.fltlnl - a.fltlnl});
 
     // create chart group, applying margins
-    var svg = d3.select("#scatter").append("svg")
-        .attr("width", width + margin.left + margin.right)// apply the conventional margin
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform", "translate("+ margin.left + "," + margin.top + ")");
+    var svg = d3.select("#scatter")
+        .classed("svg-container", true)
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 300 400")
+        .classed("svg-content-responsive", true);
 
     var ageScale = d3.scaleLinear()
         .domain([d3.min(data, function(d){return d.agea}),d3.max(data, function(d){return d.agea})])

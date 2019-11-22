@@ -1,50 +1,43 @@
 //https://github.com/vlandham/scroll_demo/blob/gh-pages/js/scroller.js
 
+
 $(function(){
     // Check the initial Position of the Sticky Header
-    var scrollHeaderTop = $("#scroll").offset().top;
-    var mapTop = $("#choro").offset().top;
+    var scrollHeaderTop = $("#matrixarea").offset().top;
+
+    var scrollHeaderBottom =$("#yipstats").offset().top;
+
     $(window).scroll(function(){
+        //situtation when scroller is above the matrix area
         if( $(window).scrollTop() < scrollHeaderTop) {
-            $('#scroll').css(
+            $('#floatingarea').css(
                 {
-                    display: 'inline-block',
-                    width: '250 px',
-                    height: '1000 px',
-                    top:'0px',
-                    'z-index':'90',
-                    'margin-bottom': '1000px',
-                    'scroll-snap-type': 'y proximity'});
-            //$('#stickyalias').css('display', 'block');
+                    position:'sticky',
+                    top:'25vh',
+                    'z-index':'90'});
         }
-        else if ($(window).scrollTop() >mapTop-3000)
+        //situation when scroller is beyond the matrix area
+        else if ($(window).scrollTop() >scrollHeaderBottom-window.innerHeight*2)
         {
-            $('#scroll').css(
+            $('#floatingarea').css(
                 {
-                    display: 'inline-block',
-                    width: '250 px',
-                    height: '1000 px',
-                    top:'4000px',
-                    'z-index':'90',
-                    'margin-bottom': '1000px',
-                    'scroll-snap-type': 'y proximity'});
+                    position:'sticky',
+                    top:'25vh',
+                    'z-index':'90'});
         }
+        //situation when scroller is in the matrix area
         else {
-            $('#scroll').css({position: 'fixed',
-                display: 'inline-block',
-                width: '250 px',
-                height: '1000 px',
-                top:'0px',
-                'z-index':'90','margin-bottom': '1000px',
-                'scroll-snap-type': 'y proximity'});
-            //$('#stickyalias').css('display', 'none');
+            $('#floatingarea').css({
+                position: 'fixed',
+                top:'25vh',
+                'z-index':'90'});
         }
     });
 });
 
 
 function scroller() {
-    var container = d3.select('body');
+    var container = d3.select('#matrixarea');
     // event dispatcher
     var dispatch = d3.dispatch('active', 'progress');
 

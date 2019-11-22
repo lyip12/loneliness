@@ -1,5 +1,6 @@
 // Position function, set the position of matrix when scrolled to a particular place
 
+
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
@@ -251,6 +252,13 @@ var scrollVis = function () {
     function getHistogram(data) {
         // only get words from the first 30 minutes
         var thirtyMins = data.filter(function (d) { return d.min < 30; });
+        // bin data into 2 minutes chuncks
+        // from 0 - 31 minutes
+        // @v4 The d3.histogram() produces a significantly different
+        // data structure then the old d3.layout.histogram().
+        // Take a look at this block:
+        // https://bl.ocks.org/mbostock/3048450
+        // to inform how you use it. Its different!
         return d3.histogram()
             .thresholds(xHistScale.ticks(10))
             .value(function (d) { return d.min; })(thirtyMins);

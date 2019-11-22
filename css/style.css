@@ -162,36 +162,10 @@ div.section {
 }
 
 /*the section changes the styles of scroll sections.*/
-#scroll {
-    /*position: relative;*/
-    display: inline-block;
-    width: 250px;
-    height: 1000px;
-    /*margin-top: -10vh;*/
-    margin-bottom: 1000px;
-    scroll-snap-type: y proximity;
-}
-
-#debugging{height:3000px}
 
 .step {
     padding-top: 100px;
-    display: inline-block;
-    color: #8293b6;
     text-align: left;
     width: 250px;
     margin-left: 750px;
-}
-
-#matrixvis {
-    display: inline-block;
-    top: -600px;
-    left: 0px;
-    margin-left: 0;
-    height: 600px;
-    width: 600px;
-    /*background-color: #ddd;*/
-    transition-property: transform;
-    transition-duration: 1s;
-    transition-timing-function: ease-in-out;
 }
