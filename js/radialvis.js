@@ -108,8 +108,7 @@ function radialvisMain(){
                         d3.select(this).style("opacity", 
                             (25-i) /30
                         )});
-        countryAreaPaths.exit().remove();
-               
+        countryAreaPaths.exit().remove();    
     }
 
 }
