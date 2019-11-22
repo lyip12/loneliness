@@ -166,12 +166,14 @@ div.section {
 .dugy-radial-axis line{
     fill: none;
     stroke:#8293b6;
-    opacity: 0.2;
+    opacity: 1;
     stroke-width: 0.5;
 }
 .dugy-radial-axis path{
   fill: none;
-  stroke:none;
+  stroke: #888888;
+  stroke-opacity: 0.3;
+  stroke-width: 0.5;
 }
 .dugy-radial-axis text{
   fill: none;
