@@ -71,7 +71,7 @@ var scrollVis = function () {
     var chart = function (selection) {
         selection.each(function (rawData) {
             // create svg and give it a width and height
-            svg = d3.select(this).selectAll('svg').data([wordData]);
+            svg = d3.select(this).selectAll('svg').data([displayData]);
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
@@ -88,9 +88,9 @@ var scrollVis = function () {
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
-            var wordData = getWords(rawData);
+            var displayData = getData(rawData);
 
-            setupVis(wordData);
+            setupVis(displayData);
 
             setupSections();
         });
@@ -106,7 +106,7 @@ var scrollVis = function () {
      *  element for each filler word type.
      * @param histData - binned histogram data
      */
-    var setupVis = function (wordData) {
+    var setupVis = function (displayData) {
         // axis
         g.append('g')
             .attr('class', 'x axis')
@@ -118,7 +118,7 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var squares = g.selectAll('.square').data(wordData, function (d) { return d.word; });
+        var squares = g.selectAll('.square').data(displayData, function (d) { return d.word; });
         var squaresE = squares.enter()
             .append('rect')
             .classed('square', true);
@@ -237,7 +237,7 @@ var scrollVis = function () {
             .style('opacity', 0);
     }
 
-    function getWords(rawData) {
+    function getData(rawData) {
         return rawData.map(function (d, i) {
             // is this word a filler word?
             d.filler = (d.filler === '1') ? true : false;
