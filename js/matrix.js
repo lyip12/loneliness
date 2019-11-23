@@ -37,13 +37,7 @@ var scrollVis = function () {
     // progress through the section.
     var updateFunctions = [];
 
-    /**
-     * chart
-     *
-     * @param selection - the current d3 selection(s)
-     *  to draw the visualization in. For this
-     *  example, we will be drawing it in #vis
-     */
+    /**chart**/
     var chart = function (selection) {
         selection.each(function (rawData) {
             // create svg and give it a width and height
@@ -90,9 +84,7 @@ var scrollVis = function () {
         var circlesE = circles.enter()
             .append('circle')
             .classed('circle', true);
-
-        //svg.append("defs").append("g").attr("id","iconCustom").append("path").attr("d","M3.5,2H2.7C3,1.8,3.3,1.5,3.3,1.1c0-0.6-0.4-1-1-1c-0.6,0-1,0.4-1,1c0,0.4,0.2,0.7,0.6,0.9H1.1C0.7,2,0.4,2.3,0.4,2.6v1.9c0,0.3,0.3,0.6,0.6,0.6h0.2c0,0,0,0.1,0,0.1v1.9c0,0.3,0.2,0.6,0.3,0.6h1.3c0.2,0,0.3-0.3,0.3-0.6V5.3c0,0,0-0.1,0-0.1h0.2c0.3,0,0.6-0.3,0.6-0.6V2.6C4.1,2.3,3.8,2,3.5,2z").attr("transform", "scale(4)")
-
+        
         circles = circles.merge(circlesE)
             .attr('r', circleSize/2)
             .attr('fill', '#fff')
