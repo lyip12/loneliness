@@ -17,8 +17,8 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var squareSize = 8;
-    var squarePad = 3;
+    var circleSize = 8;
+    var circlePad = 3;
     var numPerRow = 100;
 
     // main svg used for visualization
@@ -86,25 +86,19 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var squares = g.selectAll('.square').data(displayData, function (d) { return d.word; });
-        var squaresE = squares.enter()
-            .append('rect')
-            .classed('square', true);
+        var circles = g.selectAll('.circle').data(displayData, function (d) { return d.word; });
+        var circlesE = circles.enter()
+            .append('circle')
+            .classed('circle', true);
 
-        svg.append("defs")
-            .append("g")
-            .attr("id","iconCustom")
-            .append("path")
-            .attr("d","M3.5,2H2.7C3,1.8,3.3,1.5,3.3,1.1c0-0.6-0.4-1-1-1c-0.6,0-1,0.4-1,1c0,0.4,0.2,0.7,0.6,0.9H1.1C0.7,2,0.4,2.3,0.4,2.6v1.9c0,0.3,0.3,0.6,0.6,0.6h0.2c0,0,0,0.1,0,0.1v1.9c0,0.3,0.2,0.6,0.3,0.6h1.3c0.2,0,0.3-0.3,0.3-0.6V5.3c0,0,0-0.1,0-0.1h0.2c0.3,0,0.6-0.3,0.6-0.6V2.6C4.1,2.3,3.8,2,3.5,2z")
-            .attr("transform", "scale(4)")
+        //svg.append("defs").append("g").attr("id","iconCustom").append("path").attr("d","M3.5,2H2.7C3,1.8,3.3,1.5,3.3,1.1c0-0.6-0.4-1-1-1c-0.6,0-1,0.4-1,1c0,0.4,0.2,0.7,0.6,0.9H1.1C0.7,2,0.4,2.3,0.4,2.6v1.9c0,0.3,0.3,0.6,0.6,0.6h0.2c0,0,0,0.1,0,0.1v1.9c0,0.3,0.2,0.6,0.3,0.6h1.3c0.2,0,0.3-0.3,0.3-0.6V5.3c0,0,0-0.1,0-0.1h0.2c0.3,0,0.6-0.3,0.6-0.6V2.6C4.1,2.3,3.8,2,3.5,2z").attr("transform", "scale(4)")
 
-        squares = squares.merge(squaresE)
-            .attr('width', squareSize)
-            .attr('height', squareSize)
+        circles = circles.merge(circlesE)
+            .attr('r', circleSize/2)
             .attr('fill', '#fff')
-            .classed('fill-square', function (d) { return d.filler; })
-            .attr('x', function (d) { return d.x;})
-            .attr('y', function (d) { return d.y;})
+            .classed('fill-circle', function (d) { return d.filler; })
+            .attr('cx', function (d) { return d.x;})
+            .attr('cy', function (d) { return d.y;})
             .attr('opacity', 0);
 
     };
@@ -126,7 +120,7 @@ var scrollVis = function () {
 
 
     function showGrid() {
-        g.selectAll('.square')
+        g.selectAll('.circle')
             .transition()
             .duration(600)
             .delay(function (d) {
@@ -140,7 +134,7 @@ var scrollVis = function () {
     function highlightGrid() {
         hideAxis();
 
-        g.selectAll('.square')
+        g.selectAll('.circle')
             .transition()
             .duration(0)
             .attr('opacity', 1.0)
@@ -149,52 +143,22 @@ var scrollVis = function () {
         // use named transition to ensure
         // move happens even if other
         // transitions are interrupted.
-        g.selectAll('.fill-square')
+        g.selectAll('.fill-circle')
             .transition('move-fills')
             .duration(800)
-            .attr('x', function (d) {
+            .attr('cx', function (d) {
                 return d.x;
             })
-            .attr('y', function (d) {
+            .attr('cy', function (d) {
                 return d.y;
             });
 
-        g.selectAll('.fill-square')
+        g.selectAll('.fill-circle')
             .transition()
             .duration(800)
             .attr('opacity', 1.0)
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
-
-    function highlightisolation() {
-        hideAxis();
-
-        g.selectAll('.square')
-            .transition()
-            .duration(0)
-            .attr('opacity', 1.0)
-            .attr('fill', '#ddd');
-
-        // use named transition to ensure
-        // move happens even if other
-        // transitions are interrupted.
-        g.selectAll('.fill-square')
-            .transition('move-fills')
-            .duration(800)
-            .attr('x', function (d) {
-                return d.x;
-            })
-            .attr('y', function (d) {
-                return d.y;
-            });
-
-        g.selectAll('.fill-square')
-            .transition()
-            .duration(800)
-            .attr('opacity', 1.0)
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
-    }
-
 
     function hideAxis() {
         g.select('.x.axis')
@@ -215,9 +179,9 @@ var scrollVis = function () {
             // stored here to make it easier
             // to keep track of.
             d.col = i % numPerRow;
-            d.x = d.col * (squareSize + squarePad);
+            d.x = d.col * (circleSize + circlePad);
             d.row = Math.floor(i / numPerRow);
-            d.y = d.row * (squareSize + squarePad);
+            d.y = d.row * (circleSize + circlePad);
             return d;
         });
     }

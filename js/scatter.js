@@ -9,7 +9,7 @@ function runjiascatter(){
 
     var padding = 30;
 
-    var width = 800 - margin.left- margin.right,
+    var width = 500 - margin.left- margin.right,
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#scatter")
@@ -18,7 +18,7 @@ function runjiascatter(){
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "0 0 800 500")
         .classed("svg-content-responsive", true);
-    
+
     // Load CSV file
     d3.csv("data/sample.csv", function(data){
 
