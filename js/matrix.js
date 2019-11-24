@@ -1,53 +1,55 @@
 // Position function, set the position of matrix when scrolled to a particular place
 
-
+var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = 600;
-    var height = 520;
-    var margin = { top: 0, bottom: 40, right: 0 };
+    var width = 650;
+    var height = 650;
+    var margin = { top: 10, bottom: 0, left: 10, right: 0 };
 
-    // Keep track of which visualization
-    // we are on and which was the last
-    // index activated. When user scrolls
-    // quickly, we want to call all the
+    // Keep track of which visualization we are on and which was the last
+    // index activated. When user scrolls quickly, we want to call all the
     // activate functions that they pass.
     var lastIndex = -1;
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = 8;
-    var circlePad = 3;
-    var numPerRow = 100;
+    var circleSize = 5;
+    var circlePad = 2;
+    var numPerRow = 90;
 
     // main svg used for visualization
-    var svg = null;
+    var svg = d3.select("#matrixvis");
 
-    // d3 selection that will be used
-    // for displaying visualizations
+    // d3 selection that will be used for displaying visualizations
     var g = null;
 
     // When scrolling to a new section the activation function for that section is called.
     var activateFunctions = [];
 
-    // If a section has an update function
-    // then it is called while scrolling
-    // through the section with the current
-    // progress through the section.
+    // If a section has an update function then it is called while scrolling
+    // through the section with the current    // progress through the section.
     var updateFunctions = [];
+
+
 
     /**chart**/
     var chart = function (selection) {
         selection.each(function (rawData) {
             // create svg and give it a width and height
-            svg = d3.select(this).selectAll('svg').data([displayData]);
+
+            var matrixData = wrangleData(rawData);
+
+            displaydata = matrixData;
+
+            svg = d3.select(this).selectAll('svg').data([matrixData.prevalence]);
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
 
             svg.attr('width', width);
-            svg.attr('height', height + margin.top + margin.bottom);
+            svg.attr('height', height);
 
             svg.append('g');
 
@@ -55,12 +57,18 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                .attr('transform', 'translate(' + 0 + ',' + margin.top + ')');
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
-            var displayData = getData(rawData);
+            //var displayData = getData(rawData);
 
-            setupVis(displayData);
+
+
+            //console.log(displayData);
+            //console.log(matrixData.prevalence);
+            setupVis(matrixData);
+
+            //setupVis(displayData);
 
             setupSections();
         });
@@ -69,18 +77,15 @@ var scrollVis = function () {
 
     /**
      * setupVis - creates initial elements for all
-     * sections of the visualization.
-     *
-     * @param wordData - data object for each word.
-     * @param fillerCounts - nested data that includes
-     *  element for each filler word type.
-     * @param histData - binned histogram data
-     */
+     * sections of the visualization.*/
     var setupVis = function (displayData) {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData, function (d) { return d.word; });
+        var circles = g.selectAll('.circle').data(displayData["income"]);//.prevalence);
+
+        //console.log(displayData);
+
         var circlesE = circles.enter()
             .append('circle')
             .classed('circle', true);
@@ -95,12 +100,16 @@ var scrollVis = function () {
 
     };
 
-
     var setupSections = function () {
         // activateFunctions are called each
         // time the active section changes
         activateFunctions[0] = showGrid;
-        activateFunctions[1] = highlightGrid;
+        activateFunctions[1] = highlightPre;
+        activateFunctions[2] = highlightAge;
+        activateFunctions[3] = highlightMartial;
+        activateFunctions[4] = highlightEvent;
+        activateFunctions[5] = highlightImpact;
+        activateFunctions[6] = highlightInt;
 
         // updateFunctions are called while in a particular section to update
         // the scroll progress in that section. Most sections do not need to be updated
@@ -118,18 +127,19 @@ var scrollVis = function () {
             .delay(function (d) {
                 return 5 * d.row;
             })
-            .attr('opacity', 1.0)
+            .attr('opacity', 0.8)
             .attr('fill', '#ddd');
     }
 
-
-    function highlightGrid() {
-        hideAxis();
+    function highlightPre() {
 
         g.selectAll('.circle')
             .transition()
-            .duration(0)
-            .attr('opacity', 1.0)
+            .duration(600)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
             .attr('fill', '#ddd');
 
         // use named transition to ensure
@@ -145,20 +155,243 @@ var scrollVis = function () {
                 return d.y;
             });
 
+
         g.selectAll('.fill-circle')
             .transition()
             .duration(800)
-            .attr('opacity', 1.0)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+
+    }
+
+    function highlightAge() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["martial status"])
+            .classed('age-circle', function (d) { return d.filler; })
+            .transition()
+
+            circles.duration(800)
+                .delay(function (d) {
+                    return 5 * d.row;
+                })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.age-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        console.log(displaydata["martial status"]);
+        g.selectAll('.age-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
-    function hideAxis() {
-        g.select('.x.axis')
-            .transition().duration(500)
-            .style('opacity', 0);
+    function highlightMartial() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["Fewer Confidants"])
+            .classed('m-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.m-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.m-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
-    function getData(rawData) {
+    function highlightEvent() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["specific events"])
+            .classed('e-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.e-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.e-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightImpact() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["impact"])
+            .classed('im-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.im-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.im-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightInt() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["Fewer Confidants"])
+            .classed('it-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.it-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.it-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function wrangleData(data, matrixsize=numPerRow*numPerRow)
+    {
+        //rewrite the csv file into json file for easier data parsing
+        var newdata = [];
+        var namelist = [];
+        data.forEach(function(d, index)
+        {
+            if(d.category !='') namelist.push( d.category);
+        });
+        //get a list of all the categories from the csv file
+        //console.log(namelist);
+
+        var stack = {};
+        let sumvalue = 0;
+
+        //parse the csv file into json format for easier access.
+        //meanwhile parse string into numberic representations
+        data.forEach(function(d, index) {
+
+                if (d.category != '' && stack != {}) {
+                    stack['total'] = sumvalue;
+                    newdata.push(stack);
+                    stack = {};
+                    stack[d.division] = +d.Total;
+                    sumvalue = +d.Total;
+                } else {
+                    stack[d.division] = +d.Total;
+                    sumvalue = +d.Total;
+                }
+
+        });
+        //console.log(newdata);
+
+        var displayData = {};
+        for(var i = 0; i<namelist.length;i++)
+        {
+            var unit = [];
+            for (var j = 0; j< matrixsize; j++)
+            {
+                d = {}
+                d.col=j % numPerRow;
+                d.x=j % numPerRow * (circleSize + circlePad);
+                d.row=Math.floor(j / numPerRow);
+                d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
+                //console.log(newdata[i]['total'])
+                if(j<60*newdata[i].total){ d.filler=true}
+                else{ d.filler=false}
+                unit.push(d)
+            }
+            displayData[namelist[i]] = unit;
+        }
+        console.log(displayData);
+
+        return displayData;
+    }
+
+/*    function getData(rawData) {
         return rawData.map(function (d, i) {
             // is this word a filler word?
             d.filler = (d.filler === '1') ? true : false;
@@ -176,9 +409,7 @@ var scrollVis = function () {
             d.y = d.row * (circleSize + circlePad);
             return d;
         });
-    }
-
-
+    }*/
 
     chart.activate = function (index) {
         activeIndex = index;
@@ -231,4 +462,6 @@ function display(data) {
 }
 
 // load data and display
-d3.tsv('data/words.tsv', display);
+//d3.tsv('data/words.tsv', display);
+d3.csv('data/what are lonely people like.csv',  display);
+

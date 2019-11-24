@@ -174,9 +174,17 @@ div.section {
 }
 
 /*the section changes the styles of scroll sections.*/
-
+#matrixvis{
+    position: -webkit-sticky;
+    position: sticky;
+    top:20vh;
+    left:20vh;
+}
 .step {
-    width: 250px;
+    width: 20vw;
+    margin-left: 10vh;
+    margin-top: 30vh;
+    margin-bottom: 50vh;
 }
 
 /* radial area chart */
@@ -184,14 +192,17 @@ div.section {
 .dugy-radial-axis line{
     fill: none;
     stroke:#8293b6;
-    opacity: 0.2;
+    opacity:   1;
     stroke-width: 0.5;
 }
 .dugy-radial-axis path{
   fill: none;
-  stroke:none;
+  stroke: #888888;
+  stroke-opacity: 0.3;
+  stroke-width: 0.5;
 }
 .dugy-radial-axis text{
-  fill: none;
-  font-size:  6px;
+    fill:#ff6666;
+    font-size:  3px;
+    fill-opacity: 0.5;
 }
