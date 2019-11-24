@@ -15,9 +15,9 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = 5;
-    var circlePad = 2;
-    var numPerRow = 90;
+    var circleSize = 12;
+    var circlePad = 6;
+    var numPerRow = 30;
 
     // main svg used for visualization
     var svg = d3.select("#matrixvis");
@@ -82,7 +82,7 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData["income"]);//.prevalence);
+        var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
 
         //console.log(displayData);
 
@@ -167,7 +167,7 @@ var scrollVis = function () {
     function highlightAge() {
 
         var circles =  g.selectAll('.circle')
-            .data(displaydata["martial status"])
+            .data(displaydata["employment"])
             .classed('age-circle', function (d) { return d.filler; })
             .transition()
 
@@ -304,7 +304,7 @@ var scrollVis = function () {
     function highlightInt() {
 
         var circles =  g.selectAll('.circle')
-            .data(displaydata["Fewer Confidants"])
+            .data(displaydata["martial status"])
             .classed('it-circle', function (d) { return d.filler; })
             .transition()
 
@@ -380,7 +380,7 @@ var scrollVis = function () {
                 d.row=Math.floor(j / numPerRow);
                 d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
                 //console.log(newdata[i]['total'])
-                if(j<60*newdata[i].total){ d.filler=true}
+                if(j<6*newdata[i].total){ d.filler=true}
                 else{ d.filler=false}
                 unit.push(d)
             }
