@@ -73,7 +73,7 @@ function yipsmallmultiples(){
             .classed("yipsvg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "-40 0 370 400")
+            .attr("viewBox", "-40 0 390 420")
             .classed("svg-content-responsive", true);
 
             x.domain(countarray.map(function(d) { return d.key;}));
