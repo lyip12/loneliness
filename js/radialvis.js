@@ -21,7 +21,7 @@ function radialvisMain(){
     var tickValues
     var svg;
     var innerRadius = 40;
-    var outerRadius = 150;
+    var outerRadius = 180;
     var maxCircleCount = 5;
     var circleCount;
     var minCircleCount = 3;
@@ -39,6 +39,9 @@ function radialvisMain(){
     var axesContainer;
     var labelContainer;
 
+    var explainationContainer;
+    var currentCountry = 'Europe';
+    var displayCountry;
     // Load Data
     queue()
     .defer(d3.csv, "data/OddsRatioByFactor.csv")
@@ -66,11 +69,11 @@ function radialvisMain(){
         svg = d3.select("#dugy-radial")
                 //responsive layout from 
                 //https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
-                .classed("svg-container", true)
+                .classed("dugy-svg-container", true)
                 .append("svg")
                 .attr("preserveAspectRatio", "xMinYMin meet")
-                .attr("viewBox", "0 0 600 400")
-                .classed("svg-content-responsive", true)
+                .attr("viewBox", "0 0 400 400")
+                .classed("dugy-svg-content-responsive", true)
                 .append('g')
                 .attr("transform", "translate(" + 200 + "," +200 + ")");
 
@@ -124,7 +127,6 @@ function radialvisMain(){
         colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
         colorScheme = d3.quantize(colorInterpolator, oddsRatioCountries.length);
 
-        
         filtering = '';
         filterData();
     }
@@ -144,6 +146,8 @@ function radialvisMain(){
     }
 
     function updateRadialVis(){
+        displayCountry = document.getElementById('dugy-radial-currentCountry');
+
 
         // update radius scale
         var rmax = d3.max(oddsRatioStackedDisplayed, d=> 
@@ -199,7 +203,7 @@ function radialvisMain(){
         countryAreaPaths2 = countryAreaPaths.enter().append("path")
                         .attr("class", "dugy-radial-area")
                         .merge(countryAreaPaths);
-        countryAreaPaths2.transition(300)
+        countryAreaPaths2.transition(2000)
                         .style("fill", function(d,i) {
                             return colorScheme[i];
                             })
@@ -215,17 +219,24 @@ function radialvisMain(){
         countryAreaPaths2.on('mouseover', function(d,i) {
                             d3.select(this).style("fill", '#ff6666');
                             d3.select(this).style("fill-opacity", 0.1);
+                            currentCountry = d.key;
+                            displayCountry.innerHTML = currentCountry;
                             })
                         .on('mouseleave', function(d,i) {
                             d3.select(this).style("fill", colorScheme[i]);
                             d3.select(this).style("fill-opacity", 0.8); 
+
+                            displayCountry.innerHTML = (filtering == "")? 'Europe':d.key;
+
                             })
                         .on("click", function(d,i) {
-                            
                             filtering = (filtering) ? "" : oddsRatioCountries[i];
                             circleCount = (filtering == "")? maxCircleCount:minCircleCount;
                             innerRadius = (filtering == "")? maxInnerRadius:minInnerRadius;
                             radiusBoundaryOffset = (filtering == "")? maxBoundaryOffset:minBoundaryOffset;
+                            currentCountry = d.key;
+                            displayCountry.innerHTML = currentCountry;
+
                             filterData();});
         countryAreaPaths.exit().remove();
 
