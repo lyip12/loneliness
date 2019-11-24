@@ -82,7 +82,7 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData["age"]);//.prevalence);
+        var circles = g.selectAll('.circle').data(displayData["income"]);//.prevalence);
 
         //console.log(displayData);
 
@@ -106,10 +106,10 @@ var scrollVis = function () {
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightPre;
         activateFunctions[2] = highlightAge;
-       /* activateFunctions[3] = highlightMartial;
+        activateFunctions[3] = highlightMartial;
         activateFunctions[4] = highlightEvent;
         activateFunctions[5] = highlightImpact;
-        activateFunctions[6] = highlightInt;*/
+        activateFunctions[6] = highlightInt;
 
         // updateFunctions are called while in a particular section to update
         // the scroll progress in that section. Most sections do not need to be updated
@@ -166,18 +166,22 @@ var scrollVis = function () {
 
     function highlightAge() {
 
-        g.selectAll('.circle')
+        var circles =  g.selectAll('.circle')
             .data(displaydata["martial status"])
+            .classed('age-circle', function (d) { return d.filler; })
             .transition()
-            .duration(0)
+
+            circles.duration(800)
+                .delay(function (d) {
+                    return 5 * d.row;
+                })
             .attr('opacity', 0.3)
-            .attr('fill', '#ddd')
-            .classed('fill-circle', function (d) { return d.filler; });
+            .attr('fill', '#ddd');
 
         // use named transition to ensure
         // move happens even if other
         // transitions are interrupted.
-        g.selectAll('.fill-circle')
+        g.selectAll('.age-circle')
             .transition('move-fills')
             .duration(800)
             .attr('cx', function (d) {
@@ -188,7 +192,143 @@ var scrollVis = function () {
             });
 
         console.log(displaydata["martial status"]);
-        g.selectAll('.fill-circle')
+        g.selectAll('.age-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightMartial() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["Fewer Confidants"])
+            .classed('m-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.m-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.m-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightEvent() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["specific events"])
+            .classed('e-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.e-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.e-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightImpact() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["impact"])
+            .classed('im-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.im-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.im-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
+
+    function highlightInt() {
+
+        var circles =  g.selectAll('.circle')
+            .data(displaydata["Fewer Confidants"])
+            .classed('it-circle', function (d) { return d.filler; })
+            .transition()
+
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.it-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        g.selectAll('.it-circle')
             .transition()
             .duration(800)
             .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
@@ -222,7 +362,7 @@ var scrollVis = function () {
                     sumvalue = +d.Total;
                 } else {
                     stack[d.division] = +d.Total;
-                    sumvalue += +d.Total;
+                    sumvalue = +d.Total;
                 }
 
         });
@@ -240,7 +380,7 @@ var scrollVis = function () {
                 d.row=Math.floor(j / numPerRow);
                 d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
                 //console.log(newdata[i]['total'])
-                if(j<27*newdata[i].total){ d.filler=true}
+                if(j<60*newdata[i].total){ d.filler=true}
                 else{ d.filler=false}
                 unit.push(d)
             }
