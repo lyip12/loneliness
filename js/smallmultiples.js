@@ -1,6 +1,6 @@
 //var yipchoroselector = "All";
 
-function yipsmallmultiples(){
+function yipsmallmultiples(yipchoroselector){
     
     var margin = {top: 20, right: 20, bottom: 30, left: 30},
         width = 400 - margin.left - margin.right,

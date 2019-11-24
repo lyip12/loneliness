@@ -91,7 +91,7 @@ function demographicschorovis(){
                         .style("opacity", 0)
                     
                     var yipchoroselector = "All";
-                    yipsmallmultiples();
+                    yipsmallmultiples(yipchoroselector);
                     
                     toggle =1;
                     var t = " "
@@ -119,9 +119,8 @@ function demographicschorovis(){
                             .style("opacity", 1);
 
                         var yipchoroselector = d.properties.name;
-                        yipsmallmultiples();
+                        yipsmallmultiples(yipchoroselector);
                         
-                        //console.log(yipchoroselector)
                         var t = d.data;
                         document.getElementById("yiptooltip").innerHTML = t;
                         toggle = 0;
