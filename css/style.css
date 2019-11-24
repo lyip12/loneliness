@@ -183,8 +183,7 @@ div.section {
 .step {
     width: 20vw;
     margin-left: 10vh;
-    margin-top: 30vh;
-    margin-bottom: 50vh;
+    height: 50vh;
 }
 
 /* radial area chart */
