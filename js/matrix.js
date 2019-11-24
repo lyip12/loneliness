@@ -4,8 +4,9 @@ var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width =  Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
-    var height =Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
+    var width = screen.height*;
+    var height = 650;
+    var margin = { top: 10, bottom: 0, left: 10, right: 0 };
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -14,12 +15,10 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
+    var circleSize = Math.floor(width/numPerRow);
+    var circlePad = 6;
     var numPerRow = 30;
 
-    var circleSize = Math.floor(width/numPerRow*2/3);
-    var circlePad =  Math.floor(width/numPerRow/3);
-
-    var margin = { top: circleSize/2, bottom: 0, left: circleSize/2, right: 0 };
     // main svg used for visualization
     var svg = d3.select("#matrixvis");
 
@@ -192,7 +191,7 @@ var scrollVis = function () {
                 return d.y;
             });
 
-        //console.log(displaydata["martial status"]);
+        console.log(displaydata["martial status"]);
         g.selectAll('.age-circle')
             .transition()
             .duration(800)
@@ -387,10 +386,30 @@ var scrollVis = function () {
             }
             displayData[namelist[i]] = unit;
         }
-        //console.log(displayData);
+        console.log(displayData);
 
         return displayData;
     }
+
+/*    function getData(rawData) {
+        return rawData.map(function (d, i) {
+            // is this word a filler word?
+            d.filler = (d.filler === '1') ? true : false;
+            // time in seconds word was spoken
+            d.time = +d.time;
+            // time in minutes word was spoken
+            d.min = Math.floor(d.time / 60);
+
+            // positioning for square visual
+            // stored here to make it easier
+            // to keep track of.
+            d.col = i % numPerRow;
+            d.x = d.col * (circleSize + circlePad);
+            d.row = Math.floor(i / numPerRow);
+            d.y = d.row * (circleSize + circlePad);
+            return d;
+        });
+    }*/
 
     chart.activate = function (index) {
         activeIndex = index;
