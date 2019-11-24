@@ -1,15 +1,16 @@
 function particlevisMain(){
 
 	// get canvas element and set canvas/render size
+	var parentContainer = d3.select('#dugy-canvas-container');
 	var canvas = document.querySelector('#dugy-c');
 	var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha: true, antialias:true,preserveDrawingBuffer: true});
 	renderer.autoClearColor = false;   // do not clear buffer for rendering particle trails
-	renderer.setSize($('#dugy-c').parent().width(), $('#dugy-c').parent().height(), false);
-	var clearFlagColor = new THREE.Color( 0x161c26);
+	renderer.setSize($('#dugy-c').parent().width(), $('#dugy-c').parent().width()/2, false);
+	//var clearFlagColor = new THREE.Color( 0x161c26);
 	
 	// set camera
 	//var camera = new THREE.OrthographicCamera(-1000,1000, 1000, -1000, 1,1000 );  
-	var camera = new THREE.PerspectiveCamera(135,2, 0.1, 1000 );//fov, aspect, near, far
+	var camera = new THREE.PerspectiveCamera(135, 2, 0.1, 1000 );//fov, aspect, near, far
 	camera.position.set(0,0,100);
 	camera.lookAt( 0, 0, 0 );
 	// scene
@@ -18,16 +19,7 @@ function particlevisMain(){
 	// colors
 	var startColor = new THREE.Color(0xff6666);
 	var destColor = new THREE.Color(0x161c26);
-	// Draw a Plane in front of particles to erase old ones
-	// var veil_geo = new THREE.PlaneGeometry(20000,20000);
-	// var veil_mat = new THREE.MeshBasicMaterial( {color: 0x000000, opacity:0.012, transparent:true,blending: THREE.CustomBlending, side: THREE.DoubleSide} );
-	// veil_mat.blendEquation = THREE.ReverseSubtractEquation;
-	// veil_mat.blendSrc = THREE.SrcAlphaFactor;
-	// veil_mat.blendDst = THREE.OneFactor;
-	// var veil_obj = new THREE.Mesh(veil_geo, veil_mat);
-	// scene.add(veil_obj);
-	// veil_obj.position.z = -200;
-	// veil_obj.renderOrder = -1;
+	
 	
 	
 	// Draw Particles
@@ -40,7 +32,7 @@ function particlevisMain(){
 	var starsScaleBuffer = new Float32Array( numStars );
 	var starsObjects = new Array(numStars);
 	
-	var originScale = 1;
+	//var originScale = 1;
 	for ( var i = 0; i < numStars; i ++ ) {
 		// positions
 		var star = new THREE.Vector3();
@@ -109,9 +101,25 @@ function particlevisMain(){
 	
 	}
 	
+	function resizeRendererToDisplaySize(renderer) {
+		const pixelRatio = window.devicePixelRatio;
+	
+		const width = canvas.clientWidth * pixelRatio | 0;
+		const height = canvas.clientHeight * pixelRatio | 0;
+		const needResize = canvas.width !== width || canvas.height !== height;
+		if (needResize) {
+		  renderer.setSize(width, height, false);
+		}
+		return needResize;
+	  }
 	
 	var animate = function (time) {
 		time *= 0.001;  // convert milliseconds to seconds
+		
+		if (resizeRendererToDisplaySize(renderer)) {
+			//camera.aspect = canvas.clientWidth / canvas.clientHeight;
+			//camera.updateProjectionMatrix();
+		}
 		requestAnimationFrame( animate );
 		
 		starFieldUpdate()
