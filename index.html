@@ -195,7 +195,7 @@
                                     <option value="Conflict_Often_Frequent"> <p> something here </p></option>
 
                                     <option value="No_Confidant_Frequent"> <p> something here </p></option>
-                                    <option value="At _Least_One_Confidant_Frequent"> <p> something here </p></option>
+                                    <option value="At_Least_One_Confidant_Frequent"> <p> something here </p></option>
 
                                     <option value="Native_Frequent"> <p> something here </p></option>
                                     <option value="Immigrant_Frequent"> <p> something here </p></option>
@@ -233,10 +233,10 @@
             <div class="section">
 
                 <div class="row">
-                    <div class="col-md-3"><div id="yipbarcharts"></div><div class="yipplaceholder"></div><div class="yipplaceholder"></div></div>
-                    <div class="col-md-3"><div class="yipplaceholder"></div><div class="yipplaceholder"></div></div>
-                    <div class="col-md-3"><div class="yipplaceholder"></div><div class="yipplaceholder"></div></div>
-                    <div class="col-md-3"><div class="yipplaceholder"></div><div class="yipplaceholder"></div></div>
+                    <div class="col-md-3"><div id="yipbarcharts0"></div><div id="yipbarcharts1"></div></div>
+                    <div class="col-md-3"><div id="yipbarcharts2"></div><div id="yipbarcharts3"></div></div>
+                    <div class="col-md-3"><div id="yipbarcharts4"></div><div id="yipbarcharts5"></div></div>
+                    <div class="col-md-3"><div id="yipbarcharts6"></div><div id="yipbarcharts7"></div></div>
                 </div>
                 <div style="height:100px"></div>
                 <div class="line"></div>
@@ -245,10 +245,30 @@
 
         <!--The Radar Plot Section-->
         <div class="section">
-            <div style="height:200px"></div>
-            <div id="dugy-radial" style="height:400px"></div>
-            <p>Radar graph of odds ratio</p>
-            <div style="height:200px"></div>
+            <div class='row mt-1'>
+                <div class='col-md-6'>
+                    <div id="dugy-radial"></div>
+                </div>
+                <div class='col-md-4 offset-md-1'>
+                    <div id="dugy-radial-explaination">
+                        <div class='my-5'>
+                                <p>If we summarize from these data what factors contribute more to loneliness.
+                                   We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
+                                   This result is not surprising. Research shows, among three levels of social ties, confidant relationship is most salient to emotional-well being.  But maintaining other levels of social connections can also alleviate loneliness:
+
+                                </p>
+                                
+                        </div>
+                        <h3 id='dugy-radial-currentCountry' class = 'my-5'>Europe</h3>
+                        
+                    </div>
+                </div>
+            </div>
+            <div class='row mt-1'>
+                <div class='col-md-6 offset-md-1'>
+                <p>Odds Ratio between Loneliness and Social Factors</p>
+                </div>
+            </div>
         </div>
 
         <!--The Awareness and Solution Section-->

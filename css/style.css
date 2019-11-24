@@ -26,6 +26,7 @@ h3 {
     text-align: right;
 }
 
+
 h3.cursive {
     font-family: 'Sacramento', cursive !important;
     font-weight: 700 !important;
@@ -123,19 +124,32 @@ div.section {
     opacity: 30%;
 }
 
-.yipbaraxis line{
-    fill: none;
-    stroke:#8293b6;
-    opacity:   1;
-    stroke-width: 0.5;
+.yipbaraxis line,
+.yipbaraxis path{
+    stroke: #8293b6;
 }
 
 .yipbaraxis text{
     fill:#8293b6;
+    font-size: 16px;
 }
 
 /* CONTAINER */
-
+.dugy-svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 100%;
+    /* aspect ratio */
+    vertical-align: top;
+    /*overflow: hidden;*/
+}
+.dugy-svg-content-responsive {
+    display: inline-block;
+    position: absolute;
+    top: 0px;
+    left: 0;
+}
 .svg-container {
     display: inline-block;
     position: relative;
@@ -236,6 +250,21 @@ div.section {
 }
 .dugy-radial-axis text{
     fill:#ff6666;
-    font-size:  3px;
+    font-size:  6px;
     fill-opacity: 0.5;
 }
+
+h3#dugy-radial-currentCountry
+{
+    text-align: left;
+}
+div#dugy-radial-explaination{
+    margin-top: 200px;
+}
+
+/* particle vis */
+#dugy-c{
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
