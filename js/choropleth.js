@@ -1,5 +1,4 @@
 demographicschorovis() // for avoiding naming issue
-var yipchoroselector = "All";
 
 function demographicschorovis(){
     var toggle;
@@ -122,6 +121,7 @@ function demographicschorovis(){
                         var yipchoroselector = d.properties.name;
                         yipsmallmultiples();
                         
+                        //console.log(yipchoroselector)
                         var t = d.data;
                         document.getElementById("yiptooltip").innerHTML = t;
                         toggle = 0;
