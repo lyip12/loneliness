@@ -110,6 +110,7 @@ div.section {
     background-color: black;
     margin-bottom: 20px;
 }
+
 /* TREE */
 .yipnode circle {
     fill: #8293b6;
@@ -121,6 +122,17 @@ div.section {
     stroke: #8293b6;
     stroke-width: 1px;
     opacity: 30%;
+}
+
+.yipbaraxis line{
+    fill: none;
+    stroke:#8293b6;
+    opacity:   1;
+    stroke-width: 0.5;
+}
+
+.yipbaraxis text{
+    fill:#8293b6;
 }
 
 /* CONTAINER */
@@ -198,8 +210,7 @@ div.section {
 .step {
     width: 20vw;
     margin-left: 10vh;
-    margin-top: 30vh;
-    margin-bottom: 50vh;
+    height: 50vh;
 }
 
 /* radial area chart */

@@ -3,7 +3,7 @@ yipsmallmultiples();
 function yipsmallmultiples(){
 
 
-    var margin = {top: 20, right: 20, bottom: 30, left: 40},
+    var margin = {top: 20, right: 20, bottom: 30, left: 30},
         width = 400 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
@@ -73,7 +73,7 @@ function yipsmallmultiples(){
             .classed("yipsvg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
-            .attr("viewBox", "-40 0 370 400")
+            .attr("viewBox", "-40 0 390 420")
             .classed("svg-content-responsive", true);
 
             x.domain(countarray.map(function(d) { return d.key;}));
@@ -92,19 +92,19 @@ function yipsmallmultiples(){
                 .transition()
                 .duration(800)
                 .attr("x", function(d) { return x(d.key); })
-                .attr("width", x.bandwidth())
+                .attr("width", (x.bandwidth()/2))
                 .attr("y", function(d) { return y(d.value); })
                 .attr("height", function(d) { return height - y(d.value); });
 
             // add the x Axis
             svg.append("g")
                 .attr("transform", "translate(0," + height + ")")
-                .attr("class", "axis")
+                .attr("class", "yipbaraxis")
                 .call(d3.axisBottom(x));
 
             // add the y Axis
             svg.append("g")
-                .attr("class", "axis")
+                .attr("class", "yipbaraxis")
                 .call(d3.axisLeft(y));
 
         }

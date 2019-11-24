@@ -4,9 +4,8 @@ var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = 650;
-    var height = 650;
-    var margin = { top: 10, bottom: 0, left: 10, right: 0 };
+    var width =  Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
+    var height =Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -15,10 +14,12 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = 5;
-    var circlePad = 2;
-    var numPerRow = 90;
+    var numPerRow = 30;
 
+    var circleSize = Math.floor(width/numPerRow*2/3);
+    var circlePad =  Math.floor(width/numPerRow/3);
+
+    var margin = { top: circleSize/2, bottom: 0, left: circleSize/2, right: 0 };
     // main svg used for visualization
     var svg = d3.select("#matrixvis");
 
@@ -82,7 +83,7 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData["income"]);//.prevalence);
+        var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
 
         //console.log(displayData);
 
@@ -167,7 +168,7 @@ var scrollVis = function () {
     function highlightAge() {
 
         var circles =  g.selectAll('.circle')
-            .data(displaydata["martial status"])
+            .data(displaydata["employment"])
             .classed('age-circle', function (d) { return d.filler; })
             .transition()
 
@@ -304,7 +305,7 @@ var scrollVis = function () {
     function highlightInt() {
 
         var circles =  g.selectAll('.circle')
-            .data(displaydata["Fewer Confidants"])
+            .data(displaydata["martial status"])
             .classed('it-circle', function (d) { return d.filler; })
             .transition()
 
@@ -380,7 +381,7 @@ var scrollVis = function () {
                 d.row=Math.floor(j / numPerRow);
                 d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
                 //console.log(newdata[i]['total'])
-                if(j<60*newdata[i].total){ d.filler=true}
+                if(j<6*newdata[i].total){ d.filler=true}
                 else{ d.filler=false}
                 unit.push(d)
             }
@@ -390,26 +391,6 @@ var scrollVis = function () {
 
         return displayData;
     }
-
-/*    function getData(rawData) {
-        return rawData.map(function (d, i) {
-            // is this word a filler word?
-            d.filler = (d.filler === '1') ? true : false;
-            // time in seconds word was spoken
-            d.time = +d.time;
-            // time in minutes word was spoken
-            d.min = Math.floor(d.time / 60);
-
-            // positioning for square visual
-            // stored here to make it easier
-            // to keep track of.
-            d.col = i % numPerRow;
-            d.x = d.col * (circleSize + circlePad);
-            d.row = Math.floor(i / numPerRow);
-            d.y = d.row * (circleSize + circlePad);
-            return d;
-        });
-    }*/
 
     chart.activate = function (index) {
         activeIndex = index;
