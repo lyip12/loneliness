@@ -4,9 +4,9 @@
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = 600;
-    var height = 600;
-    var margin = { top: 5, bottom: 0, left: 5, right: 0 };
+    var width = 650;
+    var height = 650;
+    var margin = { top: 10, bottom: 0, left: 10, right: 0 };
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -15,12 +15,12 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = 8;
-    var circlePad = 3;
+    var circleSize = 5;
+    var circlePad = 2;
     var numPerRow = 90;
 
     // main svg used for visualization
-    var svg = d3.select("#matrixarea");
+    var svg = d3.select("#matrixvis");
 
     // d3 selection that will be used for displaying visualizations
     var g = null;
@@ -32,11 +32,18 @@ var scrollVis = function () {
     // through the section with the current    // progress through the section.
     var updateFunctions = [];
 
+    var displaydata;
+
     /**chart**/
     var chart = function (selection) {
         selection.each(function (rawData) {
             // create svg and give it a width and height
-            svg = d3.select(this).selectAll('svg').data([displayData]);
+
+            var matrixData = wrangleData(rawData);
+
+            displaydata = matrixData;
+
+            svg = d3.select(this).selectAll('svg').data([matrixData.prevalence]);
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
@@ -50,12 +57,18 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                .attr('transform', 'translate(' + 0 + ',' + margin.top + ')');
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
-            var displayData = getData(rawData);
+            //var displayData = getData(rawData);
 
-            setupVis(displayData);
+
+
+            //console.log(displayData);
+            //console.log(matrixData.prevalence);
+            setupVis(matrixData.prevalence);
+
+            //setupVis(displayData);
 
             setupSections();
         });
@@ -64,18 +77,14 @@ var scrollVis = function () {
 
     /**
      * setupVis - creates initial elements for all
-     * sections of the visualization.
-     *
-     * @param wordData - data object for each word.
-     * @param fillerCounts - nested data that includes
-     *  element for each filler word type.
-     * @param histData - binned histogram data
-     */
+     * sections of the visualization.*/
     var setupVis = function (displayData) {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
         var circles = g.selectAll('.circle').data(displayData);//.prevalence);
+
+        //console.log(displayData);
 
         var circlesE = circles.enter()
             .append('circle')
@@ -91,17 +100,16 @@ var scrollVis = function () {
 
     };
 
-
     var setupSections = function () {
         // activateFunctions are called each
         // time the active section changes
         activateFunctions[0] = showGrid;
-        activateFunctions[1] = highlightGrid;
-        activateFunctions[2] = highlightGrid;
-        activateFunctions[3] = highlightGrid;
-        activateFunctions[4] = highlightGrid;
-        activateFunctions[5] = highlightGrid;
-        activateFunctions[6] = highlightGrid;
+        activateFunctions[1] = highlightPre;
+        /*activateFunctions[2] = highlightAge;
+        activateFunctions[3] = highlightMartial;
+        activateFunctions[4] = highlightEvent;
+        activateFunctions[5] = highlightImpact;
+        activateFunctions[6] = highlightInt;*/
 
         // updateFunctions are called while in a particular section to update
         // the scroll progress in that section. Most sections do not need to be updated
@@ -124,7 +132,7 @@ var scrollVis = function () {
     }
 
 
-    function highlightGrid() {
+    function highlightPre() {
 
         g.selectAll('.circle')
             .transition()
@@ -139,17 +147,19 @@ var scrollVis = function () {
             .transition('move-fills')
             .duration(800)
             .attr('cx', function (d) {
-                return d.x;
+                return d.prevelance.x;
             })
             .attr('cy', function (d) {
-                return d.y;
+                return d.prevelance.y;
             });
+
+        console.log(displaydata)
 
         g.selectAll('.fill-circle')
             .transition()
             .duration(800)
             .attr('opacity', 1.0)
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+            .attr('fill', function (d) { return d.prevelance.filler ? '#ff6666' : '#ddd'; });
     }
 
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
@@ -188,23 +198,20 @@ var scrollVis = function () {
         var displayData = {};
         for(var i = 0; i<namelist.length;i++)
         {
-            d = {};
-            d.filler = [];
-            d.col = [];
-            d.x = [];
-            d.y = [];
-            d.row = [];
+            var unit = [];
             for (var j = 0; j< matrixsize; j++)
             {
-                d.col.push(j % numPerRow);
-                d.x.push(j % numPerRow * (circleSize + circlePad));
-                d.row.push(Math.floor(j / numPerRow));
-                d.y.push(Math.floor(j / numPerRow) * (circleSize + circlePad));
+                d = {}
+                d.col=j % numPerRow;
+                d.x=j % numPerRow * (circleSize + circlePad);
+                d.row=Math.floor(j / numPerRow);
+                d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
                 //console.log(newdata[i]['total'])
-                if(j<newdata[i].total){ d.filler.push(true)}
-                else{ d.filler.push(false)}
+                if(j<27*newdata[i].total){ d.filler=true}
+                else{ d.filler=false}
+                unit.push(d)
             }
-            displayData[namelist[i]] = d;
+            displayData[namelist[i]] = unit;
         }
         console.log(displayData);
 
@@ -284,6 +291,6 @@ function display(data) {
 }
 
 // load data and display
-d3.tsv('data/words.tsv', display);
+//d3.tsv('data/words.tsv', display);
 d3.csv('data/what are lonely people like.csv',  display);
 
