@@ -1,7 +1,8 @@
 //var yipchoroselector = "All";
+yipsmallmultiples();
 
 function yipsmallmultiples(yipchoroselector){
-    
+
     var margin = {top: 20, right: 20, bottom: 30, left: 30},
         width = 400 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
@@ -43,16 +44,16 @@ function yipsmallmultiples(yipchoroselector){
 
         //console.log(data);
 
-        if(yipchoroselector == "All"){
-            var filtereddata = data;
-        } else {
+        if(yipchoroselector !== "All"){
             var filtereddata = data.filter(function(d) { 
                 return d.Country == yipchoroselector; 
             });
+        } else {
+            var filtereddata = data;
         };
-        console.log(yipchoroselector);
-        
-        barchart(data);
+        console.log(filtereddata);
+
+        barchart(filtereddata);
 
     });
 
@@ -74,36 +75,36 @@ function yipsmallmultiples(yipchoroselector){
             });
             //console.log(fdata);
 
-            //            x.domain(d.map(function(d) { return key[i].Category;}));
-            //            y.domain([0, d3.max(d, function(d) { return d[1];})]);
-            //
-            //            var bar = svg.selectAll('rect')
-            //            .attr("class", "bar")
-            //            .remove()
-            //            .exit()
-            //            .data(d)
-            //
-            //            bar.enter()
-            //                .append("rect")
-            //                .data(d)
-            //                .attr("x", function(d) { return key[i].Category; })
-            //                .attr("y", function(d) { return y(d[1]); })
-            //                .attr("height", function(d) { return height - y(d[1]); })
-            //                .transition()
-            //                .duration(800)
-            //                .attr("fill", "#F67E7D")
-            //                .attr("width", x.bandwidth());
-            //
-            //            // add the x Axis
-            //            svg.append("g")
-            //                .attr("class", "yipbaraxis")
-            //                .attr("transform", "translate(0," + height + ")")
-            //                .call(d3.axisBottom(x));
-            //
-            //            // add the y Axis
-            //            svg.append("g")
-            //                .attr("class", "yipbaraxis")
-            //                .call(d3.axisLeft(y));
+            x.domain(d.map(function(d) { return key[i].Category;}));
+            y.domain([0, d3.max(d, function(d) { return d[1];})]);
+
+            var bar = svg.selectAll('rect')
+            .attr("class", "bar")
+            .remove()
+            .exit()
+            .data(d)
+
+            bar.enter()
+                .append("rect")
+                .data(d)
+                .attr("x", function(d) { return key[i].Category; })
+                .attr("y", function(d) { return y(d[1]); })
+                .attr("height", function(d) { return height - y(d[1]); })
+                .transition()
+                .duration(800)
+                .attr("fill", "#F67E7D")
+                .attr("width", x.bandwidth());
+
+            // add the x Axis
+            svg.append("g")
+                .attr("class", "yipbaraxis")
+                .attr("transform", "translate(0," + height + ")")
+                .call(d3.axisBottom(x));
+
+            // add the y Axis
+            svg.append("g")
+                .attr("class", "yipbaraxis")
+                .call(d3.axisLeft(y));
 
         }
     }
