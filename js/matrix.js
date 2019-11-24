@@ -192,7 +192,7 @@ var scrollVis = function () {
                 return d.y;
             });
 
-        console.log(displaydata["martial status"]);
+        //console.log(displaydata["martial status"]);
         g.selectAll('.age-circle')
             .transition()
             .duration(800)
@@ -387,7 +387,7 @@ var scrollVis = function () {
             }
             displayData[namelist[i]] = unit;
         }
-        console.log(displayData);
+        //console.log(displayData);
 
         return displayData;
     }

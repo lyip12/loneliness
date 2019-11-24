@@ -13,11 +13,11 @@ function runjiascatter(){
         height = 500 - margin.top - margin.bottom;
 
     var svg = d3.select("#scatter")
-        .classed("svg-container", true)
-        .append("svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 800 500")
-        .classed("svg-content-responsive", true);
+    .classed("svg-container", true)
+    .append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 800 500")
+    .classed("svg-content-responsive", true);
 
     // Load CSV file
     d3.csv("data/sample.csv", function(data){
@@ -29,14 +29,14 @@ function runjiascatter(){
             d.agea = +d.agea;
         });
         //data.forEach(d,filter(d){return d.agea<100;})
-        console.log(data);
-        console.log("Countries: " + data.length);
+        //        console.log(data);
+        //        console.log("Countries: " + data.length);
 
         // sort data according to Population
         data.sort(function(a, b){ return b.fltlnl - a.fltlnl});
- 
+
         // create chart group, applying margins
-        
+
 
         var ageScale = d3.scaleLinear()
         .domain([d3.min(data, function(d){return d.agea}),d3.max(data, function(d){return d.agea})])
@@ -58,8 +58,8 @@ function runjiascatter(){
         //var colorPalette = d3.scaleOrdinal(d3.schemeCategory10);
         //colorPalette.domain(["Europe & Central Asia", "East Asia & Pacific", "Middle East & North Africa", "America", "Sub-Saharan Africa"]);
 
-        console.log(ageScale(5))
-        console.log(lonelinessScale(68))
+        //        console.log(ageScale(5))
+        //        console.log(lonelinessScale(68))
 
         //create a group element
         //append circles to the group

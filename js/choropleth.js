@@ -1,4 +1,5 @@
 demographicschorovis() // for avoiding naming issue
+var yipchoroselector = "All";
 
 function demographicschorovis(){
     var toggle;
@@ -19,8 +20,6 @@ function demographicschorovis(){
 
     var data = d3.map();
 
-
-
     updateChoropleth()
 
     d3.select("#yipstats").on("change", function () {
@@ -34,7 +33,7 @@ function demographicschorovis(){
         var selector = d3.select("#yipstats").property("value");
         var selector2 = d3.select("#yipstats").property("value2");
         a = [];
-        console.log(selector2);
+        //console.log(selector2);
         d3.queue()
             .defer(d3.json, "data/world.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
@@ -64,7 +63,7 @@ function demographicschorovis(){
                         .transition()
                         .duration(200)
                         .style("opacity", 1)
-                    console.log("tis is working")
+                    //console.log("tis is working")
                 }
             }
 
@@ -91,7 +90,10 @@ function demographicschorovis(){
                         .duration(800)
                     Tooltip
                         .style("opacity", 0)
-
+                    
+                    var yipchoroselector = "All";
+                    yipsmallmultiples();
+                    
                     toggle =1;
                     var t = " "
                     document.getElementById("yiptooltip").innerHTML = t;
@@ -117,6 +119,9 @@ function demographicschorovis(){
                             .duration(800)
                             .style("opacity", 1);
 
+                        var yipchoroselector = d.properties.name;
+                        yipsmallmultiples();
+                        
                         var t = d.data;
                         document.getElementById("yiptooltip").innerHTML = t;
                         toggle = 0;
@@ -130,7 +135,7 @@ function demographicschorovis(){
                 legend.push(d3.min(a)+k*i);
             };
 
-            console.log(legend)
+            //console.log(legend)
             var fill = d3.scaleThreshold()
             .domain(legend)
             .range(d3.schemeBlues[9]);

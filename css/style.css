@@ -123,15 +123,14 @@ div.section {
     opacity: 30%;
 }
 
-.yipbaraxis line{
-    fill: none;
-    stroke:#8293b6;
-    opacity:   1;
-    stroke-width: 0.5;
+.yipbaraxis line,
+.yipbaraxis path{
+    stroke: #8293b6;
 }
 
 .yipbaraxis text{
     fill:#8293b6;
+    font-size: 16px;
 }
 
 /* CONTAINER */
