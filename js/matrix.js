@@ -1,6 +1,6 @@
 // Position function, set the position of matrix when scrolled to a particular place
 
-
+var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
@@ -32,7 +32,7 @@ var scrollVis = function () {
     // through the section with the current    // progress through the section.
     var updateFunctions = [];
 
-    var displaydata;
+
 
     /**chart**/
     var chart = function (selection) {
@@ -66,7 +66,7 @@ var scrollVis = function () {
 
             //console.log(displayData);
             //console.log(matrixData.prevalence);
-            setupVis(matrixData.prevalence);
+            setupVis(matrixData);
 
             //setupVis(displayData);
 
@@ -82,7 +82,7 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData);//.prevalence);
+        var circles = g.selectAll('.circle').data(displayData["age"]);//.prevalence);
 
         //console.log(displayData);
 
@@ -105,8 +105,8 @@ var scrollVis = function () {
         // time the active section changes
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightPre;
-        /*activateFunctions[2] = highlightAge;
-        activateFunctions[3] = highlightMartial;
+        activateFunctions[2] = highlightAge;
+       /* activateFunctions[3] = highlightMartial;
         activateFunctions[4] = highlightEvent;
         activateFunctions[5] = highlightImpact;
         activateFunctions[6] = highlightInt;*/
@@ -127,17 +127,19 @@ var scrollVis = function () {
             .delay(function (d) {
                 return 5 * d.row;
             })
-            .attr('opacity', 0.5)
+            .attr('opacity', 0.8)
             .attr('fill', '#ddd');
     }
-
 
     function highlightPre() {
 
         g.selectAll('.circle')
             .transition()
-            .duration(0)
-            .attr('opacity', 0.2)
+            .duration(600)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
+            .attr('opacity', 0.3)
             .attr('fill', '#ddd');
 
         // use named transition to ensure
@@ -147,19 +149,50 @@ var scrollVis = function () {
             .transition('move-fills')
             .duration(800)
             .attr('cx', function (d) {
-                return d.prevelance.x;
+                return d.x;
             })
             .attr('cy', function (d) {
-                return d.prevelance.y;
+                return d.y;
             });
 
-        console.log(displaydata)
 
         g.selectAll('.fill-circle')
             .transition()
             .duration(800)
-            .attr('opacity', 1.0)
-            .attr('fill', function (d) { return d.prevelance.filler ? '#ff6666' : '#ddd'; });
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+
+    }
+
+    function highlightAge() {
+
+        g.selectAll('.circle')
+            .data(displaydata["martial status"])
+            .transition()
+            .duration(0)
+            .attr('opacity', 0.3)
+            .attr('fill', '#ddd')
+            .classed('fill-circle', function (d) { return d.filler; });
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.fill-circle')
+            .transition('move-fills')
+            .duration(800)
+            .attr('cx', function (d) {
+                return d.x;
+            })
+            .attr('cy', function (d) {
+                return d.y;
+            });
+
+        console.log(displaydata["martial status"]);
+        g.selectAll('.fill-circle')
+            .transition()
+            .duration(800)
+            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
@@ -218,7 +251,7 @@ var scrollVis = function () {
         return displayData;
     }
 
-    function getData(rawData) {
+/*    function getData(rawData) {
         return rawData.map(function (d, i) {
             // is this word a filler word?
             d.filler = (d.filler === '1') ? true : false;
@@ -236,9 +269,7 @@ var scrollVis = function () {
             d.y = d.row * (circleSize + circlePad);
             return d;
         });
-    }
-
-
+    }*/
 
     chart.activate = function (index) {
         activeIndex = index;
