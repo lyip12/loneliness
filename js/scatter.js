@@ -7,17 +7,17 @@ function runjiascatter(){
     // SVG Size
     var margin = {top: 40, right: 20, bottom: 40, left: 20};
 
-    var padding = 30;
+    var padding = 0;
 
-    var width = 500 - margin.left- margin.right,
-        height = 500 - margin.top - margin.bottom;
+    var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - margin.left- margin.right,
+        height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6; - margin.top - margin.bottom;
 
     var svg = d3.select("#scatter")
-        .classed("svg-container", true)
+        .classed("svg-container-scatter", true)
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 800 500")
-        .attr("transform", "translate(" + margin.left+ "," + margin.top + ")");
+        .attr("width", width+margin.left+margin.right)
+        .attr("height", height+margin.top+margin.bottom);
 
     // Load CSV file
     d3.csv("data/sample.csv", function(data){
@@ -34,19 +34,20 @@ function runjiascatter(){
         data.sort(function(a, b){ return b.fltlnl - a.fltlnl});
  
         // create chart group, applying margins
-        
+
+        g = d3.select("svg").attr("transform", "translate(" + margin.left+ "," + margin.top + ")")
 
         var ageScale = d3.scaleLinear()
-        .domain([d3.min(data, function(d){return d.agea}),d3.max(data, function(d){return d.agea})])
-        .range([padding, width - padding])// this padding mapping pushes the elements away from the edges of SVG drawing area
+        .domain([10,90])
+        .range([0, width])// this padding mapping pushes the elements away from the edges of SVG drawing area
 
         //you want small life expectancy values to map to the bottom of the chart,
         //and high life expectancy values to map to the top of the chart.
         //to do this, we can change the sequence of the domain mapping.
         //it seems that d3 mapping [a,b] does not guarantee b>a
         var lonelinessScale = d3.scaleLinear()
-        .domain([d3.max(data, function(d){return d.fltlnl}), d3.min(data, function(d){return d.fltlnl})])
-        .range([padding , height-padding]);
+        .domain([10, 0])
+        .range([0 , height]);
 
         var rad = d3.scaleLinear()
         .domain([d3.min(data, function(d){return d.fltlnl}),d3.max(data, function(d){return d.fltlnl})])
@@ -61,7 +62,7 @@ function runjiascatter(){
 
         //create a group element
         //append circles to the group
-        var circle = svg.append("g")
+        var circle = g
         .attr("class", "circle")
         .selectAll("circle").data(data).enter().append("circle")
         .attr("cx", function(d){return ageScale(d.agea)})
@@ -87,7 +88,6 @@ function runjiascatter(){
 
         var yscatter = svg.append("g")
             .attr("class", "axis scatter")
-            .attr("transform", "translate(0," + padding + ")")
             .attr("fill", "white")
             .call(yAxis);
 

@@ -146,6 +146,15 @@ div.section {
     /*overflow: hidden;*/
 }
 
+.svg-container-scatter {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    /* aspect ratio */
+    vertical-align: top;
+    /*overflow: hidden;*/
+}
+
 .yipsvg-container {
     display: inline-block;
     position: relative;
