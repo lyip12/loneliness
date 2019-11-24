@@ -4,8 +4,8 @@ var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = 650;
-    var height = 650;
+    var width = screen.height*0.6;
+    var height = screen.height*0.6;
     var margin = { top: 10, bottom: 0, left: 10, right: 0 };
 
     // Keep track of which visualization we are on and which was the last
@@ -15,9 +15,10 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = 12;
-    var circlePad = 6;
     var numPerRow = 30;
+
+    var circleSize = Math.floor(width/numPerRow*2/4);
+    var circlePad =  Math.floor(width/numPerRow/4);
 
     // main svg used for visualization
     var svg = d3.select("#matrixvis");
