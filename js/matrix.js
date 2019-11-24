@@ -17,7 +17,7 @@ var scrollVis = function () {
     // Sizing for the grid visualization
     var circleSize = 8;
     var circlePad = 3;
-    var numPerRow = 30;
+    var numPerRow = 90;
 
     // main svg used for visualization
     var svg = d3.select("#matrixarea");
