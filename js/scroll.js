@@ -1,7 +1,7 @@
 //https://github.com/vlandham/scroll_demo/blob/gh-pages/js/scroller.js
 
 
-$(function(){
+/*$(function(){
     // Check the initial Position of the Sticky Header
     var scrollHeaderTop = $("#matrixarea").offset().top;
 
@@ -10,16 +10,16 @@ $(function(){
     $(window).scroll(function(){
         //situtation when scroller is above the matrix area
         if( $(window).scrollTop() < scrollHeaderTop) {
-            $('#floatingarea').css(
+            $('#matrixvis').css(
                 {
                     position:'sticky',
                     top:'10vh',
                     'z-index':'90'});
         }
         //situation when scroller is beyond the matrix area
-        else if ($(window).scrollTop() >scrollHeaderBottom-window.innerHeight*2)
+        else if ($(window).scrollTop() >scrollHeaderBottom-window.innerHeight-250)
         {
-            $('#floatingarea').css(
+            $('#matrixvis').css(
                 {
                     position:'sticky',
                     top:'10vh',
@@ -27,14 +27,14 @@ $(function(){
         }
         //situation when scroller is in the matrix area
         else {
-            $('#floatingarea').css({
+            $('#matrixvis').css({
                 position: 'fixed',
                 top:'10vh',
                 'z-index':'90'
             });
         }
     });
-});
+});*/
 
 
 function scroller() {

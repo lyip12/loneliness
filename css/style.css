@@ -174,9 +174,15 @@ div.section {
 }
 
 /*the section changes the styles of scroll sections.*/
-
+#matrixvis{
+    position: -webkit-sticky;
+    position: sticky;
+    top:20vh;
+    left:20vh;
+}
 .step {
-    width: 250px;
+    width: 20vw;
+    margin-bottom: 60vh;
 }
 
 /* radial area chart */
