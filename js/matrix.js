@@ -5,13 +5,11 @@ var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
     var width = 600;
-    var height = 520;
-    var margin = { top: 0, bottom: 40, right: 0 };
+    var height = 600;
+    var margin = { top: 5, bottom: 0, left: 5, right: 0 };
 
-    // Keep track of which visualization
-    // we are on and which was the last
-    // index activated. When user scrolls
-    // quickly, we want to call all the
+    // Keep track of which visualization we are on and which was the last
+    // index activated. When user scrolls quickly, we want to call all the
     // activate functions that they pass.
     var lastIndex = -1;
     var activeIndex = 0;
@@ -19,22 +17,19 @@ var scrollVis = function () {
     // Sizing for the grid visualization
     var circleSize = 8;
     var circlePad = 3;
-    var numPerRow = 100;
+    var numPerRow = 30;
 
     // main svg used for visualization
-    var svg = null;
+    var svg = d3.select("#matrixarea");
 
-    // d3 selection that will be used
-    // for displaying visualizations
+    // d3 selection that will be used for displaying visualizations
     var g = null;
 
     // When scrolling to a new section the activation function for that section is called.
     var activateFunctions = [];
 
-    // If a section has an update function
-    // then it is called while scrolling
-    // through the section with the current
-    // progress through the section.
+    // If a section has an update function then it is called while scrolling
+    // through the section with the current    // progress through the section.
     var updateFunctions = [];
 
     /**chart**/
@@ -47,7 +42,7 @@ var scrollVis = function () {
             svg = svg.merge(svgE);
 
             svg.attr('width', width);
-            svg.attr('height', height + margin.top + margin.bottom);
+            svg.attr('height', height);
 
             svg.append('g');
 
@@ -80,7 +75,8 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData, function (d) { return d.word; });
+        var circles = g.selectAll('.circle').data(displayData);//.prevalence);
+
         var circlesE = circles.enter()
             .append('circle')
             .classed('circle', true);
@@ -101,6 +97,11 @@ var scrollVis = function () {
         // time the active section changes
         activateFunctions[0] = showGrid;
         activateFunctions[1] = highlightGrid;
+        activateFunctions[2] = highlightGrid;
+        activateFunctions[3] = highlightGrid;
+        activateFunctions[4] = highlightGrid;
+        activateFunctions[5] = highlightGrid;
+        activateFunctions[6] = highlightGrid;
 
         // updateFunctions are called while in a particular section to update
         // the scroll progress in that section. Most sections do not need to be updated
@@ -118,18 +119,17 @@ var scrollVis = function () {
             .delay(function (d) {
                 return 5 * d.row;
             })
-            .attr('opacity', 1.0)
+            .attr('opacity', 0.5)
             .attr('fill', '#ddd');
     }
 
 
     function highlightGrid() {
-        hideAxis();
 
         g.selectAll('.circle')
             .transition()
             .duration(0)
-            .attr('opacity', 1.0)
+            .attr('opacity', 0.2)
             .attr('fill', '#ddd');
 
         // use named transition to ensure
@@ -152,10 +152,63 @@ var scrollVis = function () {
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
-    function hideAxis() {
-        g.select('.x.axis')
-            .transition().duration(500)
-            .style('opacity', 0);
+    function wrangleData(data, matrixsize=numPerRow*numPerRow)
+    {
+        //rewrite the csv file into json file for easier data parsing
+        var newdata = [];
+        var namelist = [];
+        data.forEach(function(d, index)
+        {
+            if(d.category !='') namelist.push( d.category);
+        });
+        //get a list of all the categories from the csv file
+        //console.log(namelist);
+
+        var stack = {};
+        let sumvalue = 0;
+
+        //parse the csv file into json format for easier access.
+        //meanwhile parse string into numberic representations
+        data.forEach(function(d, index) {
+
+                if (d.category != '' && stack != {}) {
+                    stack['total'] = sumvalue;
+                    newdata.push(stack);
+                    stack = {};
+                    stack[d.division] = +d.Total;
+                    sumvalue = +d.Total;
+                } else {
+                    stack[d.division] = +d.Total;
+                    sumvalue += +d.Total;
+                }
+
+        });
+        //console.log(newdata);
+
+        var displayData = {};
+        for(var i = 0; i<namelist.length;i++)
+        {
+            d = {};
+            d.filler = [];
+            d.col = [];
+            d.x = [];
+            d.y = [];
+            d.row = [];
+            for (var j = 0; j< matrixsize; j++)
+            {
+                d.col.push(j % numPerRow);
+                d.x.push(j % numPerRow * (circleSize + circlePad));
+                d.row.push(Math.floor(j / numPerRow));
+                d.y.push(Math.floor(j / numPerRow) * (circleSize + circlePad));
+                //console.log(newdata[i]['total'])
+                if(j<newdata[i].total){ d.filler.push(true)}
+                else{ d.filler.push(false)}
+            }
+            displayData[namelist[i]] = d;
+        }
+        console.log(displayData);
+
+        return displayData;
     }
 
     function getData(rawData) {
@@ -232,3 +285,5 @@ function display(data) {
 
 // load data and display
 d3.tsv('data/words.tsv', display);
+d3.csv('data/what are lonely people like.csv',  display);
+
