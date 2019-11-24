@@ -11,7 +11,6 @@ function yipsmallmultiples(){
         {Category: ["One_Person_Household_Frequent", "Mutiple_People_Household_Frequent"]},
         {Category: ["Conflict_Never_Frequent", "Conflict_Sometimes_Frequent", "Conflict_Often_Frequent"]},
         {Category: ["No_Confidant_Frequent", "At _Least_One_Confidant_Frequent"]},
-        {Category: ["No_Confidant_Frequent", "At_Least_One_Confidant_Frequent"]},
         {Category: ["Native_Frequent", "Immigrant_Frequent","Ethnic_Minority_Frequent","Ethnic_Majority_Frequent"]},
         {Category: ["Religious_Frequent", "Non_Religious_Frequent"]},
         {Category: ["Big_City_Frequent", "Suburb_Frequent", "Small_City__Frequent", "Countryside_Frequent"]},
@@ -19,7 +18,7 @@ function yipsmallmultiples(){
         {Category: ["Income_Comfortable_Frequent", "Income_Coping_Frequent", "Income_Difficult_Frequent", "Income_Very_Difficult_Frequent"]}   
     ];
 
-    console.log(key);
+    //console.log(key);
 
     // Initialize variables to save the charts later
     var barcharts = [];
@@ -43,17 +42,17 @@ function yipsmallmultiples(){
         data.forEach(function(d){
         });
 
-        console.log(data);
+        //console.log(data);
 
-        if(yipchoroselector !== "All"){
+        if(yipchoroselector == "All"){
             var filtereddata = data;
         } else {
             var filtereddata = data.filter(function(d) { 
                 return d.Country == yipchoroselector; 
-                console.log(filtereddata);
             });
         };
-
+        console.log(filtereddata);
+        
         barchart(data);
 
     });
@@ -63,7 +62,7 @@ function yipsmallmultiples(){
         //creating nested list
 
         for(var i = 0; i<8; i++){
-
+            //console.log(key[i].Category);
             var svg = d3.select("#yipbarcharts"+i)
             .classed("yipsvg-container", true)
             .append("svg")
@@ -71,36 +70,41 @@ function yipsmallmultiples(){
             .attr("viewBox", "-40 0 390 420")
             .classed("svg-content-responsive", true);
 
-            x.domain(d.map(function(d) { return d.key;}));
-            y.domain([0, d3.max(d, function(d) { return d.value;})]);
+            var fdata = d.filter(function(d) { 
+                return d.Country = key[i].Category; 
+            });
+            //console.log(fdata);
 
-            var bar = svg.selectAll('rect')
-            .attr("class", "bar")
-            .remove()
-            .exit()
-            .data(countarray)
-
-            bar.enter()
-                .append("rect")
-                .data(d)
-                .attr("x", function(d) { return x(d.key); })
-                .attr("y", function(d) { return y(d.value); })
-                .transition()
-                .duration(800)
-                .attr("fill", "#F67E7D")
-                .attr("width", x.bandwidth())
-                .attr("height", function(d) { return height - y(d.value); });
-
-            // add the x Axis
-            svg.append("g")
-                .attr("class", "yipbaraxis")
-                .attr("transform", "translate(0," + height + ")")
-                .call(d3.axisBottom(x));
-
-            // add the y Axis
-            svg.append("g")
-                .attr("class", "yipbaraxis")
-                .call(d3.axisLeft(y));
+            //            x.domain(d.map(function(d) { return key[i].Category;}));
+            //            y.domain([0, d3.max(d, function(d) { return d[1];})]);
+            //
+            //            var bar = svg.selectAll('rect')
+            //            .attr("class", "bar")
+            //            .remove()
+            //            .exit()
+            //            .data(d)
+            //
+            //            bar.enter()
+            //                .append("rect")
+            //                .data(d)
+            //                .attr("x", function(d) { return key[i].Category; })
+            //                .attr("y", function(d) { return y(d[1]); })
+            //                .attr("height", function(d) { return height - y(d[1]); })
+            //                .transition()
+            //                .duration(800)
+            //                .attr("fill", "#F67E7D")
+            //                .attr("width", x.bandwidth());
+            //
+            //            // add the x Axis
+            //            svg.append("g")
+            //                .attr("class", "yipbaraxis")
+            //                .attr("transform", "translate(0," + height + ")")
+            //                .call(d3.axisBottom(x));
+            //
+            //            // add the y Axis
+            //            svg.append("g")
+            //                .attr("class", "yipbaraxis")
+            //                .call(d3.axisLeft(y));
 
         }
     }
