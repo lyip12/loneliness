@@ -17,7 +17,7 @@ function runjiascatter(){
         .append("svg")
         .attr("preserveAspectRatio", "xMinYMin meet")
         .attr("viewBox", "0 0 800 500")
-        .classed("svg-content-responsive", true);
+        .attr("transform", "translate(" + margin.left+ "," + margin.top + ")");
 
     // Load CSV file
     d3.csv("data/sample.csv", function(data){
@@ -29,8 +29,6 @@ function runjiascatter(){
             d.agea = +d.agea;
         });
         //data.forEach(d,filter(d){return d.agea<100;})
-        console.log(data);
-        console.log("Countries: " + data.length);
 
         // sort data according to Population
         data.sort(function(a, b){ return b.fltlnl - a.fltlnl});
@@ -59,7 +57,7 @@ function runjiascatter(){
         //colorPalette.domain(["Europe & Central Asia", "East Asia & Pacific", "Middle East & North Africa", "America", "Sub-Saharan Africa"]);
 
         console.log(ageScale(5))
-        console.log(lonelinessScale(68))
+        console.log(lonelinessScale(8))
 
         //create a group element
         //append circles to the group
@@ -74,18 +72,30 @@ function runjiascatter(){
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
         // create axis elements
-        var xAxis = d3.axisBottom().scale(ageScale).tickFormat(d3.format(",d")).tickValues([0, 10, 20,30, 40,50,60, 70,80,90]);
-        var x = svg.append("g")
-        .attr("class", "axis x-axis")
+        var xAxis = d3.axisBottom().scale(ageScale).tickFormat(d3.format(",d")).tickValues([0, 10, 20,30, 40,50,60, 70,80,90])
+
+        var xscatter = svg.append("g")
+        .attr("class", "axis scatter")
         .attr("transform", "translate(0," + height + ")")
+        .attr("fill", "white")
         .call(xAxis)
 
-        var yAxis = d3.axisLeft().scale(lonelinessScale);
-        svg.append("g").attr("class", "axis y-axis").call(yAxis);
+
+        var yAxis = d3.axisLeft().scale(lonelinessScale)
+            .tickFormat(d3.format(",d"))
+            .tickValues([0, 1, 2,3, 4,5,6, 7,8,9]);
+
+        var yscatter = svg.append("g")
+            .attr("class", "axis scatter")
+            .attr("transform", "translate(0," + padding + ")")
+            .attr("fill", "white")
+            .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
-        x.append("text").text("Income per Person (GDP per Capita)").attr("x", width/2).attr("y", -20).attr("fill", "black")
+        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", 40).attr("fill", "white")
 
+        yscatter.append("text").text("Average Times Felt Lonely During Past Week").attr("x", padding)
+            .attr("y", height/2).attr("transform", "rotate(90)", "translate(10,10)")
 
     });
 }

@@ -185,6 +185,19 @@ div.section {
     display: block;
 }
 
+.axis.scatter path{
+    stroke: #ffffff;
+}
+
+.axis.scatter text{
+    fill: #ffffff;
+}
+
+
+.axis.scatter line{
+    stroke: #ffffff;
+}
+
 /*the section changes the styles of scroll sections.*/
 #matrixvis{
     position: -webkit-sticky;
