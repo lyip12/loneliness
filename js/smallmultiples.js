@@ -41,7 +41,7 @@ function yipsmallmultiples(yipchoroselector){
     d3.csv("data/ESS_Demographic.csv", function(data){
         data.forEach(function(d){
         });
-        
+
         var filtereddata = data;
         //console.log(data);
 
@@ -71,10 +71,10 @@ function yipsmallmultiples(yipchoroselector){
             var fdata = d.filter(function(d) { 
                 return d.Country = key[i].Category; 
             });
-            //console.log(fdata);
+            console.log(fdata);
 
             x.domain(d.map(function(d) { return key[i].Category;}));
-            y.domain([0, d3.max(d, function(d) { return d[1];})]);
+            //y.domain([0, d3.max(d, function(d) { return d[1];})]);
 
             var bar = svg.selectAll('rect')
             .attr("class", "bar")
@@ -82,18 +82,18 @@ function yipsmallmultiples(yipchoroselector){
             .exit()
             .data(d)
 
+            //console.log(key[i].Category);
+
             bar.enter()
                 .append("rect")
-                .data(d)
-                .attr("x", function(d) { return key[i].Category; })
-                .attr("y", function(d) { return 15
-            //y(d[1]); 
-                                       })
-                .attr("height", function(d) { return height - y(d[1]); })
+                .data(fdata)
+                .attr("y", function(d) { return y(d); })
+                .attr("width", x.bandwidth())
+                .attr("height", function(d) { return height - y(d); })
                 .transition()
                 .duration(800)
                 .attr("fill", "#F67E7D")
-                .attr("width", x.bandwidth());
+                .attr("x", function(d) { return key[i].Category; });
 
             // add the x Axis
             svg.append("g")
