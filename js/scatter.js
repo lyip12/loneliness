@@ -98,7 +98,7 @@ function runjiascatter(){
 
         yscatter.append("text").text("Average Times Felt Lonely During Past Week")
             .attr("x", width/2).attr("y", 30)
-            .attr("transform", "rotate(-90) ")
+            .attr("transform", "rotate(90) ")
 
     });
 }
