@@ -41,20 +41,18 @@ function yipsmallmultiples(yipchoroselector){
     d3.csv("data/ESS_Demographic.csv", function(data){
         data.forEach(function(d){
         });
-
+        
+        var filtereddata = data;
         //console.log(data);
 
         if(yipchoroselector !== "All"){
             var filtereddata = data.filter(function(d) { 
                 return d.Country == yipchoroselector; 
             });
-        } else {
-            var filtereddata = data;
-        };
+        }
         console.log(filtereddata);
 
         barchart(filtereddata);
-
     });
 
     function barchart(d){
@@ -88,7 +86,9 @@ function yipsmallmultiples(yipchoroselector){
                 .append("rect")
                 .data(d)
                 .attr("x", function(d) { return key[i].Category; })
-                .attr("y", function(d) { return y(d[1]); })
+                .attr("y", function(d) { return 15
+            //y(d[1]); 
+                                       })
                 .attr("height", function(d) { return height - y(d[1]); })
                 .transition()
                 .duration(800)
