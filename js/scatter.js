@@ -29,8 +29,6 @@ function runjiascatter(){
         data.forEach(function(d){
             d.fltlnl = +d.fltlnl;
             d.agea = +d.agea;
-            d.happy += d.happy;
-            d.sclmeet= +d.sclmeet
         });
         //data.forEach(d,filter(d){return d.agea<100;})
 
@@ -72,7 +70,7 @@ function runjiascatter(){
             .attr("cx", function(d){return ageScale(d.agea)})
             .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
             .attr("r", function (d){return rad(d.fltlnl/2)})
-            .attr("fill", function(d){return "rgb(0, "+d.fltlnl*20+",150)"}).attr("stroke-width", 0.1)
+            .attr("fill", function(d){return "rgb(0, 120,"+d.agea*7+")"}).attr("stroke-width", 0.1)
             .style("opacity", 0.7)
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
