@@ -1,5 +1,5 @@
-//var yipchoroselector = "All";
-yipsmallmultiples();
+var yipchoroselector = "All";
+yipsmallmultiples(yipchoroselector);
 
 function yipsmallmultiples(yipchoroselector){
 
@@ -51,7 +51,7 @@ function yipsmallmultiples(yipchoroselector){
             });
         }
         console.log(filtereddata);
-
+        
         barchart(filtereddata);
     });
 
@@ -68,13 +68,13 @@ function yipsmallmultiples(yipchoroselector){
             .attr("viewBox", "-40 0 390 420")
             .classed("svg-content-responsive", true);
 
-            var fdata = d.filter(function(d) { 
-                return d.Country = key[i].Category; 
-            });
+            var fdata=[];
+            fdata.push("debugging");
+            
             console.log(fdata);
 
             x.domain(d.map(function(d) { return key[i].Category;}));
-            //y.domain([0, d3.max(d, function(d) { return d[1];})]);
+            y.domain([0, d3.max(d, function(d) { return d[1];})]);
 
             var bar = svg.selectAll('rect')
             .attr("class", "bar")
@@ -82,7 +82,7 @@ function yipsmallmultiples(yipchoroselector){
             .exit()
             .data(d)
 
-            //console.log(key[i].Category);
+            console.log(key[i].Category);
 
             bar.enter()
                 .append("rect")

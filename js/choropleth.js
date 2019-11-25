@@ -28,7 +28,7 @@ function demographicschorovis(){
 
     //actual chorovis starts
     function updateChoropleth() {
-
+        
         var selector = d3.select("#yipstats").property("value");
         var selector2 = d3.select("#yipstats").property("value2");
         a = [];
@@ -89,10 +89,10 @@ function demographicschorovis(){
                         .duration(800)
                     Tooltip
                         .style("opacity", 0)
-                    
+
                     var yipchoroselector = "All";
                     yipsmallmultiples(yipchoroselector);
-                    
+
                     toggle =1;
                     var t = " "
                     document.getElementById("yiptooltip").innerHTML = t;
@@ -120,7 +120,7 @@ function demographicschorovis(){
 
                         var yipchoroselector = d.properties.name;
                         yipsmallmultiples(yipchoroselector);
-                        
+
                         var t = d.data;
                         document.getElementById("yiptooltip").innerHTML = t;
                         toggle = 0;
