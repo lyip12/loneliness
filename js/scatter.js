@@ -5,7 +5,7 @@ runjiascatter();
 function runjiascatter(){
 
     // SVG Size
-    var margin = {top: 20, right: 20, bottom: 20, left: 40};
+    var margin = {top: 40, right: 40, bottom: 40, left: 40};
 
     var padding = 0;
 
@@ -30,7 +30,7 @@ function runjiascatter(){
             d.fltlnl = +d.fltlnl;
             d.agea = +d.agea;
             d.happy += d.happy;
-            d.sclmeet= +d.sclmeet;
+            d.sclmeet= +d.sclmeet
         });
         //data.forEach(d,filter(d){return d.agea<100;})
 
@@ -72,7 +72,7 @@ function runjiascatter(){
             .attr("cx", function(d){return ageScale(d.agea)})
             .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
             .attr("r", function (d){return rad(d.fltlnl/2)})
-            .attr("fill", function(d){return "rgb(200, "+d.fltlnl*10+","+d.fltlnl*20+")"}).attr("stroke-width", 0.1)
+            .attr("fill", function(d){return "rgb(0, "+d.fltlnl*20+",150)"}).attr("stroke-width", 0.1)
             .style("opacity", 0.7)
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
@@ -96,10 +96,10 @@ function runjiascatter(){
             .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
-        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", -20).attr("fill", "white")
+        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", 30).attr("fill", "white")
 
         yscatter.append("text").text("Average Times Felt Lonely During Past Week")
-            .attr("x", width/2).attr("y", -20)
+            .attr("x", width/2).attr("y", 30)
             .attr("transform", "rotate(90) ")
 
     });
