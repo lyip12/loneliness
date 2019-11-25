@@ -4,6 +4,15 @@ function radialvisMain(){
     
     var oddsRatio;
     var oddsRatioDimensions = ['Confidant','Single-Person','Unemployed','Discriminated','Supervisor','Religion','EthnicMinority','Immigrant']
+    var lonelinessFactors = [
+        'no confidant',
+        'living alone',
+        'unemployed',
+        'being discriminated',
+        'no supervisory',
+        'not belong to religion'
+    ]
+    var topFactors = [];
     var oddsRatioCountries;
     var oddsRatioStacked;
     var oddsRatioStackedDisplayed;
@@ -128,6 +137,7 @@ function radialvisMain(){
         colorScheme = d3.quantize(colorInterpolator, oddsRatioCountries.length);
 
         filtering = '';
+        hovering = '';
         filterData();
     }
 
@@ -195,6 +205,7 @@ function radialvisMain(){
                                     .style('fill-opacity', 0.15)
         oddsCircleBackgrounds.exit().remove();
 
+        updateTopFactors();
 
         // Area Paths
         countryAreaPaths = areaContainer.selectAll(".dugy-radial-area")
@@ -221,13 +232,14 @@ function radialvisMain(){
                             d3.select(this).style("fill-opacity", 0.1);
                             currentCountry = d.key;
                             displayCountry.innerHTML = currentCountry;
+                            updateTopFactors();
                             })
                         .on('mouseleave', function(d,i) {
                             d3.select(this).style("fill", colorScheme[i]);
                             d3.select(this).style("fill-opacity", 0.8); 
-
-                            displayCountry.innerHTML = (filtering == "")? 'Europe':d.key;
-
+                            currentCountry = (filtering == "")? 'Europe':d.key
+                            displayCountry.innerHTML = currentCountry ;
+                            updateTopFactors();
                             })
                         .on("click", function(d,i) {
                             filtering = (filtering) ? "" : oddsRatioCountries[i];
@@ -236,9 +248,39 @@ function radialvisMain(){
                             radiusBoundaryOffset = (filtering == "")? maxBoundaryOffset:minBoundaryOffset;
                             currentCountry = d.key;
                             displayCountry.innerHTML = currentCountry;
-
                             filterData();});
         countryAreaPaths.exit().remove();
+
+    }
+
+    function updateTopFactors(){
+        topFactors = []
+        if (filtering == '' && currentCountry != 'Europe'){
+        // Update Top Factors
+            var indexOfCountry = oddsRatioCountries.findIndex(function(d){return d == currentCountry});
+            console.log(indexOfCountry);
+            oddsRatioStackedDisplayed[indexOfCountry].forEach((d,i)=>{
+            topFactors.push([d[1] - d[0],d.data.Factor,i]) 
+            })
+        }
+        else{
+             // Update Top Factors
+             oddsRatioStackedDisplayed[oddsRatioStackedDisplayed.length-1].forEach((d,i)=>{
+                topFactors.push([d[1] - oddsRatioStackedDisplayed[0][i][0],d.data.Factor,i])
+            });
+        }
+
+        //sort decreasingly
+        topFactors.sort(function(a,b){
+            return b[0] - a[0];
+        })
+
+        document.getElementById('dugy-radial-topfactors').innerHTML = 
+        lonelinessFactors[topFactors[0][2]]
+         + ' <br>' + 
+         lonelinessFactors[topFactors[1][2]]
+         + ' <br>' + 
+         lonelinessFactors[topFactors[2][2]];
 
     }
 
