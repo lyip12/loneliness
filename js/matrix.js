@@ -1,12 +1,12 @@
 // Position function, set the position of matrix when scrolled to a particular place
 
-var displaydata
+
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = screen.height;
-    var height = 650;
-    var margin = { top: 10, bottom: 0, left: 10, right: 0 };
+    var width = 600;
+    var height = 600;
+    var margin = { top: 5, bottom: 0, left: 5, right: 0 };
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -15,9 +15,9 @@ var scrollVis = function () {
     var activeIndex = 0;
 
     // Sizing for the grid visualization
-    var circleSize = Math.floor(width/numPerRow);
-    var circlePad = 6;
-    var numPerRow = 30;
+    var circleSize = 8;
+    var circlePad = 3;
+    var numPerRow = 90;
 
     // main svg used for visualization
     var svg = d3.select("#matrixvis");
@@ -32,18 +32,11 @@ var scrollVis = function () {
     // through the section with the current    // progress through the section.
     var updateFunctions = [];
 
-
-
     /**chart**/
     var chart = function (selection) {
         selection.each(function (rawData) {
             // create svg and give it a width and height
-
-            var matrixData = wrangleData(rawData);
-
-            displaydata = matrixData;
-
-            svg = d3.select(this).selectAll('svg').data([matrixData.prevalence]);
+            svg = d3.select(this).selectAll('svg');
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
@@ -57,18 +50,16 @@ var scrollVis = function () {
             // this group element will be used to contain all
             // other elements.
             g = svg.select('g')
-                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+                .attr('transform', 'translate(' + 0 + ',' + margin.top + ')');
 
             // perform some preprocessing on raw data
             //var displayData = getData(rawData);
 
-
-
-            //console.log(displayData);
-            //console.log(matrixData.prevalence);
-            setupVis(matrixData);
+            var matrixdata = wrangleData(rawData);
 
             //setupVis(displayData);
+
+            setupVis(matrixdata);
 
             setupSections();
         });
@@ -77,39 +68,46 @@ var scrollVis = function () {
 
     /**
      * setupVis - creates initial elements for all
-     * sections of the visualization.*/
+     * sections of the visualization
+     */
     var setupVis = function (displayData) {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
-
-        //console.log(displayData);
-
-        var circlesE = circles.enter()
+        var circles = g.selectAll('.circle').data(displayData).enter()
             .append('circle')
-            .classed('circle', true);
-        
-        circles = circles.merge(circlesE)
+            .classed('circle', true)
+
+        circles.attr('r', circleSize/2)
+            .attr('fill', '#fff')
+            .classed('fill-circle', function (d) { return d['prevalence'].filler; })
+            .attr('cx', function (d) { return d['prevalence'].x;})
+            .attr('cy', function (d) { return d['prevalence'].y;})
+            .attr('opacity', 1);;
+
+        console.log(displayData['prevalence'].x);
+
+        /*circles.merge(circles)
             .attr('r', circleSize/2)
             .attr('fill', '#fff')
-            .classed('fill-circle', function (d) { return d.filler; })
-            .attr('cx', function (d) { return d.x;})
-            .attr('cy', function (d) { return d.y;})
-            .attr('opacity', 0);
+            .classed('fill-circle', function (d) { return d['prevalence'].filler; })
+            .attr('cx', function (d) { return d['prevalence'].x;})
+            .attr('cy', function (d) { return d['prevalence'].y;})
+            .attr('opacity', 1);*/
 
     };
+
 
     var setupSections = function () {
         // activateFunctions are called each
         // time the active section changes
         activateFunctions[0] = showGrid;
-        activateFunctions[1] = highlightPre;
-        activateFunctions[2] = highlightAge;
-        activateFunctions[3] = highlightMartial;
-        activateFunctions[4] = highlightEvent;
-        activateFunctions[5] = highlightImpact;
-        activateFunctions[6] = highlightInt;
+        activateFunctions[1] = highlightGrid;
+        activateFunctions[2] = highlightPrevalence;
+        activateFunctions[3] = highlightAge;
+        activateFunctions[4] = highlightGrid;
+        activateFunctions[5] = highlightGrid;
+        activateFunctions[6] = highlightGrid;
 
         // updateFunctions are called while in a particular section to update
         // the scroll progress in that section. Most sections do not need to be updated
@@ -127,19 +125,17 @@ var scrollVis = function () {
             .delay(function (d) {
                 return 5 * d.row;
             })
-            .attr('opacity', 0.8)
+            .attr('opacity', 0.5)
             .attr('fill', '#ddd');
     }
 
-    function highlightPre() {
+
+    function highlightGrid() {
 
         g.selectAll('.circle')
             .transition()
-            .duration(600)
-            .delay(function (d) {
-                return 5 * d.row;
-            })
-            .attr('opacity', 0.3)
+            .duration(0)
+            .attr('opacity', 0.2)
             .attr('fill', '#ddd');
 
         // use named transition to ensure
@@ -155,184 +151,67 @@ var scrollVis = function () {
                 return d.y;
             });
 
-
         g.selectAll('.fill-circle')
             .transition()
             .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('opacity', 1.0)
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+    }
 
+    function highlightPrevalence() {
+
+        g.selectAll('.circle')
+            .transition()
+            .duration(0)
+            .attr('opacity', 0.2)
+            .attr('fill', '#ddd');
+
+        // use named transition to ensure
+        // move happens even if other
+        // transitions are interrupted.
+        g.selectAll('.fill-circle')
+            .transition('move-fills')
+            .duration(900)
+            .attr('cx', function (d) {
+                return d['prevalence'].x;
+            })
+            .attr('cy', function (d) {
+                return d['prevalence'].y;
+            });
+
+        g.selectAll('.fill-circle')
+            .transition()
+            .duration(900)
+            .attr('opacity', 1.0)
+            .attr('fill', function (d) { console.log(d['prevalence'].filler); return d['prevalence'].filler ? '#ff6666' : '#ddd'; });
     }
 
     function highlightAge() {
 
-        var circles =  g.selectAll('.circle')
-            .data(displaydata["employment"])
-            .classed('age-circle', function (d) { return d.filler; })
+        g.selectAll('.circle')
             .transition()
-
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
-                })
-            .attr('opacity', 0.3)
+            .duration(0)
+            .attr('opacity', 0.2)
             .attr('fill', '#ddd');
 
         // use named transition to ensure
         // move happens even if other
         // transitions are interrupted.
-        g.selectAll('.age-circle')
+        g.selectAll('.fill-circle')
             .transition('move-fills')
-            .duration(800)
+            .duration(900)
             .attr('cx', function (d) {
-                return d.x;
+                return d['age'].x;
             })
             .attr('cy', function (d) {
-                return d.y;
+                return d['age'].y;
             });
 
-        console.log(displaydata["martial status"]);
-        g.selectAll('.age-circle')
+        g.selectAll('.fill-circle')
             .transition()
-            .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
-    }
-
-    function highlightMartial() {
-
-        var circles =  g.selectAll('.circle')
-            .data(displaydata["Fewer Confidants"])
-            .classed('m-circle', function (d) { return d.filler; })
-            .transition()
-
-        circles.duration(800)
-            .delay(function (d) {
-                return 5 * d.row;
-            })
-            .attr('opacity', 0.3)
-            .attr('fill', '#ddd');
-
-        // use named transition to ensure
-        // move happens even if other
-        // transitions are interrupted.
-        g.selectAll('.m-circle')
-            .transition('move-fills')
-            .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
-            })
-            .attr('cy', function (d) {
-                return d.y;
-            });
-
-        g.selectAll('.m-circle')
-            .transition()
-            .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
-    }
-
-    function highlightEvent() {
-
-        var circles =  g.selectAll('.circle')
-            .data(displaydata["specific events"])
-            .classed('e-circle', function (d) { return d.filler; })
-            .transition()
-
-        circles.duration(800)
-            .delay(function (d) {
-                return 5 * d.row;
-            })
-            .attr('opacity', 0.3)
-            .attr('fill', '#ddd');
-
-        // use named transition to ensure
-        // move happens even if other
-        // transitions are interrupted.
-        g.selectAll('.e-circle')
-            .transition('move-fills')
-            .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
-            })
-            .attr('cy', function (d) {
-                return d.y;
-            });
-
-        g.selectAll('.e-circle')
-            .transition()
-            .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
-    }
-
-    function highlightImpact() {
-
-        var circles =  g.selectAll('.circle')
-            .data(displaydata["impact"])
-            .classed('im-circle', function (d) { return d.filler; })
-            .transition()
-
-        circles.duration(800)
-            .delay(function (d) {
-                return 5 * d.row;
-            })
-            .attr('opacity', 0.3)
-            .attr('fill', '#ddd');
-
-        // use named transition to ensure
-        // move happens even if other
-        // transitions are interrupted.
-        g.selectAll('.im-circle')
-            .transition('move-fills')
-            .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
-            })
-            .attr('cy', function (d) {
-                return d.y;
-            });
-
-        g.selectAll('.im-circle')
-            .transition()
-            .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
-    }
-
-    function highlightInt() {
-
-        var circles =  g.selectAll('.circle')
-            .data(displaydata["martial status"])
-            .classed('it-circle', function (d) { return d.filler; })
-            .transition()
-
-        circles.duration(800)
-            .delay(function (d) {
-                return 5 * d.row;
-            })
-            .attr('opacity', 0.3)
-            .attr('fill', '#ddd');
-
-        // use named transition to ensure
-        // move happens even if other
-        // transitions are interrupted.
-        g.selectAll('.it-circle')
-            .transition('move-fills')
-            .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
-            })
-            .attr('cy', function (d) {
-                return d.y;
-            });
-
-        g.selectAll('.it-circle')
-            .transition()
-            .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+            .duration(900)
+            .attr('opacity', 1.0)
+            .attr('fill', function (d) { console.log(d['age'].filler); return d['age'].filler ? '#ff6666' : '#ddd'; });
     }
 
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
@@ -362,7 +241,7 @@ var scrollVis = function () {
                     sumvalue = +d.Total;
                 } else {
                     stack[d.division] = +d.Total;
-                    sumvalue = +d.Total;
+                    sumvalue += +d.Total;
                 }
 
         });
@@ -371,27 +250,32 @@ var scrollVis = function () {
         var displayData = {};
         for(var i = 0; i<namelist.length;i++)
         {
-            var unit = [];
+            d = {};
+            d.filler = [];
+            d.col = [];
+            d.x = [];
+            d.y = [];
+            d.row = [];
             for (var j = 0; j< matrixsize; j++)
             {
-                d = {}
-                d.col=j % numPerRow;
-                d.x=j % numPerRow * (circleSize + circlePad);
-                d.row=Math.floor(j / numPerRow);
-                d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
+                d.col.push(j % numPerRow);
+                d.x.push(j % numPerRow * (circleSize + circlePad));
+                d.row.push(Math.floor(j / numPerRow));
+                d.y.push(Math.floor(j / numPerRow) * (circleSize + circlePad));
                 //console.log(newdata[i]['total'])
-                if(j<6*newdata[i].total){ d.filler=true}
-                else{ d.filler=false}
-                unit.push(d)
+                if(j<27*newdata[i].total){ d.filler.push(true)}
+                else{ d.filler.push(false)}
             }
-            displayData[namelist[i]] = unit;
+            displayData[namelist[i]] = d;
         }
-        console.log(displayData);
+        console.log(displayData)
+        console.log(displayData['prevalence'].filler);
 
         return displayData;
     }
 
-/*    function getData(rawData) {
+/*
+    function getData(rawData) {
         return rawData.map(function (d, i) {
             // is this word a filler word?
             d.filler = (d.filler === '1') ? true : false;
@@ -399,6 +283,7 @@ var scrollVis = function () {
             d.time = +d.time;
             // time in minutes word was spoken
             d.min = Math.floor(d.time / 60);
+
             // positioning for square visual
             // stored here to make it easier
             // to keep track of.
@@ -408,7 +293,10 @@ var scrollVis = function () {
             d.y = d.row * (circleSize + circlePad);
             return d;
         });
-    }*/
+    }
+*/
+
+
 
     chart.activate = function (index) {
         activeIndex = index;
@@ -463,3 +351,4 @@ function display(data) {
 // load data and display
 //d3.tsv('data/words.tsv', display);
 d3.csv('data/what are lonely people like.csv',  display);
+
