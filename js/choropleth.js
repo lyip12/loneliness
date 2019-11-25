@@ -114,7 +114,7 @@ function demographicschorovis(){
                         Tooltip
                             .html(tip)
                             .style("left", (d3.mouse(this)[0]*2) + "px")
-                            .style("top", (d3.mouse(this)[1]*3) + "px")
+                            .style("top", (d3.mouse(this)[1]*2.5) + "px")
                             .transition()
                             .duration(800)
                             .style("opacity", 1);
@@ -141,6 +141,26 @@ function demographicschorovis(){
             .range(d3.schemeBlues[9]);
 
             for(var i = 0; i<9;i++){
+                
+                if(i==0){  
+                    svg.append("rect")
+                        .attr("x", 74)
+                        .attr("y", 0)
+                        .attr("width", 38)
+                        .attr("height", 76)
+                        .transition()
+                        .duration(800)
+                        .attr("fill", "#0c0e12"); 
+
+                    svg.append("text")
+                        .attr("x", 90)
+                        .attr("y", 73)
+                        .attr("font-family", "'Roboto', sans-serif")
+                        .attr("font-size", "4px")
+                        .attr("fill", "#8293b6")
+                        .text("0.00%");
+                }
+                
                 svg.append("rect")
                     .attr("x", 80)
                     .attr("y", 64-i*7)
@@ -152,27 +172,28 @@ function demographicschorovis(){
                     return fill(d3.min(a)+k*i);
                 }); 
 
-                var num = (d3.min(a)+k*i);
+                var num = d3.min(a)+k*(i+1);
                 var n = num.toFixed(2);
+
+                svg.append("rect")
+                    .attr("x", 80)
+                    .attr("y", 64-i*7)
+                    .attr("width", 7)
+                    .attr("height", 7)
+                    .transition()
+                    .duration(800)
+                    .attr("fill", function(d){
+                    return fill(d3.min(a)+k*i);
+                }); 
 
                 svg.append("text")
                     .attr("x", 90)
-                    .attr("y", 69-i*7)
+                    .attr("y", 66-i*7)
                     .attr("font-family", "'Roboto', sans-serif")
-                    .attr("font-size", "5px")
+                    .attr("font-size", "4px")
                     .attr("fill", "#8293b6")
                     .text(n + "%");
-                
-                if(i=0){
-                    
-                    svg.append("text")
-                        .attr("x", 90)
-                        .attr("y", 72)
-                        .attr("font-family", "'Roboto', sans-serif")
-                        .attr("font-size", "5px")
-                        .attr("fill", "#8293b6")
-                        .text("0%");
-                }
+
             }
 
 

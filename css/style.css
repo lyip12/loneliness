@@ -127,7 +127,7 @@ div.section {
 
 .yipbaraxis line,
 .yipbaraxis path{
-    stroke: #8293b6;
+    stroke: white;
 }
 
 .yipbaraxis text{
