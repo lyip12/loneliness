@@ -1,6 +1,7 @@
 /* General */
 body{
     background-color: #161c26 !important;
+    font-family: 'Roboto', sans-serif;
 }
 
 /* TEXT */
@@ -247,3 +248,15 @@ div#dugy-radial-explaination{
     height: 100%;
     display: block;
   }
+
+div.loneliness-three-dimenstions{
+    text-align: center;
+}
+
+div.center-highlighted-words h3{
+    text-align: center;
+}
+
+div.center-highlighted-words span{
+    color: #ff6666;
+}
