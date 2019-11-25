@@ -96,8 +96,9 @@ function runjiascatter(){
         // to add labels to the axis, you do append("text") instead of append("p")
         xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", -40).attr("fill", "white")
 
-        yscatter.append("text").text("Average Times Felt Lonely During Past Week").attr("x", 60)
-            .attr("y", height/2).attr("transform", "rotate(90)", "translate(10,10)")
+        yscatter.append("text").text("Average Times Felt Lonely During Past Week")
+            .attr("x", width/2).attr("y", -40)
+            .attr("transform", "rotate(90) ")
 
     });
 }
