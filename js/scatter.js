@@ -5,19 +5,21 @@ runjiascatter();
 function runjiascatter(){
 
     // SVG Size
-    var margin = {top: 40, right: 20, bottom: 40, left: 20};
+    var margin = {top: 20, right: 20, bottom: 20, left: 40};
 
     var padding = 0;
 
     var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) - margin.left- margin.right,
         height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6; - margin.top - margin.bottom;
 
+// append the svg object to the body of the page
     var svg = d3.select("#scatter")
-        .classed("svg-container-scatter", true)
         .append("svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("width", width+margin.left+margin.right)
-        .attr("height", height+margin.top+margin.bottom);
+        .attr("width", width + margin.left + margin.right)
+        .attr("height", height + margin.top + margin.bottom)
+        .append("g")
+        .attr("transform",
+            "translate(" + margin.left + "," + margin.top + ")");
 
     // Load CSV file
     d3.csv("data/sample.csv", function(data){
@@ -32,26 +34,26 @@ function runjiascatter(){
 
         // sort data according to Population
         data.sort(function(a, b){ return b.fltlnl - a.fltlnl});
- 
+
         // create chart group, applying margins
 
         g = d3.select("svg").attr("transform", "translate(" + margin.left+ "," + margin.top + ")")
 
         var ageScale = d3.scaleLinear()
-        .domain([10,90])
-        .range([0, width])// this padding mapping pushes the elements away from the edges of SVG drawing area
+            .domain([0,90])
+            .range([0, width])// this padding mapping pushes the elements away from the edges of SVG drawing area
 
         //you want small life expectancy values to map to the bottom of the chart,
         //and high life expectancy values to map to the top of the chart.
         //to do this, we can change the sequence of the domain mapping.
         //it seems that d3 mapping [a,b] does not guarantee b>a
         var lonelinessScale = d3.scaleLinear()
-        .domain([10, 0])
-        .range([0 , height]);
+            .domain([10, 0])
+            .range([0 , height]);
 
         var rad = d3.scaleLinear()
-        .domain([d3.min(data, function(d){return d.fltlnl}),d3.max(data, function(d){return d.fltlnl})])
-        .range([4, 30])
+            .domain([d3.min(data, function(d){return d.fltlnl}),d3.max(data, function(d){return d.fltlnl})])
+            .range([4, 30])
 
         // create a color Palette to 'colour' according to location
         //var colorPalette = d3.scaleOrdinal(d3.schemeCategory10);
@@ -63,23 +65,23 @@ function runjiascatter(){
         //create a group element
         //append circles to the group
         var circle = g
-        .attr("class", "circle")
-        .selectAll("circle").data(data).enter().append("circle")
-        .attr("cx", function(d){return ageScale(d.agea)})
-        .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
-        .attr("r", function (d){return rad(d.fltlnl/2)})
-        .attr("fill", function(d){return "rgb(0, 120,"+d.agea*5+")"}).attr("stroke-width", 0.1)
-        .style("opacity", 0.7)
+            .attr("class", "circle")
+            .selectAll("circle").data(data).enter().append("circle")
+            .attr("cx", function(d){return ageScale(d.agea)})
+            .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
+            .attr("r", function (d){return rad(d.fltlnl/2)})
+            .attr("fill", function(d){return "rgb(0, 120,"+d.agea*5+")"}).attr("stroke-width", 0.1)
+            .style("opacity", 0.7)
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
         // create axis elements
         var xAxis = d3.axisBottom().scale(ageScale).tickFormat(d3.format(",d")).tickValues([0, 10, 20,30, 40,50,60, 70,80,90])
 
         var xscatter = svg.append("g")
-        .attr("class", "axis scatter")
-        .attr("transform", "translate(0," + height + ")")
-        .attr("fill", "white")
-        .call(xAxis)
+            .attr("class", "axis scatter")
+            .attr("transform", "translate(0," + height + ")")
+            .attr("fill", "white")
+            .call(xAxis)
 
 
         var yAxis = d3.axisLeft().scale(lonelinessScale)
@@ -92,10 +94,11 @@ function runjiascatter(){
             .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
-        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", 40).attr("fill", "white")
+        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", -40).attr("fill", "white")
 
-        yscatter.append("text").text("Average Times Felt Lonely During Past Week").attr("x", padding)
-            .attr("y", height/2).attr("transform", "rotate(90)", "translate(10,10)")
+        yscatter.append("text").text("Average Times Felt Lonely During Past Week")
+            .attr("x", width/2).attr("y", -40)
+            .attr("transform", "rotate(90) ")
 
     });
 }
