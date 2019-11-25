@@ -1,5 +1,5 @@
-var yipchoroselector = "All";
-yipsmallmultiples(yipchoroselector);
+//var yipchoroselector = "All";
+//yipsmallmultiples(yipchoroselector);
 
 function yipsmallmultiples(yipchoroselector){
 

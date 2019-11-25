@@ -90,8 +90,8 @@ function demographicschorovis(){
                     Tooltip
                         .style("opacity", 0)
 
-                    var yipchoroselector = "All";
-                    yipsmallmultiples(yipchoroselector);
+//                    var yipchoroselector = "All";
+//                    yipsmallmultiples(yipchoroselector);
 
                     toggle =1;
                     var t = " "
@@ -118,8 +118,8 @@ function demographicschorovis(){
                             .duration(800)
                             .style("opacity", 1);
 
-                        var yipchoroselector = d.properties.name;
-                        yipsmallmultiples(yipchoroselector);
+//                        var yipchoroselector = d.properties.name;
+//                        yipsmallmultiples(yipchoroselector);
 
                         var t = d.data;
                         document.getElementById("yiptooltip").innerHTML = t;
@@ -153,9 +153,7 @@ function demographicschorovis(){
             }
 
 
-            var text = "Data (by Population Percentage):"
-            var label = "0%" + grid2 + "50%" + grid2 + "100%<br>";
-            var t = label + gradients;
+            var t = " "
             document.getElementById("yiptooltip").innerHTML = t;
 
             // Draw the map
@@ -186,11 +184,5 @@ function demographicschorovis(){
 
 
         }
-
-
-        var gradients = "<svg height='50' width='200'><defs><linearGradient id='grad' x1='0%' y1='0%' x2='100%' y2='0%'><stop offset='0%' style='stop-color:#FEE5D9;stop-opacity:1' /><stop offset='30%' style='stop-color:#ff1100;stop-opacity:1' /><stop offset='70%' style='stop-color:#8a0000;stop-opacity:1' /><stop offset='100%' style='stop-color:#690000;stop-opacity:1' /></linearGradient></defs><rect x='3' y='0' width='200'height='15' fill='url(#grad)' /></svg>"
-        var grid2 = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-        var grid = "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-
     }
 };
