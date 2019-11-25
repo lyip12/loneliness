@@ -29,6 +29,8 @@ function runjiascatter(){
         data.forEach(function(d){
             d.fltlnl = +d.fltlnl;
             d.agea = +d.agea;
+            d.happy += d.happy;
+            d.sclmeet= +d.sclmeet;
         });
         //data.forEach(d,filter(d){return d.agea<100;})
 
@@ -70,7 +72,7 @@ function runjiascatter(){
             .attr("cx", function(d){return ageScale(d.agea)})
             .attr("cy", function(d){return lonelinessScale(d.fltlnl)})
             .attr("r", function (d){return rad(d.fltlnl/2)})
-            .attr("fill", function(d){return "rgb(0, 120,"+d.agea*5+")"}).attr("stroke-width", 0.1)
+            .attr("fill", function(d){return "rgb(200, "+d.fltlnl*10+","+d.fltlnl*20+")"}).attr("stroke-width", 0.1)
             .style("opacity", 0.7)
         //.attr("fill", function(d){return colorPalette(d.Region)});
 
@@ -94,10 +96,10 @@ function runjiascatter(){
             .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
-        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", -40).attr("fill", "white")
+        xscatter.append("text").text("Age of People Being Surveyed").attr("x", width/2).attr("y", -20).attr("fill", "white")
 
         yscatter.append("text").text("Average Times Felt Lonely During Past Week")
-            .attr("x", width/2).attr("y", -40)
+            .attr("x", width/2).attr("y", -20)
             .attr("transform", "rotate(90) ")
 
     });
