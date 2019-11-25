@@ -161,16 +161,17 @@ div.section {
     /*overflow: hidden;*/
 }
 
-.svg-container-scatter {
+.yipsvg-container {
     display: inline-block;
     position: relative;
     width: 100%;
+    padding-bottom: 100%;
     /* aspect ratio */
     vertical-align: top;
-    /*overflow: hidden;*/
+    overflow: hidden;
 }
 
-.yipsvg-container {
+.scattersvg-container {
     display: inline-block;
     position: relative;
     width: 100%;
@@ -244,10 +245,10 @@ div.section {
     stroke-width: 0.5;
 }
 .dugy-radial-axis path{
-  fill: none;
-  stroke: #888888;
-  stroke-opacity: 0.3;
-  stroke-width: 0.5;
+    fill: none;
+    stroke: #888888;
+    stroke-opacity: 0.3;
+    stroke-width: 0.5;
 }
 .dugy-radial-axis text{
     fill:#ff6666;
@@ -268,7 +269,7 @@ div#dugy-radial-explaination{
     width: 100%;
     height: 100%;
     display: block;
-  }
+}
 
 div.loneliness-three-dimenstions{
     text-align: center;
