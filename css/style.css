@@ -125,15 +125,14 @@ div.section {
     opacity: 30%;
 }
 
-.yipbaraxis line{
-    fill: none;
-    stroke:#8293b6;
-    opacity:   1;
-    stroke-width: 0.5;
+.yipbaraxis line,
+.yipbaraxis path{
+    stroke: #8293b6;
 }
 
 .yipbaraxis text{
     fill:#8293b6;
+    font-size: 16px;
 }
 
 /* CONTAINER */
@@ -157,6 +156,15 @@ div.section {
     position: relative;
     width: 100%;
     padding-bottom: 50%;
+    /* aspect ratio */
+    vertical-align: top;
+    /*overflow: hidden;*/
+}
+
+.svg-container-scatter {
+    display: inline-block;
+    position: relative;
+    width: 100%;
     /* aspect ratio */
     vertical-align: top;
     /*overflow: hidden;*/
@@ -199,6 +207,19 @@ div.section {
     height: 100px; /*Whatever you want*/
     width: 100%; /*Whatever you want*/
     display: block;
+}
+
+.axis.scatter path{
+    stroke: #ffffff;
+}
+
+.axis.scatter text{
+    fill: #ffffff;
+}
+
+
+.axis.scatter line{
+    stroke: #ffffff;
 }
 
 /*the section changes the styles of scroll sections.*/

@@ -1,19 +1,24 @@
+//var yipchoroselector = "All";
 yipsmallmultiples();
 
-function yipsmallmultiples(){
-
+function yipsmallmultiples(yipchoroselector){
 
     var margin = {top: 20, right: 20, bottom: 30, left: 30},
         width = 400 - margin.left - margin.right,
         height = 400 - margin.top - margin.bottom;
 
-    // Bar chart configurations: data keys and chart titles
-    var configs = [
-        { key: "ownrent", title: "Own or Rent" },
-        { key: "electricity", title: "Electricity" },
-        { key: "latrine", title: "Latrine" },
-        { key: "hohreligion", title: "Religion" }
+    var key = [
+        {Category: ["One_Person_Household_Frequent", "Mutiple_People_Household_Frequent"]},
+        {Category: ["Conflict_Never_Frequent", "Conflict_Sometimes_Frequent", "Conflict_Often_Frequent"]},
+        {Category: ["No_Confidant_Frequent", "At _Least_One_Confidant_Frequent"]},
+        {Category: ["Native_Frequent", "Immigrant_Frequent","Ethnic_Minority_Frequent","Ethnic_Majority_Frequent"]},
+        {Category: ["Religious_Frequent", "Non_Religious_Frequent"]},
+        {Category: ["Big_City_Frequent", "Suburb_Frequent", "Small_City__Frequent", "Countryside_Frequent"]},
+        {Category: ["Unemployed_Past_Year_Frequent", "Unemployed_Past_Month_Frequent","Unemployed_Past_Days_Frequent", "Employed_Frequent"]},
+        {Category: ["Income_Comfortable_Frequent", "Income_Coping_Frequent", "Income_Difficult_Frequent", "Income_Very_Difficult_Frequent"]}   
     ];
+
+    //console.log(key);
 
     // Initialize variables to save the charts later
     var barcharts = [];
@@ -21,13 +26,10 @@ function yipsmallmultiples(){
     var x = d3.scaleBand()
     .range([0, width])
     .padding(0.1);
-    var x2 = d3.scaleTime()
-    .range([0, width])
     var y = d3.scaleLinear()
     .range([height, 0]);
 
     // Date parser to convert strings to date objects
-    var parseDate = d3.timeParse("%Y-%m-%d");
 
 
     //  (1) Load CSV data
@@ -36,70 +38,67 @@ function yipsmallmultiples(){
     // 	(4) Create new are chart object
 
 
-    d3.csv("data/household_characteristics.csv", function(data){
+    d3.csv("data/ESS_Demographic.csv", function(data){
         data.forEach(function(d){
-            d.hhid = +d.hhid;
-            d.survey = parseDate(d.survey);
         });
-        barchart(data);
+
+        //console.log(data);
+
+        if(yipchoroselector !== "All"){
+            var filtereddata = data.filter(function(d) { 
+                return d.Country == yipchoroselector; 
+            });
+        } else {
+            var filtereddata = data;
+        };
+        console.log(filtereddata);
+
+        barchart(filtereddata);
 
     });
-
 
     function barchart(d){
 
         //creating nested list
 
-        for(var i = 0; i<configs.length; i++){
-
-            var countarray = d3.nest()
-            .key(function(d) { 
-                return d[configs[i].key].substring(0,6) })
-            .rollup(function(data) { return data.length; })
-            .entries(d);
-
-            countarray.sort( function(a, b){ 
-                return b.value - a.value;
-            });
-
-//            var svg = d3.select("#yipbarcharts").append("svg")
-//            .attr("width", width + margin.left + margin.right)
-//            .attr("height", height + margin.top + margin.bottom)
-//            .append("g")
-//            .attr("transform", 
-//                  "translate(" + margin.left + "," + margin.top + ")");
-
-            var svg = d3.select("#yipbarcharts")
+        for(var i = 0; i<8; i++){
+            //console.log(key[i].Category);
+            var svg = d3.select("#yipbarcharts"+i)
             .classed("yipsvg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-40 0 390 420")
             .classed("svg-content-responsive", true);
 
-            x.domain(countarray.map(function(d) { return d.key;}));
-            y.domain([0, d3.max(countarray, function(d) { return d.value;})]);
+            var fdata = d.filter(function(d) { 
+                return d.Country = key[i].Category; 
+            });
+            //console.log(fdata);
+
+            x.domain(d.map(function(d) { return key[i].Category;}));
+            y.domain([0, d3.max(d, function(d) { return d[1];})]);
 
             var bar = svg.selectAll('rect')
             .attr("class", "bar")
             .remove()
             .exit()
-            .data(countarray)
+            .data(d)
 
             bar.enter()
                 .append("rect")
-                .data(countarray)
-                .attr("fill", "#F67E7D")
+                .data(d)
+                .attr("x", function(d) { return key[i].Category; })
+                .attr("y", function(d) { return y(d[1]); })
+                .attr("height", function(d) { return height - y(d[1]); })
                 .transition()
                 .duration(800)
-                .attr("x", function(d) { return x(d.key); })
-                .attr("width", (x.bandwidth()/2))
-                .attr("y", function(d) { return y(d.value); })
-                .attr("height", function(d) { return height - y(d.value); });
+                .attr("fill", "#F67E7D")
+                .attr("width", x.bandwidth());
 
             // add the x Axis
             svg.append("g")
-                .attr("transform", "translate(0," + height + ")")
                 .attr("class", "yipbaraxis")
+                .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
             // add the y Axis
