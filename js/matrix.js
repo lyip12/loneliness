@@ -399,7 +399,6 @@ var scrollVis = function () {
             d.time = +d.time;
             // time in minutes word was spoken
             d.min = Math.floor(d.time / 60);
-
             // positioning for square visual
             // stored here to make it easier
             // to keep track of.
@@ -464,4 +463,3 @@ function display(data) {
 // load data and display
 //d3.tsv('data/words.tsv', display);
 d3.csv('data/what are lonely people like.csv',  display);
-
