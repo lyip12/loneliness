@@ -4,7 +4,7 @@ var displaydata
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
-    var width = screen.height*;
+    var width = screen.height;
     var height = 650;
     var margin = { top: 10, bottom: 0, left: 10, right: 0 };
 
