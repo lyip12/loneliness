@@ -85,8 +85,8 @@ function yipsmallmultiples(yipchoroselector){
             .range([height, 0]);
 
             x.domain(finaldata.map(function(d) { return d.category;}));
-            y.domain([0, 50])
-
+            y.domain([0, 50])            
+            
             var bar = svg.selectAll('bar')
             .attr("class", "bar")
             .remove()
