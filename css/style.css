@@ -33,6 +33,15 @@ h3.cursive {
     font-weight: 300 !important;
 }
 
+h5 {
+    font-family: 'Roboto', sans-serif !important;
+    color: white;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: 0.2em !important;
+}
+
+
 em {
     color: #ff6666;
 }
