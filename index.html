@@ -10,8 +10,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
-        <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
 
     </head>
@@ -63,20 +62,21 @@
             <div class="line"></div>
             <div style="height:150px"></div>
         </div>
-        <div class="section" data-aos="fade-in">
+        <div class="section" data-aos="fade-in"  id="dugy-radial-fadein">
             <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
             <p style="text-align: center;">We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race. </p>
             <div style="height:80px"></div>
-            <div style="height:600px">
+            <div style="height:600px" id='dugy-canvas-container'>
                 <canvas id="dugy-c"></canvas>
             </div>
             <p style="text-align: center; margin-top: 100px; margin-bottom: 50px"><em>There are many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>    
             <p class="shortish">The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 295 people who answered to this question from around the world, 77 of said they have been alone for more than 10 years.</b></p>
             <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
-
+        </div>
             <!--The Scatter Plot Section-->
-
-            <div class="row align-items-center">
+        
+        <div class="section" data-aos="fade-in">
+        <div class="row align-items-center">
                 <div class="col-md-8" id="scatter"></div>
                 <div class="col-md-4" style="padding-right: 8vw;">
                     <p><b>Loneliness correlation with Age:</b><br>
@@ -87,7 +87,7 @@
             </div>
             <div style="height:150px"></div>
         </div>
-
+        </div>
         <!--The Tree Section-->
         <div class="section">
             <div class="line"></div>
@@ -339,7 +339,6 @@
         <script src="libraries/queue.min.js"></script>
         <script src="libraries/topojson.min.js"></script>
         <script src="libraries/d3.min.js"></script>
-        <script src="libraries/aos.js"></script>
         <script src="libraries/three.js"></script>
         <script src="libraries/d3.v4.js"></script>
         <script src="libraries/d3-scale-chromatic.v1.min.js"></script>
@@ -347,7 +346,6 @@
 
         <!-- OptionalJS -->
         <script src="js/titlesketch.js"></script>
-        <script src="js/animate.js"></script>
 
         <!-- Vis JS -->
         <script src='js/star.js'></script>
@@ -356,10 +354,13 @@
         <script src="js/questionaire.js"></script>
         <script src="js/choropleth.js"></script>
         <script src="js/tree.js"></script>
-        <script src="js/animate.js"></script>
         <script src="js/smallmultiples.js"></script>
         <script src="js/scroll.js"></script>
         <script src="js/matrix.js"></script>
         <script src="js/scatter.js"></script>
+
+        <!-- AOS must be included last -->
+        <script src="libraries/aos.js"></script>
+        <script src="js/animate.js"></script>
     </body>
 </html>

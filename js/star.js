@@ -25,6 +25,15 @@ class Star{
     get remain(){
         return this.life2;
     }
+    reset(_x,_y,_z,_life){
+        this.pos.x = _x;
+        this.pos.y = _y;
+        this.pos.z = _z;
+        this.life = _life;
+        this.life2 = 2* _life;
+        this.lifetime = _life;
+    }
+
     wander(){
         var wanderR = 2.5;
         var wanderD = 8;

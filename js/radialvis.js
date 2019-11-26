@@ -261,7 +261,6 @@ function radialvisMain(){
         if (filtering == '' && currentCountry != 'Europe'){
             // Update Top Factors
             var indexOfCountry = oddsRatioCountries.findIndex(function(d){return d == currentCountry});
-            console.log(indexOfCountry);
             oddsRatioStackedDisplayed[indexOfCountry].forEach((d,i)=>{
                 topFactors.push([d[1] - d[0],d.data.Factor,i]) 
             })
