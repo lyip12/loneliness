@@ -58,13 +58,14 @@ function demographicschorovis(){
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(200)
+                        .duration(100)
                         .style("opacity", .1)
                     d3.select(this)
                         .transition()
-                        .duration(200)
+                        .duration(100)
                         .style("opacity", 1)
                     //console.log("tis is working")
+                        .attr('cursor', 'pointer');
                 }
             }
 
@@ -72,11 +73,11 @@ function demographicschorovis(){
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(800)
+                        .duration(100)
                         .style("opacity", 1)
                     d3.select(this)
                         .transition()
-                        .duration(800)
+                        .duration(100)
                 }
             }
 
@@ -84,11 +85,11 @@ function demographicschorovis(){
                 if(toggle == 0) {
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(800)
+                        .duration(300)
                         .style("opacity", 1)
                     d3.select(this)
                         .transition()
-                        .duration(800)
+                        .duration(300)
                     Tooltip
                         .style("opacity", 0)
 
@@ -103,7 +104,7 @@ function demographicschorovis(){
                     if(d.data !== "no data"){
                         d3.selectAll(".Country")
                             .transition()
-                            .duration(800)
+                            .duration(300)
                             .style("opacity", .02)
                         d3.select(this)
                             .transition()
@@ -116,7 +117,7 @@ function demographicschorovis(){
                             .style("left", (d3.mouse(this)[0]*2) + "px")
                             .style("top", (d3.mouse(this)[1]*2.5) + "px")
                             .transition()
-                            .duration(800)
+                            .duration(300)
                             .style("opacity", 1);
 
                         var yipchoroselector = d.properties.name;
@@ -141,7 +142,7 @@ function demographicschorovis(){
             .range(d3.schemeBlues[9]);
 
             for(var i = 0; i<9;i++){
-                
+
                 if(i==0){  
                     svg.append("rect")
                         .attr("x", 74)
@@ -160,7 +161,7 @@ function demographicschorovis(){
                         .attr("fill", "#8293b6")
                         .text("0.00%");
                 }
-                
+
                 svg.append("rect")
                     .attr("x", 80)
                     .attr("y", 64-i*7)
@@ -199,6 +200,11 @@ function demographicschorovis(){
 
             var t = " "
             document.getElementById("yiptooltip").innerHTML = t;
+
+            d3.selectAll(".lucypath2")
+                .transition()
+                .duration(800)
+                .remove();
 
             // Draw the map
             svg.append("g")
