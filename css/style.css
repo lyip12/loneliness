@@ -20,7 +20,7 @@ h3 {
     font-family: 'Roboto', sans-serif !important;
     color: white;
     font-size: 36px !important;
-    font-weight: 400 !important;
+    font-weight: 700 !important;
     letter-spacing: 0.2em !important;
     margin-bottom: 30px;
     margin-right: -0.2em !important;
@@ -30,7 +30,7 @@ h3 {
 
 h3.cursive {
     font-family: 'Sacramento', cursive !important;
-    font-weight: 700 !important;
+    font-weight: 300 !important;
 }
 
 em {
@@ -49,7 +49,7 @@ form,
 .yipnode text {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
-    font-size: 16px !important;
+    font-size: 14px !important;
     font-weight: 300 !important;
     text-align: left;
 }
