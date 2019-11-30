@@ -122,7 +122,7 @@ function radialvisMain(){
             .text(function(d){return d})
             .style('fill','#ff6666')
             .style('text-anchor','middle')
-            .style('font-size', '6px')
+            .style('font-size', '8px')
 
         // axes
         circleCount = maxCircleCount;
