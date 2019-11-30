@@ -50,9 +50,9 @@ function demographicschorovis(){
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
+            .style("background-color", "#161c26")
+            .style("border-radius", "3px")
+            .style("padding", "10px")
 
             let yipmouseOver = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
@@ -66,6 +66,21 @@ function demographicschorovis(){
                         .style("opacity", 1)
                     //console.log("tis is working")
                         .attr('cursor', 'pointer');
+
+                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click to show more details of the country's stats.</b>";
+
+                    Tooltip
+                        .html(tip)
+                        .style("left", (d3.mouse(this)[0]*2) + "px")
+                        .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 1);
+
+                    var yipchoroselector = d.properties.name;
+                    yipsmallmultiples(yipchoroselector);
+
+                    console.log(d3.mouse(this)[0]/window.innerWidth*300);
                 }
             }
 
@@ -78,6 +93,10 @@ function demographicschorovis(){
                     d3.select(this)
                         .transition()
                         .duration(100)
+
+                    Tooltip
+                        .style("opacity", 0)
+
                 }
             }
 
@@ -90,15 +109,14 @@ function demographicschorovis(){
                     d3.select(this)
                         .transition()
                         .duration(300)
-                    Tooltip
-                        .style("opacity", 0)
+
+                    var t = " "
+                    document.getElementById("yiptooltip").innerHTML = t;
 
                     var yipchoroselector = "All";
                     yipsmallmultiples(yipchoroselector);
 
                     toggle =1;
-                    var t = " "
-                    document.getElementById("yiptooltip").innerHTML = t;
 
                 } else {  
                     if(d.data !== "no data"){
@@ -110,22 +128,21 @@ function demographicschorovis(){
                             .transition()
                             .duration(800)
                             .style("opacity", 1)
-                        tip = "in " + d.properties.name + ", around " + d.data + "% of " + cate + " population is frequently lonely.";
+                        toggle = 0;
+
+                        tip = "<b>click again to exit</b>";
 
                         Tooltip
                             .html(tip)
                             .style("left", (d3.mouse(this)[0]*2) + "px")
-                            .style("top", (d3.mouse(this)[1]*2.5) + "px")
+                            .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
                             .transition()
                             .duration(300)
                             .style("opacity", 1);
 
-                        var yipchoroselector = d.properties.name;
-                        yipsmallmultiples(yipchoroselector);
 
-                        var t = d.data;
+                        var t = "this is some sudo-information about " + d.properties.name + ".";
                         document.getElementById("yiptooltip").innerHTML = t;
-                        toggle = 0;
                     }
                 }
             }

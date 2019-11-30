@@ -54,7 +54,8 @@ b {
 }
 
 p,
-form {
+form,
+.tooltip{
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
     font-size: 14px !important;
