@@ -57,8 +57,8 @@ function runjiascatter(){
         //var colorPalette = d3.scaleOrdinal(d3.schemeCategory10);
         //colorPalette.domain(["Europe & Central Asia", "East Asia & Pacific", "Middle East & North Africa", "America", "Sub-Saharan Africa"]);
 
-        console.log(ageScale(5))
-        console.log(lonelinessScale(8))
+//        console.log(ageScale(5))
+//        console.log(lonelinessScale(8))
 
         //create a group element
         //append circles to the group

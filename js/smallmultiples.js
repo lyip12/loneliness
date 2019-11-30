@@ -56,7 +56,7 @@ function yipsmallmultiples(yipchoroselector){
     });
 
     function barchart(d){
-
+        
         //creating nested list
 
         for(var i = 0; i<8; i++){
@@ -67,7 +67,7 @@ function yipsmallmultiples(yipchoroselector){
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-60 -20 450 380")
             .classed("svg-content-responsive", true);
-
+            
             var finaldata = [];
             for(var j = 0; j<key[i].Category.length; j++){
                 finaldata.push({
@@ -76,7 +76,7 @@ function yipsmallmultiples(yipchoroselector){
                 })
             }   
 
-            console.log(finaldata)
+            //console.log(finaldata)
 
             var x = d3.scaleBand()
             .range([0, width])
@@ -86,11 +86,11 @@ function yipsmallmultiples(yipchoroselector){
 
             x.domain(finaldata.map(function(d) { return d.category;}));
             y.domain([0, 50])            
-            
+
             var bar = svg.selectAll('bar')
             .attr("class", "bar")
-            .remove()
-            .exit()
+//            .remove()
+//            .exit()
             .data(finaldata)
 
             bar.enter()
@@ -102,9 +102,9 @@ function yipsmallmultiples(yipchoroselector){
                 .attr("height", height)
                 .attr("opacity",0)
                 .transition()
-                .duration(1000)
+                .duration(400)
                 .attr("opacity",1)
-                .attr("fill", "#0c0e12");
+                .attr("fill", "#0e1015");
 
             bar.enter()
                 .append("rect")
@@ -115,7 +115,7 @@ function yipsmallmultiples(yipchoroselector){
                 .attr("height", function(d) { return height-y(d.value); })
                 .attr("opacity",0)
                 .transition()
-                .duration(300)
+                .duration(200)
                 .attr("opacity",1)
                 .attr("fill", "#8293b6");
 

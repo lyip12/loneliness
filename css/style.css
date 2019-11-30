@@ -54,13 +54,26 @@ b {
 }
 
 p,
-form,
-.yipnode text {
+form {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
     font-size: 14px !important;
     font-weight: 300 !important;
     text-align: left;
+}
+
+.yipnode text {
+    font-family: 'Roboto', sans-serif; 
+    color: #8293b6 !important;
+    font-size: 14px;
+    font-weight: 300;
+    text-align: left;
+}
+
+.nodetitle{
+    font-size: 18px !important;
+    letter-spacing: 0.2em !important;
+    font-weight: 600 !important;
 }
 
 p.small {
@@ -73,8 +86,8 @@ a.hyprtxt {
     font-weight: 700;
 }
 
-#responsive-image {
-    width: 90%;
+.responsive-image {
+    width: 100%;
     height: auto;
 }
 
@@ -101,6 +114,7 @@ img.icon {
 .shortish{
     margin: 50px 20vw 50px 20vw;
 }
+
 div.section {
     padding-left: 100px;
     padding-right: 100px;
@@ -129,7 +143,7 @@ div.section {
 
 /* TREE */
 .yipnode circle {
-    fill: #8293b6;
+    /*fill: #8293b6;*/
     stroke: none;
 }
 
@@ -147,7 +161,7 @@ div.section {
 
 .yipbaraxis text{
     fill:#8293b6;
-    font-size: 16px;
+    font-size: 18px;
 }
 
 /* CONTAINER */

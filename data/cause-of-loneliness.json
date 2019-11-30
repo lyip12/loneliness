@@ -1,34 +1,41 @@
 {
     "name": "Loneliness",
+    "importance": 12,
     "info": "the state of feeling lonely",
     "children": [
         {
             "name": "Long-term or Chronic",
+            "importance": 12,
             "parent": "Loneliness",
             "info": "from constant influences on the person",
             "children": [
                 {
                     "name": "Social Identity",
+                    "importance": 8,
                     "parent": "Long-term or Chronic",
                     "info": "social group membership and markers",
                     "children": [
                         {
                             "name": "Gender and Sexuality",
+                            "importance": 8,
                             "parent": "Social Identity",
                             "info": "binary / non-binary peception and orientation"
                         },
                         {
                             "name": "Ethnicity and Race",
+                            "importance": 4,
                             "parent": "Social Identity",
                             "info": "color and cultural background"
                         },
                         {
                             "name": "Religion",
+                            "importance": 4,
                             "parent": "Social Identity",
                             "info": "mentality by belief-systems"
                         },
                         {
                             "name": "Personality Attributes",
+                            "importance": 6,
                             "parent": "Social Identity",
                             "info": "positivity, extravertedness and likability"
                         }
@@ -36,21 +43,25 @@
                 },
                 {
                     "name": "Community",
+                    "importance": 8,
                     "parent": "Long-term or Chronic",
                     "info": "group-based dynamics",
                     "children": [
                         { 
                             "name": "Hierarchy",
+                            "importance": 10,
                             "parent": "Long-term or Chronic",
                             "info": "power dynamics",
                             "children": [
                                 {
                                     "name": "Income",
+                                    "importance": 4,
                                     "parent": "Community",
                                     "info": "spending and saving",
                                     "children": [
                                         {
                                             "name": "Employment",
+                                            "importance": 6,
                                             "parent": "Community",
                                             "info": "worker / business owners"
                                         }
@@ -58,11 +69,13 @@
                                 },
                                 {
                                     "name": "Education",
+                                    "importance": 8,
                                     "parent": "Community",
                                     "info": "perceived knowledgableness"
                                 },
                                 {
                                     "name": "Social Class",
+                                    "importance": 4,
                                     "parent": "Community",
                                     "info": "targetted, aggregated assessment"
                                 }
@@ -70,11 +83,13 @@
                         },
                         {
                             "name": "Culture",
+                            "importance": 4,
                             "parent": "Community",
                             "info": "language and lifestyle-based cohabitation",
                             "children": [
                                 {
                                     "name": "Nativity",
+                                    "importance": 4,
                                     "parent": "Culture",
                                     "info": "local, immigrant, alien or visitor"
                                 }
@@ -84,21 +99,25 @@
                 },
                 {
                     "name": "Family and Friends",
+                    "importance": 8,
                     "parent": "Long-term or Chronic",
                     "info": "direct and semi-indirect connections",
                     "children": [
                         {
                             "name": "Connectedness",
+                            "importance": 10,
                             "parent": "Family and Friends",
                             "info": "degree of closeness",
                             "children": [
                                 {
-                                    "name": "Household and Social Circle Structure",
+                                    "name": "Household or Social Circle",
+                                    "importance": 10,
                                     "parent": "Connectedness",
                                     "info": "acceptance and mutual understanding"
                                 },
                                 {
                                     "name": "Confidant",
+                                    "importance": 12,
                                     "parent": "Connectedness",
                                     "info": "trust within inner circle"
                                 }
@@ -106,17 +125,20 @@
                         },
                         {
                             "name": "Alignment",
+                            "importance": 8,
                             "parent": "Family and Friends",
                             "info": "balanceness in small group",
                             "children": [
                                 {
                                     "name": "Generation Gap",
-                                    "parent": "Hierarchy (Alignment)",
+                                    "importance": 10,
+                                    "parent": "Alignment",
                                     "info": "age spread across elderlies and children"
                                 },
                                 {
                                     "name": "Gender Gap",
-                                    "parent": "Hierarchy (Alignment)",
+                                    "importance": 6,
+                                    "parent": "Alignment",
                                     "info": "community or household powerholders and roles"
                                 }
                             ]
@@ -125,16 +147,19 @@
                 },
                 {
                     "name": "Personal Health",
+                    "importance": 8,
                     "parent": "Long-term or Chronic",
                     "info": "root of personal wellbeing",
                     "children": [
                         {
                             "name": "Physical",
+                            "importance": 8,
                             "parent": "Personal Health",
                             "info": "physiology, age and fitness"
                         },
                         {
                             "name": "Mental",
+                            "importance": 12,
                             "parent": "Personal Health",
                             "info": "Mindfulness, attitude and non-apparent factors"
                         }
@@ -144,16 +169,19 @@
         },
         {
             "name": "Short-term or Temporary",
+            "importance": 8,
             "parent": "Loneliness",
             "info": "usually caused by a triggering event",
             "children": [
                 {
                     "name": "Change",
+                    "importance": 10,
                     "parent": "Short-term or Temporary",
                     "info": "e.g. moving to somewhere new"
                 },
                 {
                     "name": "Extreme Experience",
+                    "importance": 12,
                     "parent": "Short-term or Temporary",
                     "info": "e.g. death of a close one, bankruptcy, etc."
                 }

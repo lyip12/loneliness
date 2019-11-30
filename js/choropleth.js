@@ -54,7 +54,7 @@ function demographicschorovis(){
             .style("border-radius", "5px")
             .style("padding", "5px")
 
-            let mouseOver = function(d) {
+            let yipmouseOver = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
@@ -69,7 +69,7 @@ function demographicschorovis(){
                 }
             }
 
-            let mouseLeave = function(d) {
+            let yipmouseLeave = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
@@ -81,7 +81,7 @@ function demographicschorovis(){
                 }
             }
 
-            let mouseClick = function (d) {
+            let yipmouseClick = function (d) {
                 if(toggle == 0) {
                     d3.selectAll(".Country")
                         .transition()
@@ -136,24 +136,23 @@ function demographicschorovis(){
                 legend.push(d3.min(a)+k*i);
             };
 
-            //console.log(legend)
+            console.log(legend)
             var fill = d3.scaleThreshold()
             .domain(legend)
             .range(d3.schemeBlues[9]);
 
+            d3.selectAll(".yipchorotext")
+                .attr("opacity", 1)
+                .transition()
+                .duration(800)
+                .attr("opacity", 0)
+                .remove()
+
             for(var i = 0; i<9;i++){
 
                 if(i==0){  
-                    svg.append("rect")
-                        .attr("x", 74)
-                        .attr("y", 0)
-                        .attr("width", 38)
-                        .attr("height", 76)
-                        .transition()
-                        .duration(800)
-                        .attr("fill", "#0c0e12"); 
-
                     svg.append("text")
+                        .attr("class","yipchorotext")
                         .attr("x", 90)
                         .attr("y", 73)
                         .attr("font-family", "'Roboto', sans-serif")
@@ -173,7 +172,7 @@ function demographicschorovis(){
                     return fill(d3.min(a)+k*i);
                 }); 
 
-                var num = d3.min(a)+k*(i+1);
+                var num = d3.min(a)+(k*(i+1));
                 var n = num.toFixed(2);
 
                 svg.append("rect")
@@ -181,19 +180,26 @@ function demographicschorovis(){
                     .attr("y", 64-i*7)
                     .attr("width", 7)
                     .attr("height", 7)
+                    .style("stroke", "black")
+                    .style("stroke-width", 0.1)
                     .transition()
                     .duration(800)
                     .attr("fill", function(d){
-                    return fill(d3.min(a)+k*i);
+                    return fill(d3.max(a)-(d3.min(a)+k*i));
                 }); 
 
                 svg.append("text")
                     .attr("x", 90)
+                    .attr("class","yipchorotext")
                     .attr("y", 66-i*7)
                     .attr("font-family", "'Roboto', sans-serif")
                     .attr("font-size", "4px")
                     .attr("fill", "#8293b6")
-                    .text(n + "%");
+                    .text(n + "%")
+                    .attr("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .attr("opacity", 1);
 
             }
 
@@ -221,16 +227,16 @@ function demographicschorovis(){
                 .attr("fill", function (d) {
                 d.data = data.get(d.id) || "no data";
                 if(d.data !== "no data"){
-                    return fill(d.data);
+                    return fill(d3.max(a)-d.data);
                 };
             })
                 .style("opacity", 1);
 
 
             d3.selectAll(".lucypath2")
-                .on("click", mouseClick)
-                .on("mouseover", mouseOver)
-                .on("mouseleave", mouseLeave)
+                .on("click", yipmouseClick)
+                .on("mouseover", yipmouseOver)
+                .on("mouseleave", yipmouseLeave)
 
 
         }
