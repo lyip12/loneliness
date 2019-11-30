@@ -63,6 +63,7 @@ function tree(){
 
         // Add labels for the nodes
         nodeEnter.append('text')
+            .attr("class", "nodetitle")
             .attr("dy", function(d) {
             return d.children || d._children ? 5 : 5;
         })
@@ -73,8 +74,19 @@ function tree(){
             return d.children || d._children ? "end" : "start";
         })
             .text(function(d) { return d.data.name; })
-            .attr("fill", "white");
-
+            .attr("fill", function(d){
+            if(d.data.importance == 12){
+                return "white";
+            } else if (d.data.importance == 10){
+                return "#dfecf7";
+            } else if (d.data.importance == 8){
+                return "#9ecae1";
+            } else if (d.data.importance == 6){
+                return "#4293c7";
+            } else {
+                return "#08529d";
+            };
+        })
         nodeEnter.append('text')
             .attr("dy", function(d) {
             return d.children || d._children ? 25 : 25;
@@ -101,11 +113,26 @@ function tree(){
 
         // Update the node attributes and style
         nodeUpdate.select('circle.yipnode')
-            .attr('r', 5)
+            .attr('r', function(d){
+            return d.data.importance;
+        })
             .style("fill", function(d) {
             return d._children;
         })
-            .attr('cursor', 'pointer');
+            .attr('cursor', 'pointer')
+            .attr('fill', function(d){
+            if(d.data.importance == 12){
+                return "white";
+            } else if (d.data.importance == 10){
+                return "#dfecf7";
+            } else if (d.data.importance == 8){
+                return "#9ecae1";
+            } else if (d.data.importance == 6){
+                return "#4293c7";
+            } else {
+                return "#08529d";
+            };
+        });
 
 
         // Remove any exiting nodes

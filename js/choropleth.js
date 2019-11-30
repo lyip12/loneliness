@@ -50,81 +50,99 @@ function demographicschorovis(){
             .append("div")
             .style("opacity", 0)
             .attr("class", "tooltip")
-            .style("background-color", "white")
-            .style("border-radius", "5px")
-            .style("padding", "5px")
+            .style("background-color", "#161c26")
+            .style("border-radius", "3px")
+            .style("padding", "10px")
 
-            let mouseOver = function(d) {
+            let yipmouseOver = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(200)
+                        .duration(100)
                         .style("opacity", .1)
                     d3.select(this)
                         .transition()
-                        .duration(200)
+                        .duration(100)
                         .style("opacity", 1)
                     //console.log("tis is working")
+                        .attr('cursor', 'pointer');
+
+                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click to show more details of the country's stats.</b>";
+
+                    Tooltip
+                        .html(tip)
+                        .style("left", (d3.mouse(this)[0]*2) + "px")
+                        .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
+                        .transition()
+                        .duration(300)
+                        .style("opacity", 1);
+
+                    var yipchoroselector = d.properties.name;
+                    yipsmallmultiples(yipchoroselector);
+
+                    console.log(d3.mouse(this)[0]/window.innerWidth*300);
                 }
             }
 
-            let mouseLeave = function(d) {
+            let yipmouseLeave = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(800)
+                        .duration(100)
                         .style("opacity", 1)
                     d3.select(this)
                         .transition()
-                        .duration(800)
+                        .duration(100)
+
+                    Tooltip
+                        .style("opacity", 0)
+
                 }
             }
 
-            let mouseClick = function (d) {
+            let yipmouseClick = function (d) {
                 if(toggle == 0) {
                     d3.selectAll(".Country")
                         .transition()
-                        .duration(800)
+                        .duration(300)
                         .style("opacity", 1)
                     d3.select(this)
                         .transition()
-                        .duration(800)
-                    Tooltip
-                        .style("opacity", 0)
+                        .duration(300)
+
+                    var t = " "
+                    document.getElementById("yiptooltip").innerHTML = t;
 
                     var yipchoroselector = "All";
                     yipsmallmultiples(yipchoroselector);
 
                     toggle =1;
-                    var t = " "
-                    document.getElementById("yiptooltip").innerHTML = t;
 
                 } else {  
                     if(d.data !== "no data"){
                         d3.selectAll(".Country")
                             .transition()
-                            .duration(800)
+                            .duration(300)
                             .style("opacity", .02)
                         d3.select(this)
                             .transition()
                             .duration(800)
                             .style("opacity", 1)
-                        tip = "in " + d.properties.name + ", around " + d.data + "% of " + cate + " population is frequently lonely.";
+                        toggle = 0;
+
+                        tip = "<b>click again to exit</b>";
 
                         Tooltip
                             .html(tip)
                             .style("left", (d3.mouse(this)[0]*2) + "px")
-                            .style("top", (d3.mouse(this)[1]*2.5) + "px")
+                            .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
                             .transition()
-                            .duration(800)
+                            .duration(300)
                             .style("opacity", 1);
 
-                        var yipchoroselector = d.properties.name;
-                        yipsmallmultiples(yipchoroselector);
 
-                        var t = d.data;
+                        var t = "this is some sudo-information about " + d.properties.name + ".";
                         document.getElementById("yiptooltip").innerHTML = t;
-                        toggle = 0;
                     }
                 }
             }
@@ -135,24 +153,23 @@ function demographicschorovis(){
                 legend.push(d3.min(a)+k*i);
             };
 
-            //console.log(legend)
+            console.log(legend)
             var fill = d3.scaleThreshold()
             .domain(legend)
             .range(d3.schemeBlues[9]);
 
-            for(var i = 0; i<9;i++){
-                
-                if(i==0){  
-                    svg.append("rect")
-                        .attr("x", 74)
-                        .attr("y", 0)
-                        .attr("width", 38)
-                        .attr("height", 76)
-                        .transition()
-                        .duration(800)
-                        .attr("fill", "#0c0e12"); 
+            d3.selectAll(".yipchorotext")
+                .attr("opacity", 1)
+                .transition()
+                .duration(800)
+                .attr("opacity", 0)
+                .remove()
 
+            for(var i = 0; i<9;i++){
+
+                if(i==0){  
                     svg.append("text")
+                        .attr("class","yipchorotext")
                         .attr("x", 90)
                         .attr("y", 73)
                         .attr("font-family", "'Roboto', sans-serif")
@@ -160,7 +177,7 @@ function demographicschorovis(){
                         .attr("fill", "#8293b6")
                         .text("0.00%");
                 }
-                
+
                 svg.append("rect")
                     .attr("x", 80)
                     .attr("y", 64-i*7)
@@ -172,7 +189,7 @@ function demographicschorovis(){
                     return fill(d3.min(a)+k*i);
                 }); 
 
-                var num = d3.min(a)+k*(i+1);
+                var num = d3.min(a)+(k*(i+1));
                 var n = num.toFixed(2);
 
                 svg.append("rect")
@@ -180,25 +197,37 @@ function demographicschorovis(){
                     .attr("y", 64-i*7)
                     .attr("width", 7)
                     .attr("height", 7)
+                    .style("stroke", "black")
+                    .style("stroke-width", 0.1)
                     .transition()
                     .duration(800)
                     .attr("fill", function(d){
-                    return fill(d3.min(a)+k*i);
+                    return fill(d3.max(a)-(d3.min(a)+k*i));
                 }); 
 
                 svg.append("text")
                     .attr("x", 90)
+                    .attr("class","yipchorotext")
                     .attr("y", 66-i*7)
                     .attr("font-family", "'Roboto', sans-serif")
                     .attr("font-size", "4px")
                     .attr("fill", "#8293b6")
-                    .text(n + "%");
+                    .text(n + "%")
+                    .attr("opacity", 0)
+                    .transition()
+                    .duration(800)
+                    .attr("opacity", 1);
 
             }
 
 
             var t = " "
             document.getElementById("yiptooltip").innerHTML = t;
+
+            d3.selectAll(".lucypath2")
+                .transition()
+                .duration(800)
+                .remove();
 
             // Draw the map
             svg.append("g")
@@ -215,16 +244,16 @@ function demographicschorovis(){
                 .attr("fill", function (d) {
                 d.data = data.get(d.id) || "no data";
                 if(d.data !== "no data"){
-                    return fill(d.data);
+                    return fill(d3.max(a)-d.data);
                 };
             })
                 .style("opacity", 1);
 
 
             d3.selectAll(".lucypath2")
-                .on("click", mouseClick)
-                .on("mouseover", mouseOver)
-                .on("mouseleave", mouseLeave)
+                .on("click", yipmouseClick)
+                .on("mouseover", yipmouseOver)
+                .on("mouseleave", yipmouseLeave)
 
 
         }

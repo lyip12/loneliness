@@ -10,8 +10,7 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
-        <link href="https://cdn.rawgit.com/michalsnik/aos/2.1.1/dist/aos.css" rel="stylesheet">
-
+        <link rel="stylesheet" href="css/aos.css">
         <link rel="stylesheet" href="css/style.css">
 
     </head>
@@ -36,12 +35,12 @@
                 <div class="col-md-3" id="q4" style="padding-left: 40px;" data-aos="fade-in"></div>
             </div>
             <div style="height:200px;"></div>
-            <div style="height:150px"><div id = "questionaire"></div></div>
+            <div style="height:400px"><div id = "questionaire"></div></div>
         </div>
 
         <!--The Key Facts Section-->
         <div class="section">
-            <div class="line" style="margin: 50px 30vw 150px 30vw;" data-aos="fade-in"></div>
+            <div class="line" style="margin: 50px 30vw 200px 30vw;" data-aos="fade-in"></div>
         </div>
         <div class="row" style="margin: 0px !important">
             <div class="col-md-6" style="padding-left: 100px;">
@@ -55,27 +54,30 @@
                 <p data-aos="fade-in"><b><br>So, is loneliness a life sentence, or is it possible for some to break through it and come out the other side?</b></p></div>
             <div class="col-md-6" style="padding: 0px !important; background-image: url('img/sitting.png'); background-position: center right; background-repeat: no-repeat; background-size: contain;" data-aos="fade-in"></div>
         </div>
-        <div style="height:150px"></div>
+        <div style="height:200px"></div>
 
 
         <!--The WebGL Section-->
         <div class="section" data-aos="fade-in">
             <div class="line"></div>
+            <p style="text-align: center;"><em>- below are based on gathered international statistics on loneliness (data focusing on US, UK and Japan) -</em></p>
             <div style="height:150px"></div>
+
         </div>
-        <div class="section" data-aos="fade-in">
+        <div class="section" data-aos="fade-in"  id="dugy-radial-fadein">
             <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
             <p style="text-align: center;">We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race. </p>
             <div style="height:80px"></div>
-            <div style="height:600px">
+            <div style="height:600px" id='dugy-canvas-container'>
                 <canvas id="dugy-c"></canvas>
             </div>
-            <p style="text-align: center; margin-top: 100px; margin-bottom: 50px"><em>There are many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>    
-            <p class="shortish">The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 295 people who answered to this question from around the world, 77 of said they have been alone for more than 10 years.</b></p>
+            <p style="text-align: center; margin-top: 100px; margin-bottom: 50px"><em>There are many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>  
+            <p class="shortish">INSERT LEGEND HERE<br><br>The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 295 people who answered to this question from around the world, 77 of said they have been alone for more than 10 years.</b></p>
             <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
+        </div>
+        <!--The Scatter Plot Section-->
 
-            <!--The Scatter Plot Section-->
-
+        <div class="section" data-aos="fade-in">
             <div class="row align-items-center">
                 <div class="col-md-8" id="scatter"></div>
                 <div class="col-md-4" style="padding-right: 8vw;">
@@ -87,83 +89,80 @@
             </div>
             <div style="height:150px"></div>
         </div>
-
-        <!--The Tree Section-->
-        <div class="section">
-            <div class="line"></div>
-            <div style="height:150px"></div>
-            <div class="row align-items-center">
-                <div class="col-md-3" style="padding-right: 10vw; padding-bottom: 100px;">
-                    <p>
-                        <b>The Tree of Causes:<br>Why are we lonely?<br><br></b>
-                        <em>There are numerous different factors that contribute to an individual's loneliness, ranging from physical and mental health all the way to their community and social economical status.</em></p>
-                </div>
-                <div class="col-md-9">
-                    <div class="yiptree"></div>
-                </div>
-            </div>
-            <div style="height:50px"></div>
-            <div class="line"></div>
         </div>
-
-
-
-        <!--The Scrollable Dot Matrix  Section-->
-        <div  class="section" id = "matrixarea">
-            <div style="height:150px"></div>
-            <div style = "height: 350vh" class="row align-items-start" id = "floatingarea">
-                <div class="col-md-6" id="matrixvis"></div>
-                <div class="col-md-6" id="matrixtext">
-                    <section class = "step">
-                        <p><b>Demographics of Lonely People</b>
-                            <br>More than a fifth of adults in the U.S. (22 percent) and the U.K. (23 percent) say they often or always feel lonely, feel that they lack companionship, feel left out, or feel isolated from others, about twice the share in Japan (nine percent)</p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Prevalence of Loneliness</b>
-                            <br>More than a fifth of adults in the U.S. (22 percent) and the U.K. (23 percent) say they often or always feel lonely, feel that they lack companionship, feel left out, or feel isolated from others, about twice the share in Japan (nine percent)</p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Universal Presence</b>
-                            <br>While loneliness is often thought of as a problem mainly affecting the elderly, majorities of people
-                            reporting loneliness across countries are younger than 50. In addition, those who report loneliness or
-                            social isolation are more likely than others to report lower incomes and not being married. </p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Surfer from Negative Life Events</b>
-                            <br>Loneliness appears to occur in parallel with reports of real life problems and circumstances. Across
-                            countries, about six in ten say there is a specific cause of their loneliness, but when asked what the
-                            specific cause is, the responses vary considerably. </p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Negative Impact on Relationships and Health</b>
-                            <br>Substantial shares across the three countries report that loneliness has had a negative impact on their lives. In Japan, majorities say loneliness has had a negative impact on their mental health (75 percent), physical health (63 percent), and personal relationships (59 percent), and nearly half say it’s had a negative impact on their ability to do their job (47 percent). In the U.S. and U.K., many say their loneliness has had a negative impact on their mental health (58 percent and 60 percent, respectively) and about half say it’s had a negative impact on their personal relationships (49 percent and 55 percent) and their physical health (55 percent and 49 percent). </p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Less Social Interactions</b>
-                            <br>Across countries, people experiencing loneliness are much more likely than others to say they have “just a few” or “no” people nearby they can rely on for help or support.</p>
-                    </section>
-                    <section class = "step">
-                        <p><b>Heavy Social Media Users</b>
-                            <br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
-                    </section>
-                </div>
+    <!--The Tree Section-->
+    <div class="section">
+        <div class="line"></div>
+        <div style="height:150px"></div>
+        <div class="row align-items-center">
+            <div class="col-md-3" style="padding-right: 3vw; padding-bottom: 100px;">
+                <h5>Tree of Causes:</h5>
+                <p>
+                    <b>Why Are We Lonely?<br><br></b>
+                    <em>There are numerous different factors that contribute to an individual's loneliness, varying in degrees and ranging from physical and mental health all the way to their community and social economical status.</em><br><br>INSERT LEGEND HERE</p>
+            </div>
+            <div class="col-md-9">
+                <div class="yiptree"></div>
             </div>
         </div>
-
-
-        <!--The Chorolepth Map Section-->
-        <div style="padding-top: 300px; background: linear-gradient(0deg, #161c26 30%, #0c0e12 40%, #0c0e12 80%, #161c26 100%);">
-            <div class="section"><div class="line"></div></div>
-            <div style="padding: 150px 0px 100px 100px !important;">
-                <div class="row align-items-center" style="margin: 0px !important;">
-                    <div class="col-md-4" style="padding: 0px !important;">
-                        <h3 style="text-align: left;">Across Europe</h3>
-                        <p>In recent years its medical implications have brought loneliness to the centre of attention of mass media, government agents, and the general public. However, loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
+        <div style="height:50px"></div>
+        <div class="line"></div>
+    </div>
 
 
 
+    <!--The Scrollable Dot Matrix  Section-->
+    <div  class="section" id = "matrixarea">
+        <div style="height:150px"></div>
+        <div style = "height: 350vh" class="row align-items-start" id = "floatingarea">
+            <div class="col-md-6" id="matrixvis"></div>
+            <div class="col-md-6" id="matrixtext">
+                <section class = "step">
+                    <p><em>If the grid on the left represents the world. How many lonely people would there be?</em></p>
+                </section>
+                <section class = "step">
+                    <p><b>Prevalence</b>
+                        <br>More than <b>22%</b> of adults in the U.S. and the U.K. say they <em>often or always feel lonely, that they lack companionship, feel left out, or feel isolated from others.</em></p>
+                </section>
+                <section class = "step">
+                    <p><b>Young and Old</b>
+                        <br>While loneliness is often thought to affect the elderly, majorities of people who report being lonely around the world are <em>younger than 50.</em><br><br>In addition, these people are also more likely to report <em>lower incomes and unpartnered.</em></p>
+                </section>
+                <section class = "step">
+                    <p><b>Negative Life Events</b>
+                        <br>Loneliness appears to occur in parallel with reports of real life problems and circumstances: <em>6 in 10 say there is a event-cause of their loneliness,</em> though the specifics of what they were vary. </p>
+                </section>
+                <section class = "step">
+                    <p><b>Negative Impact on Relationships and Health</b>
+                        <br>Substantial shares across the three countries report that loneliness has had a negative impact on their lives. In Japan, majorities say loneliness has had a negative impact on their mental health (75 percent), physical health (63 percent), and personal relationships (59 percent), and nearly half say it’s had a negative impact on their ability to do their job (47 percent). In the U.S. and U.K., many say their loneliness has had a negative impact on their mental health (58 percent and 60 percent, respectively) and about half say it’s had a negative impact on their personal relationships (49 percent and 55 percent) and their physical health (55 percent and 49 percent). </p>
+                </section>
+                <section class = "step">
+                    <p><b>Less Social Interactions</b>
+                        <br>Across countries, people experiencing loneliness are much more likely than others to say they have “just a few” or “no” people nearby they can rely on for help or support.</p>
+                </section>
+                <section class = "step">
+                    <p><b>Heavy Social Media Users</b>
+                        <br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
+                </section>
+            </div>
+        </div>
+    </div>
 
-                        <!--
+
+    <!--The Chorolepth Map Section-->
+    <div style="padding-top: 150px; background: linear-gradient(0deg, #161c26 20%, #0e1015 40%, #0e1015 80%, #161c26 100%);">
+        <div class="section"><div class="line"></div></div>
+        <div style="padding: 150px 0px 100px 100px !important;">
+            <div class="row align-items-center" style="margin: 0px !important;">
+                <div class="col-md-4" style="padding: 0px !important;">
+                    <p><em>below are data from the </em></p>
+                    <h3 style="text-align: left;">Across Europe</h3>
+                    <p>In recent years, the European Union especially has brought loneliness to the centre of attention of its mass media, government agents, and the general public. Loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
+
+
+
+
+                    <!--
 <div id="yipchorostats" class="btn-group btn-group-toggle" data-toggle="buttons">
 <div>
 <label class="btn btn-secondary active">
@@ -190,176 +189,197 @@
 
 
 
-                        <form class="form-inline">
-                            <div class="form-group">
-                                <select id="yipstats" style="background-color: white">
-                                    <option value="Lonely_Frequent"> <p> Frequently Lonely </p></option>
+                    <form class="form-inline">
+                        <div class="form-group">
+                            <select id="yipstats" style="background-color: white">
+                                <option value="Lonely_Frequent"> <p> Frequently Lonely </p></option>
 
-                                    <option value="One_Person_Household_Frequent"> <p> One Person Household </p></option>
-                                    <option value="Mutiple_People_Household_Frequent"> <p> Multiple People Household </p></option>
+                                <option value="One_Person_Household_Frequent"> <p> One Person Household </p></option>
+                                <option value="Mutiple_People_Household_Frequent"> <p> Multiple People Household </p></option>
 
-                                    <option value="Conflict_Never_Frequent"> <p> Never In House Conflict </p></option>
-                                    <option value="Conflict_Sometimes_Frequent"> <p> Sometimes In House Conflict </p></option>
-                                    <option value="Conflict_Often_Frequent"> <p> Often In House Conflict </p></option>
+                                <option value="Conflict_Never_Frequent"> <p> Never In House Conflict </p></option>
+                                <option value="Conflict_Sometimes_Frequent"> <p> Sometimes In House Conflict </p></option>
+                                <option value="Conflict_Often_Frequent"> <p> Often In House Conflict </p></option>
 
-                                    <option value="No_Confidant_Frequent"> <p> No Confidant </p></option>
-                                    <option value="At_Least_One_Confidant_Frequent"> <p> At Least One Confidant </p></option>
+                                <option value="No_Confidant_Frequent"> <p> No Confidant </p></option>
+                                <option value="At_Least_One_Confidant_Frequent"> <p> At Least One Confidant </p></option>
 
-                                    <option value="Native_Frequent"> <p> Native </p></option>
-                                    <option value="Immigrant_Frequent"> <p> Immigrant </p></option>
-                                    <option value="Ethnic_Minority_Frequent"> <p> Ethnic Minority </p></option>
-                                    <option value="Ethnic_Majority_Frequent"> <p> Ethnic Majority </p></option>
+                                <option value="Native_Frequent"> <p> Native </p></option>
+                                <option value="Immigrant_Frequent"> <p> Immigrant </p></option>
+                                <option value="Ethnic_Minority_Frequent"> <p> Ethnic Minority </p></option>
+                                <option value="Ethnic_Majority_Frequent"> <p> Ethnic Majority </p></option>
 
-                                    <option value="Religious_Frequent"> <p> Religious </p></option>
-                                    <option value="Non_Religious_Frequent"> <p> Non-Religious </p></option>
+                                <option value="Religious_Frequent"> <p> Religious </p></option>
+                                <option value="Non_Religious_Frequent"> <p> Non-Religious </p></option>
 
-                                    <option value="Big_City_Frequent"> <p> Big City </p></option>
-                                    <option value="Suburb_Frequent"> <p> Suburb </p></option>
-                                    <option value="Small_City_Frequent"> <p> Small City </p></option>
-                                    <option value="Countryside_Frequent"> <p> Country Side </p></option>
+                                <option value="Big_City_Frequent"> <p> Big City </p></option>
+                                <option value="Suburb_Frequent"> <p> Suburb </p></option>
+                                <option value="Small_City_Frequent"> <p> Small City </p></option>
+                                <option value="Countryside_Frequent"> <p> Country Side </p></option>
 
-                                    <option value="Unemployed_Past_Year_Frequent"> <p> Past Year Unemployed </p></option>
-                                    <option value="Unemployed_Past_Month_Frequent"> <p> Past Month Unemployed </p></option>
-                                    <option value="Unemployed_Past_Days_Frequent"> <p> Past Days Unemployed </p></option>
-                                    <option value="Employed_Frequent"> <p> Employed </p></option>
+                                <option value="Unemployed_Past_Year_Frequent"> <p> Past Year Unemployed </p></option>
+                                <option value="Unemployed_Past_Month_Frequent"> <p> Past Month Unemployed </p></option>
+                                <option value="Unemployed_Past_Days_Frequent"> <p> Past Days Unemployed </p></option>
+                                <option value="Employed_Frequent"> <p> Employed </p></option>
 
-                                    <option value="Income_Comfortable_Frequent"> <p> Comfortable Income </p></option>
-                                    <option value="Income_Coping_Frequent"> <p> Coping Income </p></option>
-                                    <option value="Income_Difficult_Frequent"> <p> Difficult Income </p></option>
-                                    <option value="Income_Very_Difficult_Frequent"> <p> Very Difficult Income </p></option>
+                                <option value="Income_Comfortable_Frequent"> <p> Comfortable Income </p></option>
+                                <option value="Income_Coping_Frequent"> <p> Coping Income </p></option>
+                                <option value="Income_Difficult_Frequent"> <p> Difficult Income </p></option>
+                                <option value="Income_Very_Difficult_Frequent"> <p> Very Difficult Income </p></option>
 
-                                </select>
-                            </div>
-                        </form>
-                        <p id="yiptooltip" style="height:40vh;"></p>
-                    </div>
-                    <div class="col-md-8" style="padding: 0px !important;">
-                        <div id="yipchoro"></div>
-                    </div>
-                </div>
-            </div>
-            <div class="section">
-
-                <div class="row">
-                    <div class="col-md-3"><div id="yipbarcharts0"></div><div id="yipbarcharts1"></div></div>
-                    <div class="col-md-3"><div id="yipbarcharts2"></div><div id="yipbarcharts3"></div></div>
-                    <div class="col-md-3"><div id="yipbarcharts4"></div><div id="yipbarcharts5"></div></div>
-                    <div class="col-md-3"><div id="yipbarcharts6"></div><div id="yipbarcharts7"></div></div>
-                </div>
-                <div style="height:150px"></div>
-                <div class="line"></div>
-
-
-
-                <!--The Radar Plot Section-->
-
-
-                <div class='row mt-1 align-items-center'>
-                    <div class='col-md-6'>
-                        <div style="height:150px"></div>
-                        <div id="dugy-radial"></div>
-                        <div style="height:50px"></div>
-                        <p class="small" style="text-align: center;"><b>Odds Ratio between Loneliness and Social Factors</b></p>
-                    </div>
-                    <div class='col-md-4 offset-md-1'>
-                        <div id="dugy-radial-explaination">
-                            <div class='my-5'>
-                                <p>If we summarize from these data what factors contribute more to loneliness.
-                                    We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
-                                    This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>.  But maintaining other levels of social connections can also alleviate loneliness:
-                                </p>
-
-                            </div>
-                            <p>Top 3 Loneliness Factors in</p>
-                            <h3 id='dugy-radial-currentCountry' class = "cursive">Europe</h3>
-                            <div class = 'mt-5'>
-                                <h5 id ='dugy-radial-topfactors' class = 'my-5'></h5>
-                            </div>
-                            <div class = 'mb-5'></div>
-                            <p class='mt-5'>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</p>
+                            </select>
                         </div>
-                    </div>
+                    </form>
+                    <p id="yiptooltip" style="padding-top: 50px; height:40vh;"></p>
                 </div>
-                <div class='row mt-1'>
-                    <div class='col-md-6 offset-md-1'>
+                <div class="col-md-8" style="padding: 0px !important;">
+                    <div id="yipchoro"></div>
 
-                        <div style="height:150px"></div>
-                    </div>
                 </div>
             </div>
         </div>
-
-        <!--The Awareness and Solution Section-->
         <div class="section">
-            <div class="line"></div>
+
+            <div class="row" style="padding: 0px !important;">
+                <div class="col-md-2"><div id="yipbarcharts0"></div><div id="yipbarcharts1"></div></div>
+                <div class="col-md-2"><div id="yipbarcharts2"></div><div id="yipbarcharts3"></div></div>
+                <div class="col-md-2"><div id="yipbarcharts4"></div><div id="yipbarcharts5"></div></div>
+                <div class="col-md-2"><div id="yipbarcharts6"></div><div id="yipbarcharts7"></div></div>
+            </div>
             <div style="height:150px"></div>
-            <div class='loneliness-three-dimenstions' class=" pt-5">
-                <em >Three Levels of Loneliness - Connections</em>
-                <div class='center-highlighted-words my-5'>
-                    <h3 class="cursive"> 
-                        Intimate - <span> Confidant</span><br>
-                        Relational - <span> Family/friends</span><br>
-                        Collective - <span> Organization</span>
-                    </h3>
+            <div class="line"></div>
+
+
+
+            <!--The Radar Plot Section-->
+
+
+            <div class='row mt-1 align-items-center'>
+                <div class='col-md-6'>
+                    <div style="height:150px"></div>
+                    <div id="dugy-radial"></div>
+                    <div style="height:50px"></div>
+                    <p class="small" style="text-align: center;"><b>Odds Ratio between Loneliness and Social Factors</b></p>
+                </div>
+                <div class='col-md-4 offset-md-1'>
+                    <div id="dugy-radial-explaination">
+                        <div class='my-5'>
+                            <p>If we summarize from these data what factors contribute more to loneliness.
+                                We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
+                                This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>.  But maintaining other levels of social connections can also alleviate loneliness:
+                            </p>
+
+                        </div>
+                        <p>Top 3 Loneliness Factors in</p>
+                        <h3 id='dugy-radial-currentCountry'>Europe</h3>
+                        <div class = 'mt-5'>
+                            <h5 id ='dugy-radial-topfactors' class = 'my-5'></h5>
+                        </div>
+                        <div class = 'mb-5'></div>
+                        <p class="small"><em>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</em></p>
+                    </div>
                 </div>
             </div>
-            <p class="shortish">
-                Three correlated but separable dimensions of loneliness are intimate isolation/connection, relational isolation/connection, and collective isolation/connection (Weiss, 1973; Hawkley et al., 2005; Cacioppo and Patrick, 2008; Cacioppo, Cacioppo, and Boomsma, 2014). They respectively refer to the perceived absence/presence of emotional confidant, quality friendships or family connections, and identity with groups or social entity (Cacioppo et al., 2014). It is noteworthy that it is the quality more than the quantities of social connections that strongly influences the level of loneliness (Putman, 2000; Cacioppo and Patrick, 2008).
-                <br><br><br>
-                <em>Build three levels of connections to alleviate Loneliness.</em>
-            </p>
-        </div>
+            <div class='row mt-1'>
+                <div class='col-md-6 offset-md-1'>
 
-        <div class="section">
-            <div style="height:300px"></div>
-            <p>We live in a lonely world, <b>but you are not alone.</b></p>
-            <div style="height:50px"></div>
-        </div>
-
-
-        <div class="section">
-            <div class="line"></div>
-            <div class="row">
-                <div class="col-md-3"><p class="small">Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>
-                <div class="col-md-6"><p class="small">Data Sources:</p></div>
-                <div class="col-md-3"><p class="small" style="text-align: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> from Harvard Graduate School of Design</p></div>
+                    <div style="height:150px"></div>
+                </div>
             </div>
-            <div style="height:100px"></div>
         </div>
+    </div>
+
+    <!--The Awareness and Solution Section-->
+    <div class="section">
+        <div class="line"></div>
+        <div style="height:150px"></div>
+
+        <div class="row" >
+            <div class="col-md-2"></div>
+            <div class="col-md-2"><img src="img/m1.png" class="responsive-image">
+
+                <div style="height:30px"></div>
+                <h5 style="text-align: center; margin-right: -0.4em;">CONFIDANT</h5>
+                <p style="text-align: center;"><em>desire for intimacy</em></p>
+
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2"><img src="img/m2.png" class="responsive-image">
+
+                <div style="height:30px"></div>
+                <h5 style="text-align: center; margin-right: -0.4em;">FAMILY / FRIEND</h5>
+                <p style="text-align: center;"><em>solidary relationship</em></p>
+
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-2"><img src="img/m3.png" class="responsive-image">
+
+                <div style="height:30px"></div>
+                <h5 style="text-align: center; margin-right: -0.4em;">COMMUNITY</h5>
+                <p style="text-align: center;"><em>collective belongingness</em></p>
+
+            </div>
+            <div class="col-md-2"></div>
+        </div>
+        <div style="height: 30px"></div>
+        <p style="padding-left: 15vw; padding-right: 15vw;">
+            Three correlated but separable dimensions of loneliness are intimate isolation/connection, relational isolation/connection, and collective isolation/connection (Weiss, 1973; Hawkley et al., 2005; Cacioppo and Patrick, 2008; Cacioppo, Cacioppo, and Boomsma, 2014). They respectively refer to the perceived absence/presence of emotional confidant, quality friendships or family connections, and identity with groups or social entity (Cacioppo et al., 2014). It is noteworthy that it is the quality more than the quantities of social connections that strongly influences the level of loneliness (Putman, 2000; Cacioppo and Patrick, 2008).
+            <br><br><br>
+            <em>Build three levels of connections to alleviate Loneliness.</em>
+        </p>
+    </div>
+
+    <div class="section">
+        <div style="height:300px"></div>
+        <p>We live in a lonely world, <b>but you are not alone.</b></p>
+        <div style="height:50px"></div>
+    </div>
 
 
-        <!-- Load JS libraries -->
-        <!-- <script src="libraries/p5.js" type="text/javascript"></script> -->
-        <!-- <script src="libraries/p5.dom.js" type="text/javascript"></script> -->
-        <!-- <script src="libraries/p5.sound.js" type="text/javascript"></script> -->
+    <div class="section">
+        <div class="line"></div>
+        <div class="row">
+            <div class="col-md-3"><p class="small">Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>
+            <div class="col-md-6"><p class="small">Data Sources:</p></div>
+            <div class="col-md-3"><p class="small" style="text-align: right;">by <b>Guangyu Du</b>, <b>Lucy Yip</b> and <b>Runjia Tian</b> from Harvard Graduate School of Design</p></div>
+        </div>
+        <div style="height:100px"></div>
+    </div>
 
-        <script src="libraries/jquery.min.js"></script>
-        <script src="libraries/popper.min.js"></script>
-        <script src="libraries/bootstrap.min.js"></script>
-        <script src="libraries/queue.min.js"></script>
-        <script src="libraries/topojson.min.js"></script>
-        <script src="libraries/d3.min.js"></script>
-        <script src="libraries/aos.js"></script>
-        <script src="libraries/three.js"></script>
-        <script src="libraries/d3.v4.js"></script>
-        <script src="libraries/d3-scale-chromatic.v1.min.js"></script>
-        <script src="libraries/d3-geo-projection.v2.min.js"></script>
 
-        <!-- OptionalJS -->
-        <script src="js/titlesketch.js"></script>
-        <script src="js/animate.js"></script>
+    <!-- Load JS libraries -->
+    <!-- <script src="libraries/p5.js" type="text/javascript"></script> -->
+    <!-- <script src="libraries/p5.dom.js" type="text/javascript"></script> -->
+    <!-- <script src="libraries/p5.sound.js" type="text/javascript"></script> -->
 
-        <!-- Vis JS -->
-        <script src='js/star.js'></script>
-        <script src='js/particlevis.js'></script>
-        <script src='js/radialvis.js'></script>
-        <script src="js/questionaire.js"></script>
-        <script src="js/choropleth.js"></script>
-        <script src="js/tree.js"></script>
-        <script src="js/animate.js"></script>
-        <script src="js/smallmultiples.js"></script>
-        <script src="js/scroll.js"></script>
-        <script src="js/matrix.js"></script>
-        <script src="js/scatter.js"></script>
+    <script src="libraries/jquery.min.js"></script>
+    <script src="libraries/popper.min.js"></script>
+    <script src="libraries/bootstrap.min.js"></script>
+    <script src="libraries/queue.min.js"></script>
+    <script src="libraries/topojson.min.js"></script>
+    <script src="libraries/d3.min.js"></script>
+    <script src="libraries/three.js"></script>
+    <script src="libraries/d3.v4.js"></script>
+    <script src="libraries/d3-scale-chromatic.v1.min.js"></script>
+    <script src="libraries/d3-geo-projection.v2.min.js"></script>
+
+    <!-- OptionalJS -->
+    <script src="js/titlesketch.js"></script>
+
+    <!-- Vis JS -->
+    <script src='js/star.js'></script>
+    <script src='js/particlevis.js'></script>
+    <script src='js/radialvis.js'></script>
+    <script src="js/questionaire.js"></script>
+    <script src="js/choropleth.js"></script>
+    <script src="js/tree.js"></script>
+    <script src="js/smallmultiples.js"></script>
+    <script src="js/scroll.js"></script>
+    <script src="js/matrix.js"></script>
+    <script src="js/scatter.js"></script>
+
+    <!-- AOS must be included last -->
+    <script src="libraries/aos.js"></script>
+    <script src="js/animate.js"></script>
     </body>
 </html>

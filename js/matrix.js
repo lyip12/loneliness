@@ -92,7 +92,7 @@ var scrollVis = function () {
             .classed('circle', true);
         
         circles = circles.merge(circlesE)
-            .attr('r', circleSize/2)
+            .attr('r', circleSize/2.5)
             .attr('fill', '#fff')
             .classed('fill-circle', function (d) { return d.filler; })
             .attr('cx', function (d) { return d.x;})

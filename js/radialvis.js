@@ -122,7 +122,7 @@ function radialvisMain(){
             .text(function(d){return d})
             .style('fill','#ff6666')
             .style('text-anchor','middle')
-            .style('font-size', '6px')
+            .style('font-size', '8px')
 
         // axes
         circleCount = maxCircleCount;
@@ -261,7 +261,6 @@ function radialvisMain(){
         if (filtering == '' && currentCountry != 'Europe'){
             // Update Top Factors
             var indexOfCountry = oddsRatioCountries.findIndex(function(d){return d == currentCountry});
-            console.log(indexOfCountry);
             oddsRatioStackedDisplayed[indexOfCountry].forEach((d,i)=>{
                 topFactors.push([d[1] - d[0],d.data.Factor,i]) 
             })
