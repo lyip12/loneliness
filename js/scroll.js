@@ -1,42 +1,5 @@
 //https://github.com/vlandham/scroll_demo/blob/gh-pages/js/scroller.js
 
-
-/*$(function(){
-    // Check the initial Position of the Sticky Header
-    var scrollHeaderTop = $("#matrixarea").offset().top;
-
-    var scrollHeaderBottom =$("#yipstats").offset().top;
-
-    $(window).scroll(function(){
-        //situtation when scroller is above the matrix area
-        if( $(window).scrollTop() < scrollHeaderTop) {
-            $('#matrixvis').css(
-                {
-                    position:'sticky',
-                    top:'10vh',
-                    'z-index':'90'});
-        }
-        //situation when scroller is beyond the matrix area
-        else if ($(window).scrollTop() >scrollHeaderBottom-window.innerHeight-250)
-        {
-            $('#matrixvis').css(
-                {
-                    position:'sticky',
-                    top:'10vh',
-                    'z-index':'90'});
-        }
-        //situation when scroller is in the matrix area
-        else {
-            $('#matrixvis').css({
-                position: 'fixed',
-                top:'10vh',
-                'z-index':'90'
-            });
-        }
-    });
-});*/
-
-
 function scroller() {
     var container = d3.select('#matrixarea');
     // event dispatcher

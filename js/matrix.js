@@ -1,6 +1,6 @@
-// Position function, set the position of matrix when scrolled to a particular place
-
 var displaydata
+
+//Main function, update visualization upon scrolling
 var scrollVis = function () {
     // constants to define the size
     // and margins of the vis area.
@@ -302,6 +302,7 @@ var scrollVis = function () {
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
+
     function highlightInt() {
 
         var circles =  g.selectAll('.circle')
@@ -336,6 +337,7 @@ var scrollVis = function () {
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
+    // wrangle and parse data to fit visualization
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
     {
         //rewrite the csv file into json file for easier data parsing
@@ -411,7 +413,7 @@ var scrollVis = function () {
 };
 
 
-
+// the function that recognize current section and call visualization fucntion respectively
 function display(data) {
     // create a new plot and
     // display it
@@ -443,5 +445,4 @@ function display(data) {
 }
 
 // load data and display
-//d3.tsv('data/words.tsv', display);
 d3.csv('data/what are lonely people like.csv',  display);
