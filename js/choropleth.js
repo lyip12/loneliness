@@ -77,8 +77,8 @@ function demographicschorovis(){
                         .duration(300)
                         .style("opacity", 1);
 
-                    var yipchoroselector = d.properties.name;
-                    yipsmallmultiples(yipchoroselector);
+                    //var yipchoroselector = d.properties.name;
+                    //yipsmallmultiples(yipchoroselector);
 
                     console.log(d3.mouse(this)[0]/window.innerWidth*300);
                 }
@@ -113,8 +113,8 @@ function demographicschorovis(){
                     var t = " "
                     document.getElementById("yiptooltip").innerHTML = t;
 
-                    var yipchoroselector = "All";
-                    yipsmallmultiples(yipchoroselector);
+                    //var yipchoroselector = "All";
+                    //yipsmallmultiples(yipchoroselector);
 
                     toggle =1;
 
