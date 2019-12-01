@@ -30,14 +30,26 @@ h3 {
 .btn {
     font-family: 'Roboto', sans-serif; 
     color: white;
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: 0px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    border: none;
+}
+
+.btn-light {
+    font-family: 'Roboto', sans-serif; 
+    color: white;
     font-size: 10px;
     font-weight: 300;
-    padding: 8px !important;
+    padding: 8px;
     background-color: #8293b6;
     border: none;
 }
 
-.btn:hover {
+.btn-light:hover {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
     background: white;

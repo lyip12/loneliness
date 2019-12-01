@@ -1,6 +1,7 @@
 demographicschorovis() // for avoiding naming issue
 
 function demographicschorovis(){
+    var selector = "Lonely_Frequent";
     var toggle;
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
     var svg = d3.select("#yipchoro")
@@ -18,26 +19,29 @@ function demographicschorovis(){
 
     var data = d3.map();
 
-    updateChoropleth()
+    updateChoropleth(selector)
 
-    d3.select("#yipstats").on("change", function () {
+    $("#yipchorofilter").click(function(){
         Tooltip.style("opacity", 0);
         toggle =1;
-        updateChoropleth()
+        var selector = $("input[name='choro']:hover").val();
+        //console.log(yipchoroselector);
+        if(selector!== undefined && selector!== "NA"){updateChoropleth(selector)};
     });
 
+
     var Tooltip = d3.select("#yipchoro")
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "#161c26")
-            .style("border-radius", "3px")
-            .style("padding", "10px")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "#161c26")
+    .style("border-radius", "3px")
+    .style("padding", "10px")
 
     //actual chorovis starts
-    function updateChoropleth() {
+    function updateChoropleth(selector) {
 
-        var selector = d3.select("#yipstats").property("value");
+
         //var selector2 = d3.select("#yipstats").property("value2");
 
         if(selector == "One_Person_Household_Frequent"){ var cate = "one person household"; } else if(selector == "Mutiple_People_Household_Frequent"){ var cate = "multiple people household"; } else if(selector == "Conflict_Never_Frequent"){ var cate = "no conflict household"; } else if(selector == "Conflict_Sometimes_Frequent"){ var cate = "sometimes conflict household"; } else if(selector == "Conflict_Often_Frequent"){ var cate = "often conflicting household"; } else if(selector == "No_Confidant_Frequent"){ var cate = "no confidant"; } else if(selector == "At_Least_One_Confidant_Frequent"){ var cate = "more than one confidant"; } else if(selector == "Native_Frequent"){ var cate = "native (local)"; } else if(selector == "Immigrant_Frequent"){ var cate = "immigrant"; } else if(selector == "Ethnic_Minority_Frequent"){ var cate = "ethinic minority"; } else if(selector == "Ethnic_Majority_Frequent"){ var cate = "ethnic majority"; } else if(selector == "Religious_Frequent"){ var cate = "religious"; } else if(selector == "Non_Religious_Frequent"){ var cate = "non-religious"; } else if(selector == "Big_City_Frequent"){ var cate = "big city"; } else if(selector == "Suburb_Frequent"){ var cate = "suburb"; } else if(selector == "Small_City_Frequent"){ var cate = "small city"; } else if(selector == "Countryside_Frequent"){ var cate = "countryside"; } else if(selector == "Unemployed_Past_Year_Frequent"){ var cate = "past year unemployed"; } else if(selector == "Unemployed_Past_Month_Frequent"){ var cate = "past month unemployed"; } else if(selector == "Unemployed_Past_Days_Frequent"){ var cate = "past days unemployed"; } else if(selector == "Employed_Frequent"){ var cate = "employed"; } else if(selector == "Income_Comfortable_Frequent"){ var cate = "comfortable income"; } else if(selector == "Income_Coping_Frequent"){ var cate = "coping income"; } else if(selector == "Income_Difficult_Frequent"){ var cate = "difficult income"; } else if(selector == "Income_Very_Difficult_Frequent"){ var cate = "very difficult income"; } else { var cate = "all"; };
@@ -111,9 +115,6 @@ function demographicschorovis(){
                         .transition()
                         .duration(300)
 
-                    var t = " "
-                    document.getElementById("yiptooltip").innerHTML = t;
-
                     //var yipchoroselector = "All";
                     //yipsmallmultiples(yipchoroselector);
 
@@ -140,10 +141,6 @@ function demographicschorovis(){
                             .transition()
                             .duration(300)
                             .style("opacity", 1);
-
-
-                        var t = "this is some sudo-information about " + d.properties.name + ".";
-                        document.getElementById("yiptooltip").innerHTML = t;
                     }
                 }
             }
@@ -220,10 +217,6 @@ function demographicschorovis(){
                     .attr("opacity", 1);
 
             }
-
-
-            var t = " "
-            document.getElementById("yiptooltip").innerHTML = t;
 
             d3.selectAll(".lucypath2")
                 .transition()

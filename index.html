@@ -164,51 +164,62 @@
                 <div class="col-md-4" style="padding: 0px !important;">
                     <p class="small" style="padding-right: 7vw; margin-bottom: 5px;"><em>below are data from the European Social Survey (ESS) from 2014 on the frequently lonely demographic populations</em></p>
                     <h3 style="text-align: left;">ACROSS EUROPE</h3>
-                    <p>In recent years, the European Union especially has brought loneliness to the centre of attention of its mass media, government agents, and the general public. Loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.</b></p>
-
-
-                    <form class="form-inline">
-                        <div class="form-group">
-                            <select id="yipstats" style="background-color: white">
-                                <option value="Lonely_Frequent"> <p> Frequently Lonely </p></option>
-
-                                <option value="One_Person_Household_Frequent"> <p> One Person Household </p></option>
-                                <option value="Mutiple_People_Household_Frequent"> <p> Multiple People Household </p></option>
-
-                                <option value="Conflict_Never_Frequent"> <p> Never In House Conflict </p></option>
-                                <option value="Conflict_Sometimes_Frequent"> <p> Sometimes In House Conflict </p></option>
-                                <option value="Conflict_Often_Frequent"> <p> Often In House Conflict </p></option>
-
-                                <option value="No_Confidant_Frequent"> <p> No Confidant </p></option>
-                                <option value="At_Least_One_Confidant_Frequent"> <p> At Least One Confidant </p></option>
-
-                                <option value="Native_Frequent"> <p> Native </p></option>
-                                <option value="Immigrant_Frequent"> <p> Immigrant </p></option>
-                                <option value="Ethnic_Minority_Frequent"> <p> Ethnic Minority </p></option>
-                                <option value="Ethnic_Majority_Frequent"> <p> Ethnic Majority </p></option>
-
-                                <option value="Religious_Frequent"> <p> Religious </p></option>
-                                <option value="Non_Religious_Frequent"> <p> Non-Religious </p></option>
-
-                                <option value="Big_City_Frequent"> <p> Big City </p></option>
-                                <option value="Suburb_Frequent"> <p> Suburb </p></option>
-                                <option value="Small_City_Frequent"> <p> Small City </p></option>
-                                <option value="Countryside_Frequent"> <p> Country Side </p></option>
-
-                                <option value="Unemployed_Past_Year_Frequent"> <p> Past Year Unemployed </p></option>
-                                <option value="Unemployed_Past_Month_Frequent"> <p> Past Month Unemployed </p></option>
-                                <option value="Unemployed_Past_Days_Frequent"> <p> Past Days Unemployed </p></option>
-                                <option value="Employed_Frequent"> <p> Employed </p></option>
-
-                                <option value="Income_Comfortable_Frequent"> <p> Comfortable Income </p></option>
-                                <option value="Income_Coping_Frequent"> <p> Coping Income </p></option>
-                                <option value="Income_Difficult_Frequent"> <p> Difficult Income </p></option>
-                                <option value="Income_Very_Difficult_Frequent"> <p> Very Difficult Income </p></option>
-
-                            </select>
+                    <p>In recent years, the European Union especially has brought loneliness to the centre of attention of its mass media, government agents, and the general public. Loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.<br><br></b></p>
+                    <form id="yipchorofilter" data-toggle="buttons">
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">No Filter:</label>
+                            <label class="btn btn-light active"><input type="radio" name="choro" autocomplete="" checked value="Lonely_Frequent">Entire Population</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Number of People Per Household:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="One_Person_Household_Frequent">One Person</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Mutiple_People_Household_Frequent">Multiple People</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">In House Conflict:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Conflict_Never_Frequent">Never</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Conflict_Sometimes_Frequent">Sometimes</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Conflict_Often_Frequent">Often</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Confidant:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="No_Confidant_Frequent">None</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="At_Least_One_Confidant_Frequent">At Least One</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Ethnicity:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Native_Frequent">Native</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Immigrant_Frequent">Immigrant</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Ethnic_Minority_Frequent">Ethnic Minority</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Ethnic_Majority_Frequent">Ethnic Majority</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Religion:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Religious_Frequent">Religious</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Non_Religious_Frequent">Non-Religious</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Living Space:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Big_City_Frequent">Big City</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Suburb_Frequent">Suburb</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Small_City_Frequent">Small City</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Countryside_Frequent">Countryside</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Unemployment:</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Unemployed_Past_Year_Frequent">Past Year</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Unemployed_Past_Month_Frequent">Past Month</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Unemployed_Past_Days_Frequent">Past Days</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Employed_Frequent">Employed</label>
+                        </div><br>
+                        <div class="btn-group btn-group-toggle">
+                            <label class="btn" disabled><input type="radio" name="choro" autocomplete="off" value="NA">Income Level</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Income_Comfortable_Frequent">Comfortable</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Income_Coping_Frequent">Coping</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Income_Difficult_Frequent">Difficult</label>
+                            <label class="btn btn-light"><input type="radio" name="choro" autocomplete="off" value="Income_Very_Difficult_Frequent">Very Difficult</label>
                         </div>
                     </form>
-                    <p id="yiptooltip" style="padding-top: 50px; height:40vh;"></p>
                 </div>
                 <div class="col-md-8" style="padding: 0px !important;">
                     <div id="yipchoro"></div>
