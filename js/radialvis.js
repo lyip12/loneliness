@@ -232,12 +232,35 @@ function radialvisMain(){
         });
         countryAreaPaths2.on('mouseover', function(d,i) {
             d3.select(this).style("fill", '#ff6666');
-            d3.select(this).style("fill-opacity", 0.1);
+            d3.select(this).style("fill-opacity", 0.1)
+                .attr('cursor', 'pointer');
             currentCountry = d.key;
             displayCountry.innerHTML = currentCountry;
             updateTopFactors();
+            svg.append("text")
+                .attr("x", 0)
+                .attr("y", 0)
+                .attr("class", "dugyclicktoshow")
+                .attr("font-family", "'Roboto', sans-serif")
+                .attr("font-weight", "200")
+                .attr("font-size", "8px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .text("click to show")
+            svg.append("text")
+                .attr("class", "dugyclicktoshow")
+                .attr("x", 0)
+                .attr("y", 10)
+                .attr("font-family", "'Roboto', sans-serif")
+                .attr("font-weight", "200")
+                .attr("font-size", "8px")
+                .attr("text-anchor", "middle")
+                .attr("fill", "white")
+                .text("individual")
+
         })
             .on('mouseleave', function(d,i) {
+            d3.selectAll(".dugyclicktoshow").remove();
             d3.select(this).style("fill", colorScheme[i]);
             d3.select(this).style("fill-opacity", 0.8); 
             currentCountry = (filtering == "")? 'Europe':d.key
