@@ -198,7 +198,7 @@ function demographicschorovis(){
                     .attr("width", 7)
                     .attr("height", 7)
                     .style("stroke", "black")
-                    .style("stroke-width", 0.1)
+                    .style("stroke-width", 0.05)
                     .transition()
                     .duration(800)
                     .attr("fill", function(d){
@@ -238,7 +238,7 @@ function demographicschorovis(){
                 .attr("class","lucypath2 Country")
                 .attr("d", d3.geoPath().projection(projection))
                 .style("stroke", "black")
-                .style("stroke-width", 0.1)
+                .style("stroke-width", 0.05)
                 .style("opacity", 0)
                 .transition()
                 .duration(800)
