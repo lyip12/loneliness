@@ -1,5 +1,20 @@
 demographicschorovis() // for avoiding naming issue
 
+var choronarratives = {
+    Austria: "Austria is commonly known as one of the safest and most beautiful countries in Europe. By international standards, It has a very generous welfare state, and was known as one of the happiest European nations. Yet, despite living in a country with a high quality of life, a relatively thriving economy and a stable political system only one in five Austrians say they are truly happy, according to a two year study from Vienna’s Modul University. Austrians believe financial worries, physical pain, loneliness, stress, and frustration about work all contribute to a reduced sense of well-being. The main cause to people’s loneliness and social isolation was specific regional differences in living areas.",
+    Belgium: "Research led by Ghent University has shown that no less than 46 percent of the Belgians feels lonely, either permanently or at times. Adults aged between 20 and 50 are particularly vulnerable. The crucial factor is a relationship, and living without a partner, multiplies the risk of becoming lonely. Other factors triggering loneliness in Belgium are low income and a bad health.",
+    "Czech Rep.": "The problem of loneliness in Czech Republic surrounds the younger population, where it is a common issue in adolescence and has been linked to various negative outcomes. Inconsistent parenting, shyness, and peer victimisation were associated with higher odds for loneliness by research conducted by Universities in the nation. ",
+    Denmark: "About one in 10 young people in Denmark report that they are lonely. While this may seem surprising in a country that is frequently rated one of the happiest in the world, it mirrors data from around the world showing a spike in loneliness among the young as well as the old. It is estimated that 35,000 people in Denmark feel that they are severely lonely, and the problem is particularly prevalent among people aged 16-29 and people over the age of 85. Studies show that loneliness increases the chance of high blood pressure, insomnia and depression, and long-term loneliness costs Danish society an estimated 8 billion kroner every year.",
+    England: "Great Britain (UK/England) is the second loneliest country in the world with an incredible amount of population living in single person households. One contributing factor is that Britain has a stable welfare system and that system rewards those who are poor or on unemployment compensation who live alone with an increase in benefits. Due to this, more individuals are choosing a solitary life in order to reap more benefits causing a noticable rise in the number of lonely people, and a steady decline in the length of long-lasting marriages.",
+    Estonia: "Lonelines and social exclusion is a common issue among elderlies in Estonia. The cause is often poor health and apathy regarding the elderly that have worked hard during the soviet era and now have little savings, real estate or living relatives. It is understood as a situation in which one is unable to fully participate in social life due to insufficient education, low income, poverty, material deprivation, unemployment or poor health, and his/her access to resources and services is limited. Social exclusion entails negative consequences not only for the excluded individual but for the society as a whole, since the individual’s potential contribution to the society diminishes. In addition, Estonia non-citizens are more at risk of social exclusion compared to Estonian citizens.",
+    Finland: "The latest figures on income and living conditions published by Statistics Finland show that 890,000 persons (16.4% of the household population) were at risk of poverty or social exclusion. And 950,000 Finns aged 16 or older (21.2%) suffer loneliness. Most of the people that are at risk of poverty or social exclusion live in low income households. Being at risk of poverty or social exclusion means that the person is living in a low income household, a household with low work intensity or a household that experiences severe material deprivation.",
+    France: "A growing number of French people, including the younger generations, are afflicted by loneliness. Poor job security, decreasing salaries and the loss of traditional family networks are blamed for the rise. French culture is known for the importance it places on family life, but numerous national surveys show that a loss of family networks due to rapid employment status change has led to almost 40 percent of French people to not engage in regular contact with their families.",
+    Germany: "A majority of Germans think that loneliness is a big problem in their society, with only a small number seeing it as of little relevance. A survey carried out by the federal government in May found that from 2011 to 2017, the number of Germans between the ages of 45 and 84 who reported that they sometimes felt very lonely jumped by 15%. In some age groups, that number jumped by 59%, and one in four teenagers reported at least occasional feelings of lonesomeness.",
+    Hungary: "The number of elderly people living on their own is expected to increase as a consequence of the demographic change in Hungary. Loneliness may become a huge health problem in the nation – elderly individuals are particularly vulnerable to it. From a study in 2017, the risk of loneliness varies according to the elderly individual’s level of wealth. The least wealthy in society experience the greatest risk of loneliness. Also, loneliness is higher among women. 28 % of the least wealthy women report loneliness, compared to 18 % of the wealthiest.",
+    Ireland: "A growing epidemic, loneliness affects almost one in 10 people in Ireland. It has also been identified as a key health hazard. Loneliness is a subjective realisation that quality and/or quantity of one’s social networks isn’t sufficient to meet one’s needs. One-third of Irish adults over 50 report feeling lonely at least some of the time. Loneliness is most prevalent among over-75s and those living alone."
+};
+//console.log(choronarratives["France"]);
+
 function demographicschorovis(){
     var selector = "Lonely_Frequent";
     var toggle;
@@ -72,7 +87,7 @@ function demographicschorovis(){
                     //console.log("tis is working")
                         .attr('cursor', 'pointer');
 
-                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click to show more info on the country's stats.</b>";
+                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click for more information.</b>";
 
                     Tooltip
                         .html(tip)
@@ -85,7 +100,7 @@ function demographicschorovis(){
                     //var yipchoroselector = d.properties.name;
                     //yipsmallmultiples(yipchoroselector);
 
-                    console.log(d3.mouse(this)[0]/window.innerWidth*300);
+                    //console.log(d3.mouse(this)[0]/window.innerWidth*300);
                 }
             }
 
@@ -132,7 +147,7 @@ function demographicschorovis(){
                             .style("opacity", 1)
                         toggle = 0;
 
-                        tip = "<b>click again to exit</b>";
+                        tip = choronarratives[d.properties.name]+"<br><b>click again to exit.</b>";
 
                         Tooltip
                             .html(tip)
