@@ -68,7 +68,7 @@ function demographicschorovis(){
                     //console.log("tis is working")
                         .attr('cursor', 'pointer');
 
-                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click to show more details of the country's stats.</b>";
+                    tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click to show more info on the country's stats.</b>";
 
                     Tooltip
                         .html(tip)
