@@ -83,6 +83,12 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
+
+        total = d3.sum(displayData, function(d){return d.total});
+        console.log(displayData);
+
+        console.log(total);
+
         var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
 
         //console.log(displayData);
