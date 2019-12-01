@@ -21,9 +21,18 @@ function demographicschorovis(){
     updateChoropleth()
 
     d3.select("#yipstats").on("change", function () {
+        Tooltip.style("opacity", 0);
+        toggle =1;
         updateChoropleth()
     });
 
+    var Tooltip = d3.select("#yipchoro")
+            .append("div")
+            .style("opacity", 0)
+            .attr("class", "tooltip")
+            .style("background-color", "#161c26")
+            .style("border-radius", "3px")
+            .style("padding", "10px")
 
     //actual chorovis starts
     function updateChoropleth() {
@@ -45,14 +54,6 @@ function demographicschorovis(){
 
 
         function ready(error, topo, loneliness) {
-
-            var Tooltip = d3.select("#yipchoro")
-            .append("div")
-            .style("opacity", 0)
-            .attr("class", "tooltip")
-            .style("background-color", "#161c26")
-            .style("border-radius", "3px")
-            .style("padding", "10px")
 
             let yipmouseOver = function(d) {
                 if(toggle !== 0 && d.data !== "no data"){
