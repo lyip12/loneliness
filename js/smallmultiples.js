@@ -3,7 +3,8 @@ yipsmallmultiples(yipchoroselector);
 
 $("#yipcountries").click(function(){
     var yipchoroselector = $("input[name='countries']:hover").val();
-    yipsmallmultiples(yipchoroselector);
+    //console.log(yipchoroselector);
+    if(yipchoroselector!== undefined){yipsmallmultiples(yipchoroselector)};
 });
 
 function yipsmallmultiples(yipchoroselector){
@@ -29,7 +30,7 @@ function yipsmallmultiples(yipchoroselector){
         {Category: ["None", "At Least One"], Title: ["Confidants"]},
         {Category: ["Native", "Immigrant","Minority","Majority"], Title: ["Ethnicity"]},
         {Category: ["Religious", "Non-religious"], Title: ["Religion"]},
-        {Category: ["Big Cit", "Suburb", "Small City", "Countryside"], Title: ["Living Area"]},
+        {Category: ["Big City", "Suburb", "Small City", "Countryside"], Title: ["Living Area"]},
         {Category: ["Years", "Months","Days", "Employed"], Title: ["Unemployment"]},
         {Category: ["Comfortable", "Coping", "Difficult", "Very Difficult"], Title: ["Income"]}   
     ];
