@@ -4,10 +4,10 @@ questionaire(); // for avoiding naming issue
 
 
 function questionaire(){
-    var q1 = [1, "How often do you feel that you have a lot in common with the people around you?"];
+    var q1 = [1, "How often do you feel that you very little lot in common with the people around you?"];
     var q2 = [2, "How often do you feel that no one really knows you well?"];
     var q3 = [3, "How often do you feel that people are around you but not with you?"];
-    var q4 = [4, "How often do you feel that there are people you can talk to or turn to?"];
+    var q4 = [4, "How often do you feel that there are very few people you can talk to or turn to?"];
     var a = ["Never","Rare","Sometimes","Always"],an=[];
 
 
@@ -17,7 +17,7 @@ function questionaire(){
 
     d3.select("#q1").on("change", function () {
         a1 = d3.select('input[name="q1"]:checked').property("value");
-        an.push(3-a1);
+        an.push(+a1);
         var section = 1;
         document.getElementById("q1").innerHTML = "<p class='smalltext' style='color:#404040;'>"+q1[1]+"<br><br>"+a[a1]+"</p>"
 
@@ -47,7 +47,7 @@ function questionaire(){
 
     d3.select("#q4").on("change", function () {
         a4 = d3.select('input[name="group-stack"]:checked').node().value;
-        an.push(3-a4);
+        an.push(+a4);
         var q_4 = "<p class='smalltext' style='color:#404040;'>"+q4[1]+"<br><br>"+a[a4]+"</p>"
         document.getElementById("q4").innerHTML = q_4;
         
