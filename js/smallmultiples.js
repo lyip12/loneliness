@@ -5,7 +5,7 @@ function yipsmallmultiples(yipchoroselector){
 
     var margin = {top: 30, right: 20, bottom: 50, left: 0},
         width = 400 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 300 - margin.top - margin.bottom;
 
     var key = [
         {Category: ["One_Person_Household_Frequent", "Mutiple_People_Household_Frequent"]},
@@ -25,7 +25,7 @@ function yipsmallmultiples(yipchoroselector){
         {Category: ["Native", "Immigrant","Minority","Majority"], Title: ["Ethnicity"]},
         {Category: ["Religious", "Non-religious"], Title: ["Religion"]},
         {Category: ["Big Cit", "Suburb", "Small City", "Countryside"], Title: ["Living Area"]},
-        {Category: ["Past Years", "Past Months","Past Days", "Employed"], Title: ["Unemployment"]},
+        {Category: ["Years", "Months","Days", "Employed"], Title: ["Unemployment"]},
         {Category: ["Comfortable", "Coping", "Difficult", "Very Difficult"], Title: ["Income"]}   
     ];
 
@@ -62,7 +62,7 @@ function yipsmallmultiples(yipchoroselector){
         for(var i = 0; i<8; i++){
             //console.log(key[i].Category);
             var svg = d3.select("#yipbarcharts"+i)
-            .classed("yipsvg-container", true)
+            .classed("yip2svg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-60 -20 450 380")
@@ -120,14 +120,14 @@ function yipsmallmultiples(yipchoroselector){
                 .attr("fill", "#8293b6");
 
             svg.append("text")
-                .attr("x", -width/2+20)
+                .attr("x", -height/2)
                 .attr("y", -45)
                 .attr("text-anchor", "middle")
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "18px")
+                .attr("font-size", "20px")
                 .attr("font-weight", "300")
                 .attr("fill", "white")
-                .text("% Population Frequently Lonely")
+                .text("% Pop. Frequently Lonely")
                 .attr("transform", "rotate(-90)");
 
             svg.append("text")
