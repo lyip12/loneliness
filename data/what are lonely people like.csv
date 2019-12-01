@@ -1,47 +1,47 @@
 ﻿category,division,U.S.-Lonely ,U.K.-Lonely, Japan-Lonely,Total
 prevalence,major problem,4,10,8,22
-,minor problem,5,11,7,23
-,isn't really a problem,5,3,2,10
+prevalence,minor problem,5,11,7,23
+prevalence,isn't really a problem,5,3,2,10
 age,18-29,24,25,19,68
-,30-49,35,30,37,102
-,50-64,25,20,23,68
-,65+,16,25,21,62
+age,30-49,35,30,37,102
+age,50-64,25,20,23,68
+age,65+,16,25,21,62
 gender,male,44,50,54,148
-,female,56,50,46,152
+gender,female,56,50,46,152
 income,lower income,63,49,52,164
-,middle income,23,21,33,77
-,higher income,14,10,15,39
+income,middle income,23,21,33,77
+income,higher income,14,10,15,39
 education,High school or less/secondary or less,47,36,64,147
-,Some college/ post-secondary/junior college,36,42,15,93
-,College/university or more,17,22,20,59
+education,Some college/ post-secondary/junior college,36,42,15,93
+education,College/university or more,17,22,20,59
 employment,Employed full time,33,25,35,93
-,Employed part time,13,14,18,45
-,unemployed,14,14,22,50
-,other,40,47,25,112
+employment,Employed part time,13,14,18,45
+employment,unemployed,14,14,22,50
+employment,other,40,47,25,112
 martial status,"single, that is never married",33,32,42,107
-,"single, living with a partner",7,7,2,16
-,married,22,22,30,74
-,divorced/Separated,27,23,14,64
-,widowed,11,16,12,39
+martial status,"single, living with a partner",7,7,2,16
+martial status,married,22,22,30,74
+martial status,divorced/Separated,27,23,14,64
+martial status,widowed,11,16,12,39
 specific events,The death of a close family member or friend,19,20,22,61
-,A change in living situation,15,16,18,49
-,A negative change in financial status,17,16,11,44
-,A serious illness or injury in their family,16,15,12,43
-,A serious illness or injury themselves,12,14,9,35
-,A loss of a job,9,7,6,22
-,A death of a spouse or partner,4,5,2,11
-,Marital separation or divorce,4,4,1,9
-,Other,4,3,19,26
+specific events,A change in living situation,15,16,18,49
+specific events,A negative change in financial status,17,16,11,44
+specific events,A serious illness or injury in their family,16,15,12,43
+specific events,A serious illness or injury themselves,12,14,9,35
+specific events,A loss of a job,9,7,6,22
+specific events,A death of a spouse or partner,4,5,2,11
+specific events,Marital separation or divorce,4,4,1,9
+specific events,Other,4,3,19,26
 impact,mental health,29,30,25,84
-,physical health,28,25,21,74
-,personal relationships,24,27,20,71
-,ability to do their job,17,16,16,49
-,other,2,2,18,22
+impact,physical health,28,25,21,74
+impact,personal relationships,24,27,20,71
+impact,ability to do their job,17,16,16,49
+impact,other,2,2,18,22
 Dissatisfaction with the Number of Meaningful Personal Connections,family members,36,30,20,86
-,friends,27,30,27,84
-,neighbors,29,35,28,92
-,other,8,5,25,38
+Dissatisfaction with the Number of Meaningful Personal Connections,friends,27,30,27,84
+Dissatisfaction with the Number of Meaningful Personal Connections,neighbors,29,35,28,92
+Dissatisfaction with the Number of Meaningful Personal Connections,other,8,5,25,38
 Fewer Confidants,>6,18,18,7,43
-,3-5',33,38,42,113
-,1-2',39,33,34,106
+Fewer Confidants,3-5',33,38,42,113
+Fewer Confidants,1-2',39,33,34,106
 ,0,10,11,16,37

@@ -100,28 +100,13 @@ var scrollVis = function () {
             .append('circle')
             .classed('circle', true);
 
-        var color = d3.scaleSequential().domain([1,10])
-            .interpolator(d3.interpolateRdYlBu);
-
         circles = circles.merge(circlesE)
             .attr('r', circleSize/2.5)
-            .attr("fill", function(d)
-            {
-                return color(d.groupIndex);
-            })
+            .attr('fill', '#fff')
             .classed('fill-circle', function (d) { return d.filler; })
-            .attr('cx', function (d, i) { col = Math.floor(i/heightcount);
-                return (col*circleSize) + (col*circlePad);})
-            .attr('cy', function (d, i) {
-                row = i%heightcount;a
-                return (heightcount*circleSize) - ((row*circleSize) + (row*circlePad))
-            })
-            .attr('opacity', 0)
-            .append("title")
-            .text(function (d,i)
-            {
-                return "Division: " + d.division + " | " +  d.Total + " , " + d.units + "%"
-            });;
+            .attr('cx', function (d) { return d.x;})
+            .attr('cy', function (d) { return d.y;})
+            .attr('opacity', 0);
 
     };
 
@@ -379,26 +364,28 @@ var scrollVis = function () {
 
         var dotvalue = 300/matrixsize;
 
+        var nesteddata = d3.nest().key(function(d){return d.category}).entries(data);
+
+        nesteddata.forEach(function(d, index){if (!(d.key in namelist)){namelist.push(d.key);}})
+        console.log(namelist)
+
+        var matrixcolor = d3.schemeRdBu[10]
+
+        console.log(nesteddata);
+
+
         //parse the csv file into json format for easier access.
         //meanwhile parse string into numberic representations
-        data.forEach(function(d, index) {
-
-            if (d.category != '' && stack != {}) {
-                stack['total'] = sumvalue;
-                stack['units'] = Math.floor(sumvalue / dotvalue);
-                stack['division'] = d.division;
-                stack['category'] = d.category;
-                stack['squareValue'] = dotvalue;
-                stack['groupIndex'] = index;
-                newdata.push(stack);
-                stack = {};
-                stack[d.division] = +d.Total;
-                sumvalue = +d.Total;
-            } else {
-                stack[d.division] = +d.Total;
-                sumvalue = +d.Total;
-            }
-
+        nesteddata.forEach(function(g, index) {
+            var temp = g.values;
+            temp.Total = +temp.Total;
+            temp.units = Math.floor(temp.Total/dotvalue);
+            console.log(temp)
+            var groupdata = temp.map(function (d, index) { return
+                    {Total: + d.Total}
+                        })
+            console.log(groupdata);
+            newdata.push(groupdata);
         });
         console.log(newdata);
 
