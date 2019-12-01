@@ -27,6 +27,25 @@ h3 {
     text-align: right;
 }
 
+.btn {
+    font-family: 'Roboto', sans-serif; 
+    color: white;
+    font-size: 10px;
+    font-weight: 300;
+    padding: 8px !important;
+    background-color: #8293b6;
+    border: none;
+}
+
+.btn:hover {
+    font-family: 'Roboto', sans-serif; 
+    color: #8293b6 !important;
+    background: white;
+}
+
+.btn-light:checked{
+    font-weight: 700 !important;
+}
 
 h3.cursive {
     font-family: 'Sacramento', cursive !important;
