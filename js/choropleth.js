@@ -36,7 +36,7 @@ function demographicschorovis(){
         a = [];
         //console.log(selector2);
         d3.queue()
-            .defer(d3.json, "data/worldnew.geojson")
+            .defer(d3.json, "data/worldeu.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
             data.set(d.Code, +d[selector]);
             a.push(+d[selector]);
@@ -242,7 +242,7 @@ function demographicschorovis(){
                 .transition()
                 .duration(800)
                 .attr("fill", function (d) {
-                d.data = data.get(d.properties.id) || "no data";
+                d.data = data.get(d.properties.adm0_a3) || "no data";
                 if(d.data !== "no data"){
                     return fill(d3.max(a)-d.data);
                 };
