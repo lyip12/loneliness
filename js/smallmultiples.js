@@ -1,11 +1,17 @@
 var yipchoroselector = "All";
 yipsmallmultiples(yipchoroselector);
 
+$("#yipcountries").click(function(){
+    var yipchoroselector = $("input[name='countries']:hover").val();
+    //console.log(yipchoroselector);
+    if(yipchoroselector!== undefined){yipsmallmultiples(yipchoroselector)};
+});
+
 function yipsmallmultiples(yipchoroselector){
 
     var margin = {top: 30, right: 20, bottom: 50, left: 0},
         width = 400 - margin.left - margin.right,
-        height = 400 - margin.top - margin.bottom;
+        height = 300 - margin.top - margin.bottom;
 
     var key = [
         {Category: ["One_Person_Household_Frequent", "Mutiple_People_Household_Frequent"]},
@@ -24,8 +30,8 @@ function yipsmallmultiples(yipchoroselector){
         {Category: ["None", "At Least One"], Title: ["Confidants"]},
         {Category: ["Native", "Immigrant","Minority","Majority"], Title: ["Ethnicity"]},
         {Category: ["Religious", "Non-religious"], Title: ["Religion"]},
-        {Category: ["Big Cit", "Suburb", "Small City", "Countryside"], Title: ["Living Area"]},
-        {Category: ["Past Years", "Past Months","Past Days", "Employed"], Title: ["Unemployment"]},
+        {Category: ["Big City", "Suburb", "Small City", "Countryside"], Title: ["Living Area"]},
+        {Category: ["Years", "Months","Days", "Employed"], Title: ["Unemployment"]},
         {Category: ["Comfortable", "Coping", "Difficult", "Very Difficult"], Title: ["Income"]}   
     ];
 
@@ -56,18 +62,24 @@ function yipsmallmultiples(yipchoroselector){
     });
 
     function barchart(d){
-        
+
+        d3.selectAll(".yipcountryvis")
+            .attr("opacity",1)
+            .transition()
+            .duration(500)
+            .attr("opacity",0)
+            .remove();
         //creating nested list
 
         for(var i = 0; i<8; i++){
             //console.log(key[i].Category);
             var svg = d3.select("#yipbarcharts"+i)
-            .classed("yipsvg-container", true)
+            .classed("yip2svg-container", true)
             .append("svg")
             .attr("preserveAspectRatio", "xMinYMin meet")
             .attr("viewBox", "-60 -20 450 380")
             .classed("svg-content-responsive", true);
-            
+
             var finaldata = [];
             for(var j = 0; j<key[i].Category.length; j++){
                 finaldata.push({
@@ -78,36 +90,27 @@ function yipsmallmultiples(yipchoroselector){
 
             //console.log(finaldata)
 
+            var fill = d3.scaleThreshold()
+            .domain([10,20,30,40])
+            .range(d3.schemeBlues[5]);
+
             var x = d3.scaleBand()
             .range([0, width])
-            .padding(0.1);
+            .padding(0.1)
+            
             var y = d3.scaleLinear()
             .range([height, 0]);
 
             x.domain(finaldata.map(function(d) { return d.category;}));
-            y.domain([0, 50])            
+            y.domain([0, 50])           
 
             var bar = svg.selectAll('bar')
             .attr("class", "bar")
-//            .remove()
-//            .exit()
             .data(finaldata)
 
             bar.enter()
                 .append("rect")
-                .data(finaldata)
-                .attr("x", 0)
-                .attr("width", width)
-                .attr("y", 0)
-                .attr("height", height)
-                .attr("opacity",0)
-                .transition()
-                .duration(400)
-                .attr("opacity",1)
-                .attr("fill", "#0e1015");
-
-            bar.enter()
-                .append("rect")
+                .attr("class","yipcountryvis")
                 .data(finaldata)
                 .attr("x", function(d) { return x(d.category); })
                 .attr("width", x.bandwidth())
@@ -115,22 +118,26 @@ function yipsmallmultiples(yipchoroselector){
                 .attr("height", function(d) { return height-y(d.value); })
                 .attr("opacity",0)
                 .transition()
-                .duration(200)
+                .duration(500)
                 .attr("opacity",1)
-                .attr("fill", "#8293b6");
+                .attr("fill", function(d){
+                return fill(50-d.value);
+            }); 
 
             svg.append("text")
-                .attr("x", -width/2+20)
+                .attr("class","yipcountryvis")
+                .attr("x", -height/2)
                 .attr("y", -45)
                 .attr("text-anchor", "middle")
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "18px")
+                .attr("font-size", "20px")
                 .attr("font-weight", "300")
                 .attr("fill", "white")
-                .text("% Population Frequently Lonely")
+                .text("% Pop. Frequently Lonely")
                 .attr("transform", "rotate(-90)");
 
             svg.append("text")
+                .attr("class","yipcountryvis")
                 .attr("x", width/2)
                 .attr("y", 0)
                 .attr("font-family", "'Roboto', sans-serif")
@@ -142,12 +149,14 @@ function yipsmallmultiples(yipchoroselector){
 
             // add the x Axis
             svg.append("g")
+                .attr("class","yipcountryvis")
                 .attr("class", "yipbaraxis")
                 .attr("transform", "translate(0," + height + ")")
                 .call(d3.axisBottom(x));
 
             // add the y Axis
             svg.append("g")
+                .attr("class","yipcountryvis")
                 .attr("class", "yipbaraxis")
                 .call(d3.axisLeft(y));
 

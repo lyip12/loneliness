@@ -27,6 +27,37 @@ h3 {
     text-align: right;
 }
 
+.btn {
+    font-family: 'Roboto', sans-serif; 
+    color: white;
+    font-size: 14px;
+    font-weight: 300;
+    padding-left: 0px;
+    padding-right: 10px;
+    padding-top: 5px;
+    padding-bottom: 4px;
+    border: none;
+}
+
+.btn-light {
+    font-family: 'Roboto', sans-serif; 
+    color: white;
+    font-size: 10px;
+    font-weight: 300;
+    padding: 8px;
+    background-color: #8293b6;
+    border: none;
+}
+
+.btn-light:hover {
+    font-family: 'Roboto', sans-serif; 
+    color: #8293b6 !important;
+    background: white;
+}
+
+.btn-light:checked{
+    font-weight: 700 !important;
+}
 
 h3.cursive {
     font-family: 'Sacramento', cursive !important;
@@ -196,6 +227,16 @@ div.section {
     position: relative;
     width: 100%;
     padding-bottom: 100%;
+    /* aspect ratio */
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.yip2svg-container {
+    display: inline-block;
+    position: relative;
+    width: 100%;
+    padding-bottom: 70%;
     /* aspect ratio */
     vertical-align: top;
     overflow: hidden;
