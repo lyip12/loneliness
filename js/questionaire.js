@@ -56,9 +56,13 @@ function questionaire(){
         if((arrSum(an))>4){
             var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers to the above questions:</p><h5 style='text-align: center'><b style='color: #8293b6 !important;'><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.</h5><p style='text-align: center'><em><br><br><br>Loneliess is even more common than what you may think.<br>It is a depressing feeling that is shared among many of us.<br><br>yet, why are we still struggling with it alone?</em></p></div>";
             document.getElementById("questionaire").innerHTML = answer;
+            var review = "This is some phrase that talks to you because your questionaire says you're lonely";
+            document.getElementById("questionreview").innerHTML = review;
         }else{
             var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers to the above questions:</p><h5 style='text-align: center'>Everyone feels lonely sometimes,<br><b style='color: #8293b6 !important;'>you are among the lucky, happy few.</b></h5><p style='text-align: center'><br><br><br><em>But loneliness is actually more common than you may think.<br><br>Did you know that about 15% of the world suffers from loneliness?<br>and what can we do? how can we help?</em></p></div>";
             document.getElementById("questionaire").innerHTML = answer;
+            var review = "This is some phrase that talks to you because apparently you are not lonely.";
+            document.getElementById("questionreview").innerHTML = review;
             //console.log(arrSum(an));
         }
 
