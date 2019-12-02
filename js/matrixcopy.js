@@ -362,32 +362,23 @@ var scrollVis = function () {
         var stack = {};
         let sumvalue = 0;
 
-        var dotvalue = 300/matrixsize;
-
-        var nesteddata = d3.nest().key(function(d){return d.category}).entries(data);
-
-        nesteddata.forEach(function(d, index){if (!(d.key in namelist)){namelist.push(d.key);}})
-        console.log(namelist)
-
-        var matrixcolor = d3.schemeRdBu[10]
-
-        console.log(nesteddata);
-
-
         //parse the csv file into json format for easier access.
         //meanwhile parse string into numberic representations
-        nesteddata.forEach(function(g, index) {
-            var temp = g.values;
-            temp.Total = +temp.Total;
-            temp.units = Math.floor(temp.Total/dotvalue);
-            console.log(temp)
-            var groupdata = temp.map(function (d, index) { return
-                    {Total: + d.Total}
-                        })
-            console.log(groupdata);
-            newdata.push(groupdata);
+        data.forEach(function(d, index) {
+
+            if (d.category != '' && stack != {}) {
+                stack['total'] = sumvalue;
+                newdata.push(stack);
+                stack = {};
+                stack[d.division] = +d.Total;
+                sumvalue = +d.Total;
+            } else {
+                stack[d.division] = +d.Total;
+                sumvalue = +d.Total;
+            }
+
         });
-        console.log(newdata);
+        //console.log(newdata);
 
         var displayData = {};
         for(var i = 0; i<namelist.length;i++)
@@ -411,6 +402,7 @@ var scrollVis = function () {
 
         return displayData;
     }
+
 
     chart.activate = function (index) {
         activeIndex = index;

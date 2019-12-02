@@ -1,4 +1,4 @@
-var displaydata
+var displaydata;
 
 //Main function, update visualization upon scrolling
 var scrollVis = function () {
@@ -15,12 +15,10 @@ var scrollVis = function () {
 
     // Sizing for the grid visualization
     var numPerRow = 30;
+    var numPerCol = 30;
 
     var circleSize = Math.floor(width/numPerRow*2/3);
     var circlePad =  Math.floor(width/numPerRow/3);
-
-    var widthcount = 30;
-    var heightcount = 30;
 
     var margin = { top: circleSize/2, bottom: 0, left: circleSize/2, right: 0 };
     // main svg used for visualization
@@ -86,12 +84,6 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-
-        total = d3.sum(displayData, function(d){return d.total});
-        console.log(displayData);
-
-        console.log(total);
-
         var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
 
         //console.log(displayData);
@@ -100,28 +92,19 @@ var scrollVis = function () {
             .append('circle')
             .classed('circle', true);
 
-        var color = d3.scaleSequential().domain([1,10])
-            .interpolator(d3.interpolateRdYlBu);
-
         circles = circles.merge(circlesE)
-            .attr('r', circleSize/2.5)
-            .attr("fill", function(d)
-            {
-                return color(d.groupIndex);
-            })
+            .attr('r', circleSize/2)
+            .attr('fill', '#fff')
             .classed('fill-circle', function (d) { return d.filler; })
-            .attr('cx', function (d, i) { col = Math.floor(i/heightcount);
-                return (col*circleSize) + (col*circlePad);})
-            .attr('cy', function (d, i) {
-                row = i%heightcount;a
-                return (heightcount*circleSize) - ((row*circleSize) + (row*circlePad))
-            })
-            .attr('opacity', 0)
-            .append("title")
-            .text(function (d,i)
+            .attr('cx', function (d, i)
             {
-                return "Division: " + d.division + " | " +  d.Total + " , " + d.units + "%"
-            });;
+                col = Math.floor(i/numPerCol);
+                return (col*circleSize) +(col*gsp);
+            })
+            .attr('cy', function (d) { return d.y;})
+            .attr('opacity', 0);
+
+        circles.transition().attr('cx')
 
     };
 
@@ -196,10 +179,10 @@ var scrollVis = function () {
             .classed('age-circle', function (d) { return d.filler; })
             .transition()
 
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
-                })
+        circles.duration(800)
+            .delay(function (d) {
+                return 5 * d.row;
+            })
             .attr('opacity', 0.3)
             .attr('fill', '#ddd');
 
@@ -220,7 +203,14 @@ var scrollVis = function () {
         g.selectAll('.age-circle')
             .transition()
             .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
+            .attr('opacity', function (d) {
+                if(d.filler == true)
+                {return 1}
+                else if (d.filler == false)
+                {
+                    return 0.3
+                }
+            })
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
 
@@ -360,49 +350,52 @@ var scrollVis = function () {
             .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
             .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
     }
-
     // wrangle and parse data to fit visualization
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
     {
         //rewrite the csv file into json file for easier data parsing
-        var newdata = [];
-        var namelist = [];
-        data.forEach(function(d, index)
-        {
-            if(d.category !='') namelist.push( d.category);
-        });
-        //get a list of all the categories from the csv file
-        //console.log(namelist);
-
-        var stack = {};
-        let sumvalue = 0;
+        var newdata = {};
+        var namelist = d3.nest().key(function(d){return d.category})
+            .rollup(function(leaves)
+            {
+                return d3.sum(leaves, function(d){return +d.Total});
+            })
+            .entries(data)
+            .map(function (d) { return {Category: d.key, Value: d.value}});
 
         var dotvalue = 300/matrixsize;
 
+        var nesteddata = d3.nest().key(function(d){return d.category})
+        .entries(data);
+
+        console.log(nesteddata);
+        console.log(namelist);
+
         //parse the csv file into json format for easier access.
         //meanwhile parse string into numberic representations
-        data.forEach(function(d, index) {
+        nesteddata.forEach(function(g, index) {
+            var category = g.values;
+            console.log(category);
+            var total = namelist[index].Value;
+            units = Math.floor(total/dotvalue);
+            var groupdata = []
+            groupdata = groupdata.concate(
 
-            if (d.category != '' && stack != {}) {
-                stack['total'] = sumvalue;
-                stack['units'] = Math.floor(sumvalue / dotvalue);
-                stack['division'] = d.division;
-                stack['category'] = d.category;
-                stack['squareValue'] = dotvalue;
-                stack['groupIndex'] = index;
-                newdata.push(stack);
-                stack = {};
-                stack[d.division] = +d.Total;
-                sumvalue = +d.Total;
-            } else {
-                stack[d.division] = +d.Total;
-                sumvalue = +d.Total;
-            }
-
+            )category.map(function (d, index) {
+                var temp = {};
+                if (index ===0){temp.total = 0}
+                temp.total +=+d.Total;
+                temp.division = d.division;
+                temp.counr = + d.Total;
+                temp.index = index;
+                return temp;
+            })
+            //console.log(groupdata);
+            newdata[namelist[index]] = groupdata;
         });
         console.log(newdata);
 
-        var displayData = {};
+        /*var displayData = {};
         for(var i = 0; i<namelist.length;i++)
         {
             var unit = [];
@@ -420,7 +413,7 @@ var scrollVis = function () {
             }
             displayData[namelist[i]] = unit;
         }
-        //console.log(displayData);
+        //console.log(displayData);*/
 
         return displayData;
     }
@@ -430,7 +423,7 @@ var scrollVis = function () {
         var sign = (activeIndex - lastIndex) < 0 ? -1 : 1;
         var scrolledSections = d3.range(lastIndex + sign, activeIndex + sign, sign);
         scrolledSections.forEach(function (i) {
-            activateFunctions[i]();
+            activateFunctions[i](index);
         });
         lastIndex = activeIndex;
     };
