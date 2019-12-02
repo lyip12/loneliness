@@ -194,7 +194,7 @@ function demographicschorovis(){
                     svg.append("text")
                         .attr("class","yipchorotext")
                         .attr("x", 90)
-                        .attr("y", 78)
+                        .attr("y", 80)
                         .attr("font-family", "'Roboto', sans-serif")
                         .attr("font-size", "4px")
                         .attr("fill", "#8293b6")
@@ -206,13 +206,22 @@ function demographicschorovis(){
                         .attr("y", 3)
                         .attr("font-family", "'Roboto', sans-serif")
                         .attr("font-size", "4px")
-                        .attr("fill", "#8293b6")
-                        .text("percentage population frequently lonely");
+                        .attr("fill", "white")
+                        .text("percentage population who report");
+                    
+                    svg.append("text")
+                        .attr("class","yipchorotext")
+                        .attr("x", 80)
+                        .attr("y", 9)
+                        .attr("font-family", "'Roboto', sans-serif")
+                        .attr("font-size", "4px")
+                        .attr("fill", "white")
+                        .text("being frequently lonely");
                 }
 
                 svg.append("rect")
                     .attr("x", 80)
-                    .attr("y", 69-i*7)
+                    .attr("y", 71-i*7)
                     .attr("width", 7)
                     .attr("height", 7)
                     .transition()
@@ -226,7 +235,7 @@ function demographicschorovis(){
 
                 svg.append("rect")
                     .attr("x", 80)
-                    .attr("y", 69-i*7)
+                    .attr("y", 71-i*7)
                     .attr("width", 7)
                     .attr("height", 7)
                     .style("stroke", "black")
@@ -240,7 +249,7 @@ function demographicschorovis(){
                 svg.append("text")
                     .attr("x", 90)
                     .attr("class","yipchorotext")
-                    .attr("y", 71-i*7)
+                    .attr("y", 73-i*7)
                     .attr("font-family", "'Roboto', sans-serif")
                     .attr("font-size", "4px")
                     .attr("fill", "#8293b6")

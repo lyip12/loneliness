@@ -4,9 +4,9 @@ questionaire(); // for avoiding naming issue
 
 
 function questionaire(){
-    var q1 = [1, "How often do you feel that you very little lot in common with the people around you?"];
+    var q1 = [1, "How often do you feel that you have very little in common with the people around you?"];
     var q2 = [2, "How often do you feel that no one really knows you well?"];
-    var q3 = [3, "How often do you feel that people are around you but not with you?"];
+    var q3 = [3, "How often do you feel that people are around you, but not with you?"];
     var q4 = [4, "How often do you feel that there are very few people you can talk to or turn to?"];
     var a = ["Never","Rare","Sometimes","Always"],an=[];
 
@@ -53,7 +53,7 @@ function questionaire(){
         
         const arrSum = arr => arr.reduce((a,b) => a + b, 0);
         console.log(arrSum(an));
-        if((arrSum(an))>3){
+        if((arrSum(an))>4){
             var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers to the above questions:</p><h5 style='text-align: center'><b style='color: #8293b6 !important;'><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.</h5><p style='text-align: center'><em><br><br><br>Loneliess is even more common than what you may think.<br>It is a depressing feeling that is shared among many of us.<br><br>yet, why are we still struggling with it alone?</em></p></div>";
             document.getElementById("questionaire").innerHTML = answer;
         }else{

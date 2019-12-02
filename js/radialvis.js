@@ -117,12 +117,13 @@ function radialvisMain(){
             .transition()
             .duration(800)
             .attr('x',0)
-            .attr('y',-outerRadius)
+            .attr('y',-outerRadius-10)
             .attr("transform", function(d,i) { return "rotate(" + angleScale(i) * 180 / Math.PI + ")"; })
             .text(function(d){return d})
             .style('fill','#ff6666')
+            .style('font-weight', '200')
             .style('text-anchor','middle')
-            .style('font-size', '8px')
+            .style('font-size', '9px')
 
         // axes
         circleCount = maxCircleCount;

@@ -91,9 +91,9 @@
         </div>
     <!--The Tree Section-->
     <div class="section">
-        <div class="line"></div>
+        <div class="line" data-aos="fade-in"></div>
         <div style="height:150px"></div>
-        <div class="row align-items-center">
+        <div class="row align-items-center" data-aos="fade-in">
             <div class="col-md-3" style="padding-right: 3vw; padding-bottom: 100px;">
                 <h5>Tree of Causes:</h5>
                 <p>
@@ -116,7 +116,7 @@
     </div>
 
     <!--The Scrollable Dot Matrix  Section - Previous -->
-    <div  class="section" id = "matrixarea">
+    <div  class="section" id = "matrixarea" data-aos="fade-in">
         <div style="height:150px"></div>
         <div style = "height: 350vh" class="row align-items-start" id = "floatingarea">
             <div class="col-md-6" id="matrixvis"></div>
@@ -154,11 +154,13 @@
 
     <!--The Chorolepth Map Section-->
     <div style="padding-top: 150px; background: linear-gradient(0deg, #161c26 20%, #0c0e12 40%, #0c0e12 80%, #161c26 100%);">
-        <div class="section"><div class="line"></div></div>
+        <div class="section" data-aos="fade-in">
+            <div class="line"></div>
+        </div>
         <div style="padding: 150px 0px 100px 100px !important;">
-            <div class="row align-items-center" style="margin: 0px !important;">
+            <div class="row align-items-center" style="margin: 0px !important;" data-aos="fade-in">
                 <div class="col-md-4" style="padding: 0px !important;">
-                    <p class="small" style="padding-right: 7vw; margin-bottom: 5px;"><em>below are data from the European Social Survey (ESS) from 2014 on the frequently lonely demographic populations</em></p>
+                    <p class="small" style="padding-right: 7vw; margin-bottom: 5px;"><em>below are data from the European Social Survey (ESS) from 2014 on the frequently lonely demographic populations of 21 nations</em></p>
                     <h3 style="text-align: left;">ACROSS EUROPE</h3>
                     <p>In recent years, the European Union especially has brought loneliness to the centre of attention of its mass media, government agents, and the general public. Loneliness is not merely a psychological, individual, or health issue. <b>In multiple ways, it is a social problem as well.<br><br></b></p>
                     <form id="yipchorofilter" data-toggle="buttons">
@@ -224,18 +226,18 @@
             </div>
         </div>
         <div class="section ">
-            <div class="line" style="margin: 50px 30vw 100px 30vw;"></div>
-            <p class="shortish">This is a collective section comparing the overall differences between each set of data presented above. It reveals the way these social constructs, labels and ways of living may contribute to our loneliness. </p>
+            <div class="line" style="margin: 50px 30vw 100px 30vw;" data-aos="fade-in"></div>
+            <p class="shortish" data-aos="fade-in">This is a collective section comparing the overall differences between each set of data presented above. It reveals the way these social constructs, labels and ways of living may contribute to our loneliness. </p>
 
             <div style="height:50px"></div>
-            <div class="row" style="padding: 0px !important;">
+            <div class="row" style="padding: 0px !important;" data-aos="fade-in">
                 <div class="col-md-3"><div id="yipbarcharts0"></div><div id="yipbarcharts1"></div></div>
                 <div class="col-md-3"><div id="yipbarcharts2"></div><div id="yipbarcharts3"></div></div>
                 <div class="col-md-3"><div id="yipbarcharts4"></div><div id="yipbarcharts5"></div></div>
                 <div class="col-md-3"><div id="yipbarcharts6"></div><div id="yipbarcharts7"></div></div>
             </div>
             <div style="height:10px"></div>
-            <p class="small" style="text-align: center;">
+            <p class="small" style="text-align: center;" data-aos="fade-in">
                 <i class="fa fa-square" style="color: #ffffff; margin-left: 5px; margin-right: 5px"></i>40% - 50%
                 <i class="fa fa-square" style="color: #dfecf7; margin-left: 5px; margin-right: 5px"></i>30% - 40%
                 <i class="fa fa-square" style="color: #9ecae1; margin-left: 5px; margin-right: 5px"></i>20% - 30%
@@ -249,7 +251,7 @@
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Belgium">Belgium</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Czech Republic">Czech Republic</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Denmark">Denmark</label>
-                <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="England">England</label>
+                <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="England">UK</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Estonia">Estonia</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Finland">Finland</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="France">France</label>
@@ -267,98 +269,89 @@
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Switzerland">Switzerland</label>
                 <label class="btn btn-light"><input type="radio" name="countries" autocomplete="off" value="Slovenia">Slovenia</label>
             </form>
-            <div class="line" style="margin: 150px 30vw 0px 30vw;"></div>
+            <div class="line" style="margin: 150px 30vw 0px 30vw;" data-aos="fade-in"></div>
 
 
 
             <!--The Radar Plot Section-->
 
 
-            <div class='row mt-1 align-items-center'>
+            <div class='row align-items-center' data-aos="fade-in">
                 <div class='col-md-6'>
                     <div style="height:150px"></div>
                     <div id="dugy-radial"></div>
                     <div style="height:50px"></div>
                     <p class="small" style="text-align: center;"><b>Odds Ratio between Loneliness and Social Factors</b></p>
-                </div>
-                <div class='col-md-4 offset-md-1'>
-                    <div id="dugy-radial-explaination">
-                        <div class='my-5'>
-                            <p>If we summarize from these data what factors contribute more to loneliness.
-                                We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
-                                This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>.  But maintaining other levels of social connections can also alleviate loneliness:
-                            </p>
-
-                        </div>
-                        <p>Top 3 Loneliness Factors in</p>
-                        <h3 id='dugy-radial-currentCountry'>Europe</h3>
-                        <div class = 'mt-5'>
-                            <h5 id ='dugy-radial-topfactors' class = 'my-5'></h5>
-                        </div>
-                        <div class = 'mb-5'></div>
-                        <p class="small"><em>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</em></p>
-                    </div>
-                </div>
-            </div>
-            <div class='row mt-1'>
-                <div class='col-md-6 offset-md-1'>
-
                     <div style="height:150px"></div>
                 </div>
+                <div class='col-md-1'></div>
+                <div class='col-md-4'>
+                    <p>If we summarize from these data what factors contribute more to loneliness.
+                        We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
+                        This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>.  But maintaining other levels of social connections can also alleviate loneliness:<br><br>
+                        Top 3 Loneliness Factors in</p>
+                    <h3 id='dugy-radial-currentCountry'>Europe</h3>
+                    <div class = 'mt-5'>
+                        <h5 id ='dugy-radial-topfactors' class = 'my-5'></h5>
+                    </div>
+                    <div class = 'mb-5'></div>
+                    <p class="small"><em>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</em></p>
+                </div>
+                <div class='col-md-1'></div>
             </div>
         </div>
     </div>
 
     <!--The Scrollable Dot Matrix  Section WIP
-    <div  class="section" id = "matrixarea">
-        <div class="line"></div>
-        <div style="height:150px"></div>
-        <div style = "height: 450vh" class="row align-items-start" id = "floatingarea">
-            <div class="col-md-6" id="matrixvis"></div>
-            <div class="col-md-6" id="matrixtext">
-                <section class = "step">
-                    <p><b>How to stay away from loneliness?</b>
-                        <br><em>If the grid on the left represents the world, who are <em>LESS</em> vulnerable to loneliness?</em></p>
-                </section>
-                <section class = "step">
-                    <p><b>Release your self from Negative Life Events</b>
-                        <br>Loneliness appears to occur in parallel with reports of real life problems and circumstances: <em>6 in 10 say there is a event-cause of their loneliness,</em> though the specifics of what they were vary. </p>
-                </section>
-                <section class = "step">
-                    <p><b>Establish Close Relationships</b>
-                        <br>More than <b>22%</b> of adults in the U.S. and the U.K. say they <em>often or always feel lonely, that they lack companionship, feel left out, or feel isolated from others.</em></p>
-                </section>
-                <section class = "step">
-                    <p><b>Live with Family</b>
-                        <br>While loneliness is often thought to affect the elderly, majorities of people who report being lonely around the world are <em>younger than 50.</em><br><br>In addition, these people are also more likely to report <em>lower incomes and unpartnered.</em></p>
-                </section>
-                <section class = "step">
-                    <p><b>Join People with Similar Interests</b>
-                        <br>Social Interactions</p>
-                </section>
-                <section class = "step">
-                    <p><b>Sleep Well</b>
-                        <br></p>
-                </section>
-                <section class = "step">
-                    <p><b>Stay Healthy</b>
-                        <br></p>
-                </section>
-                <section class = "step">
-                    <p><b>Avoid Heavy Social Media Uses</b>
-                        <br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
-                </section>
-                <section class = "step">
-                    <p><b>Heavy Social Media Users</b>
-                        <br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
-                </section>
-            </div>
-        </div>
-        <div style="height:150px"></div>
-    </div>-->
+<div  class="section" id = "matrixarea">
+<div class="line"></div>
+<div style="height:150px"></div>
+<div style = "height: 450vh" class="row align-items-start" id = "floatingarea">
+<div class="col-md-6" id="matrixvis"></div>
+<div class="col-md-6" id="matrixtext">
+<section class = "step">
+<p><b>How to stay away from loneliness?</b>
+<br><em>If the grid on the left represents the world, who are <em>LESS</em> vulnerable to loneliness?</em></p>
+</section>
+<section class = "step">
+<p><b>Release your self from Negative Life Events</b>
+<br>Loneliness appears to occur in parallel with reports of real life problems and circumstances: <em>6 in 10 say there is a event-cause of their loneliness,</em> though the specifics of what they were vary. </p>
+</section>
+<section class = "step">
+<p><b>Establish Close Relationships</b>
+<br>More than <b>22%</b> of adults in the U.S. and the U.K. say they <em>often or always feel lonely, that they lack companionship, feel left out, or feel isolated from others.</em></p>
+</section>
+<section class = "step">
+<p><b>Live with Family</b>
+<br>While loneliness is often thought to affect the elderly, majorities of people who report being lonely around the world are <em>younger than 50.</em><br><br>In addition, these people are also more likely to report <em>lower incomes and unpartnered.</em></p>
+</section>
+<section class = "step">
+<p><b>Join People with Similar Interests</b>
+<br>Social Interactions</p>
+</section>
+<section class = "step">
+<p><b>Sleep Well</b>
+<br></p>
+</section>
+<section class = "step">
+<p><b>Stay Healthy</b>
+<br></p>
+</section>
+<section class = "step">
+<p><b>Avoid Heavy Social Media Uses</b>
+<br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
+</section>
+<section class = "step">
+<p><b>Heavy Social Media Users</b>
+<br>Social media consumption varies across the three countries from four in ten in Japan saying they use it, including 23 percent who say they use it every day, to 69 percent in the U.S. and 67 percent in the U.K., including nearly half in the U.S. and U.K. who say they use it every day, some of them for hours a day.</p>
+</section>
+</div>
+</div>
+<div style="height:150px"></div>
+</div>-->
 
     <!--The Awareness and Solution Section-->
-    <div class="section">
+    <div class="section" data-aos="fade-in">
         <div class="line"></div>
         <div style="height:150px"></div>
 
@@ -397,14 +390,14 @@
         </p>
     </div>
 
-    <div class="section">
+    <div class="section" data-aos="fade-in">
         <div style="height:300px"></div>
         <p>We live in a lonely world, <b>but you are not alone.</b></p>
         <div style="height:50px"></div>
     </div>
 
 
-    <div class="section">
+    <div class="section" data-aos="fade-in">
         <div class="line"></div>
         <div class="row">
             <div class="col-md-3"><p class="small">Harvard CS171 : <b>Visualization</b><br><br>An introductual course at Harvard focusing on key design principles and techniques for visualizing data.</p></div>

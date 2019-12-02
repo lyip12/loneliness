@@ -42,9 +42,9 @@ h3 {
 .btn-light {
     font-family: 'Roboto', sans-serif; 
     color: white;
-    font-size: 10px;
-    font-weight: 300;
-    padding: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    padding: 6px;
     background-color: #8293b6;
     border: none;
 }
@@ -89,7 +89,7 @@ form,
 .tooltip{
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
-    font-size: 14px !important;
+    font-size: 16px !important;
     font-weight: 300 !important;
     text-align: left;
 }
@@ -97,7 +97,7 @@ form,
 .yipnode text {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 300;
     text-align: left;
 }
@@ -323,16 +323,13 @@ div.section {
 }
 .dugy-radial-axis text{
     fill:#ff6666;
-    font-size:  6px;
-    fill-opacity: 0.5;
+    font-size:  7px;
+    fill-opacity: 0.8;
 }
 
 h3#dugy-radial-currentCountry
 {
     text-align: left;
-}
-div#dugy-radial-explaination{
-    margin-top: 200px;
 }
 
 /* particle vis */
