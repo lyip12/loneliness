@@ -25,43 +25,45 @@ var choronarratives = {
 };
 //console.log(choronarratives["France"]);
 
-function demographicschorovis(){
+function demographicschorovis() {
     var selector = "Lonely_Frequent";
     var toggle;
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
     var svg = d3.select("#yipchoro")
-    .classed("yipsvg-container", true)
-    .append("svg")
-    .attr("preserveAspectRatio", "xMinYMin meet")
-    .attr("viewBox", "0 0 300 400")
-    .classed("svg-content-responsive", true);
+        .classed("yipsvg-container", true)
+        .append("svg")
+        .attr("preserveAspectRatio", "xMinYMin meet")
+        .attr("viewBox", "0 0 300 400")
+        .classed("svg-content-responsive", true);
 
     var lucypath = d3.geoPath();
     var projection = d3.geoMercator()
-    .scale(230)
-    .center([0, 0])
-    .translate([130, 410]);
+        .scale(230)
+        .center([0, 0])
+        .translate([130, 410]);
 
     var data = d3.map();
 
     updateChoropleth(selector)
 
-    $("#yipchorofilter").click(function(){
+    $("#yipchorofilter").click(function () {
         Tooltip.style("opacity", 0);
-        toggle =1;
+        toggle = 1;
         var selector = $("input[name='choro']:hover").val();
         //console.log(yipchoroselector);
-        if(selector!== undefined && selector!== "NA"){updateChoropleth(selector)};
+        if (selector !== undefined && selector !== "NA") {
+            updateChoropleth(selector)
+        };
     });
 
 
     var Tooltip = d3.select("#yipchoro")
-    .append("div")
-    .style("opacity", 0)
-    .attr("class", "tooltip")
-    .style("background-color", "#161c26")
-    .style("border-radius", "3px")
-    .style("padding", "10px")
+        .append("div")
+        .style("opacity", 0)
+        .attr("class", "tooltip")
+        .style("background-color", "#161c26")
+        .style("border-radius", "3px")
+        .style("padding", "10px")
 
     //actual chorovis starts
     function updateChoropleth(selector) {
@@ -69,23 +71,75 @@ function demographicschorovis(){
 
         //var selector2 = d3.select("#yipstats").property("value2");
 
-        if(selector == "One_Person_Household_Frequent"){ var cate = "one person household"; } else if(selector == "Mutiple_People_Household_Frequent"){ var cate = "multiple people household"; } else if(selector == "Conflict_Never_Frequent"){ var cate = "no conflict household"; } else if(selector == "Conflict_Sometimes_Frequent"){ var cate = "sometimes conflict household"; } else if(selector == "Conflict_Often_Frequent"){ var cate = "often conflicting household"; } else if(selector == "No_Confidant_Frequent"){ var cate = "no confidant"; } else if(selector == "At_Least_One_Confidant_Frequent"){ var cate = "more than one confidant"; } else if(selector == "Native_Frequent"){ var cate = "native (local)"; } else if(selector == "Immigrant_Frequent"){ var cate = "immigrant"; } else if(selector == "Ethnic_Minority_Frequent"){ var cate = "ethinic minority"; } else if(selector == "Ethnic_Majority_Frequent"){ var cate = "ethnic majority"; } else if(selector == "Religious_Frequent"){ var cate = "religious"; } else if(selector == "Non_Religious_Frequent"){ var cate = "non-religious"; } else if(selector == "Big_City_Frequent"){ var cate = "big city"; } else if(selector == "Suburb_Frequent"){ var cate = "suburb"; } else if(selector == "Small_City_Frequent"){ var cate = "small city"; } else if(selector == "Countryside_Frequent"){ var cate = "countryside"; } else if(selector == "Unemployed_Past_Year_Frequent"){ var cate = "past year unemployed"; } else if(selector == "Unemployed_Past_Month_Frequent"){ var cate = "past month unemployed"; } else if(selector == "Unemployed_Past_Days_Frequent"){ var cate = "past days unemployed"; } else if(selector == "Employed_Frequent"){ var cate = "employed"; } else if(selector == "Income_Comfortable_Frequent"){ var cate = "comfortable income"; } else if(selector == "Income_Coping_Frequent"){ var cate = "coping income"; } else if(selector == "Income_Difficult_Frequent"){ var cate = "difficult income"; } else if(selector == "Income_Very_Difficult_Frequent"){ var cate = "very difficult income"; } else { var cate = "all"; };
+        if (selector == "One_Person_Household_Frequent") {
+            var cate = "one person household";
+        } else if (selector == "Mutiple_People_Household_Frequent") {
+            var cate = "multiple people household";
+        } else if (selector == "Conflict_Never_Frequent") {
+            var cate = "no conflict household";
+        } else if (selector == "Conflict_Sometimes_Frequent") {
+            var cate = "sometimes conflict household";
+        } else if (selector == "Conflict_Often_Frequent") {
+            var cate = "often conflicting household";
+        } else if (selector == "No_Confidant_Frequent") {
+            var cate = "no confidant";
+        } else if (selector == "At_Least_One_Confidant_Frequent") {
+            var cate = "more than one confidant";
+        } else if (selector == "Native_Frequent") {
+            var cate = "native (local)";
+        } else if (selector == "Immigrant_Frequent") {
+            var cate = "immigrant";
+        } else if (selector == "Ethnic_Minority_Frequent") {
+            var cate = "ethinic minority";
+        } else if (selector == "Ethnic_Majority_Frequent") {
+            var cate = "ethnic majority";
+        } else if (selector == "Religious_Frequent") {
+            var cate = "religious";
+        } else if (selector == "Non_Religious_Frequent") {
+            var cate = "non-religious";
+        } else if (selector == "Big_City_Frequent") {
+            var cate = "big city";
+        } else if (selector == "Suburb_Frequent") {
+            var cate = "suburb";
+        } else if (selector == "Small_City_Frequent") {
+            var cate = "small city";
+        } else if (selector == "Countryside_Frequent") {
+            var cate = "countryside";
+        } else if (selector == "Unemployed_Past_Year_Frequent") {
+            var cate = "past year unemployed";
+        } else if (selector == "Unemployed_Past_Month_Frequent") {
+            var cate = "past month unemployed";
+        } else if (selector == "Unemployed_Past_Days_Frequent") {
+            var cate = "past days unemployed";
+        } else if (selector == "Employed_Frequent") {
+            var cate = "employed";
+        } else if (selector == "Income_Comfortable_Frequent") {
+            var cate = "comfortable income";
+        } else if (selector == "Income_Coping_Frequent") {
+            var cate = "coping income";
+        } else if (selector == "Income_Difficult_Frequent") {
+            var cate = "difficult income";
+        } else if (selector == "Income_Very_Difficult_Frequent") {
+            var cate = "very difficult income";
+        } else {
+            var cate = "all";
+        };
 
         a = [];
         //console.log(selector2);
         d3.queue()
             .defer(d3.json, "data/worldeu.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
-            data.set(d.Code, +d[selector]);
-            a.push(+d[selector]);
-        })
+                data.set(d.Code, +d[selector]);
+                a.push(+d[selector]);
+            })
             .await(ready);
 
 
         function ready(error, topo, loneliness) {
 
-            let yipmouseOver = function(d) {
-                if(toggle !== 0 && d.data !== "no data"){
+            let yipmouseOver = function (d) {
+                if (toggle !== 0 && d.data !== "no data") {
                     d3.selectAll(".Country")
                         .transition()
                         .duration(100)
@@ -94,15 +148,15 @@ function demographicschorovis(){
                         .transition()
                         .duration(100)
                         .style("opacity", 1)
-                    //console.log("tis is working")
+                        //console.log("tis is working")
                         .attr('cursor', 'pointer');
 
                     tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click for more information.</b>";
 
                     Tooltip
                         .html(tip)
-                        .style("left", (d3.mouse(this)[0]*2) + "px")
-                        .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
+                        .style("left", (d3.mouse(this)[0] * 2) + "px")
+                        .style("top", (d3.mouse(this)[1] * 2.7 - 80) + "px")
                         .transition()
                         .duration(300)
                         .style("opacity", 1);
@@ -114,8 +168,8 @@ function demographicschorovis(){
                 }
             }
 
-            let yipmouseLeave = function(d) {
-                if(toggle !== 0 && d.data !== "no data"){
+            let yipmouseLeave = function (d) {
+                if (toggle !== 0 && d.data !== "no data") {
                     d3.selectAll(".Country")
                         .transition()
                         .duration(100)
@@ -131,7 +185,7 @@ function demographicschorovis(){
             }
 
             let yipmouseClick = function (d) {
-                if(toggle == 0) {
+                if (toggle == 0) {
                     d3.selectAll(".Country")
                         .transition()
                         .duration(300)
@@ -143,10 +197,10 @@ function demographicschorovis(){
                     //var yipchoroselector = "All";
                     //yipsmallmultiples(yipchoroselector);
 
-                    toggle =1;
+                    toggle = 1;
 
-                } else {  
-                    if(d.data !== "no data"){
+                } else {
+                    if (d.data !== "no data") {
                         d3.selectAll(".Country")
                             .transition()
                             .duration(300)
@@ -157,12 +211,12 @@ function demographicschorovis(){
                             .style("opacity", 1)
                         toggle = 0;
 
-                        tip = choronarratives[d.properties.name]+"<br><b>click again to exit.</b>";
+                        tip = choronarratives[d.properties.name] + "<br><b>click again to exit.</b>";
 
                         Tooltip
                             .html(tip)
-                            .style("left", (d3.mouse(this)[0]*2) + "px")
-                            .style("top", (d3.mouse(this)[1]*2.7-80) + "px")
+                            .style("left", (d3.mouse(this)[0] * 2) + "px")
+                            .style("top", (d3.mouse(this)[1] * 2.7 - 80) + "px")
                             .transition()
                             .duration(300)
                             .style("opacity", 1);
@@ -170,16 +224,16 @@ function demographicschorovis(){
                 }
             }
 
-            var k = (d3.max(a) - d3.min(a))/9;
+            var k = (d3.max(a) - d3.min(a)) / 9;
             var legend = []
-            for(var i = 0; i<9;i++){
-                legend.push(d3.min(a)+k*i);
+            for (var i = 0; i < 9; i++) {
+                legend.push(d3.min(a) + k * i);
             };
 
             console.log(legend)
             var fill = d3.scaleThreshold()
-            .domain(legend)
-            .range(d3.schemeBlues[9]);
+                .domain(legend)
+                .range(d3.schemeBlues[9]);
 
             d3.selectAll(".yipchorotext")
                 .attr("opacity", 1)
@@ -188,29 +242,29 @@ function demographicschorovis(){
                 .attr("opacity", 0)
                 .remove()
 
-            for(var i = 0; i<9;i++){
+            for (var i = 0; i < 9; i++) {
 
-                if(i==0){  
+                if (i == 0) {
                     svg.append("text")
-                        .attr("class","yipchorotext")
+                        .attr("class", "yipchorotext")
                         .attr("x", 90)
                         .attr("y", 80)
                         .attr("font-family", "'Roboto', sans-serif")
                         .attr("font-size", "4px")
                         .attr("fill", "#8293b6")
                         .text("0.00%");
-                    
+
                     svg.append("text")
-                        .attr("class","yipchorotext")
+                        .attr("class", "yipchorotext")
                         .attr("x", 80)
                         .attr("y", 3)
                         .attr("font-family", "'Roboto', sans-serif")
                         .attr("font-size", "4px")
                         .attr("fill", "white")
                         .text("percentage population who report");
-                    
+
                     svg.append("text")
-                        .attr("class","yipchorotext")
+                        .attr("class", "yipchorotext")
                         .attr("x", 80)
                         .attr("y", 9)
                         .attr("font-family", "'Roboto', sans-serif")
@@ -221,35 +275,35 @@ function demographicschorovis(){
 
                 svg.append("rect")
                     .attr("x", 80)
-                    .attr("y", 71-i*7)
+                    .attr("y", 71 - i * 7)
                     .attr("width", 7)
                     .attr("height", 7)
                     .transition()
                     .duration(800)
-                    .attr("fill", function(d){
-                    return fill(d3.min(a)+k*i);
-                }); 
+                    .attr("fill", function (d) {
+                        return fill(d3.min(a) + k * i);
+                    });
 
-                var num = d3.min(a)+(k*(i+1));
+                var num = d3.min(a) + (k * (i + 1));
                 var n = num.toFixed(2);
 
                 svg.append("rect")
                     .attr("x", 80)
-                    .attr("y", 71-i*7)
+                    .attr("y", 71 - i * 7)
                     .attr("width", 7)
                     .attr("height", 7)
                     .style("stroke", "black")
                     .style("stroke-width", 0.05)
                     .transition()
                     .duration(800)
-                    .attr("fill", function(d){
-                    return fill(d3.max(a)-(d3.min(a)+k*i));
-                }); 
+                    .attr("fill", function (d) {
+                        return fill(d3.max(a) - (d3.min(a) + k * i));
+                    });
 
                 svg.append("text")
                     .attr("x", 90)
-                    .attr("class","yipchorotext")
-                    .attr("y", 73-i*7)
+                    .attr("class", "yipchorotext")
+                    .attr("y", 73 - i * 7)
                     .attr("font-family", "'Roboto', sans-serif")
                     .attr("font-size", "4px")
                     .attr("fill", "#8293b6")
@@ -272,7 +326,7 @@ function demographicschorovis(){
                 .data(topo.features)
                 .enter()
                 .append("path")
-                .attr("class","lucypath2 Country")
+                .attr("class", "lucypath2 Country")
                 .attr("d", d3.geoPath().projection(projection))
                 .style("stroke", "#8293b6")
                 .style("stroke-width", 0.05)
@@ -280,11 +334,11 @@ function demographicschorovis(){
                 .transition()
                 .duration(800)
                 .attr("fill", function (d) {
-                d.data = data.get(d.properties.adm0_a3) || "no data";
-                if(d.data !== "no data"){
-                    return fill(d3.max(a)-d.data);
-                };
-            })
+                    d.data = data.get(d.properties.adm0_a3) || "no data";
+                    if (d.data !== "no data") {
+                        return fill(d3.max(a) - d.data);
+                    };
+                })
                 .style("opacity", 1);
 
 
