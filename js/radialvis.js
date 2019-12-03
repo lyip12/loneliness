@@ -234,8 +234,8 @@ function radialvisMain(){
             }
         });
         countryAreaPaths2.on('mouseover', function(d,i) {
-            d3.select(this).style("fill", '#ff6666');
-            d3.select(this).style("fill-opacity", 0.1)
+            d3.select(this).style("fill", 'white');
+            d3.select(this).style("fill-opacity", 1)
                 .attr('cursor', 'pointer');
             currentCountry = d.key;
             displayCountry.innerHTML = currentCountry;
@@ -249,7 +249,7 @@ function radialvisMain(){
                 .attr("font-size", "8px")
                 .attr("text-anchor", "middle")
                 .attr("fill", "white")
-                .text("click to show")
+                .text("click to")
             svg.append("text")
                 .attr("class", "dugyclicktoshow")
                 .attr("x", 0)
@@ -259,7 +259,7 @@ function radialvisMain(){
                 .attr("font-size", "8px")
                 .attr("text-anchor", "middle")
                 .attr("fill", "white")
-                .text("individual")
+                .text("zoom in/out")
 
         })
             .on('mouseleave', function(d,i) {

@@ -55,10 +55,6 @@ h3 {
     background: white;
 }
 
-.btn-light:checked{
-    font-weight: 700 !important;
-}
-
 h3.cursive {
     font-family: 'Sacramento', cursive !important;
     font-weight: 300 !important;

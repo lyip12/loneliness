@@ -1,106 +1,111 @@
 <!doctype html>
 <html>
     <head>
-    <meta charset="utf-8">
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Lonliness: A Social Story | CS171</title>
+        <meta charset="utf-8">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Lonliness: A Social Story | CS171</title>
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/aos.css">
-    <link rel="stylesheet" href="css/style.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700,900&display=swap" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Sacramento&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="css/aos.css">
+        <link rel="stylesheet" href="css/style.css">
 
-</head>
+    </head>
 
-<body>
-    <div class="section" style="background-image: url('img/background.jpg'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; padding-top: 35vh; padding-bottom: 35vh;">
-        <div data-aos="fade-in">
-            <h1>LONELINESS</h1>
-            <h3 class="cursive">a social story</h3>
-            <div style="padding-left: 60vw;" data-aos="fade-in">
-                <p style="text-align: right">“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”<br><em>- Dilip V. Jeste, M.D.</em></p>
+    <body>
+        <div class="section" style="background-image: url('img/background.jpg'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; padding-top: 35vh; padding-bottom: 35vh;">
+            <div data-aos="fade-in">
+                <h1>LONELINESS</h1>
+                <h3 class="cursive">a social story</h3>
+                <div style="padding-left: 60vw;" data-aos="fade-in">
+                    <p style="text-align: right">“Loneliness is defined as 'subjective distress’. It is the discrepancy between the social relationships you want and the social relationships you have.”<br><em>- Dilip V. Jeste, M.D.</em></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--The Qustionnaire Section-->
-    <div class="section" style="margin-top: -3px; background: linear-gradient(0deg, #161c26 10%, #0c0e12 90%);">
-        <div style="height:150px"></div>
-        <div class="row">
-            <div class="col-md-3" id="q1" style="padding-right: 40px;" data-aos="fade-in"></div>
-            <div class="col-md-3" id="q2" style="padding-left: 40px; padding-right: 40px;" data-aos="fade-in"></div>
-            <div class="col-md-3" id="q3" style="padding-left: 40px; padding-right: 40px;" data-aos="fade-in"></div>
-            <div class="col-md-3" id="q4" style="padding-left: 40px;" data-aos="fade-in"></div>
-        </div>
-        <div style="height:200px;"></div>
-        <div style="height:400px">
-            <div id="questionaire"></div>
-        </div>
-    </div>
-
-    <!--The Key Facts Section-->
-    <div class="section">
-        <div class="line" style="margin: 50px 30vw 200px 30vw;" data-aos="fade-in"></div>
-    </div>
-    <div class="row" style="margin: 0px !important">
-        <div class="col-md-6" style="padding-left: 100px;">
-            <p data-aos="fade-in">
-                <b>We are living through an epidemic of loneliness. </b><br><br>
-                It is a complex and usually unpleasant emotional response to isolation, typically includes anxious feelings about a lack of connection or communication with other beings, both in the present and extending into the future.<br><br>
-                <em style="color: #8293b6;">A growing body of longitudinal research indicates that loneliness predicts increased morbidity and mortality (Hawkley and Cacioppo, 2010). According to a study from the British Red Cross, over nine million adults in the U.K. feel the same way—that’s about 1/5 of the country’s population! Now even governments are getting involved—in 2018, the U.K. appointed a Loneliness Minister, Tracey Crouch, to help combat the country’s chronic loneliness problem.<br><br></em>
-            </p>
-            <div class="line" style="width: 50px;" data-aos="fade-in"></div>
-
-            <p data-aos="fade-in"><b><br>So, is loneliness a life sentence, or is it possible for some to break through it and come out the other side?</b></p>
-        </div>
-        <div class="col-md-6" style="padding: 0px !important; background-image: url('img/sitting.png'); background-position: center right; background-repeat: no-repeat; background-size: contain;" data-aos="fade-in"></div>
-    </div>
-    <div style="height:200px"></div>
-
-
-    <!--The WebGL Section-->
-    <div class="section" data-aos="fade-in">
-        <div class="line"></div>
-        <p style="text-align: center;"><em>- below are based on gathered international statistics on loneliness (summative data of US, UK and Japan) -</em></p>
-        <div style="height:150px"></div>
-
-    </div>
-    <div class="section" data-aos="fade-in" id="dugy-radial-fadein">
-        <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
-        <p style="text-align: center; margin-bottom: 50px"><em>There are many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>
-        <div style="height:80px"></div>
-        <div style="height:600px" id='dugy-canvas-container'>
-            <canvas id="dugy-c"></canvas>
-        </div>
-        <p class="shortish" style="margin-top: 50px"><em>We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race.</em><br><br>INSERT LEGEND HERE<br><br>The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 295 people who answered to this question from around the world, 77 of said they have been alone for more than 10 years.</b></p>
-        <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
-    </div>
-    <!--The Scatter Plot Section-->
-
-    <div class="section" data-aos="fade-in">
-        <div class="row align-items-center">
-            <div class="col-md-9" id="scatter" style="padding-left: 0px !important"></div>
-            <div class="col-md-3">
-                <p><b>Loneliness correlation with Age:</b><br>
-                    <br><em>Overall, existing evidence does seem to suggest that the frequency of feeling lonely increases as you grow older. It could mean older people are more susceptible, or loneliness is accumulative.</em></p>
+        <!--The Qustionnaire Section-->
+        <div class="section" style="margin-top: -3px; background: linear-gradient(0deg, #161c26 10%, #0c0e12 90%);">
+            <div style="height:150px"></div>
+            <div class="row">
+                <div class="col-md-3" id="q1" style="padding-right: 40px;" data-aos="fade-in"></div>
+                <div class="col-md-3" id="q2" style="padding-left: 40px; padding-right: 40px;" data-aos="fade-in"></div>
+                <div class="col-md-3" id="q3" style="padding-left: 40px; padding-right: 40px;" data-aos="fade-in"></div>
+                <div class="col-md-3" id="q4" style="padding-left: 40px;" data-aos="fade-in"></div>
+            </div>
+            <div style="height:200px;"></div>
+            <div style="height:400px">
+                <div id="questionaire"></div>
             </div>
         </div>
-        <div style="height:150px"></div>
-    </div>
-    </div>
+
+        <!--The Key Facts Section-->
+        <div class="section">
+            <div class="line" style="margin: 50px 30vw 200px 30vw;" data-aos="fade-in"></div>
+        </div>
+        <div class="row" style="margin: 0px !important">
+            <div class="col-md-6" style="padding-left: 100px;">
+                <p data-aos="fade-in">
+                    <b>We are living through an epidemic of loneliness. </b><br><br>
+                    It is a complex and usually unpleasant emotional response to isolation, typically includes anxious feelings about a lack of connection or communication with other beings, both in the present and extending into the future.<br><br>
+                    <em style="color: #8293b6;">A growing body of longitudinal research indicates that loneliness predicts increased morbidity and mortality (Hawkley and Cacioppo, 2010). According to a study from the British Red Cross, over nine million adults in the U.K. feel the same way—that’s about 1/5 of the country’s population! Now even governments are getting involved—in 2018, the U.K. appointed a Loneliness Minister, Tracey Crouch, to help combat the country’s chronic loneliness problem.<br><br></em>
+                </p>
+                <div class="line" style="width: 50px;" data-aos="fade-in"></div>
+
+                <p data-aos="fade-in"><b><br>So, is loneliness a life sentence, or is it possible for some to break through it and come out the other side?</b></p>
+            </div>
+            <div class="col-md-6" style="padding: 0px !important; background-image: url('img/sitting.png'); background-position: center right; background-repeat: no-repeat; background-size: contain;" data-aos="fade-in"></div>
+        </div>
+        <div style="height:200px"></div>
+
+
+        <!--The WebGL Section-->
+        <div class="section" data-aos="fade-in">
+            <div class="line"></div>
+            <p style="text-align: center;"><em>- below are based on gathered international statistics on loneliness (summative data of US, UK and Japan) -</em></p>
+            <div style="height:150px"></div>
+
+        </div>
+        <div class="section" data-aos="fade-in" id="dugy-radial-fadein">
+            <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
+            <p style="text-align: center; margin-bottom: 50px"><em>There are many people who have been lonely for a long, long time,<br>more so than we have ever imagined.</em></p>
+            <div style="height:80px"></div>
+            <div style="height:600px" id='dugy-canvas-container'>
+                <canvas id="dugy-c"></canvas>
+            </div>
+            <div style="height:80px"></div>
+            <div class="shortish">
+                <p style="margin-top: 50px"><em>We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race.<br><br><br></em></p>
+                <img src="img/tempParticleLegend.png" class="responsive-image">
+                <p><br>The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 295 people who answered to this question from around the world, 77 of said they have been alone for more than 10 years.</b></p>
+            </div>
+            <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
+        </div>
+        <!--The Scatter Plot Section-->
+
+        <div class="section">
+            <div class="row align-items-center">
+                <div class="col-md-9" id="scatter" style="padding-left: 0px !important"></div>
+                <div class="col-md-3">
+                    <p><b>Loneliness correlation with Age:</b><br>
+                        <br><em>Overall, existing data suggest that the frequency of feeling lonely increases as you grow older. It could mean elders are more susceptible, or that loneliness is accumulative.</em></p>
+                </div>
+            </div>
+            <div style="height:150px"></div>
+        </div>
+        </div>
     <!--The Tree Section-->
     <div class="section">
         <div class="line" data-aos="fade-in"></div>
         <div style="height:150px"></div>
         <div class="row align-items-center" data-aos="fade-in">
-            <div class="col-md-3" style="padding-right: 3vw; padding-bottom: 100px;">
+            <div class="col-md-3" style="padding-right: 5vw; padding-bottom: 100px;">
                 <h5>Tree of Causes:</h5>
                 <p>
                     <b>What Builds Up Our Loneliness?<br><br></b>
-                    <em>There are numerous different factors that contribute to an individual's loneliness, varying in degrees and ranging from physical and mental health all the way to their community and social economical status.</em><br><br><br>
+                    <em>There are numerous different factors that contribute to one's loneliness, varying in degrees and ranging from physical and mental health, to community and social economical status. </em><br><br><br>
                     <b class="small">primary</b>
                     <i class="fa fa-circle" style="color: #ffffff; font-size: 24px; margin-left: 5px; margin-right: 5px"></i>
                     <i class="fa fa-circle" style="color: #dfecf7; font-size: 20px; margin-right: 5px"></i>
@@ -409,7 +414,6 @@
     <div class="section" style="background-image: url('img/back4.png'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; margin-bottom: 0px;">
         <div style="height:300px"></div>
         <p id="questionreview"></p>
-        <p data-aos="fade-in">We live in a lonely world, <b>but you are not alone.</b></p>
         <div style="height:300px"></div>
     </div>
 
@@ -464,4 +468,4 @@
     <!-- AOS must be included last -->
     <script src="libraries/aos.js"></script>
     <script src="js/animate.js"></script>
-</body></html>
+    </body></html>

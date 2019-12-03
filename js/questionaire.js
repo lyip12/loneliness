@@ -54,14 +54,14 @@ function questionaire(){
         const arrSum = arr => arr.reduce((a,b) => a + b, 0);
         console.log(arrSum(an));
         if((arrSum(an))>4){
-            var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers to the above questions:</p><h5 style='text-align: center'><b style='color: #8293b6 !important;'><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.</h5><p style='text-align: center'><em><br><br><br>Loneliess is even more common than what you may think.<br>It is a depressing feeling that is shared among many of us.<br><br>yet, why are we still struggling with it alone?</em></p></div>";
+            var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers:</p><h5 style='text-align: center'><b style='color: #8293b6 !important;'><br>You are likely to be lonely,</b><br>and everyone feels lonely sometimes.</h5><p style='text-align: center'><br><br><br>Loneliness is actually more prevalent than you may think.<br>It is an anxious, depressing feeling that is shared among many of us.<br><br><a style='color: #ff6666;'>yet, why are we still struggling with it alone?</a></p></div>";
             document.getElementById("questionaire").innerHTML = answer;
-            var review = "This is some phrase that talks to you because your questionaire says you're lonely";
+            var review = "Loneliness can be depressing, but the more you understand about it the less scary it becomes.<br>In the end, we live in a lonely world, <b>but you are not alone.</b>";
             document.getElementById("questionreview").innerHTML = review;
         }else{
-            var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers to the above questions:</p><h5 style='text-align: center'>Everyone feels lonely sometimes,<br><b style='color: #8293b6 !important;'>you are among the lucky, happy few.</b></h5><p style='text-align: center'><br><br><br><em>But loneliness is actually more common than you may think.<br><br>Did you know that about 15% of the world suffers from loneliness?<br>and what can we do? how can we help?</em></p></div>";
+            var answer = "<div data-aos='fade-in'><p style='text-align: center'>based on your answers:</p><h5 style='text-align: center'>you are among the lucky, happy few<br><b style='color: #8293b6 !important;'>in a world with many, many lonely people.</b></h5><p style='text-align: center'><br><br><br>Loneliness is actually more prevalent than you may think.<br>Did you know that about 35% of the world suffers from loneliness?<br><a style='color: #ff6666;'>and what can we do? how can we help?</a></p></div>";
             document.getElementById("questionaire").innerHTML = answer;
-            var review = "This is some phrase that talks to you because apparently you are not lonely.";
+            var review = "Even though you do not struggle with loneliness, you can always look for ways to help others.<br>We live in a lonely world, <b>but no one should be alone.</b>";
             document.getElementById("questionreview").innerHTML = review;
             //console.log(arrSum(an));
         }
