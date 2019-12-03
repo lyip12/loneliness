@@ -1,11 +1,12 @@
-var displaydata;
-
 //Main function, update visualization upon scrolling
 var scrollVis = function () {
+
+    var displaydata;
+    var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
     // constants to define the size
     // and margins of the vis area.
-    var width =  Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
-    var height =Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
+    var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
+    var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -43,9 +44,7 @@ var scrollVis = function () {
 
             var matrixData = wrangleData(rawData);
 
-            displaydata = matrixData;
-
-            svg = d3.select(this).selectAll('svg').data([matrixData.prevalence]);
+            svg = d3.select(this).selectAll('svg').data(matrixData["prevalence"]);
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
@@ -61,13 +60,7 @@ var scrollVis = function () {
             g = svg.select('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-            // perform some preprocessing on raw data
-            //var displayData = getData(rawData);
-
-
-
-            //console.log(displayData);
-            //console.log(matrixData.prevalence);
+            console.log(matrixData)
             setupVis(matrixData);
 
             //setupVis(displayData);
@@ -84,7 +77,10 @@ var scrollVis = function () {
         // square grid
         // @v4 Using .merge here to ensure
         // new and old data have same attrs applied
-        var circles = g.selectAll('.circle').data(displayData["Fewer Confidants"]);//.prevalence);
+
+        var firstdata = displayData["Fewer Confidants"];
+        console.log(firstdata);
+        var circles = g.selectAll('.circle').data(firstdata);//.prevalence);
 
         //console.log(displayData);
 
@@ -95,16 +91,21 @@ var scrollVis = function () {
         circles = circles.merge(circlesE)
             .attr('r', circleSize/2)
             .attr('fill', '#fff')
-            .classed('fill-circle', function (d) { return d.filler; })
+            .classed('fill-circle', true)
             .attr('cx', function (d, i)
             {
-                col = Math.floor(i/numPerCol);
-                return (col*circleSize) +(col*gsp);
+                let col = i%numPerRow;
+                let x = (col*circleSize) +(col*circlePad)
+                return (col*circleSize) +(col*circlePad);
             })
-            .attr('cy', function (d) { return d.y;})
+            .attr('cy', function (d, i) {
+                let row =Math.floor( i / numPerRow);
+                let y = (row*circleSize)+(row*circlePad);
+                return (row*circleSize)+(row*circlePad);
+            })
             .attr('opacity', 0);
 
-        circles.transition().attr('cx')
+        //circles.transition().attr('cx')
 
     };
 
@@ -136,7 +137,7 @@ var scrollVis = function () {
                 return 5 * d.row;
             })
             .attr('opacity', 0.8)
-            .attr('fill', '#ddd');
+            .attr('fill', '#fff');
     }
 
     function highlightPre() {
@@ -354,7 +355,7 @@ var scrollVis = function () {
     function wrangleData(data, matrixsize=numPerRow*numPerRow)
     {
         //rewrite the csv file into json file for easier data parsing
-        var newdata = {};
+        var displayData = {};
         var namelist = d3.nest().key(function(d){return d.category})
             .rollup(function(leaves)
             {
@@ -363,58 +364,46 @@ var scrollVis = function () {
             .entries(data)
             .map(function (d) { return {Category: d.key, Value: d.value}});
 
-        var dotvalue = 300/matrixsize;
-
         var nesteddata = d3.nest().key(function(d){return d.category})
         .entries(data);
 
-        console.log(nesteddata);
-        console.log(namelist);
+        //console.log(nesteddata);
+        //console.log(namelist);
 
         //parse the csv file into json format for easier access.
         //meanwhile parse string into numberic representations
         nesteddata.forEach(function(g, index) {
             var category = g.values;
-            console.log(category);
+            //console.log(category);
             var total = namelist[index].Value;
-            units = Math.floor(total/dotvalue);
-            var groupdata = []
-            groupdata = groupdata.concate(
+            var dotvalue = total/matrixsize;
+            var groupdata = [];
 
-            )category.map(function (d, index) {
-                var temp = {};
-                if (index ===0){temp.total = 0}
-                temp.total +=+d.Total;
-                temp.division = d.division;
-                temp.counr = + d.Total;
-                temp.index = index;
-                return temp;
-            })
+            var colorScheme = d3.quantize(colorInterpolator, category.length);
+
+            //turn the count for each division into a matrix with different categories
+            category.forEach(function(d, index){
+                d.total = +d.Total;
+                d.units = Math.floor(d.total/dotvalue);
+                groupdata = groupdata.concat(
+                        Array(d.units+1).join(1)
+                            .split('')
+                            .map(function(){
+                                return {
+                                    dotvalue: dotvalue,
+                                    division: d.division,
+                                    units:d.units,
+                                    total: +g.Total,
+                                    index: index,
+                                    fill: colorScheme[index]
+                                };
+                            })
+                    )
+            });
             //console.log(groupdata);
-            newdata[namelist[index]] = groupdata;
+            displayData[namelist[index].Category] = groupdata;
         });
-        console.log(newdata);
-
-        /*var displayData = {};
-        for(var i = 0; i<namelist.length;i++)
-        {
-            var unit = [];
-            for (var j = 0; j< matrixsize; j++)
-            {
-                d = {}
-                d.col=j % numPerRow;
-                d.x=j % numPerRow * (circleSize + circlePad);
-                d.row=Math.floor(j / numPerRow);
-                d.y=Math.floor(j / numPerRow) * (circleSize + circlePad);
-                //console.log(newdata[i]['total'])
-                if(j<6*newdata[i].total){ d.filler=true}
-                else{ d.filler=false}
-                unit.push(d)
-            }
-            displayData[namelist[i]] = unit;
-        }
-        //console.log(displayData);*/
-
+        console.log(displayData);
         return displayData;
     }
 
