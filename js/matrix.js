@@ -5,8 +5,11 @@ var scrollVis = function () {
     var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
     // constants to define the size
     // and margins of the vis area.
-    var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
-    var height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.6;
+    var width = Math.min(document.documentElement.clientHeight,
+        window.innerHeight,
+        document.documentElement.clientWidth,
+        window.innerWidth)*0.6;
+    var height = width;
 
     // Keep track of which visualization we are on and which was the last
     // index activated. When user scrolls quickly, we want to call all the
@@ -44,7 +47,7 @@ var scrollVis = function () {
 
             var matrixData = wrangleData(rawData);
 
-            svg = d3.select(this).selectAll('svg').data(matrixData["prevalence"]);
+            svg = d3.select(this).selectAll('svg').data([matrixData.prevalence]);
             var svgE = svg.enter().append('svg');
             // @v4 use merge to combine enter and existing selection
             svg = svg.merge(svgE);
@@ -95,12 +98,10 @@ var scrollVis = function () {
             .attr('cx', function (d, i)
             {
                 let col = i%numPerRow;
-                let x = (col*circleSize) +(col*circlePad)
                 return (col*circleSize) +(col*circlePad);
             })
             .attr('cy', function (d, i) {
                 let row =Math.floor( i / numPerRow);
-                let y = (row*circleSize)+(row*circlePad);
                 return (row*circleSize)+(row*circlePad);
             })
             .attr('opacity', 0);
@@ -137,7 +138,7 @@ var scrollVis = function () {
                 return 5 * d.row;
             })
             .attr('opacity', 0.8)
-            .attr('fill', '#fff');
+            .attr('fill', '#ddd');
     }
 
     function highlightPre() {
@@ -157,19 +158,21 @@ var scrollVis = function () {
         g.selectAll('.fill-circle')
             .transition('move-fills')
             .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
+            .attr('cx', function (d, i) {
+                let col = i%numPerRow;
+                return (col*circleSize) +(col*circlePad);
             })
-            .attr('cy', function (d) {
-                return d.y;
+            .attr('cy', function (d, i) {
+                let row =Math.floor( i / numPerRow);
+                return (row*circleSize)+(row*circlePad);
             });
 
 
         g.selectAll('.fill-circle')
             .transition()
             .duration(800)
-            .attr('opacity', function (d) { return d.filler ? 1 : 0.3; })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+            .attr('opacity', function (d) { return d.fill/4})
+            .attr('fill', function (d) { return d.fill; });
 
     }
 
@@ -177,7 +180,7 @@ var scrollVis = function () {
 
         var circles =  g.selectAll('.circle')
             .data(displaydata["employment"])
-            .classed('age-circle', function (d) { return d.filler; })
+            .classed('age-circle', function (d) { return d.fill; })
             .transition()
 
         circles.duration(800)
@@ -193,33 +196,31 @@ var scrollVis = function () {
         g.selectAll('.age-circle')
             .transition('move-fills')
             .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
+            .attr('cx', function (d, i) {
+                let col = i%numPerRow;
+                return (col*circleSize) +(col*circlePad);
             })
-            .attr('cy', function (d) {
-                return d.y;
+            .attr('cy', function (d, i) {
+                let row =Math.floor( i / numPerRow);
+                return (row*circleSize)+(row*circlePad);
             });
+
 
         //console.log(displaydata["martial status"]);
         g.selectAll('.age-circle')
             .transition()
             .duration(800)
             .attr('opacity', function (d) {
-                if(d.filler == true)
-                {return 1}
-                else if (d.filler == false)
-                {
-                    return 0.3
-                }
+                d.fill/6
             })
-            .attr('fill', function (d) { return d.filler ? '#ff6666' : '#ddd'; });
+            .attr('fill', function (d) { return d.fill; });
     }
 
     function highlightMartial() {
 
         var circles =  g.selectAll('.circle')
             .data(displaydata["Fewer Confidants"])
-            .classed('m-circle', function (d) { return d.filler; })
+            .classed('m-circle', function (d) { return d.fill; })
             .transition()
 
         circles.duration(800)
@@ -269,11 +270,13 @@ var scrollVis = function () {
         g.selectAll('.e-circle')
             .transition('move-fills')
             .duration(800)
-            .attr('cx', function (d) {
-                return d.x;
+            .attr('cx', function (d, i) {
+                let col = i%numPerRow;
+                return (col*circleSize) +(col*circlePad);
             })
-            .attr('cy', function (d) {
-                return d.y;
+            .attr('cy', function (d, i) {
+                let row =Math.floor( i / numPerRow);
+                return (row*circleSize)+(row*circlePad);
             });
 
         g.selectAll('.e-circle')
