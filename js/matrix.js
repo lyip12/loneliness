@@ -379,9 +379,7 @@ var scrollVis = function () {
             var total = namelist[index].Value;
             units = Math.floor(total/dotvalue);
             var groupdata = []
-            groupdata = groupdata.concate(
-
-            )category.map(function (d, index) {
+            groupdata = groupdata.concate(category.map(function (d, index) {
                 var temp = {};
                 if (index ===0){temp.total = 0}
                 temp.total +=+d.Total;

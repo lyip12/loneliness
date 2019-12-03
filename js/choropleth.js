@@ -1,5 +1,6 @@
 demographicschorovis() // for avoiding naming issue
 
+
 var choronarratives = {
     Austria: "Austria is commonly known as one of the safest and most beautiful countries in Europe. By international standards, It has a very generous welfare state, and was known as one of the happiest European nations. Yet, despite living in a country with a high quality of life, a relatively thriving economy and a stable political system only one in five Austrians say they are truly happy, according to a two year study from Vienna’s Modul University. Austrians believe financial worries, physical pain, loneliness, stress, and frustration about work all contribute to a reduced sense of well-being. The main cause to people’s loneliness and social isolation was specific regional differences in living areas.",
     Belgium: "Research led by Ghent University has shown that no less than 46 percent of the Belgians feels lonely, either permanently or at times. Adults aged between 20 and 50 are particularly vulnerable. The crucial factor is a relationship, and living without a partner, multiplies the risk of becoming lonely. Other factors triggering loneliness in Belgium are low income and a bad health.",
@@ -30,17 +31,17 @@ function demographicschorovis() {
     var toggle;
     //responsive layout from https://stackoverflow.com/questions/16265123/resize-svg-when-window-is-resized-in-d3-js
     var svg = d3.select("#yipchoro")
-        .classed("yipsvg-container", true)
-        .append("svg")
-        .attr("preserveAspectRatio", "xMinYMin meet")
-        .attr("viewBox", "0 0 300 400")
-        .classed("svg-content-responsive", true);
+    .classed("yipsvg-container", true)
+    .append("svg")
+    .attr("preserveAspectRatio", "xMinYMin meet")
+    .attr("viewBox", "0 0 300 400")
+    .classed("svg-content-responsive", true);
 
     var lucypath = d3.geoPath();
     var projection = d3.geoMercator()
-        .scale(230)
-        .center([0, 0])
-        .translate([130, 410]);
+    .scale(230)
+    .center([0, 0])
+    .translate([130, 410]);
 
     var data = d3.map();
 
@@ -58,12 +59,12 @@ function demographicschorovis() {
 
 
     var Tooltip = d3.select("#yipchoro")
-        .append("div")
-        .style("opacity", 0)
-        .attr("class", "tooltip")
-        .style("background-color", "#161c26")
-        .style("border-radius", "3px")
-        .style("padding", "10px")
+    .append("div")
+    .style("opacity", 0)
+    .attr("class", "tooltip")
+    .style("background-color", "#161c26")
+    .style("border-radius", "3px")
+    .style("padding", "10px")
 
     //actual chorovis starts
     function updateChoropleth(selector) {
@@ -130,15 +131,17 @@ function demographicschorovis() {
         d3.queue()
             .defer(d3.json, "data/worldeu.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
-                data.set(d.Code, +d[selector]);
-                a.push(+d[selector]);
-            })
+            data.set(d.Code, +d[selector]);
+            a.push(+d[selector]);
+        })
             .await(ready);
 
 
         function ready(error, topo, loneliness) {
 
             let yipmouseOver = function (d) {
+                //console.log(d3.mouse(this)[0]);
+                
                 if (toggle !== 0 && d.data !== "no data") {
                     d3.selectAll(".Country")
                         .transition()
@@ -148,7 +151,7 @@ function demographicschorovis() {
                         .transition()
                         .duration(100)
                         .style("opacity", 1)
-                        //console.log("tis is working")
+                    //console.log("tis is working")
                         .attr('cursor', 'pointer');
 
                     tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click for more information.</b>";
@@ -164,7 +167,8 @@ function demographicschorovis() {
                     //var yipchoroselector = d.properties.name;
                     //yipsmallmultiples(yipchoroselector);
 
-                    //console.log(d3.mouse(this)[0]/window.innerWidth*300);
+                    //                    console.log(window.innerWidth/20);
+                    //console.log(d3.mouse(this)[0]);
                 }
             }
 
@@ -230,10 +234,10 @@ function demographicschorovis() {
                 legend.push(d3.min(a) + k * i);
             };
 
-            console.log(legend)
+            //console.log(legend)
             var fill = d3.scaleThreshold()
-                .domain(legend)
-                .range(d3.schemeBlues[9]);
+            .domain(legend)
+            .range(d3.schemeBlues[9]);
 
             d3.selectAll(".yipchorotext")
                 .attr("opacity", 1)
@@ -281,8 +285,8 @@ function demographicschorovis() {
                     .transition()
                     .duration(800)
                     .attr("fill", function (d) {
-                        return fill(d3.min(a) + k * i);
-                    });
+                    return fill(d3.min(a) + k * i);
+                });
 
                 var num = d3.min(a) + (k * (i + 1));
                 var n = num.toFixed(2);
@@ -297,8 +301,8 @@ function demographicschorovis() {
                     .transition()
                     .duration(800)
                     .attr("fill", function (d) {
-                        return fill(d3.max(a) - (d3.min(a) + k * i));
-                    });
+                    return fill(d3.max(a) - (d3.min(a) + k * i));
+                });
 
                 svg.append("text")
                     .attr("x", 90)
@@ -334,11 +338,11 @@ function demographicschorovis() {
                 .transition()
                 .duration(800)
                 .attr("fill", function (d) {
-                    d.data = data.get(d.properties.adm0_a3) || "no data";
-                    if (d.data !== "no data") {
-                        return fill(d3.max(a) - d.data);
-                    };
-                })
+                d.data = data.get(d.properties.adm0_a3) || "no data";
+                if (d.data !== "no data") {
+                    return fill(d3.max(a) - d.data);
+                };
+            })
                 .style("opacity", 1);
 
 
