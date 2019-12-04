@@ -7,7 +7,7 @@ function runjiascatter() {
         top: 10,
         right: 150,
         bottom: 40,
-        left: 0
+        left: 18
     };
 
     var width = Math.max(document.documentElement.clientHeight, window.innerWidth || 0) * 0.5 - margin.left,
