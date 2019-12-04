@@ -151,7 +151,7 @@ function MatrixMain()
             })*/
 
 
-        var skipbutton =  d3.selectAll(".step")
+        /*var skipbutton =  d3.selectAll(".step")
             .append("button")
             .classed("matrixbutton", true)
             .attr("id", "skipmatrix")
@@ -165,7 +165,7 @@ function MatrixMain()
                 var top = document.getElementById("#choloraftermatrix").offsetTop();
                 console.log(top);
                 window.scrollTo(0, top);
-            })
+            })*/
 
 
         function updateMatrix(){
@@ -410,7 +410,7 @@ function MatrixMain()
                 })
                 .duration(600)
                 .attr("opacity", function(d){
-                    if (d.index ===1 || d.index ==2) return 0.8;
+                    if (d.index ===0 || d.index ==2) return 0.8;
                     return 0.3;
                 })
                 .attr("fill", function (d){return d.fill})

@@ -302,6 +302,7 @@ div.section {
     width: 20vw;
     margin-left: 10vh;
     height: 50vh;
+    text-align: left;
 }
 
 .fill-circle{
