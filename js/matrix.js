@@ -89,7 +89,7 @@ function MatrixMain()
             var dotvalue = total/matrixsize;
             var groupdata = [];
 
-            var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
+            var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#ffffff"));//change the second color to #8293b6 to show blue
             var colorScheme = d3.quantize(colorInterpolator, category.length);
 
             //turn the count for each division into a matrix with different categories
