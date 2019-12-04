@@ -28,11 +28,7 @@ function MatrixMain()
 
     var relative = false;
 
-    var changeSortingOrder = d3.select("#change-format").on("click", function() {
-        reverse = !reverse;
-        updateMatrix();
-    });
-
+    var namelist;
 
     d3.csv('data/what are lonely people like.csv',  initVis);
 
@@ -70,7 +66,7 @@ function MatrixMain()
     {
         //rewrite the csv file into json file for easier data parsing
         var displayData = {};
-        var namelist = d3.nest().key(function(d){return d.category})
+        namelist = d3.nest().key(function(d){return d.category})
             .rollup(function(leaves)
             {
                 return d3.sum(leaves, function(d){return +d.Total});
@@ -99,12 +95,14 @@ function MatrixMain()
             //turn the count for each division into a matrix with different categories
             category.forEach(function(d, index){
                 d.total = +d.Total;
-                d.units = Math.floor(d.total/dotvalue);
+                d.units = Math.ceil(d.total/dotvalue)%matrixsize;;
+                d.maxindex = index
                 groupdata = groupdata.concat(
                     Array(d.units+1).join(1)
                         .split('')
                         .map(function(){
                             return {
+                                maxindex: d.maxindex,
                                 dotvalue: dotvalue,
                                 division: d.division,
                                 units:d.units,
@@ -122,11 +120,7 @@ function MatrixMain()
         return displayData;
     }
 
-    function updateMatrix(){
-        // create a new plot and display it
 
-
-    }
 
     //Main function, update visualization upon scrolling
     function scrollVis(matrixData) {
@@ -141,6 +135,49 @@ function MatrixMain()
         // If a section has an update function then it is called while scrolling
         // through the section with the current    // progress through the section.
         var updateFunctions = [];
+
+ /*       var button =  d3.selectAll(".step")
+            .append("button")
+            .classed("matrixbutton", true)
+            .attr("x", width/2)
+            .attr("y", height/2)
+            .attr("color", "#fff")
+            .text("Absolute")
+            .on('click', function () {
+                relative = !relative;
+                if (relative){d3.select(this).text("Relative");}
+                else{d3.select(this).text("Absolute");}
+                updateMatrix();
+            })*/
+
+
+        var skipbutton =  d3.selectAll(".step")
+            .append("button")
+            .classed("matrixbutton", true)
+            .attr("id", "skipmatrix")
+            .attr("x", width/2+20)
+            .attr("y", height/2)
+            .attr("color", "#fff")
+            .text("Skip Matrix")
+            .on('click', function () {
+                var $target = $('#skipmatrix');
+
+                var top = document.getElementById("#choloraftermatrix").offsetTop();
+                console.log(top);
+                window.scrollTo(0, top);
+            })
+
+
+        function updateMatrix(){
+            // create a new plot and display it
+            d3.selectAll('.circle')
+                .transition()
+                .duration(300)
+                .attr("cx", function(d, i){return d3.select(this).cx/2})
+                .attr("cy", function(d, i){return d3.select(this).cy/2})
+                .attr("r", circleSize/9)
+
+        }
 
         /**chart**/
         var chart = function (selection) {
@@ -163,25 +200,32 @@ function MatrixMain()
                 g = svg.select('g')
                     .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-                console.log(matrixData)
                 setupVis(matrixData);
 
                 setupSections();
             });
         };
 
+        var circles;
         /**setupVis - creates initial elements for all sections of the visualization.*/
         var setupVis = function (matrixData) {
+            console.log(matrixData)
+
             // square grid
             // @v4 Using .merge here to ensure
             // new and old data have same attrs applied
 
-            var firstdata = matrixData["Fewer Confidants"];
+            var firstdata = matrixData["prevalence"];
             console.log(firstdata);
-            g.selectAll('.circle').data(firstdata)
+
+//            var circles = g.selectAll(".circle").append('circle').data(firstdata).classed('circle', true);
+
+            circles = g.selectAll('.circle')
+                //.merge(circles)
+                .data(firstdata)
                 .enter()
                 .append('circle')
-                .attr("class", "circle fill-circle")
+                .classed("fill-circle",true)
                 .attr('r', circleSize/2)
                 .attr('fill', '#fff')
                 .attr('cx', function (d, i)
@@ -193,7 +237,7 @@ function MatrixMain()
                     let row =Math.floor( i / numPerRow);
                     return (row*circleSize)+(row*circlePad);
                 })
-                .attr('opacity', 0.3);
+                .attr('opacity', 0.1);
 
             //circles.transition().attr('cx')
 
@@ -219,66 +263,41 @@ function MatrixMain()
         };
 
         function showGrid() {
-            g.selectAll('.circle')
+            circles
                 .transition()
-                .duration(600)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .delay(function (d,i) {
+                   return 50 * getrownum(i);
                 })
+                .duration(800)
                 .attr('opacity', 0.8)
-                .attr('fill', '#ddd');
-
-            g.selectAll('.fill-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', 0);
+                .attr("fill", "#fff")
+            ;
         }
 
-        function highlightPre() {
+        function getrownum(i){
+            return Math.floor( i / numPerRow);
+        }
 
-            g.selectAll('.circle')
+        function highlightPre(index) {
+            console.log("hightlightpre")
+            circles
+                .data(matrixData["prevalence"])
+                .classed('age-circle',true)
                 .transition()
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
+                })
                 .duration(600)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .attr("opacity", function(d){
+                    if (d.index === 0 || d.index ===Math.floor(d3.max(d.index)/2)) return 0.8;
+                    return 0.3;
                 })
-                .attr('opacity', 0)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
-                })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
+                .attr("fill", function (d){return d.fill})
 
 
-            g.selectAll('.fill-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) { return d.index/4})
-                .attr('fill', function (d) { return d.fill; });
-
-        }
-
-        function highlightAge() {
-
-            var circles =  g.selectAll('.circle')
-                .data(matrixData["employment"])
-                .classed('age-circle', function (d) { return d.fill; })
-                .transition()
-
-            circles.duration(800)
+            /*circles.duration(800)
                 .delay(function (d) {
-                    return 5 * d.row;
+                    return 5 * getrownum(i);
                 })
                 .attr('opacity', 0.3)
                 .attr('fill', '#ddd');
@@ -305,151 +324,119 @@ function MatrixMain()
                     d.fill/6
                 })
                 .attr('fill', function (d) { return d.fill; });
+        */}
+
+
+        function highlightAge() {
+
+            console.log("hightlightage")
+            circles
+                .data(matrixData["age"])
+                .classed('age-circle',true)
+                .transition()
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
+                })
+                .duration(600)
+                .attr("opacity", function(d){
+                    if (d.index === 1 || d.index ===3) return 0.8;
+                    return 0.3;
+                })
+                .attr("fill", function (d){return d.fill})
         }
+
+
 
         function highlightMartial() {
 
-            var circles =  g.selectAll('.circle')
-                .data(matrixData["Fewer Confidants"])
-                .classed('m-circle', function (d) { return d.fill; })
+            console.log("hightlightmar")
+            circles
+                .data(matrixData["martial status"])
+                //.classed('age-circle',true)
                 .transition()
-
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
                 })
-                .attr('opacity', 0.3)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.m-circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
+                .duration(600)
+                .attr("opacity", function(d){
+                    if (d.index === 0 || d.index ==2) return 0.8;
+                    return 0.3;
                 })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
-
-            g.selectAll('.m-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) { return d.index/12})
-                .attr('fill', function (d) { return d.fill});
+                .attr("fill", function (d){return d.fill})
         }
 
         function highlightEvent() {
 
-            var circles =  g.selectAll('.circle')
+            circles
                 .data(matrixData["specific events"])
-                .classed('e-circle', true)
+                //.classed('age-circle',true)
                 .transition()
-
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
                 })
-                .attr('opacity', 0.3)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.e-circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
+                .duration(600)
+                .attr("opacity", function(d){
+                    if (d.index === 0 || d.index ==2) return 0.8;
+                    return 0.3;
                 })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
-
-            g.selectAll('.e-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) { return d.index/12})
-                .attr('fill', function (d) { return d.fill})
+                .attr("fill", function (d){return d.fill})
         }
 
         function highlightImpact() {
 
-            var circles =  g.selectAll('.circle')
-                .data(matrixData["impact"])
-                .classed('im-circle', function (d) { return d.filler; })
+            circles
+                .data(matrixData["Fewer Confidants"])
+                //.classed('age-circle',true)
                 .transition()
-
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
                 })
-                .attr('opacity', 0.3)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.im-circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
+                .duration(600)
+                .attr("opacity", function(d){
+                    if (d.index === 0 ) return 0.8;
+                    return 0.3;
                 })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
-
-            g.selectAll('.im-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) { return d.fill/10})
-                .attr('fill', function (d) { return d.fill});
+                .attr("fill", function (d){return d.fill})
         }
 
         function highlightInt() {
 
-            var circles =  g.selectAll('.circle')
-                .data(matrixData["martial status"])
-                .classed('it-circle', true)
+            circles
+                .data(matrixData["employment"])
+                //.classed('age-circle',true)
                 .transition()
-
-            circles.duration(800)
-                .delay(function (d) {
-                    return 5 * d.row;
+                .delay(function (d,i) {
+                    return 50 * getrownum(i);
                 })
-                .attr('opacity', 0.3)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.it-circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
+                .duration(600)
+                .attr("opacity", function(d){
+                    if (d.index ===1 || d.index ==2) return 0.8;
+                    return 0.3;
                 })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
-
-            g.selectAll('.it-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) { return d.index/12})
-                .attr('fill', function (d) { return d.fill});
+                .attr("fill", function (d){return d.fill})
         }
+
+            /* // use named transition to ensure
+             // move happens even if other
+             // transitions are interrupted.
+             g.selectAll('.it-circle')
+                 .transition('move-fills')
+                 .duration(800)
+                 .attr('cx', function (d, i) {
+                     let col = i%numPerRow;
+                     return (col*circleSize) +(col*circlePad);
+                 })
+                 .attr('cy', function (d, i) {
+                     let row =Math.floor( i / numPerRow);
+                     return (row*circleSize)+(row*circlePad);
+                 });
+
+             g.selectAll('.it-circle')
+                 .transition()
+                 .duration(800)
+                 .attr('opacity', function (d) { return d.index/12})
+                 .attr('fill', function (d) { return d.fill});
+         }*/
 
         chart.activate = function (index) {
             activeIndex = index;
@@ -470,15 +457,5 @@ function MatrixMain()
     };
 
     //control button: Switch Between Absolute Percentage Matrix and Relative Percentage Matrix
-
-    function changeformat(){
-
-        d3.selectAll('.circle')
-            .transition()
-            .duration(300)
-            .attr("cx", function(d, i){return})
-            .attr("cy", function(d, i){return })
-            .attr("r")
-    }
 
 }

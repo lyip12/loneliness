@@ -1,47 +1,48 @@
-﻿category,division,U.S.-Lonely ,U.K.-Lonely, Japan-Lonely,Total
-prevalence,major problem,4,10,8,22
-prevalence,minor problem,5,11,7,23
-prevalence,isn't really a problem,5,3,2,10
-age,18-29,24,25,19,68
-age,30-49,35,30,37,102
-age,50-64,25,20,23,68
-age,65+,16,25,21,62
-gender,male,44,50,54,148
-gender,female,56,50,46,152
-income,lower income,63,49,52,164
-income,middle income,23,21,33,77
-income,higher income,14,10,15,39
-education,High school or less/secondary or less,47,36,64,147
-education,Some college/ post-secondary/junior college,36,42,15,93
-education,College/university or more,17,22,20,59
-employment,Employed full time,33,25,35,93
-employment,Employed part time,13,14,18,45
-employment,unemployed,14,14,22,50
-employment,other,40,47,25,112
-martial status,"single, that is never married",33,32,42,107
-martial status,"single, living with a partner",7,7,2,16
-martial status,married,22,22,30,74
-martial status,divorced/Separated,27,23,14,64
-martial status,widowed,11,16,12,39
-specific events,The death of a close family member or friend,19,20,22,61
-specific events,A change in living situation,15,16,18,49
-specific events,A negative change in financial status,17,16,11,44
-specific events,A serious illness or injury in their family,16,15,12,43
-specific events,A serious illness or injury themselves,12,14,9,35
-specific events,A loss of a job,9,7,6,22
-specific events,A death of a spouse or partner,4,5,2,11
-specific events,Marital separation or divorce,4,4,1,9
-specific events,Other,4,3,19,26
-impact,mental health,29,30,25,84
-impact,physical health,28,25,21,74
-impact,personal relationships,24,27,20,71
-impact,ability to do their job,17,16,16,49
-impact,other,2,2,18,22
-Dissatisfaction with the Number of Meaningful Personal Connections,family members,36,30,20,86
-Dissatisfaction with the Number of Meaningful Personal Connections,friends,27,30,27,84
-Dissatisfaction with the Number of Meaningful Personal Connections,neighbors,29,35,28,92
-Dissatisfaction with the Number of Meaningful Personal Connections,other,8,5,25,38
-Fewer Confidants,>6,18,18,7,43
-Fewer Confidants,3-5',33,38,42,113
-Fewer Confidants,1-2',39,33,34,106
-,0,10,11,16,37
+﻿category,division,Lonely,Not Lonely,Total
+prevalence,major problem,22,78,100
+prevalence,minor problem,23,77,100
+prevalence,isn't really a problem,10,90,100
+age,18-29,68,54,122
+age,30-49,102,95,197
+age,50-64,68,72,140
+age,65+,62,79,141
+gender,male,148,50,198
+gender,female,152,50,202
+income,lower income,164,49,213
+income,middle income,77,21,98
+income,higher income,39,10,49
+education,High school or less/secondary or less,147,129,276
+education,Some college/ post-secondary/junior college,93,84,177
+education,College/university or more,59,84,143
+employment,Employed full time,93,138,231
+employment,Employed part time,45,44,89
+employment,unemployed,50,20,70
+employment,other,112,96,208
+martial status,"single, that is never married",106,65,172
+martial status,"single, living with a partner",16,26,42
+martial status,married,74,151,225
+martial status,divorced/Separated,64,29,93
+martial status,widowed,39,27,64
+specific events,The death of a close family member or friend,61,20,81
+specific events,A change in living situation,49,16,65
+specific events,A negative change in financial status,44,16,60
+specific events,A serious illness or injury in their family,43,15,58
+specific events,A serious illness or injury themselves,35,14,49
+specific events,A loss of a job,22,7,29
+specific events,A death of a spouse or partner,11,5,16
+specific events,Marital separation or divorce,9,4,13
+specific events,Other,26,3,29
+impact,mental health,84,30,114
+impact,physical health,74,25,99
+impact,personal relationships,71,27,98
+impact,ability to do their job,49,16,65
+impact,other,22,2,24
+Dissatisfaction with the Number of Meaningful Personal Connections,family members,86,30,116
+Dissatisfaction with the Number of Meaningful Personal Connections,friends,84,30,114
+Dissatisfaction with the Number of Meaningful Personal Connections,neighbors,92,35,127
+Dissatisfaction with the Number of Meaningful Personal Connections,other,38,5,43
+Fewer Confidants,>6,43,18,61
+Fewer Confidants,3-5',113,38,151
+Fewer Confidants,1-2',106,33,139
+,0,37,11,48
+,,299,,

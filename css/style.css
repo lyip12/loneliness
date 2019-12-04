@@ -291,7 +291,7 @@ div.section {
     stroke: #ffffff;
 }
 
-/*the section changes the styles of scroll sections.*/
+/*Matrix Section*/
 #matrixvis{
     position: -webkit-sticky;
     position: sticky;
@@ -302,6 +302,20 @@ div.section {
     width: 20vw;
     margin-left: 10vh;
     height: 50vh;
+}
+
+.fill-circle{
+    /*transition: opacity 0.5s ;*/
+}
+
+.matrixbutton {
+    color: #ffffff;
+    background: none;
+    font-family: 'Roboto', sans-serif;
+    font-size: 8px;
+    width: 80px;
+    word-wrap: break-word;
+
 }
 
 /* radial area chart */
