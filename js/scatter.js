@@ -63,7 +63,7 @@ function runjiascatter() {
             fltlnlList.push({
                 Age: i,
                 Value: d3.format(".4s")(meanfltlnl),
-                Count: filteredFltlnl.length*3
+                Count: filteredFltlnl.length*5
             })
         }
 
