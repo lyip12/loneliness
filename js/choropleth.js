@@ -321,7 +321,7 @@ function demographicschorovis() {
 
             d3.selectAll(".lucypath2")
                 .transition()
-                .duration(300)
+                .duration(500)
                 .remove();
 
             // Draw the map
@@ -336,7 +336,7 @@ function demographicschorovis() {
                 .style("stroke-width", 0.05)
                 .style("opacity", 0)
                 .transition()
-                .duration(300)
+                .duration(500)
                 .attr("fill", function (d) {
                 d.data = data.get(d.properties.adm0_a3) || "no data";
                 if (d.data !== "no data") {
