@@ -198,7 +198,7 @@ function radialvisMain(){
         oddsCircleBackgrounds = circleContainer.selectAll(".dugy-radial-circle")
             .data(tickValues, function(d,i){return i})
 
-        console.log(oddsCircleBackgrounds)
+        //console.log(oddsCircleBackgrounds)
         oddsCircleBackgrounds2 = oddsCircleBackgrounds
             .enter().append("circle")
             .attr('class','dugy-radial-circle')
