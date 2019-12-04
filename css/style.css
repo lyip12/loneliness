@@ -63,9 +63,10 @@ h3.cursive {
 h5 {
     font-family: 'Roboto', sans-serif !important;
     color: white;
-    font-size: 24px !important;
+    font-size: 26px !important;
+    line-height: 32px !important;
     font-weight: 700 !important;
-    letter-spacing: 0.2em !important;
+    letter-spacing: 0.1em !important;
 }
 
 
@@ -80,6 +81,9 @@ b {
     text-align: right;
 }
 
+a{
+    color: white !important;
+}
 p,
 form,
 .tooltip{

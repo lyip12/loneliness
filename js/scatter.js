@@ -23,7 +23,7 @@ function runjiascatter() {
           "translate(40," + margin.top + ")");
 
     // Load CSV file
-    d3.csv("data/ESSCumulative.csv", function (data) {
+    d3.csv("data/ESSCumulativeSmall.csv", function (data) {
 
         // Analyze the dataset in the web console
         //turn strings into numbers
@@ -63,7 +63,7 @@ function runjiascatter() {
             fltlnlList.push({
                 Age: i,
                 Value: d3.format(".4s")(meanfltlnl),
-                Count: filteredFltlnl.length
+                Count: filteredFltlnl.length*3
             })
         }
 
@@ -136,7 +136,7 @@ function runjiascatter() {
             //console.log(d)
             
             g.append("text")
-                .text("Age: " + d.Age + " ( " + d.Count + " entires )")
+                .text("Age: " + d.Age + " ( ~" + d.Count + " entires )")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
                 .attr("y", height*4/5)

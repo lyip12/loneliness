@@ -242,7 +242,7 @@ function radialvisMain(){
             updateTopFactors();
             svg.append("text")
                 .attr("x", 0)
-                .attr("y", 0)
+                .attr("y", -2)
                 .attr("class", "dugyclicktoshow")
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-weight", "200")
@@ -253,13 +253,13 @@ function radialvisMain(){
             svg.append("text")
                 .attr("class", "dugyclicktoshow")
                 .attr("x", 0)
-                .attr("y", 10)
+                .attr("y", 8)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-weight", "200")
                 .attr("font-size", "8px")
                 .attr("text-anchor", "middle")
                 .attr("fill", "white")
-                .text("zoom in/out")
+                .text("zoom")
 
         })
             .on('mouseleave', function(d,i) {
