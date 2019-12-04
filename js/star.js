@@ -7,6 +7,7 @@ class Star{
     life = 0;
     life2 = 0
     lifetime = 1;
+    
 	static maxspeed = 1.2;
 	static maxforce = 0.03;
 
@@ -15,7 +16,7 @@ class Star{
 	this.pos.y = _y;
     this.pos.z = _z;
     this.life = _life;
-    this.life2 = 2* _life;
+    this.life2 = 2 * _life;
     this.lifetime = _life;
 	}
     get alpha() {
