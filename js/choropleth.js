@@ -129,7 +129,7 @@ function demographicschorovis() {
         a = [];
         //console.log(selector2);
         d3.queue()
-            .defer(d3.json, "data/worldeu.geojson")
+            .defer(d3.json, "data/europe.geojson")
             .defer(d3.csv, "data/ESS_Demographic.csv", function (d) {
             data.set(d.Code, +d[selector]);
             a.push(+d[selector]);
@@ -211,7 +211,7 @@ function demographicschorovis() {
                             .style("opacity", .02)
                         d3.select(this)
                             .transition()
-                            .duration(800)
+                            .duration(300)
                             .style("opacity", 1)
                         toggle = 0;
 
@@ -242,7 +242,7 @@ function demographicschorovis() {
             d3.selectAll(".yipchorotext")
                 .attr("opacity", 1)
                 .transition()
-                .duration(800)
+                .duration(300)
                 .attr("opacity", 0)
                 .remove()
 
@@ -283,7 +283,7 @@ function demographicschorovis() {
                     .attr("width", 7)
                     .attr("height", 7)
                     .transition()
-                    .duration(800)
+                    .duration(300)
                     .attr("fill", function (d) {
                     return fill(d3.min(a) + k * i);
                 });
@@ -314,14 +314,14 @@ function demographicschorovis() {
                     .text(n + "%")
                     .attr("opacity", 0)
                     .transition()
-                    .duration(800)
+                    .duration(300)
                     .attr("opacity", 1);
 
             }
 
             d3.selectAll(".lucypath2")
                 .transition()
-                .duration(800)
+                .duration(300)
                 .remove();
 
             // Draw the map
@@ -336,7 +336,7 @@ function demographicschorovis() {
                 .style("stroke-width", 0.05)
                 .style("opacity", 0)
                 .transition()
-                .duration(800)
+                .duration(300)
                 .attr("fill", function (d) {
                 d.data = data.get(d.properties.adm0_a3) || "no data";
                 if (d.data !== "no data") {
