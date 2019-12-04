@@ -207,6 +207,8 @@ function MatrixMain()
         };
 
         var circles;
+
+        var label;
         /**setupVis - creates initial elements for all sections of the visualization.*/
         var setupVis = function (matrixData) {
             console.log(matrixData)
@@ -238,6 +240,7 @@ function MatrixMain()
                     return (row*circleSize)+(row*circlePad);
                 })
                 .attr('opacity', 0.1);
+
 
             //circles.transition().attr('cx')
 
@@ -271,6 +274,7 @@ function MatrixMain()
                 .duration(800)
                 .attr('opacity', 0.8)
                 .attr("fill", "#fff")
+
             ;
         }
 
@@ -359,7 +363,7 @@ function MatrixMain()
                 })
                 .duration(600)
                 .attr("opacity", function(d){
-                    if (d.index === 0 || d.index ==2) return 0.8;
+                    if (d.index !== 3 && d.index !== 4) return 0.8;
                     return 0.3;
                 })
                 .attr("fill", function (d){return d.fill})
@@ -376,7 +380,7 @@ function MatrixMain()
                 })
                 .duration(600)
                 .attr("opacity", function(d){
-                    if (d.index === 0 || d.index ==2) return 0.8;
+                    if (d.index !== 7 && d.index !==8) return 0.8;
                     return 0.3;
                 })
                 .attr("fill", function (d){return d.fill})
@@ -393,7 +397,7 @@ function MatrixMain()
                 })
                 .duration(600)
                 .attr("opacity", function(d){
-                    if (d.index === 0 ) return 0.8;
+                    if (d.index === 0 ||d.index ===1) return 0.8;
                     return 0.3;
                 })
                 .attr("fill", function (d){return d.fill})
@@ -402,7 +406,7 @@ function MatrixMain()
         function highlightInt() {
 
             circles
-                .data(matrixData["employment"])
+                .data(matrixData["education"])
                 //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
@@ -410,7 +414,7 @@ function MatrixMain()
                 })
                 .duration(600)
                 .attr("opacity", function(d){
-                    if (d.index ===0 || d.index ==2) return 0.8;
+                    if (d.index ===0) return 0.8;
                     return 0.3;
                 })
                 .attr("fill", function (d){return d.fill})
