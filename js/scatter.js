@@ -15,12 +15,12 @@ function runjiascatter() {
 
     // append the svg object to the body of the page
     var svg = d3.select("#scatter")
-        .append("svg")
-        .attr("width", width + margin.left + margin.right)
-        .attr("height", height + margin.top + margin.bottom)
-        .append("g")
-        .attr("transform",
-            "translate(40," + margin.top + ")");
+    .append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+    .append("g")
+    .attr("transform",
+          "translate(40," + margin.top + ")");
 
     // Load CSV file
     d3.csv("data/ESSCumulativeSmall.csv", function (data) {
@@ -72,21 +72,21 @@ function runjiascatter() {
         g = d3.select("svg").attr("transform", "translate(" + margin.left + "," + margin.top + ")")
 
         var ageScale = d3.scaleLinear()
-            .domain([0, 100])
-            .range([0, width]) // this padding mapping pushes the elements away from the edges of SVG drawing area
+        .domain([0, 100])
+        .range([0, width]) // this padding mapping pushes the elements away from the edges of SVG drawing area
 
 
         var lonelinessScale = d3.scaleLinear()
-            .domain([3, 0])
-            .range([0, height]);
+        .domain([3, 0])
+        .range([0, height]);
 
         var rad = d3.scaleLinear()
-            .domain([d3.min(data, function (d) {
-                return d.fltlnl
-            }), d3.max(data, function (d) {
-                return d.fltlnl
-            })])
-            .range([1, 3])
+        .domain([d3.min(data, function (d) {
+            return d.fltlnl
+        }), d3.max(data, function (d) {
+            return d.fltlnl
+        })])
+        .range([1, 3])
 
         //console.log(fltlnlList)
 
@@ -96,44 +96,47 @@ function runjiascatter() {
             .range([0,1])*/
         //create a group element
         //append circles to the group
-        var circle = g
-            .attr("class", "circle")
-            .selectAll("circle")
-            .data(fltlnlList)
-            .enter()
-            .append("circle")
-            .attr("cx", function (d) {
-                return ageScale(d.Age)
-            })
-            .attr("cy", function (d) {
-                return lonelinessScale(d.Value) || -10
-            })
-            .attr("r", function(d,i){
-                if (d.Value === null) return 2;
-                return d.Value*d.Value;
-            })
-            .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
-            .style("opacity", 1)
-            .on("mouseover", yipmouseOver)
-            .on("mouseleave", yipmouseLeave)
+        g.attr("class", "circle")
+        .selectAll("circle")
+        .data(fltlnlList)
+        .enter()
+        .append("circle")
+        .attr("cx", function (d) {
+            return ageScale(d.Age)
+        })
+        .attr("cy", function (d) {
+            return lonelinessScale(d.Value) || -50
+        })
+        .attr("r", function(d,i){
+            if (d.Value === null) return 2;
+            return d.Value*d.Value*1.5+1;
+        })
+        .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
+        .style("opacity", 1)
+        .on("mouseover", yipmouseOver)
+        .on("mouseleave", yipmouseLeave)
 
         function yipmouseOver(d){
-            g.append("circle")
-                .classed("scattertooltipcir", true)
-                .attr("cx", d3.mouse(this)[0])
-                .attr("cy",d3.mouse(this)[1])
-                .attr("r", 8)
+
+            d3.select(this)
                 .style("opacity", 1)
                 .attr("fill", "#ff6666")
+                .attr("r", 8)
 
-            d3.selectAll(".scattertooltip").remove();
-            //console.log(d)
+            //            g.append("circle")
+            //                .classed("scattertooltipcir", true)
+            //                .attr("cx", d3.mouse(this)[0])
+            //                .attr("cy",d3.mouse(this)[1])
+            //                .attr("r", 8)
+            //                .style("opacity", 1)
+            //                .attr("fill", "#ff6666")
+            console.log(this)
 
             g.append("text")
                 .text("Age: " + d.Age + " ( ~" + d.Count + " entires )")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5)
+                .attr("y", height*4/5+20)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "12px")
                 .attr("font-weight", "300")
@@ -143,11 +146,31 @@ function runjiascatter() {
                 .text("Frequency: " + d.Value + " / Week")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+14)
+                .attr("y", height*4/5+34)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "12px")
                 .attr("font-weight", "300")
                 .attr("fill", "white")
+
+            g.append("line")
+                .attr("class", "scattertooltip")
+                .attr("x1", d3.mouse(this)[0] + "px")
+                .attr("y1", d3.mouse(this)[1] + "px")
+                .attr("x2", d3.mouse(this)[0] + "px")
+                .attr("y2", height*4/5)
+                .attr("stroke-width", 1)
+                .attr("stroke", "#ff6666")
+            
+            g.append("line")
+                .attr("class", "scattertooltip")
+                .attr("x1", ageScale(0)+40+"px")
+                .attr("y1", height*0.56 + "px")
+                .attr("x2", ageScale(100)+40+"px")
+                .attr("y2", height*0.4 + "px")
+                .attr("stroke-width", 1)
+                .attr("stroke", "#ff6666")
+
+            //<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
 
             //            Tooltip
             //                .html(data)
@@ -159,6 +182,7 @@ function runjiascatter() {
         }
 
         function yipmouseLeave(d){
+            //d3.selectAll(".scattertooltip").remove();
             /*d3.select(this)
                 .attr("r", function(d,i){
                     if (d.Value === null) return 2;
@@ -166,6 +190,20 @@ function runjiascatter() {
                 })
                 .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
 */
+            d3.select(this)
+                .attr("cx", function (d) {
+                return ageScale(d.Age)
+            })
+                .attr("cy", function (d) {
+                return lonelinessScale(d.Value) || -50
+            })
+                .attr("r", function(d,i){
+                if (d.Value === null) return 2;
+                return d.Value*d.Value*1.5+1;
+            })
+                .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
+                .style("opacity", 1)
+
             d3.selectAll(".scattertooltipcir").remove()
             d3.selectAll(".scattertooltip").remove();
 
@@ -179,20 +217,20 @@ function runjiascatter() {
         var xAxis = d3.axisBottom().scale(ageScale).tickFormat(d3.format(",d")).tickValues([0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100])
 
         var xscatter = svg.append("g")
-            .attr("class", "axis scatter")
-            .attr("transform", "translate(0," + height + ")")
-            .attr("fill", "white")
-            .call(xAxis)
+        .attr("class", "axis scatter")
+        .attr("transform", "translate(0," + height + ")")
+        .attr("fill", "white")
+        .call(xAxis)
 
 
         var yAxis = d3.axisLeft().scale(lonelinessScale)
-            .tickFormat(d3.format(",d"))
-            .tickValues([0, 1, 2, 3]);
+        .tickFormat(d3.format(",d"))
+        .tickValues([0, 1, 2, 3]);
 
         var yscatter = svg.append("g")
-            .attr("class", "axis scatter")
-            .attr("fill", "white")
-            .call(yAxis);
+        .attr("class", "axis scatter")
+        .attr("fill", "white")
+        .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
         xscatter.append("text")

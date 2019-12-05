@@ -8,7 +8,7 @@ class StarTrail{
           vertexColors: THREE.VertexColors, 
           map:this.starTexture, 
           depthTest: false, 
-          size:5,
+          size:3,
           blending:THREE.AdditiveBlending
           /* blending: THREE.CustomBlending,
           blendEquation: THREE.AddEquation,
@@ -55,7 +55,7 @@ class StarTrail{
 			this.starsColorBuffer[i*3+2] = StarTrail.startColor.b;
 		}
 		this.starsBufferGeometry.setAttribute( 'position', new THREE.BufferAttribute( this.starsPositionBuffer, 3 ) );
-		this.starsBufferGeometry.setAttribute( 'size', new THREE.BufferAttribute( this.starsScaleBuffer, 1 ) );
+		this.starsBufferGeometry.setAttribute( 'size', new THREE.BufferAttribute( this.starsScaleBuffer, 3 ) );
 		this.starsBufferGeometry.setAttribute( 'color', new THREE.BufferAttribute( this.starsColorBuffer, 3) );
 	}
 
