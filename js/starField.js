@@ -71,7 +71,7 @@ class StarTrail{
         this.starFieldUpdate();
     }
 
-    starFieldUpdate(){
+    starFieldUpdate(selectColor = null){
 		var positions = this.starField.geometry.attributes.position.array;
 		var colors = this.starField.geometry.attributes.color.array;
 		var scales = this.starField.geometry.attributes.size.array;
@@ -83,18 +83,23 @@ class StarTrail{
 			positions [i*3] = this.star.trail[i].x;
 			positions [i*3 + 1] = this.star.trail[i].y;
 			positions [i*3 + 2] = this.star.trail[i].z;
-			
-            //var color = StarTrail.startColor.clone();
-            //var sequenceInTrail = (i > this.star.pointer) ? this.star.pointer - i : this.star.pointer + this.star.alllife - i;
-            //var t  = Math.max(sequenceInTrail - this.star.lifetime, 0) / this.star.lifetime;
-            //color.lerp(StarTrail.destColor, 2 * Math.abs( t - 0.5));
-
-			//colors[i*3] = color.r;
-			//colors[i*3+1] = color.g;
-            //colors[i*3+2] = color.b;
+            
+            var color;
+            if (selectColor){
+                color = selectColor;
+            }
+            else{
+                var sequenceInTrail = (i <= this.star.pointer) ? this.star.pointer - i : this.star.pointer + this.star.alllife - i;
+                var sequenceInTrailColor  =  Math.max(this.star.colorPointer - sequenceInTrail , 0)
+                color = this.star.trailColor[sequenceInTrailColor];
+            }
+           
+			colors[i*3] = color.r;
+			colors[i*3+1] = color.g;
+            colors[i*3+2] = color.b;
 		}
 		this.starField.geometry.attributes.position.needsUpdate = true;
-		//this.starField.geometry.attributes.color.needsUpdate = true;
+		this.starField.geometry.attributes.color.needsUpdate = true;
 		this.starField.geometry.attributes.size.needsUpdate = true;
 	}
 

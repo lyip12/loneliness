@@ -2,23 +2,27 @@
 class Star{
 
 	pos = new THREE.Vector3(0,0,0);
-	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.2,0.2),0);
+	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.1,0.1),0);
     acc = new THREE.Vector3(0,0,0);
     
+    static startColor = new THREE.Color(0xff6666);
+    static destColor = new THREE.Color(0x161c26);
+
     // for records
     trail = [];
     trailColor = [];
     trailPointer = 0;
     // indicate if finished the first round of trail
-    // which means all positions along the trail is recorded
+    // which means the colors along the trail is fixed
+    trailColorPointer = 0
 
     wandertheta = 0;
     life = 0;
     life2 = 0
     lifetime = 1;
     
-	static maxspeed = 1.5;
-	static maxforce = 0.05;
+	static maxspeed = 1.0;
+	static maxforce = 0.03;
 
 	constructor(_x,_y,_z, _life){
 	this.pos.x = _x;
@@ -41,6 +45,10 @@ class Star{
         //return the current pointer of the trail
         return this.trailPointer;
     }
+
+    get colorPointer(){
+        return this.trailColorPointer;
+    }
     get alllife(){
         return this.lifetime * 2;
     }
@@ -58,7 +66,11 @@ class Star{
     }
     initTrail(){
         this.trail = [...Array(this.alllife).keys()].map(x => new THREE.Vector3(0,10000,10000));
-       
+        this.trailColor = [...Array(this.alllife).keys()].map(x => {
+            var color = Star.startColor.clone();
+            color.lerp(Star.destColor, 2 * Math.abs( Math.max(this.lifetime - x,0) / this.lifetime - 0.5));
+            return color;
+        });
     }
     wander(){
         var wanderR = 2.5;
@@ -108,10 +120,17 @@ class Star{
         this.trail[this.trailPointer] = this.pos.clone(); 
         this.trailPointer += 1
         // loop again
-        if (this.trailPointer >= this.lifetime * 2){
-            this.trailPointer -= this.lifetime * 2;
+        if (this.trailPointer >= this.alllife){
+            this.trailPointer -= this.alllife;
         }
     }
+
+    updateColorPointer(){
+        if ( this.trailColorPointer < this.alllife -1){
+            this.trailColorPointer += 1; 
+        }
+    }
+
 
     run(){
         this.vel.add(this.acc);
@@ -125,6 +144,7 @@ class Star{
 	}
 	update(){
         this.updatePosInTrail();
+        this.updateColorPointer();
         this.run();
         this.decay();
 	}
