@@ -404,21 +404,21 @@ function MatrixMain()
                 .attr("opacity", 1)
                 .attr("fill", function (d){
                 if(d.index == 0){
-                    return "#9b3434";
+                    return "#ffffff";
                 } else if(d.index == 1){
-                    return "#8293b6";
+                    return "#94535b";
                 } else if(d.index == 2){
-                    return "#ff6666";
+                    return "#fda6a6";
                 } else if(d.index == 3){
-                    return "#7b4444";
+                    return "#af3342";
                 } else if(d.index == 4){
-                    return "#2f3f61";
+                    return "#ff6666";
                 } else if(d.index == 5){
-                    return "#545db0";
+                    return "#42536a";
                 } else if(d.index == 6){
-                    return "#ffbaba";
+                    return "#8293b6";
                 } else if(d.index == 7){
-                    return "#51446d";
+                    return "#6a69a0";
                 } else {
                     return "#727272";
                 }
