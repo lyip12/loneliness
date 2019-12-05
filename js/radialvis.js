@@ -120,7 +120,7 @@ function radialvisMain(){
             .attr('y',-outerRadius-10)
             .attr("transform", function(d,i) { return "rotate(" + angleScale(i) * 180 / Math.PI + ")"; })
             .text(function(d){return d})
-            .style('fill','#ff6666')
+            .style('fill','#8293b6')
             .style('font-weight', '200')
             .style('text-anchor','middle')
             .style('font-size', '9px')

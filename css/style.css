@@ -335,7 +335,7 @@ div.section {
     stroke-width: 0.5;
 }
 .dugy-radial-axis text{
-    fill:#ff6666;
+    fill:#8293b6;
     font-size:  7px;
     fill-opacity: 0.8;
 }
@@ -360,10 +360,6 @@ div.center-highlighted-words h3{
     text-align: center;
 }
 
-div.center-highlighted-words span{
-    color: #ff6666;
-}
-
 h5#dugy-radial-topfactors{
-    color:#ff6666;
+    color:#8293b6;
 }
