@@ -108,8 +108,8 @@ function runjiascatter() {
             return lonelinessScale(d.Value) || -50
         })
             .attr("r", function(d,i){
-            if (d.Value === null) return 2;
-            return d.Value*d.Value*1.5+1;
+            if (d.Value == null) return 2;
+            return d.Value*d.Value*1.5+1 || 0;
         })
             .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
             .style("opacity", 1)
@@ -130,6 +130,7 @@ function runjiascatter() {
             //                .attr("r", 8)
             //                .style("opacity", 1)
             //                .attr("fill", "#ff6666")
+            
             console.log(this)
 
             g.append("text")

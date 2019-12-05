@@ -4,6 +4,9 @@ tree()
 
 function tree(){
 
+    var titleselector = "none";
+    var subtextselector = "none";
+
     var svg2 = d3.select(".yiptree")
     .classed("yipsvg-container", true)
     .append("svg")
@@ -65,7 +68,7 @@ function tree(){
         nodeEnter.append('text')
             .attr("class", "nodetitle")
             .attr("dy", function(d) {
-            return d.children || d._children ? 5 : 5;
+            return d.children || d._children ? 7 : 7;
         })
             .attr("x", function(d) {
             return d.children || d._children ? -30 : 30;
@@ -87,7 +90,9 @@ function tree(){
                 return "#08529d";
             };
         })
+
         nodeEnter.append('text')
+            .attr("class", "subtext")
             .attr("dy", function(d) {
             return d.children || d._children ? 25 : 25;
         })
@@ -99,7 +104,7 @@ function tree(){
         })
             .text(function(d) { if(d.data.info !== "null"){return d.data.info;}else{return " ";} })
             .attr("fill", "#8293b6")
-            .attr("opacity", "1");
+            .attr("opacity", 0.2);
 
         // UPDATE
         var nodeUpdate = nodeEnter.merge(node);
@@ -132,6 +137,80 @@ function tree(){
             } else {
                 return "#08529d";
             };
+        })
+            .on("mouseover", function(d){
+
+            var subtextselector = d.data.info;
+            
+            d3.selectAll('.subtext')
+                .attr("opacity", 1)
+                .attr("fill", function(d){
+                if(d.data.info == subtextselector){
+                    return "#ff6666";
+                } else { 
+                    return "#8293b6";
+                };
+            });
+
+            d3.select(this).attr("fill", "#ff6666")
+
+            var titleselector = d.data.name;
+
+            d3.selectAll(".nodetitle")
+                .attr("fill", function(d){
+                if(d.data.name == titleselector){
+                    return "#ff6666";
+                } else {
+                    if(d.data.importance == 12){
+                        return "white";
+                    } else if (d.data.importance == 10){
+                        return "#dfecf7";
+                    } else if (d.data.importance == 8){
+                        return "#9ecae1";
+                    } else if (d.data.importance == 6){
+                        return "#4293c7";
+                    } else {
+                        return "#08529d";
+                    };
+                };
+            })
+
+            console.log(d.data.name);
+            console.log(this);
+        })
+            .on("mouseleave", function(d){
+            d3.selectAll('.subtext').attr("opacity", 0.2).attr("fill", "#8293b6");
+
+            d3.selectAll(".nodetitle")
+                .attr("fill", function(d){
+                if(d.data.importance == 12){
+                    return "white";
+                } else if (d.data.importance == 10){
+                    return "#dfecf7";
+                } else if (d.data.importance == 8){
+                    return "#9ecae1";
+                } else if (d.data.importance == 6){
+                    return "#4293c7";
+                } else {
+                    return "#08529d";
+                };
+            })
+
+
+            d3.selectAll('circle.yipnode')
+                .attr('fill', function(d){
+                if(d.data.importance == 12){
+                    return "white";
+                } else if (d.data.importance == 10){
+                    return "#dfecf7";
+                } else if (d.data.importance == 8){
+                    return "#9ecae1";
+                } else if (d.data.importance == 6){
+                    return "#4293c7";
+                } else {
+                    return "#08529d";
+                };
+            })
         });
 
 

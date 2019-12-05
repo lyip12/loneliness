@@ -95,15 +95,15 @@ form,
 .yipnode text {
     font-family: 'Roboto', sans-serif; 
     color: #8293b6 !important;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 300;
     text-align: left;
 }
 
 .nodetitle{
-    font-size: 18px !important;
+    font-size: 20px !important;
     letter-spacing: 0.2em !important;
-    font-weight: 600 !important;
+    font-weight: 400 !important;
 }
 
 p.small {
