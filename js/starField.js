@@ -2,6 +2,7 @@
 class StarTrail{
     static startColor = new THREE.Color(0xff6666);
     static destColor = new THREE.Color(0x161c26);
+
     starTexture = new THREE.TextureLoader().load( "textures/TEX_Glow.png" );
     starMaterial = new THREE.PointsMaterial( 
         {  
@@ -9,7 +10,9 @@ class StarTrail{
           map:this.starTexture, 
           depthTest: false, 
           size:5,
-          blending:THREE.AdditiveBlending
+          blending:THREE.AdditiveBlending,
+          transparent:true,
+          opacity:1.0
           /* blending: THREE.CustomBlending,
           blendEquation: THREE.AddEquation,
           blendSrc:  THREE.SrcAlphaFactor,
@@ -19,6 +22,7 @@ class StarTrail{
         } );
 
     star = null;
+    category = 0;
 
     starsBufferGeometry = new THREE.BufferGeometry();
     starsPositionBuffer = null;
@@ -28,12 +32,18 @@ class StarTrail{
     numStars = 10;
     starField = null;
 
-    constructor(_x, _y, _z, _minLife, _maxLife){
+    // change
+    static fadingFactor = 0.1;
+    fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
+
+
+    constructor(_x, _y, _z, _minLife, _maxLife,_category){
         this.numStars = 2 * THREE.Math.randInt(_minLife, _maxLife);
         this.star = new Star(_x,_y,_z,this.numStars / 2);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
         this.starsColorBuffer = new Float32Array( this.numStars * 3 );
         this.starsScaleBuffer = new Float32Array( this.numStars );
+        this.category = _category;
         this.initialization();
     }
 
@@ -63,11 +73,42 @@ class StarTrail{
 		this.starField = new THREE.Points( this.starsBufferGeometry, this.starMaterial);
 	}
 
-	
+	fadeOut(){
+        this.fadingStage = -1;
+    }
+
+    fadeIn(){
+        this.fadingStage = 1;
+    }
+
+    opacityChange(){
+        switch(this.fadingStage){
+            case -1:
+                if (this.starField.material.opacity > 0){
+                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity,0, StarTrail.fadingFactor);
+                    this.starField.material.needsUpdate = true;}
+                else{
+                    this.fadingStage = 0;
+                }
+                break;
+            case 1:
+                if (this.starField.material.opacity < 1){
+                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity,1, StarTrail.fadingFactor);
+                    this.starField.material.needsUpdate = true;}
+                else{
+                    this.fadingStage = 0;
+                }
+                break;
+            default:
+                break;      
+        }
+    }
+
     /* Update */
     update(){
         this.star.wander();
         this.star.update();
+        this.opacityChange();
         this.starFieldUpdate();
     }
 
