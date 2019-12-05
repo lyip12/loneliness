@@ -2,13 +2,15 @@ particlevisNew();
 
 function particlevisNew(){
 
+
+
     var canvas = document.querySelector('#dugy-c');
     var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
     renderer.autoClearColor = true;
     
     const pixelRatio = window.devicePixelRatio;
 	var canvas_width = $('#dugy-c').parent().width();
-	var canvas_height =  $('#dugy-c').parent().height();
+	var canvas_height =  canvas_width / 2;
 	canvas_width = canvas_width * pixelRatio | 0;
 	canvas_height =  canvas_height * pixelRatio | 0;
 
@@ -38,38 +40,65 @@ function particlevisNew(){
     // toggle layer
 	$('#dugy-particle-radio').change( function() {
         var selected = parseInt(document.querySelector('input[name="dugy-radio-options"]:checked').value);
-        console.log(selected);
-        if(selected != 0){
+        if(selected !=0){
+            for (var i = 0; i< stars.length; i++){
+                if ( stars[i].category != selected)
+                {stars[i].fadeOut();}
+            }
+        }
+        else{
+            for (var i = 0; i< stars.length; i++){
+                stars[i].fadeIn();
+            }
+        }
+
+        /* if(selected != 0){
             camera.layers.disableAll();
             camera.layers.enable(selected);
         }
         else{
             camera.layers.enableAll(); 
-        }
+        } */
     });
     
+
     var numStars = 100;
     var stars = [];
+    var categories = [];
+    var countries = [];
+    var howLongLonely = [];
+    var howLongLonelyDisplay = [];
+
+    queue()
+    .defer(d3.csv, "data/HowLongLonely.csv")
+    .await(createParticleVis);
+
+    function createParticleVis(error, howLongLonelyData){
+
+        console.log(howLongLonelyData);
+        countries = howLongLonelyData.columns.slice(1,);
+        howLongLonely = howLongLonelyData.slice();
+        howLongLonely.forEach(e => {categories.push(e.Category)});
+        console.log(categories);
+        
+        
+    }
+
+
 
     for (var i= 0; i < numStars; i++){
         var x = THREE.Math.randFloatSpread( 2000);
         var y = THREE.Math.randFloatSpread( 1000);
         var z = - i * 0.01 - 100;
-        var starTrail = new StarTrail(x,y,z,36,720 );
-        if(starTrail.star.lifetime >= 360){
-            starTrail.starField.layers.set(1);
-            console.log(starTrail.star.lifetime);
-        }
-        else{
-            starTrail.starField.layers.set(0);
-        }
+
+        var starTrail = new StarTrail(x,y,z,36,720,i%2);
 
         particleScene.add(starTrail.starField);
         stars.push(starTrail);
     }
     function starFieldUpdate(){
         for (var i = 0; i< stars.length; i++){
-            stars[i].update()
+            stars[i].update();
         }
     }
 
