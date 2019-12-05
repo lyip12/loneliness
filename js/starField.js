@@ -23,6 +23,7 @@ class StarTrail{
 
     star = null;
     category = 0;
+    country = 'Japan-Lonely';
 
     starsBufferGeometry = new THREE.BufferGeometry();
     starsPositionBuffer = null;
@@ -35,15 +36,16 @@ class StarTrail{
     // change
     static fadingFactor = 0.1;
     fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
+    static minOpacity = 0.1;
 
-
-    constructor(_x, _y, _z, _minLife, _maxLife,_category){
+    constructor(_x, _y, _z, _minLife, _maxLife,_category, _country){
         this.numStars = 2 * THREE.Math.randInt(_minLife, _maxLife);
         this.star = new Star(_x,_y,_z,this.numStars / 2);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
         this.starsColorBuffer = new Float32Array( this.numStars * 3 );
         this.starsScaleBuffer = new Float32Array( this.numStars );
         this.category = _category;
+        this.country = _country;
         this.initialization();
     }
 
@@ -84,8 +86,8 @@ class StarTrail{
     opacityChange(){
         switch(this.fadingStage){
             case -1:
-                if (this.starField.material.opacity > 0){
-                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity,0, StarTrail.fadingFactor);
+                if (this.starField.material.opacity > StarTrail.minOpacity){
+                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity, StarTrail.minOpacity, StarTrail.fadingFactor);
                     this.starField.material.needsUpdate = true;}
                 else{
                     this.fadingStage = 0;
@@ -93,7 +95,7 @@ class StarTrail{
                 break;
             case 1:
                 if (this.starField.material.opacity < 1){
-                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity,1, StarTrail.fadingFactor);
+                    this.starField.material.opacity = THREE.Math.lerp(this.starField.material.opacity,1, StarTrail.fadingFactor * 0.5);
                     this.starField.material.needsUpdate = true;}
                 else{
                     this.fadingStage = 0;
