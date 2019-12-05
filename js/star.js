@@ -1,6 +1,7 @@
 // Star Class
 class Star{
-
+    static maxX = 1000;
+    static maxY = 500;
 	pos = new THREE.Vector3(0,0,0);
 	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.2,0.2),0);
     acc = new THREE.Vector3(0,0,0);
@@ -69,7 +70,11 @@ class Star{
         this.trailColor = [...Array(this.alllife).keys()].map(x => {
             var color = Star.startColor.clone();
             color.lerp(Star.destColor, 2 * Math.abs( Math.max(this.lifetime - x,0) / this.lifetime - 0.5));
-            return color;
+            if(x == 0){
+                return new THREE.Color(0xffffff);
+            }
+            else{return color;}
+            
         });
     }
     wander(){
@@ -130,11 +135,19 @@ class Star{
             this.trailColorPointer += 1; 
         }
     }
-
+    boundaryCheck(){
+        if(this.pos.x > Star.maxX && this.vel.x > 0 || this.pos.x < - Star.maxX && this.vel.x < 0){
+            this.vel.add(new THREE.Vector3(-2*this.vel.x, 0,0));
+        }
+        if(this.pos.y > Star.maxY && this.vel.y > 0 || this.pos.y < - Star.maxY && this.vel.y < 0){
+            this.vel.add(new THREE.Vector3(0,-2*this.vel.y, 0));
+        }
+    }
 
     run(){
         this.vel.add(this.acc);
         this.vel.clampLength(0,Star.maxspeed);
+        this.boundaryCheck();
 		this.pos.add(this.vel);
         this.acc.multiplyScalar(0);
     }
