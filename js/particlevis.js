@@ -53,11 +53,9 @@ function particlevisMain(){
 	var texsize = canvas_width * canvas_height
 
 	var past_texdata =  new Uint8Array( 4 * texsize);
-	var past_texture = new THREE.DataTexture( past_texdata, canvas_width, canvas_height, THREE.RGBAFormat );
 	var current_texdata = new Uint8Array( 4 * texsize);
 	var current_texture = new THREE.DataTexture( current_texdata, canvas_width, canvas_height, THREE.RGBAFormat );
 	var future_texdata =  new Uint8Array( 4 * texsize);
-	var future_texture = new THREE.DataTexture(future_texdata, canvas_width, canvas_height, THREE.RGBAFormat );
 
     var screenMaterial = new THREE.MeshBasicMaterial({map:current_texture});
 
@@ -115,7 +113,7 @@ function particlevisMain(){
 	function starFieldInit(){
 		var starsTexture = new THREE.TextureLoader().load( "textures/TEX_Glow.png" );
 		var starsMaterial = new THREE.PointsMaterial( 
-			{ vertexColors: THREE.VertexColors , map:starsTexture, blending: THREE.AdditiveBlending, depthTest: true,size:3} );
+			{ vertexColors: THREE.VertexColors , map:starsTexture, blending: THREE.NormalBlending, depthTest: false,size:3} );
 		// using Buffer Geometry as particle system
 		var field = new THREE.Points( starsBufferGeometry, starsMaterial );
 		return field
@@ -221,11 +219,11 @@ function particlevisMain(){
 			var srcAlpha =  future_texdata[i+3]  / 255
 
 			
-			current_texdata[i] = Math.min(255, Math.floor( future_texdata[i] + (1 - srcAlpha) * past_texdata[i]));
-			current_texdata[i+1] =Math.min(255, Math.floor( future_texdata[i+1] + (1 - srcAlpha) * past_texdata[i+1]));
-			current_texdata[i+2] = Math.min(255,Math.floor( future_texdata[i+2] + (1 - srcAlpha) * past_texdata[i+2]));
+			current_texdata[i] = Math.min(255, Math.floor( future_texdata[i] * srcAlpha +  past_texdata[i]));
+			current_texdata[i+1] =Math.min(255, Math.floor( future_texdata[i+1] * srcAlpha +   past_texdata[i+1]));
+			current_texdata[i+2] = Math.min(255,Math.floor( future_texdata[i+2] * srcAlpha  +  past_texdata[i+2]));
 			//current_texdata[i+3] = Math.min(255,Math.floor( future_texdata[i+3] + (1 - srcAlpha) * past_texdata[i+3]));
-			current_texdata[i+3] = Math.min(255, Math.floor(past_texdata[i+3] * t * (1-srcAlpha) + future_texdata[i+3]));
+			current_texdata[i+3] = Math.min(255, Math.floor(past_texdata[i+3] * (1-srcAlpha) + future_texdata[i+3])* srcAlpha);
 
 		
 			// pass current data to past data
