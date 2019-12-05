@@ -28,14 +28,14 @@ function particlevisNew(){
 	camera.position.set(0,0,100);
     camera.lookAt( 0, 0, 0 );
     
-    var numStars = 50;
+    var numStars = 100;
     var stars = [];
 
     for (var i= 0; i < numStars; i++){
         var x = THREE.Math.randFloatSpread( 2000);
         var y = THREE.Math.randFloatSpread( 1000);
         var z = - i * 0.01 - 100;
-        var starTrail = new StarTrail(x,y,z,24,480 );
+        var starTrail = new StarTrail(x,y,z,36,720 );
         particleScene.add(starTrail.starField);
         stars.push(starTrail);
     }

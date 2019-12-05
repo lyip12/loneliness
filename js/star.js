@@ -2,7 +2,7 @@
 class Star{
 
 	pos = new THREE.Vector3(0,0,0);
-	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.1,0.1),0);
+	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.2,0.2),0);
     acc = new THREE.Vector3(0,0,0);
     
     static startColor = new THREE.Color(0xff6666);
@@ -21,7 +21,7 @@ class Star{
     life2 = 0
     lifetime = 1;
     
-	static maxspeed = 1.0;
+	static maxspeed = 1.2;
 	static maxforce = 0.03;
 
 	constructor(_x,_y,_z, _life){
