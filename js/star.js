@@ -1,24 +1,35 @@
 // Star Class
 class Star{
+
 	pos = new THREE.Vector3(0,0,0);
-	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.1,0.1),0);
-	acc = new THREE.Vector3(0,0,0);
+	vel = new THREE.Vector3(0,THREE.Math.randFloat(-0.2,0.2),0);
+    acc = new THREE.Vector3(0,0,0);
+    
+    // for records
+    trail = [];
+    trailColor = [];
+    trailPointer = 0;
+    // indicate if finished the first round of trail
+    // which means all positions along the trail is recorded
+
     wandertheta = 0;
     life = 0;
     life2 = 0
     lifetime = 1;
     
-	static maxspeed = 1.2;
-	static maxforce = 0.03;
+	static maxspeed = 1.5;
+	static maxforce = 0.05;
 
-	constructor(_x,_y,_z,_life){
+	constructor(_x,_y,_z, _life){
 	this.pos.x = _x;
 	this.pos.y = _y;
     this.pos.z = _z;
     this.life = _life;
     this.life2 = 2 * _life;
     this.lifetime = _life;
-	}
+    this.initTrail();
+    }
+    
     get alpha() {
         return this.life/this.lifetime;
       }
@@ -26,6 +37,17 @@ class Star{
     get remain(){
         return this.life2;
     }
+    get pointer(){
+        //return the current pointer of the trail
+        return this.trailPointer;
+    }
+    get alllife(){
+        return this.lifetime * 2;
+    }
+
+
+   
+
     reset(_x,_y,_z,_life){
         this.pos.x = _x;
         this.pos.y = _y;
@@ -34,12 +56,14 @@ class Star{
         this.life2 = 2* _life;
         this.lifetime = _life;
     }
-
+    initTrail(){
+        this.trail = [...Array(this.alllife).keys()].map(x => new THREE.Vector3(0,10000,10000));
+       
+    }
     wander(){
         var wanderR = 2.5;
         var wanderD = 8;
         var change = 0.6;
-        //this.wandertheta = THREE.Math.randFloatSpread(change);
     
         this.wandertheta += THREE.Math.randFloat(-change,change);
         var circlepos = this.vel.clone()
@@ -79,15 +103,29 @@ class Star{
             this.life2 -=1;
         }
     }
+    updatePosInTrail(){
+
+        this.trail[this.trailPointer] = this.pos.clone(); 
+        this.trailPointer += 1
+        // loop again
+        if (this.trailPointer >= this.lifetime * 2){
+            this.trailPointer -= this.lifetime * 2;
+        }
+    }
+
+    run(){
+        this.vel.add(this.acc);
+        this.vel.clampLength(0,Star.maxspeed);
+		this.pos.add(this.vel);
+        this.acc.multiplyScalar(0);
+    }
 
 	applyforce(force){
 		this.acc.add(force);
 	}
 	update(){
-        this.vel.add(this.acc);
-        this.vel.clampLength(0,Star.maxspeed);
-		this.pos.add(this.vel);
-        this.acc.multiplyScalar(0);
+        this.updatePosInTrail();
+        this.run();
         this.decay();
 	}
 }
