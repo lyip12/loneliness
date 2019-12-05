@@ -186,7 +186,7 @@ div.section {
 
 .yipbaraxis line,
 .yipbaraxis path{
-    stroke: white;
+    stroke: #8293b6;
 }
 
 .yipbaraxis text{
@@ -280,16 +280,16 @@ div.section {
 }
 
 .axis.scatter path{
-    stroke: #ffffff;
+    stroke: #8293b6;
 }
 
 .axis.scatter text{
-    fill: #ffffff;
+    fill: #8293b6;
 }
 
 
 .axis.scatter line{
-    stroke: #ffffff;
+    stroke: #8293b6;
 }
 
 /*Matrix Section*/

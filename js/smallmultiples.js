@@ -131,7 +131,7 @@ function yipsmallmultiples(yipchoroselector){
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "20px")
                 .attr("font-weight", "300")
-                .attr("fill", "white")
+                .attr("fill", "#8293b6")
                 .text("% Pop. Frequently Lonely")
                 .attr("transform", "rotate(-90)");
 

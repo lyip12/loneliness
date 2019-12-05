@@ -204,7 +204,7 @@ function runjiascatter() {
             })
                 .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
                 .style("opacity", 1)
-            
+
             g.append("text")
                 .text("Hover to Display Detailed Data")
                 .attr("class", "scatterclickthis")
@@ -214,7 +214,7 @@ function runjiascatter() {
                 .attr("font-size", "12px")
                 .attr("font-weight", "300")
                 .attr("fill", "white")
-            
+
             d3.selectAll(".scattertooltipcir").remove()
             d3.selectAll(".scattertooltip").remove();
 
@@ -230,7 +230,7 @@ function runjiascatter() {
         var xscatter = svg.append("g")
         .attr("class", "axis scatter")
         .attr("transform", "translate(0," + height + ")")
-        .attr("fill", "white")
+        //.attr("stroke", "#8293b6")
         .call(xAxis)
 
 
@@ -240,21 +240,23 @@ function runjiascatter() {
 
         var yscatter = svg.append("g")
         .attr("class", "axis scatter")
-        .attr("fill", "white")
+        //.attr("stroke", "#8293b6")
         .call(yAxis);
 
         // to add labels to the axis, you do append("text") instead of append("p")
         xscatter.append("text")
             .text("Age of People Being Surveyed")
+            .attr("class", "scattertext")
             .attr("x", width / 2)
             .attr("y", 35)
             .attr("font-family", "'Roboto', sans-serif")
             .attr("font-size", "12px")
             .attr("font-weight", "300")
-            .attr("fill", "white")
+            .attr("fill", "#8293b6");
 
         yscatter.append("text")
             .text("Average Times Felt Lonely During Past Week")
+            .attr("class", "scattertext")
             .attr("x", 0)
             .attr("y", -30)
             .attr("text-anchor", "center")
@@ -262,6 +264,7 @@ function runjiascatter() {
             .attr("font-size", "12px")
             .attr("font-weight", "300")
             .attr("transform", "rotate(-90) ")
+            .attr("fill", "#8293b6")
 
         g.append("text")
             .text("Hover to Display Detailed Data")
@@ -273,5 +276,7 @@ function runjiascatter() {
             .attr("font-weight", "300")
             .attr("fill", "white")
 
+
+        d3.selectAll(".scattertext").attr("fill", "#8293b6");
     });
 }
