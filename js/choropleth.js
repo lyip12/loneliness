@@ -141,18 +141,21 @@ function demographicschorovis() {
 
             let yipmouseOver = function (d) {
                 //console.log(d3.mouse(this)[0]);
-                
+
                 if (toggle !== 0 && d.data !== "no data") {
                     d3.selectAll(".Country")
                         .transition()
                         .duration(100)
                         .style("opacity", .1)
+                    
                     d3.select(this)
-                        .transition()
-                        .duration(100)
-                        .style("opacity", 1)
+                    .transition()
+                    .attr("class", "highlight")
+                    .duration(100)
+                    .style("opacity", 1)
+                    .style("fill", "#ff6666")
                     //console.log("tis is working")
-                        .attr('cursor', 'pointer');
+                    .attr('cursor', 'pointer');
 
                     tip = "in " + d.properties.name + ", around <em>" + d.data + "%</em> of <em>" + cate + " population </em>is frequently lonely.<br><b>click for more information.</b>";
 
@@ -174,11 +177,41 @@ function demographicschorovis() {
 
             let yipmouseLeave = function (d) {
                 if (toggle !== 0 && d.data !== "no data") {
-                    d3.selectAll(".Country")
+
+                    d3.selectAll(".lucypath2").remove();
+                    d3.selectAll(".highlight").remove();
+
+                    svg.append("g")
+                        .selectAll(".lucypath2")
+                        .data(topo.features)
+                        .enter()
+                        .append("path")
+                        .attr("class", "lucypath2 Country")
+                        .attr("d", d3.geoPath().projection(projection))
+                        .style("stroke", "#8293b6")
+                        .style("stroke-width", 0.05)
                         .transition()
-                        .duration(100)
-                        .style("opacity", 1)
+                        .duration(500)
+                        .attr("fill", function (d) {
+                        d.data = data.get(d.properties.adm0_a3) || "no data";
+                        if (d.data !== "no data") {
+                            return fill(d3.max(a) - d.data);
+                        };
+                    })
+                        .style("opacity", 1);
+
+                    d3.selectAll(".lucypath2")
+                        .on("click", yipmouseClick)
+                        .on("mouseover", yipmouseOver)
+                        .on("mouseleave", yipmouseLeave)
+
                     d3.select(this)
+                        .attr("fill", function (d) {
+                        d.data = data.get(d.properties.adm0_a3) || "no data";
+                        if (d.data !== "no data") {
+                            return fill(d3.max(a) - d.data);
+                        };
+                    })
                         .transition()
                         .duration(100)
 
@@ -343,13 +376,14 @@ function demographicschorovis() {
                     return fill(d3.max(a) - d.data);
                 };
             })
-                .style("opacity", 1);
+                .style("opacity", 1)
 
 
             d3.selectAll(".lucypath2")
                 .on("click", yipmouseClick)
                 .on("mouseover", yipmouseOver)
                 .on("mouseleave", yipmouseLeave)
+
 
 
         }

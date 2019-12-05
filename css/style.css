@@ -37,6 +37,7 @@ h3 {
     padding-top: 5px;
     padding-bottom: 4px;
     border: none;
+    border-radius: 0px !important;
 }
 
 .btn-light {
@@ -180,7 +181,7 @@ div.section {
     fill: none;
     stroke: #8293b6;
     stroke-width: 1px;
-    opacity: 30%;
+    opacity: 70%;
 }
 
 .yipbaraxis line,

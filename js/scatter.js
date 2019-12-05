@@ -97,24 +97,24 @@ function runjiascatter() {
         //create a group element
         //append circles to the group
         g.attr("class", "circle")
-        .selectAll("circle")
-        .data(fltlnlList)
-        .enter()
-        .append("circle")
-        .attr("cx", function (d) {
+            .selectAll("circle")
+            .data(fltlnlList)
+            .enter()
+            .append("circle")
+            .attr("cx", function (d) {
             return ageScale(d.Age)
         })
-        .attr("cy", function (d) {
+            .attr("cy", function (d) {
             return lonelinessScale(d.Value) || -50
         })
-        .attr("r", function(d,i){
+            .attr("r", function(d,i){
             if (d.Value === null) return 2;
             return d.Value*d.Value*1.5+1;
         })
-        .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
-        .style("opacity", 1)
-        .on("mouseover", yipmouseOver)
-        .on("mouseleave", yipmouseLeave)
+            .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
+            .style("opacity", 1)
+            .on("mouseover", yipmouseOver)
+            .on("mouseleave", yipmouseLeave)
 
         function yipmouseOver(d){
 
@@ -140,7 +140,7 @@ function runjiascatter() {
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "12px")
                 .attr("font-weight", "300")
-                .attr("fill", "white")
+                .attr("fill", "#ff6666")
 
             g.append("text")
                 .text("Frequency: " + d.Value + " / Week")
@@ -150,7 +150,7 @@ function runjiascatter() {
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "12px")
                 .attr("font-weight", "300")
-                .attr("fill", "white")
+                .attr("fill", "#ff6666")
 
             g.append("line")
                 .attr("class", "scattertooltip")
@@ -160,16 +160,17 @@ function runjiascatter() {
                 .attr("y2", height*4/5)
                 .attr("stroke-width", 1)
                 .attr("stroke", "#ff6666")
-            
+
             g.append("line")
                 .attr("class", "scattertooltip")
-                .attr("x1", ageScale(0)+40+"px")
+                .attr("x1", ageScale(0)+41+"px")
                 .attr("y1", height*0.56 + "px")
                 .attr("x2", ageScale(100)+40+"px")
                 .attr("y2", height*0.4 + "px")
                 .attr("stroke-width", 1)
                 .attr("stroke", "#ff6666")
 
+            d3.selectAll(".scatterclickthis").remove();
             //<line x1="0" y1="0" x2="200" y2="200" style="stroke:rgb(255,0,0);stroke-width:2" />
 
             //            Tooltip
@@ -203,7 +204,17 @@ function runjiascatter() {
             })
                 .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
                 .style("opacity", 1)
-
+            
+            g.append("text")
+                .text("Hover to Display Detailed Data")
+                .attr("class", "scatterclickthis")
+                .attr("x", width /12+40)
+                .attr("y", height*4/5+20)
+                .attr("font-family", "'Roboto', sans-serif")
+                .attr("font-size", "12px")
+                .attr("font-weight", "300")
+                .attr("fill", "white")
+            
             d3.selectAll(".scattertooltipcir").remove()
             d3.selectAll(".scattertooltip").remove();
 
@@ -251,6 +262,16 @@ function runjiascatter() {
             .attr("font-size", "12px")
             .attr("font-weight", "300")
             .attr("transform", "rotate(-90) ")
+
+        g.append("text")
+            .text("Hover to Display Detailed Data")
+            .attr("class", "scatterclickthis")
+            .attr("x", width /12+40)
+            .attr("y", height*4/5+20)
+            .attr("font-family", "'Roboto', sans-serif")
+            .attr("font-size", "12px")
+            .attr("font-weight", "300")
+            .attr("fill", "white")
 
     });
 }
