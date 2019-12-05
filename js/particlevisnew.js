@@ -8,7 +8,7 @@ function particlevisNew(){
     
     const pixelRatio = window.devicePixelRatio;
 	var canvas_width = $('#dugy-c').parent().width();
-	var canvas_height =  canvas_width / 2;
+	var canvas_height =  $('#dugy-c').parent().height();
 	canvas_width = canvas_width * pixelRatio | 0;
 	canvas_height =  canvas_height * pixelRatio | 0;
 
@@ -20,6 +20,8 @@ function particlevisNew(){
         }
     });
 
+
+     
     // scene
     var particleScene = new THREE.Scene();
 
@@ -27,6 +29,24 @@ function particlevisNew(){
 	var camera = new THREE.PerspectiveCamera(135, 2, 0.1, 1000 );//fov, aspect, near, far
 	camera.position.set(0,0,100);
     camera.lookAt( 0, 0, 0 );
+    
+    // layer control
+    for (var i = 0; i < 8; i++){
+        camera.layers.enable( i ); 
+    }
+
+    // toggle layer
+	$('#dugy-particle-radio').change( function() {
+        var selected = parseInt(document.querySelector('input[name="dugy-radio-options"]:checked').value);
+        console.log(selected);
+        if(selected != 0){
+            camera.layers.disableAll();
+            camera.layers.enable(selected);
+        }
+        else{
+            camera.layers.enableAll(); 
+        }
+    });
     
     var numStars = 100;
     var stars = [];
@@ -36,6 +56,14 @@ function particlevisNew(){
         var y = THREE.Math.randFloatSpread( 1000);
         var z = - i * 0.01 - 100;
         var starTrail = new StarTrail(x,y,z,36,720 );
+        if(starTrail.star.lifetime >= 360){
+            starTrail.starField.layers.set(1);
+            console.log(starTrail.star.lifetime);
+        }
+        else{
+            starTrail.starField.layers.set(0);
+        }
+
         particleScene.add(starTrail.starField);
         stars.push(starTrail);
     }
@@ -46,18 +74,18 @@ function particlevisNew(){
     }
 
     printed = 20;
-    loop = 5;
+    loop = 1;
 	var animate = function (time) {
 		time *= 0.001;  // convert milliseconds to seconds
 		requestAnimationFrame( animate );
 		starFieldUpdate();
         renderer.render( particleScene, camera );
-  /*       printed -=1;
+ /*        printed -=1;
         if (printed < 0 && loop > 0){
             console.log(stars[5]);
             printed = 20;
             loop -=1;
-        } */
+        }  */
 	}
 	animate();
 	
