@@ -1,7 +1,7 @@
 ﻿category,division,Lonely,Not Lonely,Total
-prevalence,major problem,22,78,100
-prevalence,minor problem,23,77,100
-prevalence,isn't really a problem,10,90,100
+prevalence,major problem,123,0,123
+prevalence,minor problem,93,0,93
+prevalence,isn't really a problem,84,0,84
 age,18-29,68,54,122
 age,30-49,102,95,197
 age,50-64,68,72,140
@@ -18,11 +18,11 @@ employment,Employed full time,93,138,231
 employment,Employed part time,45,44,89
 employment,unemployed,50,20,70
 employment,other,112,96,208
-martial status,"single, that is never married",106,65,172
-martial status,"single, living with a partner",16,26,42
-martial status,married,74,151,225
-martial status,divorced/Separated,64,29,93
-martial status,widowed,39,27,64
+marital status,"single, that is never married",106,65,172
+marital status,"single, living with a partner",16,26,42
+marital status,married,74,151,225
+marital status,divorced/Separated,64,29,93
+marital status,widowed,39,27,64
 specific events,The death of a close family member or friend,61,20,81
 specific events,A change in living situation,49,16,65
 specific events,A negative change in financial status,44,16,60

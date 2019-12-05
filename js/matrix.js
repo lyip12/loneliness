@@ -89,7 +89,7 @@ function MatrixMain()
             var dotvalue = total/matrixsize;
             var groupdata = [];
 
-            var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#ffffff"));//change the second color to #8293b6 to show blue
+            var colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));//change the second color to #8293b6 to show blue
             var colorScheme = d3.quantize(colorInterpolator, category.length);
 
             //turn the count for each division into a matrix with different categories
@@ -228,7 +228,7 @@ function MatrixMain()
                 .enter()
                 .append('circle')
                 .classed("fill-circle",true)
-                .attr('r', circleSize/2)
+                .attr('r', circleSize/2.1)
                 .attr('fill', '#fff')
                 .attr('cx', function (d, i)
                       {
@@ -252,7 +252,7 @@ function MatrixMain()
             activateFunctions[0] = showGrid;
             activateFunctions[1] = highlightPre;
             activateFunctions[2] = highlightAge;
-            activateFunctions[3] = highlightMartial;
+            activateFunctions[3] = highlightMarital;
             activateFunctions[4] = highlightEvent;
             activateFunctions[5] = highlightImpact;
             activateFunctions[6] = highlightInt;
@@ -269,13 +269,13 @@ function MatrixMain()
             circles
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(800)
-                .attr('opacity', 0.8)
-                .attr("fill", "#fff")
-
-            ;
+                .attr('opacity', function(d,i){
+                return i*0.001+0.2
+            })
+                .attr("fill", "#ffffff");
         }
 
         function getrownum(i){
@@ -288,13 +288,10 @@ function MatrixMain()
                 .classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index === 0 || d.index ===Math.floor(d3.max(d.index)/2)) return 0.8;
-                return 0.3;
-            })
+                .attr("opacity", 1)
                 .attr("fill", function (d){
                 if(d.index == 0){
                     return "#ffffff";
@@ -307,7 +304,7 @@ function MatrixMain()
 
             //.attr("fill", function (d){return d.fill})
 
-            console.log(matrixData["prevalence"])
+
             /*circles.duration(800)
                 .delay(function (d) {
                     return 5 * getrownum(i);
@@ -341,41 +338,57 @@ function MatrixMain()
 
 
         function highlightAge() {
-
+            console.log(matrixData["age"])
             //console.log("hightlightage")
             circles
                 .data(matrixData["age"])
                 .classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index === 1 || d.index ===3) return 0.8;
-                return 0.3;
-            })
-                .attr("fill", function (d){return d.fill})
+                .attr("opacity", 1)
+                .attr("fill", function (d){
+                if(d.index == 0){
+                    return "#ffbaba";
+                } else if(d.index == 1){
+                    return "#e97777";
+                } else if(d.index == 2){
+                    return "#7b4444";
+                } else {
+                    return "#482323";
+                }
+            }) 
         }
 
 
 
-        function highlightMartial() {
+        function highlightMarital() {
 
             //console.log("hightlightmar")
             circles
-                .data(matrixData["martial status"])
+                .data(matrixData["marital status"])
             //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index !== 3 && d.index !== 4) return 0.8;
-                return 0.3;
-            })
-                .attr("fill", function (d){return d.fill})
+                .attr("opacity", 1)
+                .attr("fill", function (d){
+                if(d.index == 0){
+                    return "#ffffff";
+                } else if(d.index == 1){
+                    return "#fda6a6";
+                } else if(d.index == 2){
+                    return "#ff6666";
+                } else if(d.index == 3){
+                    return "#8293b6";
+                } else {
+                    return "#727272";
+                }
+            }) 
         }
 
         function highlightEvent() {
@@ -385,14 +398,31 @@ function MatrixMain()
             //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index !== 7 && d.index !==8) return 0.8;
-                return 0.3;
-            })
-                .attr("fill", function (d){return d.fill})
+                .attr("opacity", 1)
+                .attr("fill", function (d){
+                if(d.index == 0){
+                    return "#9b3434";
+                } else if(d.index == 1){
+                    return "#8293b6";
+                } else if(d.index == 2){
+                    return "#ff6666";
+                } else if(d.index == 3){
+                    return "#7b4444";
+                } else if(d.index == 4){
+                    return "#2f3f61";
+                } else if(d.index == 5){
+                    return "#545db0";
+                } else if(d.index == 6){
+                    return "#ffbaba";
+                } else if(d.index == 7){
+                    return "#51446d";
+                } else {
+                    return "#727272";
+                }
+            }) 
         }
 
         function highlightImpact() {
@@ -402,31 +432,50 @@ function MatrixMain()
             //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index === 0 ||d.index ===1) return 0.8;
-                return 0.3;
-            })
-                .attr("fill", function (d){return d.fill})
+            //                .attr("opacity", function(d){
+            //                if (d.index === 0 ||d.index ===1) return 0.8;
+            //                return 0.3;
+            //            })
+            //                .attr("fill", function (d){return d.fill})
+                .attr("opacity", 1)
+                .attr("fill", function (d){
+                if(d.index == 0){
+                    return "#ffffff";
+                } else if(d.index == 1){
+                    return "#8293b6";
+                } else {
+                    return "#3e4b66";
+                }
+            })   
         }
 
         function highlightInt() {
 
             circles
-                .data(matrixData["education"])
+                .data(matrixData["impact"])
             //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
-                return 50 * getrownum(i);
+                return 20 * getrownum(i);
             })
                 .duration(600)
-                .attr("opacity", function(d){
-                if (d.index ===0) return 0.8;
-                return 0.3;
-            })
-                .attr("fill", function (d){return d.fill})
+                .attr("opacity", 1)
+                .attr("fill", function (d){
+                if(d.index == 0){
+                    return "#ffffff";
+                } else if(d.index == 1){
+                    return "#fda6a6";
+                } else if(d.index == 2){
+                    return "#ff6666";
+                } else if(d.index == 3){
+                    return "#8293b6";
+                } else {
+                    return "#727272";
+                }
+            }) 
         }
 
         /* // use named transition to ensure
