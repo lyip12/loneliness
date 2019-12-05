@@ -38,36 +38,23 @@ function particlevisNew(){
     }
 
     // toggle layer
-	$('#dugy-particle-radio').change( function() {
-        var selected = parseInt(document.querySelector('input[name="dugy-radio-options"]:checked').value);
-        if(selected !=0){
-            for (var i = 0; i< stars.length; i++){
-                if ( stars[i].category != selected)
-                {stars[i].fadeOut();}
-            }
-        }
-        else{
-            for (var i = 0; i< stars.length; i++){
-                stars[i].fadeIn();
-            }
-        }
-
-        /* if(selected != 0){
-            camera.layers.disableAll();
-            camera.layers.enable(selected);
-        }
-        else{
-            camera.layers.enableAll(); 
-        } */
+	$('#dugy-particle-category').change( function() {
+        selectedCategory = parseInt(document.querySelector('input[name="dugy-category-options"]:checked').value);
+        
+        updateSelection();
     });
-    
+    $('#dugy-particle-country').change( function() {
+        selectedCountry = document.querySelector('input[name="dugy-country-options"]:checked').value;
+        updateSelection();
+    });
 
-    var numStars = 100;
     var stars = [];
     var categories = [];
     var countries = [];
     var howLongLonely = [];
-    var howLongLonelyDisplay = [];
+    var lonelyTime = [1,24,48,96,240,480,600];
+    var selectedCountry = 'Japan-Lonely'; 
+    var selectedCategory = 7;   // ALL
 
     queue()
     .defer(d3.csv, "data/HowLongLonely.csv")
@@ -75,27 +62,60 @@ function particlevisNew(){
 
     function createParticleVis(error, howLongLonelyData){
 
-        console.log(howLongLonelyData);
         countries = howLongLonelyData.columns.slice(1,);
         howLongLonely = howLongLonelyData.slice();
-        howLongLonely.forEach(e => {categories.push(e.Category)});
-        console.log(categories);
-        
-        
+        howLongLonely.forEach((d,i) => {
+            categories.push(d.Category)
+            for (const property in d){
+                if (property != 'Category'){
+                    d[property] = + d[property] 
+                    if (Number.isNaN(d[property])){
+                        d[property] = 0;  
+                    }
+                }
+            }
+        });
+    
+
+        for ( var i = 0; i < howLongLonely.length - 1; i++){
+            for (var k = 0; k < countries.length - 1; k++){
+                var country = countries[k];
+                for (var j = 0; j < howLongLonely[i][country]; j++){
+                    var x = THREE.Math.randFloatSpread( 2000);
+                    var y = THREE.Math.randFloatSpread( 1000);
+                    var z = - i * 0.01 - 100;
+                    var starTrail = null;
+                    if (i == howLongLonely.length - 2){// 'not sure' category
+                        starTrail = new StarTrail(x,y,z,lonelyTime[0],lonelyTime[i],i,country);
+                    }else{// other categories
+                        starTrail = new StarTrail(x,y,z,lonelyTime[i],lonelyTime[i+1],i,country);
+                    }
+                    particleScene.add(starTrail.starField);
+                    stars.push(starTrail);
+                } 
+            } 
+        }
+
+        updateSelection();
     }
 
 
+    function updateSelection(){
+        console.log(selectedCountry);
+        console.log(selectedCategory);
+        for (var i = 0; i< stars.length; i++){
+            if (selectedCategory == 7 || stars[i].category == selectedCategory){
+                if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
+                    stars[i].fadeIn();
+                    continue;
+                }
+            }
+            stars[i].fadeOut();
+        }
 
-    for (var i= 0; i < numStars; i++){
-        var x = THREE.Math.randFloatSpread( 2000);
-        var y = THREE.Math.randFloatSpread( 1000);
-        var z = - i * 0.01 - 100;
-
-        var starTrail = new StarTrail(x,y,z,36,720,i%2);
-
-        particleScene.add(starTrail.starField);
-        stars.push(starTrail);
     }
+
+
     function starFieldUpdate(){
         for (var i = 0; i< stars.length; i++){
             stars[i].update();
@@ -109,7 +129,8 @@ function particlevisNew(){
 		requestAnimationFrame( animate );
 		starFieldUpdate();
         renderer.render( particleScene, camera );
- /*        printed -=1;
+        // Debugging
+        /*  printed -=1;
         if (printed < 0 && loop > 0){
             console.log(stars[5]);
             printed = 20;
@@ -117,8 +138,5 @@ function particlevisNew(){
         }  */
 	}
 	animate();
-	
-	
-
 
 }
