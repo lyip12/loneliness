@@ -16,7 +16,55 @@
     </head>
 
     <body>
-        <div class="section" style="background-image: url('img/background.jpg'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; padding-top: 35vh; padding-bottom: 35vh;">
+    <!--Navigation WIP
+            <nav id="cd-vertical-nav">
+                <ul>
+                    <li>
+                        <a href="nav-section0" data-number="1">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Intro</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section1" data-number="2">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">About</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section2" data-number="3">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Features</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section3" data-number="4">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section4" data-number="4">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section5" data-number="5">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Pricing</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="nav-section6" data-number="6">
+                            <span class="cd-dot"></span>
+                            <span class="cd-label">Contact</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>-->
+
+        <div class="section" id = "nav-section0" style="background-image: url('img/background.jpg'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; padding-top: 35vh; padding-bottom: 35vh;">
             <div data-aos="fade-in">
                 <h1>LONELINESS</h1>
                 <h3 class="cursive">a social story</h3>
@@ -27,7 +75,7 @@
         </div>
 
         <!--The Qustionnaire Section-->
-        <div class="section" style="margin-top: -3px; background-image: url('img/backgroundcontinue.png'); background-position: center top; background-repeat: no-repeat; background-size: contain;">
+        <div class="section"  id = "nav-section1" style="margin-top: -3px; background-image: url('img/backgroundcontinue.png'); background-position: center top; background-repeat: no-repeat; background-size: contain;">
             <div style="height:150px"></div>
             <div class="row">
                 <div class="col-md-3" id="q1" style="padding-right: 40px;" data-aos="fade-in"></div>
@@ -42,7 +90,7 @@
         </div>
 
         <!--The Key Facts Section-->
-        <div class="section">
+        <div class="section"  id = "nav-section2">
             <div class="line" style="margin: 50px 30vw 200px 30vw;" data-aos="fade-in"></div>
         </div>
         <div class="row" style="margin: 0px !important">
@@ -62,7 +110,7 @@
 
 
         <!--The WebGL Section-->
-        <div class="section" data-aos="fade-in">
+        <div class="section"  id = "nav-section3"data-aos="fade-in">
             <div class="line"></div>
             <p style="text-align: center;" class="small"><em>- below are based on gathered international statistics on loneliness (summative data of US, UK and Japan) -</em></p>
             <div style="height:150px"></div>
@@ -141,7 +189,7 @@
 
         <!--The Scatter Plot Section-->
 
-        <div class="section">
+        <div class="section"  id = "nav-section4">
             <div class="row align-items-center">
                 <div class="col-md-9" id="scatter" style="padding-left: 0px !important"></div>
                 <div class="col-md-3">
@@ -154,7 +202,7 @@
 
 
         <!--The Tree Section-->
-        <div class="section" style="background-image: url('img/back2.png'); background-position: center top; background-repeat: no-repeat; background-size: contain;">
+        <div class="section"  id = "nav-section5" style="background-image: url('img/back2.png'); background-position: center top; background-repeat: no-repeat; background-size: contain;">
             <div style="height:70px"></div>
             <div class="line" data-aos="fade-in"></div>
             <div style="height:150px"></div>
@@ -315,7 +363,7 @@
         </div>
 
         <!--The Chorolepth Map Section-->
-        <div style="padding-top: 150px; background: linear-gradient(0deg, #161c26 20%, #000000 70%, #161c26 100%);">
+        <div  id = "nav-section7" style="padding-top: 150px; background: linear-gradient(0deg, #161c26 20%, #000000 70%, #161c26 100%);">
             <div class="section" data-aos="fade-in">
                 <div id = "skipmatrix" class="line"></div>
             </div>
@@ -476,7 +524,7 @@
         </div>
 
         <!--The Awareness and Solution Section-->
-        <div class="section" data-aos="fade-in">
+        <div class="section"  id = "nav-section8" data-aos="fade-in">
             <div class="line"></div>
             <div style="height:150px"></div>
 
@@ -563,7 +611,7 @@
 
         </div>
 
-        <div class="section" style="background-image: url('img/back4.png'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; margin-bottom: 0px;">
+        <div class="section"  style="background-image: url('img/back4.png'); background-position: center bottom; background-repeat: no-repeat; background-size: cover; margin-bottom: 0px;">
             <div style="height:300px"></div>
             <p id="questionreview"></p>
             <div style="height:300px"></div>
@@ -602,6 +650,7 @@
         <script src="libraries/d3.v4.js"></script>
         <script src="libraries/d3-scale-chromatic.v1.min.js"></script>
         <script src="libraries/d3-geo-projection.v2.min.js"></script>
+        <script src = "libraries/navigation.js"></script>
 
         <!-- OptionalJS -->
 
