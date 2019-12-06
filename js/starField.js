@@ -22,8 +22,8 @@ class StarTrail{
         } );
 
     star = null;
-    category = 0;
-    country = 'Japan-Lonely';
+    category = 5;
+    country = 'All-Lonely';
 
     starsBufferGeometry = new THREE.BufferGeometry();
     starsPositionBuffer = null;

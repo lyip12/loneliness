@@ -2,8 +2,6 @@ particlevisNew();
 
 function particlevisNew(){
 
-
-
     var canvas = document.querySelector('#dugy-c');
     var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
     renderer.autoClearColor = true;
@@ -15,14 +13,15 @@ function particlevisNew(){
 	canvas_height =  canvas_height * pixelRatio | 0;
 
 	renderer.setSize(canvas_width, canvas_height, false);
+    var loaded = false;
 
     document.addEventListener('aos:in', e => {
-        if(e.detail.id == 'dugy-radial-fadein'){
-            renderer.clear();
+        if(e.detail.id == 'dugy-radial-fadein' && loaded == true){
+            //renderer.clear();
+            console.log('in');
+            resetStarFields();
         }
     });
-
-
      
     // scene
     var particleScene = new THREE.Scene();
@@ -48,24 +47,32 @@ function particlevisNew(){
         updateSelection();
     });
 
-    var stars = [];
     var categories = [];
     var countries = [];
     var howLongLonely = [];
     var lonelyTime = [1,24,48,96,240,480,600];
-    var selectedCountry = 'Japan-Lonely'; 
-    var selectedCategory = 7;   // ALL
+    var countryNames = {
+        'US-Lonely':'United States',
+        'UK-Lonely': 'United Kingdom',
+        'Japan-Lonely': 'Japan',
+        'All-Lonely':'United States, United Kingdom and Japan'
+    }; 
+    var selectedCountry = 'All-Lonely'; 
+    var selectedCategory = 5;   // More Than 10 years
+    var stars = [];
     var starLabels = [];
+    var font = null;
+    var textFont = null;
+    var textSize = 20;
+    var labelDict = {};
 
     queue()
     .defer(d3.csv, "data/HowLongLonely.csv")
     .defer(d3.json, "fonts/helvetiker_regular.typeface.json")
     .await(createParticleVis);
 
-    function createParticleVis(error, howLongLonelyData, font){
-
+    function createParticleVis(error, howLongLonelyData, fontData){
         countries = howLongLonelyData.columns.slice(1,);
-        console.log(countries);
         howLongLonely = howLongLonelyData.slice();
         howLongLonely.forEach((d,i) => {
             categories.push(d.Category)
@@ -78,8 +85,16 @@ function particlevisNew(){
                 }
             }
         });
-    
+        font = fontData;
+        textFont = new THREE.Font(font);
+        resetStarFields(); 
+        loaded == true;      
+    }
 
+
+    function resetStarFields(){
+        stars = [];   // clear objects 
+        particleScene = new THREE.Scene();  // clear scene;
         for ( var i = 0; i < howLongLonely.length - 1; i++){
             for (var k = 0; k < countries.length - 1; k++){
                 var country = countries[k];
@@ -98,45 +113,129 @@ function particlevisNew(){
                 } 
             } 
         }
+        initText();
         updateSelection();
-        initText(font);
     }
 
-    function initText(_font){
 
-        var textfont = new THREE.Font(_font);
-        console.log(new THREE.Font(_font));
-
-        var starlabel = new StarText(stars[100].star,textfont,50,'Loneliness', -150)
-        particleScene.add(starlabel.starText);
-        starLabels.push(starlabel);
-
+    function initText(){
+        starLabels = [];
+        for(var i = 0; i< howLongLonely.length-1; i++){
+            for(var k = 0; k < countries.length; k++){
+                var message = generateMessage(i, countries[k]);       
+                var star = new Star(10000,0,0,10); // a temporary star   
+                var starlabel = new StarText(star,textFont,textSize,message, -150,i,countries[k])
+                particleScene.add(starlabel.starText);
+                starLabels.push(starlabel);
+            }
+        }
+        generateLabelDict();
+        
     }
 
+    function generateLabelDict(){
+        labelDict = {}
+        for (var i=0; i < starLabels.length; i++){
+            labelDict[starLabels[i].category.toString() + ' '+starLabels[i].country] = i;
+        }
+        console.log(labelDict);
+    }
+
+
+    function generateMessage(_category, _country){
+        var percentage = howLongLonely[_category][_country];
+        if (_country == 'All-Lonely'){
+            percentage = parseInt(percentage * 100 /  howLongLonely[categories.length-1][_country] );
+        }
+        var countryName = countryNames[_country];
+        var message = null;
+        if (_category != howLongLonely.length-2){
+           message = 'In '+ countryName + ', \nabout' + ' ' + percentage.toString() + '% of people reporting loneliness/isolation say \nthey have been lonely for ' + howLongLonely[_category].Category + ' .'; 
+        }else{
+           message = 'In '+ countryName + ', \nabout' + ' ' + percentage.toString() + '% of people reporting loneliness/isolation \nare not sure/declined to answer how long they have been lonely.'; 
+        }
+        return message;
+    }
 
     function updateSelection(){
-        for (var i = 0; i< stars.length; i++){
-            if (selectedCategory == 7 || stars[i].category == selectedCategory){
+        var candidateStars = [];
+        var totalindex = howLongLonely.length - 1;
+        console.log(selectedCountry);
+        console.log(selectedCategory);
+        if (selectedCategory == totalindex){
+            // store 7 different stars for different categories
+            candidateStars = [...Array(totalindex).keys()].map(x => null);
+            console.log(candidateStars);
+            for (var i = 0; i< stars.length; i++){
                 if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
                     stars[i].fadeIn();
+                    var type = stars[i].category
+                    // decide if replace the current candidates in list
+                    if (candidateStars[type] == null){
+                        candidateStars[type] = stars[i].star
+                    }else{
+                        if (stars[i].star.lessThan(candidateStars[type])){
+                            candidateStars[type] = stars[i].star;
+                        }
+                    }
                     continue;
                 }
+                stars[i].fadeOut();
             }
-            stars[i].fadeOut();
-        }
+            // fade out those not needed, fade in needed
+            Object.keys(labelDict).forEach((k) => {
+                var key = k.split(' ');
+                var v = labelDict[k];
+                console.log(key);
+                if (key[1] == selectedCountry){
+                    var category = parseInt(key[0])
+                    starLabels[v].fadeIn();
+                    starLabels[v].resetCompanionStar(candidateStars[category]);
+                }else{
+                    starLabels[v].fadeOut();
+                }
+            });
+        }else{
+            // only one candidate is needed
+            candidateStars.push(null);
 
+            for (var i = 0; i< stars.length; i++){
+                if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
+                    stars[i].fadeIn();
+                    // compare with canditates
+                    if (candidateStars[0] == null){
+                        candidateStars[0] = stars[i].star
+                    }else{
+                        if (stars[i].star.lessThan(candidateStars[0])){
+                            candidateStars[0] = stars[i].star;
+                        }
+                    }
+                    continue;
+                }
+                stars[i].fadeOut();
+            }
+
+            // since only one starlabl is gonna shown, fade out all others and
+            Object.keys(labelDict).forEach((k) => {
+                var v = labelDict[k];
+                starLabels[v].fadeOut();
+            });
+            // fadein only the needed one
+            var v = labelDict[selectedCategory.toString() + ' ' + selectedCountry]
+            console.log(v);
+            starLabels[v].fadeIn();
+            starLabels[v].resetCompanionStar(candidateStars[0]);
+
+        }
     }
 
 
     function starFieldUpdate(){
-        /* for (var i = 0; i< stars.length; i++){
-            stars[i].update();} */
         for (var i = 0 ; i < stars.length; i++){
                 stars[i].update();
-            
         }
-        for (var i = 0; i < starLabels.length; i++){
-            starLabels[i].update()
+        for (var i= 0; i < starLabels.length; i++){
+            starLabels[i].update();
         }
     }
 

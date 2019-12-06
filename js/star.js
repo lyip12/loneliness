@@ -19,9 +19,9 @@ class Star{
 
     wandertheta = 0;
     life = 0;
-    life2 = 0
-    lifetime = 1;
-    
+    life2 = 0;      //changeable
+    lifetime = 1; 
+
 	static maxspeed = 1.2;
 	static maxforce = 0.03;
 
@@ -53,9 +53,6 @@ class Star{
     get alllife(){
         return this.lifetime * 2;
     }
-
-
-   
 
     reset(_x,_y,_z,_life){
         this.pos.x = _x;
@@ -142,6 +139,15 @@ class Star{
         if(this.pos.y > Star.maxY && this.vel.y > 0 || this.pos.y < - Star.maxY && this.vel.y < 0){
             this.vel.add(new THREE.Vector3(0,-2*this.vel.y, 0));
         }
+    }
+
+    lessThan(other){
+        if (Math.abs(this.pos.x)+ Math.abs(this.pos.y) >= Math.abs(other.pos.x)+ Math.abs(other.pos.y)){
+            return false;
+        }else{
+            return true;
+        }
+
     }
 
     run(){
