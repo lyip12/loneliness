@@ -70,11 +70,11 @@
         </div>
         <div class="section" data-aos="fade-in" id="dugy-radial-fadein">
             <h5 style="text-align: center;">LONELY IN THE CROWD</h5>
-            <div style="height:30px"></div>
+            <div style="height:0px"></div>
             <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
-            <p style="text-align: center; margin-bottom: 30px"><em>We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race.<br>There are many people who have been lonely for a long, long time, more so than we have ever imagined.</em></p>
-            <div style="height:30px"></div>
-            <div style="height:600px" id='dugy-canvas-container'>
+            <p style="text-align: center; margin-bottom: 10px"><em>We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race.<br>There are many people who have been lonely for a long, long time, more so than we have ever imagined.</em></p>
+            <div style="height:20px"></div>
+            <div  id='dugy-canvas-container'>
                 <canvas id="dugy-c"></canvas>
             </div>
 
@@ -104,7 +104,7 @@
                         <input type="radio" name="dugy-category-options" autocomplete="off" value='5' >&ge; 10 years
                     </label>
                     <label class="btn btn-light">
-                        <input type="radio" name="dugy-category-options" autocomplete="off" value='6' > Not Sure
+                        <input type="radio" name="dugy-category-options" autocomplete="off" value='6' > Not Sure &ast;
                     </label>
                     <label disabled style="margin-right: 20px;" ></label>
                 </div>
@@ -130,6 +130,11 @@
             <div class="shortish">
                 <img src="img/tempParticleLegend.png" class="responsive-image">
                 <p><br>The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 737 people who answered to this question from US,UK and Japan, about 25% said they have been alone for more than 10 years.</b></p>
+            
+                <p class="small" style="text-align: center;"> 
+                    <em>&ast; Not Sure refers to people who chose 'Not sure/Declined to answer' when describing how long they have been lonely.
+                    </em>
+                    </p>
             </div>
             <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
         </div>
@@ -603,6 +608,7 @@
         <!-- Vis JS -->
         <script src='js/star.js'></script>
         <script src='js/starField.js'></script>
+        <script src='js/starText.js'></script>
         <script src='js/particlevisnew.js'></script>
         <script src='js/radialvis.js'></script>
         <script src="js/questionaire.js"></script>

@@ -55,14 +55,17 @@ function particlevisNew(){
     var lonelyTime = [1,24,48,96,240,480,600];
     var selectedCountry = 'Japan-Lonely'; 
     var selectedCategory = 7;   // ALL
+    var starLabels = [];
 
     queue()
     .defer(d3.csv, "data/HowLongLonely.csv")
+    .defer(d3.json, "fonts/helvetiker_regular.typeface.json")
     .await(createParticleVis);
 
-    function createParticleVis(error, howLongLonelyData){
+    function createParticleVis(error, howLongLonelyData, font){
 
         countries = howLongLonelyData.columns.slice(1,);
+        console.log(countries);
         howLongLonely = howLongLonelyData.slice();
         howLongLonely.forEach((d,i) => {
             categories.push(d.Category)
@@ -95,9 +98,22 @@ function particlevisNew(){
                 } 
             } 
         }
-
         updateSelection();
+        initText(font);
     }
+
+    function initText(_font){
+
+        var textfont = new THREE.Font(_font);
+        console.log(new THREE.Font(_font));
+
+        var starlabel = new StarText(stars[100].star,textfont,50,'Loneliness', -150)
+        particleScene.add(starlabel.starText);
+        starLabels.push(starlabel);
+
+    }
+
+
 
 
     function updateSelection(){
@@ -115,13 +131,20 @@ function particlevisNew(){
 
 
     function starFieldUpdate(){
-        for (var i = 0; i< stars.length; i++){
-            stars[i].update();
+        /* for (var i = 0; i< stars.length; i++){
+            stars[i].update();} */
+        for (var i = 0 ; i < stars.length; i++){
+                stars[i].update();
+            
+        }
+        for (var i = 0; i < starLabels.length; i++){
+            starLabels[i].update()
         }
     }
 
     printed = 20;
     loop = 1;
+
 	var animate = function (time) {
 		time *= 0.001;  // convert milliseconds to seconds
 		requestAnimationFrame( animate );
@@ -135,6 +158,7 @@ function particlevisNew(){
             loop -=1;
         }  */
 	}
-	animate();
+    animate();
+
 
 }
