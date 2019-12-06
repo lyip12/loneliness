@@ -443,11 +443,11 @@ function MatrixMain()
                 .attr("opacity", 1)
                 .attr("fill", function (d){
                 if(d.index == 0){
-                    return "#ffffff";
+                    return "#ff6666";
                 } else if(d.index == 1){
-                    return "#8293b6";
+                    return "#ffbaba";
                 } else {
-                    return "#3e4b66";
+                    return "#ffffff";
                 }
             })   
         }
