@@ -22,6 +22,7 @@ function radialvisMain(){
     var countryAreaPaths;
     var countryAreaPaths2;
     var oddsCircleBackgrounds;
+    var oddsAxesLabels;
     var oddsCircleBackgrounds2;
     var radiusScale;
     var angleScale;
@@ -85,7 +86,7 @@ function radialvisMain(){
             .classed("dugy-svg-content-responsive", true)
             .append('g')
             .attr("transform", "translate(" + 200 + "," +200 + ")");
-
+        
         circleContainer = svg.append('g').attr('class', 'dugy-radial-circle-container');
         areaContainer = svg.append('g').attr('class','dugy-radial-area-container');
         axesContainer = svg.append('g').attr('class','dugy-radial-axes-container');
@@ -111,14 +112,30 @@ function radialvisMain(){
 
 
         // text labels for factors
-        oddsCircleBackgrounds = labelContainer.selectAll(".dugy-radial-label")
+        oddsAxesLabels = labelContainer.selectAll(".dugy-radial-label")
             .data(oddsRatioDimensions, function(d,i){return i})
             .enter().append('text')
             .transition()
             .duration(800)
             .attr('x',0)
-            .attr('y',-outerRadius-10)
-            .attr("transform", function(d,i) { return "rotate(" + angleScale(i) * 180 / Math.PI + ")"; })
+            .attr('y',function(d,i){
+
+            if (angleScale(i)> 0.5 * Math.PI && angleScale(i) < 1.5* Math.PI ){
+               return outerRadius+10
+            }else{
+               return -outerRadius-10
+            }
+            
+            })
+            .attr('class', 'dugy-radial-label')
+            .attr("transform", function(d,i) { 
+                if (angleScale(i)> 0.5 * Math.PI && angleScale(i) < 1.5 * Math.PI){
+                    return "rotate(" + (angleScale(i) - Math.PI) * 180 / Math.PI + ")"; 
+                }else{
+                    return "rotate(" + angleScale(i) * 180 / Math.PI + ")"; 
+                }
+            
+            })
             .text(function(d){return d})
             .style('fill','#8293b6')
             .style('font-weight', '200')
