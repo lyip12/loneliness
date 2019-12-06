@@ -161,7 +161,8 @@ function radialvisMain(){
         d3.selectAll("g.dugy-radial-axis.dugy-radial-axis-upright")
         .selectAll('.tick').selectAll('text')
         .attr('transform', 'rotate(180)')
-        .attr('x',8);
+        .attr('x', 5)
+        .attr('text-anchor','middle')
 
         colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
         colorScheme = d3.quantize(colorInterpolator, oddsRatioCountries.length);
