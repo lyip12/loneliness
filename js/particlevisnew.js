@@ -101,8 +101,6 @@ function particlevisNew(){
 
 
     function updateSelection(){
-        console.log(selectedCountry);
-        console.log(selectedCategory);
         for (var i = 0; i< stars.length; i++){
             if (selectedCategory == 7 || stars[i].category == selectedCategory){
                 if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
