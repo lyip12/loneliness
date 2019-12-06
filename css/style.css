@@ -46,13 +46,13 @@ h3 {
     font-size: 12px;
     font-weight: 400;
     padding: 6px;
-    background-color: #8293b6;
+    background-color: #333a46;
     border: none;
 }
 
 .btn-light:hover {
     font-family: 'Roboto', sans-serif; 
-    color: #8293b6 !important;
+    color: #384661 !important;
     background: white;
 }
 
