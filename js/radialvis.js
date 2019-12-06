@@ -27,6 +27,7 @@ function radialvisMain(){
     var radiusScale;
     var angleScale;
     var radiusAxis;
+    var radiusAxisInverse;
     var oddsAxes;
     var tickValues
     var svg;
@@ -137,7 +138,7 @@ function radialvisMain(){
             
             })
             .text(function(d){return d})
-            .style('fill','#8293b6')
+            .style('fill','#ff6666')
             .style('font-weight', '200')
             .style('text-anchor','middle')
             .style('font-size', '9px')
@@ -145,13 +146,22 @@ function radialvisMain(){
         // axes
         circleCount = maxCircleCount;
         radiusAxis = d3.axisLeft().scale(radiusScale).tickSize(2).ticks(circleCount);
-
+        
         oddsAxes = axesContainer.selectAll(".dugy-radial-axis")
             .data(d3.range(angleScale.domain()[1]))
             .enter().append("g")
-            .attr("class", "dugy-radial-axis")
+            .attr("class", function(d){
+                if (angleScale(d) >= Math.PI * 0.5 && angleScale(d) < Math.PI * 1.5){
+                    return "dugy-radial-axis dugy-radial-axis-upright";
+                }else{
+                    return "dugy-radial-axis dugy-radial-axis-down";
+                }})
             .attr("transform", function(d) { return "rotate(" + angleScale(d) * 180 / Math.PI + ")"; })
             .call(radiusAxis);
+        d3.selectAll("g.dugy-radial-axis.dugy-radial-axis-upright")
+        .selectAll('.tick').selectAll('text')
+        .attr('transform', 'rotate(180)')
+        .attr('x',8);
 
         colorInterpolator = d3.interpolateRgb(d3.color("#ff6666"),d3.color("#8293b6"));
         colorScheme = d3.quantize(colorInterpolator, oddsRatioCountries.length);
@@ -209,7 +219,13 @@ function radialvisMain(){
         tickValues = d3.ticks(0,radiusScale.domain()[1],circleCount);
         if (tickValues[-1] != rmax){tickValues.push(rmax)}
 
-        oddsAxes.call(radiusAxis);
+        oddsAxes.call(radiusAxis); 
+        d3.selectAll("g.dugy-radial-axis.dugy-radial-axis-upright")
+        .selectAll('.tick').selectAll('text')
+        .attr('transform', 'rotate(180)')
+        .attr('x',8);
+
+        
 
         // circles
         oddsCircleBackgrounds = circleContainer.selectAll(".dugy-radial-circle")
