@@ -451,7 +451,7 @@ ul {
     background-color: white;
     opacity: 1;
 }
-#cd-vertical-nav .cd-dot {
+.cd-dot {
     position: relative;
     /* we set a top value in order to align the dot with the label. If you change label's font, you may need to change this top value*/
     top: 8px;
@@ -469,12 +469,14 @@ ul {
     transform-origin: 50% 50%;
     opacity: 0.1;
 }
+
 #cd-vertical-nav .cd-label {
     position: relative;
-    margin-right: 10px;
     color: white;
     font-size: 12px;
-    line-height: 6px;
+    padding-top: 10px;
+    padding-left: 12px;
+    line-height: 6px ;
     font-size: 0.875rem;
     -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
     -moz-transition: -moz-transform 0.2s, opacity 0.2s;
@@ -486,10 +488,4 @@ ul {
     -o-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
     z-index:0;
-}
-
-.cd-label {
-    padding-top: 10px;
-    padding-left: 12px;
-    line-height: 6px;
 }
