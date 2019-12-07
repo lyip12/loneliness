@@ -315,6 +315,10 @@ div.section {
     text-align: left;
 }
 
+.scattertooltip {
+    pointer-events: none;
+}
+
 .fill-circle{
     /*transition: opacity 0.5s ;*/
 }
