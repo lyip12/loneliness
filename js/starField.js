@@ -151,11 +151,10 @@ class StarTrail{
                 var sequenceInTrail = (i <= this.star.pointer) ? this.star.pointer - i : this.star.pointer + this.star.alllife - i;
                 var sequenceInTrailColor  =  Math.max(this.star.colorPointer - sequenceInTrail , 0)
                 color = this.star.trailColor[sequenceInTrailColor];
-               if (i  == this.star.pointer ){
-                    color = new THREE.Color(0xffffff);;
-                } 
             }
-           
+            if (i  == this.star.pointer || i == 0 ){
+                color = new THREE.Color(0xffffff);;
+            }           
 			colors[i*3] = color.r;
 			colors[i*3+1] = color.g;
             colors[i*3+2] = color.b;

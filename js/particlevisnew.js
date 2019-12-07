@@ -43,6 +43,11 @@ function particlevisNew(){
         updateSelection();
     });
 
+    $('#dugy-particle-color').change( function() {
+        selectedColorMode = document.querySelector('input[name="dugy-color-options"]:checked').value;
+        colorChannelChange();
+    });
+
     // Add Legend --------------------------------------------------------------------------------
     var legendCanvas = document.querySelector('#dugy-c-legend');
     var legendRenderer = new THREE.WebGLRenderer({canvas:legendCanvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
@@ -69,7 +74,7 @@ function particlevisNew(){
     var dragMaxLife = maxLonelyTime;
     var dragTexts = [];
     var legendTexts = [];
-    var uniformColorMode = true;
+    var selectedColorMode = 'UniformColor';  // 'UniformColor' or 'ColorByLength'
     
     function initLegend(){
         // star trail
@@ -87,27 +92,28 @@ function particlevisNew(){
         legendTexts = []
         var star = new Star(0,0,0,10); // a temporary star 
 
-        var starlabel1 = new StarText(star,textFont,20,'6 months', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-50,cubeDepth))
-        starlabel1.setOpacity(1);
+        var starlabel1 = new StarText(star,textFont,20,'6 months', 0,4,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-55,cubeDepth))
+        starlabel1.setOpacity(0);
         legendScene.add(starlabel1.starText);
         legendTexts.push(starlabel1);
         
-        var starlabel2 = new StarText(star,textFont,20,'start', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-50,cubeDepth))
-        starlabel2.setOpacity(0);
+        var starlabel2 = new StarText(star,textFont,20,'the beginning(6 mos)', 0,4,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-55,cubeDepth))
+        starlabel2.setOpacity(1);
         legendScene.add(starlabel2.starText);
         legendTexts.push(starlabel2);
 
-        var starlabel3 = new StarText(star,textFont,20,'10 years', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-50,cubeDepth))
-        starlabel3.setOpacity(1);
+        var starlabel3 = new StarText(star,textFont,20,'10 years', 0,4,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-55,cubeDepth))
+        starlabel3.setOpacity(0);
         legendScene.add(starlabel3.starText);
         legendTexts.push(starlabel3);
 
-        var starlabel4 = new StarText(star,textFont,20,'end', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-50,cubeDepth))
-        starlabel4.setOpacity(0);
+        var starlabel4 = new StarText(star,textFont,20,'the end(10 yrs)', 0,4,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-55,cubeDepth))
+        starlabel4.setOpacity(1);
         legendScene.add(starlabel4.starText);
         legendTexts.push(starlabel4);
 
         initDrag();
+        colorChannelChange();
     }
 
     function legendUpdate(){
@@ -118,9 +124,26 @@ function particlevisNew(){
             }
         }
     }
+
+    function colorChannelChange(){
+        var selector = (selectedColorMode == 'UniformColor')? 1 : 0;
+
+        for(var i=0; i<legendTexts.length; i++){
+            if (i % 2 == selector){
+                legendTexts[i].fadeIn();
+            }else{
+                legendTexts[i].fadeOut();
+            }
+        }
+    }
     function getSliderX(_life)
     {
         return THREE.Math.lerp(-sliderLength, sliderLength, _life * 1.0 / maxLonelyTime)
+    }
+    function getColor(_life){
+        var color = Star.startColor.clone();
+        color.lerp(Star.destColor, THREE.Math.smoothstep(_life, 0,maxLonelyTime));
+        return color;
     }
 
     function moveDrag(_minLife,_maxLife){
@@ -141,7 +164,7 @@ function particlevisNew(){
     function initDrag(){
         cubeArray = [];
         dragTexts = [];
-        var geometry = new THREE.BoxGeometry( 10, 60, 0.1 );
+        var geometry = new THREE.BoxGeometry( 10, 50, 0.1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xff6666} );
         var cubeleft = new THREE.Mesh(geometry, material );
         var cuberight = new THREE.Mesh(geometry, material);
@@ -425,8 +448,14 @@ function particlevisNew(){
 
 
     function starFieldUpdate(){
-        for (var i = 0 ; i < stars.length; i++){
-            stars[i].update();
+        if (selectedColorMode == 'UniformColor'){
+            for (var i = 0 ; i < stars.length; i++){
+                stars[i].update();
+            }
+        }else{
+            for (var i = 0 ; i < stars.length; i++){
+                stars[i].update(getColor(stars[i].star.lifetime));
+            }
         }
         for (var i= 0; i < starLabels.length; i++){
             starLabels[i].update();
