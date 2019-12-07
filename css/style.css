@@ -365,7 +365,7 @@ div.center-highlighted-words h3{
 }
 
 h5#dugy-radial-topfactors{
-    color:#8293b6;
+    color: #8293b6;
 }
 
 /* Vertical Navigation Bar*/
@@ -401,11 +401,11 @@ ul {
 #cd-vertical-nav li {
     text-align: left;
 }@
-#cd-vertical-nav a {
-    display: inline-block;
-    /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
-    -webkit-backface-visibility: hidden;
-    backface-visibility: hidden;
+    #cd-vertical-nav a {
+        display: inline-block;
+        /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
+        -webkit-backface-visibility: hidden;
+        backface-visibility: hidden;
 }
 #cd-vertical-nav a:after {
     content: "";
@@ -458,9 +458,9 @@ ul {
 #cd-vertical-nav .cd-label {
     position: relative;
     margin-right: 10px;
-    padding: .4em .5em;
     color: white;
-    font-size: 14px;
+    font-size: 12px;
+    line-height: 6px;
     font-size: 0.875rem;
     -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
     -moz-transition: -moz-transform 0.2s, opacity 0.2s;
@@ -472,4 +472,10 @@ ul {
     -o-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
     z-index:0;
+}
+
+.cd-label {
+    padding-top: 10px;
+    padding-left: 12px;
+    line-height: 6px;
 }
