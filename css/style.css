@@ -355,6 +355,11 @@ h3#dugy-radial-currentCountry
     height: 100%;
     display: block;
 }
+#dugy-c-legend{
+    width: 100%;
+    height: 100%;
+    display: block;
+}
 
 div.loneliness-three-dimenstions{
     text-align: center;
@@ -400,12 +405,21 @@ ul {
 }
 #cd-vertical-nav li {
     text-align: left;
-}@
-    #cd-vertical-nav a {
-        display: inline-block;
-        /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
-        -webkit-backface-visibility: hidden;
-        backface-visibility: hidden;
+
+}
+#cd-vertical-nav a {
+    display: inline-block;
+    /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
+}
+#cd-vertical-nav a {
+    display: inline-block;
+    /* prevent weird movements on hover when you use a CSS3 transformation - webkit browsers */
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+
 }
 #cd-vertical-nav a:after {
     content: "";
