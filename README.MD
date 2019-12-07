@@ -3,6 +3,8 @@ Website Link: https://lyip12.github.io/loneliness/
 Our Code:
 
     index.html
+    
+    css/style.css
 
     js/animate.js
 
@@ -31,6 +33,10 @@ Our Code:
 Libraries:
     
     all code inside libraries folder
+
+    css/bootstrap.min.css
+
+    css/aos.css
 
 Code Examples Taken From Internet:
 
