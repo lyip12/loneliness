@@ -427,6 +427,7 @@ ul {
 }
 #cd-vertical-nav a:hover .cd-label {
     opacity: 1;
+    z-index: 0;
 }
 #cd-vertical-nav a.is-selected .cd-dot {
     background-color: white;
@@ -455,7 +456,6 @@ ul {
     margin-right: 10px;
     padding: .4em .5em;
     color: white;
-    width:
     font-size: 14px;
     font-size: 0.875rem;
     -webkit-transition: -webkit-transform 0.2s, opacity 0.2s;
@@ -467,4 +467,5 @@ ul {
     -ms-transform-origin: 100% 50%;
     -o-transform-origin: 100% 50%;
     transform-origin: 100% 50%;
+    z-index:0;
 }
