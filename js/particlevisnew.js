@@ -6,19 +6,15 @@ function particlevisNew(){
     var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
     renderer.autoClearColor = true;
     
-    const pixelRatio = window.devicePixelRatio;
+    //const pixelRatio = window.devicePixelRatio;
 	var canvas_width = $('#dugy-c').parent().width();
-	var canvas_height =  canvas_width / 2;
-	canvas_width = canvas_width * pixelRatio | 0;
-	canvas_height =  canvas_height * pixelRatio | 0;
-
-	renderer.setSize(canvas_width, canvas_height, false);
+    var canvas_height =  canvas_width / 2 | 0;
+    renderer.setSize(canvas_width, canvas_height, false);
+    renderer.setPixelRatio(window.devicePixelRatio);    
     var loaded = false;
 
     document.addEventListener('aos:in', e => {
         if(e.detail.id == 'dugy-radial-fadein' && loaded == true){
-            //renderer.clear();
-            console.log('in');
             resetStarFields();
         }
     });
@@ -31,10 +27,10 @@ function particlevisNew(){
 	camera.position.set(0,0,100);
     camera.lookAt( 0, 0, 0 );
     
-    // layer control
+    /*// layer control
     for (var i = 0; i < 8; i++){
         camera.layers.enable( i ); 
-    }
+    } */
 
     // toggle layer
 	$('#dugy-particle-category').change( function() {
@@ -47,6 +43,45 @@ function particlevisNew(){
         updateSelection();
     });
 
+
+    // Add Legend --------------------------------------------------------------------------------
+    var legendCanvas = document.querySelector('#dugy-c-legend');
+    var legendRenderer = new THREE.WebGLRenderer({canvas:legendCanvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
+    legendRenderer.autoClearColor = true;
+    var legendWidth = $('#dugy-c-legend').parent().width();
+    var legendHeight =  legendWidth / 20;    
+    legendRenderer.setPixelRatio(window.devicePixelRatio);
+    // Legend Scene
+    var legendScene = new THREE.Scene();
+    // set legend camera
+	var legendCamera = new THREE.PerspectiveCamera(135, 2, 0.1, 1000 );//fov, aspect, near, far
+	legendCamera.position.set(0,0,100);
+    legendCamera.lookAt( 0, 0, 0 );
+    var legendStar = [];
+
+    function initLegend(){
+        legendStar = [];
+        legendScene = new THREE.Scene();
+        var starTrail = new StarTrail(-10000,0,0,720,721,5,'All-Lonely');
+        starTrail.starField.material.size = 10;
+        starTrail.starField.material.needsUpdate = true;
+        starTrail.star.setStats(new THREE.Vector3(-700,0,-110), new THREE.Vector3(0.2,0,0), new THREE.Vector3(0,0,0))
+        legendScene.add(starTrail.starField);
+        legendStar.push(starTrail);
+    }
+    function legendUpdate(){
+        for (var i = 0; i< legendStar.length; i++){
+            //legendStar[i].update();
+            if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < 600){
+                legendStar[i].advancedUpdate(2.5, 3, 0.5, new THREE.Vector3(600,0,-110));
+            }
+        }
+    }
+    // Legend ------------------------------------------------------------------------------------
+
+
+
+    // particle vis
     var categories = [];
     var countries = [];
     var howLongLonely = [];
@@ -115,6 +150,7 @@ function particlevisNew(){
         }
         initText();
         updateSelection();
+        initLegend();
     }
 
 
@@ -243,6 +279,8 @@ function particlevisNew(){
 		requestAnimationFrame( animate );
 		starFieldUpdate();
         renderer.render( particleScene, camera );
+        legendUpdate();
+        legendRenderer.render(legendScene,legendCamera);
         // Debugging
         /*  printed -=1;
         if (printed < 0 && loop > 0){

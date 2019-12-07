@@ -23,7 +23,7 @@ class StarTrail{
 
     star = null;
     category = 5;
-    country = 'All-Lonely';
+    country = 'US-Lonely';
 
     starsBufferGeometry = new THREE.BufferGeometry();
     starsPositionBuffer = null;
@@ -38,7 +38,7 @@ class StarTrail{
     fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
     static minOpacity = 0.1;
 
-    constructor(_x, _y, _z, _minLife, _maxLife,_category, _country){
+    constructor(_x, _y, _z, _minLife, _maxLife, _category=5, _country='US-Lonely'){
         this.numStars = 2 * THREE.Math.randInt(_minLife, _maxLife);
         this.star = new Star(_x,_y,_z,this.numStars / 2);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
@@ -109,6 +109,14 @@ class StarTrail{
     /* Update */
     update(){
         this.star.wander();
+        this.star.update();
+        this.opacityChange();
+        this.starFieldUpdate();
+    }
+
+    advancedUpdate(_wanderR,_wanderD,_change, _target){
+        this.star.wander(_wanderR,_wanderD,_change);
+        this.star.seek(_target);
         this.star.update();
         this.opacityChange();
         this.starFieldUpdate();

@@ -53,6 +53,12 @@ class Star{
     get alllife(){
         return this.lifetime * 2;
     }
+    
+    setStats(_pos,_vel,_acc){
+        this.pos = _pos;
+        this.vel = _vel;
+        this.acc = _acc;
+    }
 
     reset(_x,_y,_z,_life){
         this.pos.x = _x;
@@ -75,10 +81,10 @@ class Star{
 
         this.trail[this.trailPointer] = this.pos.clone(); 
     }
-    wander(){
-        var wanderR = 2.5;
-        var wanderD = 8;
-        var change = 0.6;
+    wander(wanderR = 2.5,wanderD = 8,change = 0.6){
+        //var wanderR = 2.5;
+        //var wanderD = 8;
+        //var change = 0.6;
     
         this.wandertheta += THREE.Math.randFloat(-change,change);
         var circlepos = this.vel.clone()
