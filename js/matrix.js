@@ -209,18 +209,11 @@ function MatrixMain()
         var circles;
 
         var label;
-        /**setupVis - creates initial elements for all sections of the visualization.*/
+        /*****  setupVis - creates initial elements for all sections of the visualization.*/
         var setupVis = function (matrixData) {
             //console.log(matrixData)
 
-            // square grid
-            // @v4 Using .merge here to ensure
-            // new and old data have same attrs applied
-
             var firstdata = matrixData["prevalence"];
-            //console.log(firstdata);
-
-            //            var circles = g.selectAll(".circle").append('circle').data(firstdata).classed('circle', true);
 
             circles = g.selectAll('.circle')
             //.merge(circles)
@@ -285,61 +278,26 @@ function MatrixMain()
         function highlightPre(index) {
             circles
                 .data(matrixData["prevalence"])
-                .classed('age-circle',true)
+                .classed('age-circle', true)
                 .transition()
-                .delay(function (d,i) {
-                return 20 * getrownum(i);
-            })
+                .delay(function (d, i) {
+                    return 20 * getrownum(i);
+                })
                 .duration(600)
                 .attr("opacity", 1)
-                .attr("fill", function (d){
-                if(d.index == 0){
-                    return "#ffffff";
-                } else if(d.index == 1){
-                    return "#8293b6";
-                } else {
-                    return "#3e4b66";
-                }
-            })    
-
-            //.attr("fill", function (d){return d.fill})
-
-
-            /*circles.duration(800)
-                .delay(function (d) {
-                    return 5 * getrownum(i);
+                .attr("fill", function (d) {
+                    if (d.index == 0) {
+                        return "#ffffff";
+                    } else if (d.index == 1) {
+                        return "#8293b6";
+                    } else {
+                        return "#3e4b66";
+                    }
                 })
-                .attr('opacity', 0.3)
-                .attr('fill', '#ddd');
-
-            // use named transition to ensure
-            // move happens even if other
-            // transitions are interrupted.
-            g.selectAll('.age-circle')
-                .transition('move-fills')
-                .duration(800)
-                .attr('cx', function (d, i) {
-                    let col = i%numPerRow;
-                    return (col*circleSize) +(col*circlePad);
-                })
-                .attr('cy', function (d, i) {
-                    let row =Math.floor( i / numPerRow);
-                    return (row*circleSize)+(row*circlePad);
-                });
-
-            g.selectAll('.age-circle')
-                .transition()
-                .duration(800)
-                .attr('opacity', function (d) {
-                    d.fill/6
-                })
-                .attr('fill', function (d) { return d.fill; });
-        */}
-
+        }
 
         function highlightAge() {
             console.log(matrixData["age"])
-            //console.log("hightlightage")
             circles
                 .data(matrixData["age"])
                 .classed('age-circle',true)
@@ -366,10 +324,8 @@ function MatrixMain()
 
         function highlightMarital() {
 
-            //console.log("hightlightmar")
             circles
                 .data(matrixData["marital status"])
-            //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
                 return 20 * getrownum(i);
@@ -395,7 +351,6 @@ function MatrixMain()
 
             circles
                 .data(matrixData["specific events"])
-            //.classed('age-circle',true)
                 .transition()
                 .delay(function (d,i) {
                 return 20 * getrownum(i);
