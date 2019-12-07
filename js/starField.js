@@ -107,19 +107,27 @@ class StarTrail{
     }
 
     /* Update */
-    update(){
+    update(_color = null){
         this.star.wander();
         this.star.update();
         this.opacityChange();
-        this.starFieldUpdate();
+        if (_color){
+            this.starFieldUpdate(_color);
+        }else{        
+            this.starFieldUpdate();
+        }
     }
 
-    advancedUpdate(_wanderR,_wanderD,_change, _target){
+    advancedUpdate(_wanderR,_wanderD,_change, _target,_color=null){
         this.star.wander(_wanderR,_wanderD,_change);
         this.star.seek(_target);
         this.star.update();
         this.opacityChange();
-        this.starFieldUpdate();
+        if (_color){
+            this.starFieldUpdate(_color);
+        }else{        
+            this.starFieldUpdate();
+        }
     }
 
     starFieldUpdate(selectColor = null){

@@ -2,6 +2,7 @@ particlevisNew();
 
 function particlevisNew(){
 
+
     var canvas = document.querySelector('#dugy-c');
     var renderer = new THREE.WebGLRenderer({canvas:canvas, alpha: true, antialias:true,preserveDrawingBuffer: false});
     renderer.autoClearColor = true;
@@ -59,6 +60,9 @@ function particlevisNew(){
 	legendCamera.position.set(0,0,10);
     legendCamera.lookAt( 0, 0, 0 );
     var legendStar = [];
+    legendStarObj = [];
+    var dragControls;
+    var sliderLength = 650;
 
     function initLegend(){
         legendStar = [];
@@ -66,19 +70,63 @@ function particlevisNew(){
         var starTrail = new StarTrail(-10000,0,0,720,721,5,'All-Lonely');
         starTrail.starField.material.size = 10;
         starTrail.starField.material.needsUpdate = true;
-        starTrail.star.setStats(new THREE.Vector3(-700,0,-25), new THREE.Vector3(0.0,-0.2,0), new THREE.Vector3(0,0,0))
+        starTrail.star.setStats(new THREE.Vector3(-sliderLength,0,-25), new THREE.Vector3(0.0,-0.2,0), new THREE.Vector3(0,0,0))
         legendScene.add(starTrail.starField);
+        legendStarObj.push(starTrail.starField);
         legendStar.push(starTrail);
+        initDrag();
     }
+
     function legendUpdate(){
         for (var i = 0; i< legendStar.length; i++){
             //legendStar[i].update();
-            if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < 600){
-                legendStar[i].advancedUpdate(1.2, 4, 0.4, new THREE.Vector3(600,0,-25));
+            if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < 650){
+                legendStar[i].advancedUpdate(1.2, 4, 0.4, new THREE.Vector3(650,0,-25));
             }
         }
     }
-    // Legend ------------------------------------------------------------------------------------
+
+
+    // Drag ------------------------------------------------------------------------------------
+
+    function initDrag(){
+        var geometry = new THREE.BoxGeometry( 5, 50, 0.1 );
+        var material = new THREE.MeshBasicMaterial( {color: 0xff6666} );
+        var cube = new THREE.Mesh(geometry, material );
+        var cube2 = new THREE.Mesh(geometry, material);
+        cube.position.set(-sliderLength,0,-25);
+        cube2.position.set(sliderLength,0,-25)
+        legendScene.add(cube );
+        legendScene.add(cube2);
+        var cubeArray = [];
+        cubeArray.push(cube);
+        cubeArray.push(cube2);
+
+        dragControls = new DragControls( cubeArray, legendCamera, legendCanvas );
+        // add event listener to highlight dragged objects
+        dragControls.addEventListener( 'dragstart', function ( event ) {
+            event.object.material.color.set( 0xffffff );
+        } );
+        dragControls.addEventListener( 'dragend', function ( event ) {
+            event.object.material.color.set( 0xff6666 );
+            if(event.object.position.x > 650){
+                event.object.position.x = 650;
+            }
+            if(event.object.position.y > 0){
+                event.object.position.y = 0;
+            }
+            if(event.object.position.x <- 650){
+                event.object.position.x = -650;
+            }
+
+            if(event.object.position.y < 0){
+                event.object.position.y = 0;
+            }
+        });
+
+    }
+   
+   
 
 
 
