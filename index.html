@@ -52,7 +52,7 @@
                 <li>
                     <a href="#section6" data-number="6">
                         <span class="cd-dot"></span>
-                        <span class="cd-label">Causes</span>
+                        <span class="cd-label">Factors</span>
                     </a>
                 </li>
                 <li>
@@ -120,10 +120,9 @@
         </div>
 
         <!--The Key Facts Section-->
-        <div class="section">
+        <div class="section" id = "section3" style="padding-right: 0px !important">
             <div class="line" style="margin: 50px 30vw 200px 30vw;" data-aos="fade-in"></div>
-        </div>
-        <div class="row section" id = "section3" style="margin: 0px !important">
+        <div class="row" style="margin: 0px !important">
             <div class="col-md-6" style="padding-left: 100px;">
                 <p data-aos="fade-in">
                     <b>We are living through an epidemic of loneliness. </b><br><br>
@@ -137,6 +136,7 @@
             <div class="col-md-6" style="padding: 0px !important; background-image: url('img/sitting.png'); background-position: center right; background-repeat: no-repeat; background-size: contain;" data-aos="fade-in"></div>
         </div>
         <div style="height:200px"></div>
+        </div>
 
 
         <!--The WebGL Section-->
@@ -394,10 +394,7 @@
 
         <!--The Chorolepth Map Section-->
         <div style="padding-top: 150px; background: linear-gradient(0deg, #161c26 20%, #000000 70%, #161c26 100%);">
-            <div class="section" id = "section8" data-aos="fade-in">
-                <div id = "skipmatrix" class="line"></div>
-            </div>
-            <div class="section" id = "section9" style="padding: 150px 0px 100px 100px !important;">
+            <div class="section" id = "section8" style="padding: 150px 0px 100px 100px !important;">
                 <div class="row align-items-center" style="margin: 0px !important;" data-aos="fade-in">
                     <div class="col-md-4" style="padding: 0px !important;">
                         <p class="small" style="padding-right: 7vw; margin-bottom: 5px;"><em>below are data from the European Social Survey (ESS) from 2014 on the frequently lonely demographic populations of 21 nations</em></p>
@@ -466,7 +463,7 @@
                     </div>
                 </div>
             </div>
-            <div class="section"  id = "section10" >
+            <div class="section"  id = "section9">
                 <div class="line" style="margin: 50px 30vw 100px 30vw;" data-aos="fade-in"></div>
                 <p class="shortish" data-aos="fade-in">This is a collective section comparing the overall differences between each set of data presented above. It reveals the way these social constructs, labels and ways of living may contribute to our loneliness. </p>
 
@@ -524,33 +521,30 @@
                 </form>
                 <div class="line" style="margin: 150px 30vw 0px 30vw;" data-aos="fade-in"></div>
 
+            </div>
+        </div>
 
-
-                <!--The Radar Plot Section-->
-
-
-                <div class='row align-items-center section' data-aos="fade-in">
-                    <div class='col-md-6'>
-                        <div style="height:150px"></div>
-                        <div id="dugy-radial"></div>
-                        <div style="height:50px"></div>
-                        <p class="small" style="text-align: center;"><b>Odds Ratio between Loneliness and Social Factors</b><br><em>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</em></p>
-                        <div style="height:150px"></div>
-                    </div>
-                    <div class='col-md-1'></div>
-                    <div class='col-md-4'>
-                        <p style="margin-bottom: 0px !important;">If we summarize from these data what factors contribute more to loneliness.
-                            We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
-                            This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>. But maintaining other levels of social connections can also alleviate loneliness:<br><br><br>
-                            <em class="small">Top 3 Factors Contributing to Loneliness in</em></p>
-                        <h3 id='dugy-radial-currentCountry'>Europe</h3>
-                        <div class='mt-5'>
-                            <h5 id='dugy-radial-topfactors' class='my-5'></h5>
-                        </div>
-                    </div>
-                    <div class='col-md-1'></div>
+        <!--The Radar Plot Section-->
+        <div class='row align-items-center section' id = "section10" data-aos="fade-in">
+            <div class='col-md-6'>
+                <div style="height:150px"></div>
+                <div id="dugy-radial"></div>
+                <div style="height:50px"></div>
+                <p class="small" style="text-align: center;"><b>Odds Ratio between Loneliness and Social Factors</b><br><em>Odds Ratio quantifies the strength of the association between two events, A and B. 1 means A and B are independent. The larger odds ratio means the presence of B raises the presence of A.</em></p>
+                <div style="height:150px"></div>
+            </div>
+            <div class='col-md-1'></div>
+            <div class='col-md-4'>
+                <p style="margin-bottom: 0px !important;">If we summarize from these data what factors contribute more to loneliness.
+                    We can find that <b>loneliness is most related with having no confidant, living alone and being unemployed</b>.
+                    This result is not surprising. Research shows, among three levels of social ties, <b>confidant relationship is most salient to emotional-well being</b>. But maintaining other levels of social connections can also alleviate loneliness:<br><br><br>
+                    <em class="small">Top 3 Factors Contributing to Loneliness in</em></p>
+                <h3 id='dugy-radial-currentCountry'>Europe</h3>
+                <div class='mt-5'>
+                    <h5 id='dugy-radial-topfactors' class='my-5'></h5>
                 </div>
             </div>
+            <div class='col-md-1'></div>
         </div>
 
         <!--The Awareness and Solution Section-->

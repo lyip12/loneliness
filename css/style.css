@@ -82,6 +82,10 @@ b {
     text-align: right;
 }
 
+#q1{
+    z-index:99;
+}
+
 p,
 form,
 .tooltip{
