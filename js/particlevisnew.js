@@ -185,7 +185,7 @@ function particlevisNew(){
    
     function updateSelectionDragging(){
         for (var i = 0; i< stars.length; i++){
-            if ((selectedCountry == 'All-Lonely' || stars[i].category == selectedCountry ) 
+            if ((selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry ) 
             && stars[i].star.lifetime >= dragMinLife 
             && stars[i].star.lifetime <= dragMaxLife){
                 stars[i].fadeIn();
