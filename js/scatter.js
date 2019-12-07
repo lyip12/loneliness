@@ -13,8 +13,8 @@ function runjiascatter() {
 
     var padding = 30;
 
-    var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.8  - margin.left - margin.right,
-        height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.35 - margin.top - margin.bottom;
+    var width = Math.max(document.documentElement.clientHeight, window.innerHeight || 0)*0.9  - margin.left - margin.right,
+        height = Math.max(document.documentElement.clientHeight, window.innerHeight || 0) * 0.3 - margin.top - margin.bottom;
 
     function responsivefy(svg) {
 
@@ -154,7 +154,7 @@ function runjiascatter() {
 
 
     var lonelinessScale = d3.scaleLinear()
-        .domain([4, 0])
+        .domain([3, 0])
         .range([0, height]);
 
     var rad = d3.scaleLinear()
@@ -204,7 +204,7 @@ function runjiascatter() {
             })
             .attr("r", function(d,i){
                 if (d.Value == null) return 1;
-                return d.Value*d.Value*1|| 0;
+                return d.Value*d.Value*0.995|| 0;
             })
             .attr("fill", function(d){
 
@@ -230,7 +230,7 @@ function runjiascatter() {
 
         var yAxis = d3.axisLeft().scale(lonelinessScale)
             .tickFormat(d3.format(",d"))
-            .tickValues([0, 1, 2, 3, 4]);
+            .tickValues([0, 1, 2, 3]);
 
         var yscatter = svg.append("g")
             .attr("class", "axis scatter")
@@ -244,7 +244,7 @@ function runjiascatter() {
             .attr("x", width / 2)
             .attr("y", 30)
             .attr("font-family", "'Roboto', sans-serif")
-            .attr("font-size", "12px")
+            .attr("font-size", "9px")
             .attr("font-weight", "300")
             .attr("fill", "#8293b6");
 
@@ -255,7 +255,7 @@ function runjiascatter() {
             .attr("y", -30)
             .attr("text-anchor", "center")
             .attr("font-family", "'Roboto', sans-serif")
-            .attr("font-size", "12px")
+            .attr("font-size", "9px")
             .attr("font-weight", "300")
             .attr("transform", "rotate(-90) ")
             .attr("fill", "#8293b6")
@@ -266,7 +266,7 @@ function runjiascatter() {
             .attr("x", width /12+40)
             .attr("y", height*4/5+20)
             .attr("font-family", "'Roboto', sans-serif")
-            .attr("font-size", "12px")
+            .attr("font-size", "9px")
             .attr("font-weight", "300")
             .attr("fill", "white")
 
@@ -296,9 +296,9 @@ function runjiascatter() {
                 .text("Year: " + d.Year)
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+20)
+                .attr("y", height*4/5+15)
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "12px")
+                .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "#ff6666")
 
@@ -306,9 +306,9 @@ function runjiascatter() {
                 .text("Age: " + d.Age + " ( ~" + d.Count + " entires )")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+34)
+                .attr("y", height*4/5+29)
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "12px")
+                .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "#ff6666")
 
@@ -316,9 +316,9 @@ function runjiascatter() {
                 .text("Frequency: " + d.Value + " / Week")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+48)
+                .attr("y", height*4/5+43)
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "12px")
+                .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "#ff6666")
 
@@ -358,7 +358,7 @@ function runjiascatter() {
                 .attr("x", width+30)
                 .attr("y", height/2+20)
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "12px")
+                .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "#ff6666")
 
@@ -393,7 +393,7 @@ function runjiascatter() {
                 })
                 .attr("r", function(d,i){
                     if (d.Value == null) return 1;
-                    return d.Value*d.Value*1|| 0;
+                    return d.Value*d.Value*0.995|| 0;
                 })
                 .attr("fill", function(d){return d3.interpolateBlues(d.Value*d.Value/8)})
                 .style("opacity", 1)
@@ -405,7 +405,7 @@ function runjiascatter() {
                 .attr("x", width /12+40)
                 .attr("y", height*4/5+20)
                 .attr("font-family", "'Roboto', sans-serif")
-                .attr("font-size", "12px")
+                .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "white")
 
