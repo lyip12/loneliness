@@ -43,7 +43,7 @@ class StarTrail{
         this.star = new Star(_x,_y,_z,this.numStars / 2);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
         this.starsColorBuffer = new Float32Array( this.numStars * 3 );
-        this.starsScaleBuffer = new Float32Array( this.numStars );
+        //this.starsScaleBuffer = new Float32Array( this.numStars );
         this.category = _category;
         this.country = _country;
         this.initialization();
@@ -61,13 +61,13 @@ class StarTrail{
 			this.starsPositionBuffer[i*3] = this.star.trail[i].x;
 			this.starsPositionBuffer[i*3 + 1] = this.star.trail[i].y;
 			this.starsPositionBuffer[i*3 + 2] = this.star.trail[i].z;
-			this.starsScaleBuffer[i] = 1;
+			//this.starsScaleBuffer[i] = 1;
 			this.starsColorBuffer[i*3] = StarTrail.startColor.r;
 			this.starsColorBuffer[i*3+1] = StarTrail.startColor.g;
 			this.starsColorBuffer[i*3+2] = StarTrail.startColor.b;
 		}
 		this.starsBufferGeometry.setAttribute( 'position', new THREE.BufferAttribute( this.starsPositionBuffer, 3 ) );
-		this.starsBufferGeometry.setAttribute( 'size', new THREE.BufferAttribute( this.starsScaleBuffer, 1 ) );
+		//this.starsBufferGeometry.setAttribute( 'size', new THREE.BufferAttribute( this.starsScaleBuffer, 1 ) );
 		this.starsBufferGeometry.setAttribute( 'color', new THREE.BufferAttribute( this.starsColorBuffer, 3) );
 	}
 
@@ -133,11 +133,11 @@ class StarTrail{
     starFieldUpdate(selectColor = null){
 		var positions = this.starField.geometry.attributes.position.array;
 		var colors = this.starField.geometry.attributes.color.array;
-		var scales = this.starField.geometry.attributes.size.array;
+		//var scales = this.starField.geometry.attributes.size.array;
 	
 		for (var i = 0; i<this.numStars; i++){
            
-            scales[i] = 1;
+            //scales[i] = 1;
 
 			positions [i*3] = this.star.trail[i].x;
 			positions [i*3 + 1] = this.star.trail[i].y;
@@ -162,7 +162,7 @@ class StarTrail{
 		}
 		this.starField.geometry.attributes.position.needsUpdate = true;
 		this.starField.geometry.attributes.color.needsUpdate = true;
-		this.starField.geometry.attributes.size.needsUpdate = true;
+		//this.starField.geometry.attributes.size.needsUpdate = true;
 	}
 
 }

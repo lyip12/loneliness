@@ -61,14 +61,18 @@ function particlevisNew(){
     legendStarObj = [];
     var dragControls;
     var sliderLength = 600;
+    var sixmonths = 24;
     var maxLonelyTime = 540;
     var cubeDepth = -25;
     var cubeArray = [];
     var dragMinLife = 0;
     var dragMaxLife = maxLonelyTime;
     var dragTexts = [];
-
+    var legendTexts = [];
+    var uniformColorMode = true;
+    
     function initLegend(){
+        // star trail
         legendStar = [];
         legendScene = new THREE.Scene();
         var starTrail = new StarTrail(-10000,0,0,maxLonelyTime,maxLonelyTime,5,'All-Lonely');
@@ -78,6 +82,31 @@ function particlevisNew(){
         legendScene.add(starTrail.starField);
         legendStarObj.push(starTrail.starField);
         legendStar.push(starTrail);
+
+        // axis texts
+        legendTexts = []
+        var star = new Star(0,0,0,10); // a temporary star 
+
+        var starlabel1 = new StarText(star,textFont,20,'6 months', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-50,cubeDepth))
+        starlabel1.setOpacity(1);
+        legendScene.add(starlabel1.starText);
+        legendTexts.push(starlabel1);
+        
+        var starlabel2 = new StarText(star,textFont,20,'start', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths),-50,cubeDepth))
+        starlabel2.setOpacity(0);
+        legendScene.add(starlabel2.starText);
+        legendTexts.push(starlabel2);
+
+        var starlabel3 = new StarText(star,textFont,20,'10 years', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-50,cubeDepth))
+        starlabel3.setOpacity(1);
+        legendScene.add(starlabel3.starText);
+        legendTexts.push(starlabel3);
+
+        var starlabel4 = new StarText(star,textFont,20,'end', 0,5,'All-Lonely',new THREE.Vector3(getSliderX(sixmonths * 20),-50,cubeDepth))
+        starlabel4.setOpacity(0);
+        legendScene.add(starlabel4.starText);
+        legendTexts.push(starlabel4);
+
         initDrag();
     }
 
@@ -88,6 +117,10 @@ function particlevisNew(){
                 legendStar[i].advancedUpdate(1.2, 4, 0.4, new THREE.Vector3(sliderLength,0,cubeDepth));
             }
         }
+    }
+    function getSliderX(_life)
+    {
+        return THREE.Math.lerp(-sliderLength, sliderLength, _life * 1.0 / maxLonelyTime)
     }
 
     function moveDrag(_minLife,_maxLife){
@@ -102,7 +135,6 @@ function particlevisNew(){
         cuberight.position.set(x2,0,cubeDepth);
 
     }
-
 
     // Drag ------------------------------------------------------------------------------------
 
@@ -160,8 +192,6 @@ function particlevisNew(){
             dragTexts[0].fadeOut();  // Try Drag
             dragTexts[1].fadeIn();  // Dragging
 
-            
-
             var left = (cubeArray[0].position.x <= cubeArray[1].position.x)? 0:1;
             var cubeleft = cubeArray[left];
             var cuberight = cubeArray[1-left];
@@ -181,7 +211,6 @@ function particlevisNew(){
         })
     
     }
-   
    
     function updateSelectionDragging(){
         for (var i = 0; i< stars.length; i++){
@@ -397,13 +426,16 @@ function particlevisNew(){
 
     function starFieldUpdate(){
         for (var i = 0 ; i < stars.length; i++){
-                stars[i].update();
+            stars[i].update();
         }
         for (var i= 0; i < starLabels.length; i++){
             starLabels[i].update();
         }
         for (var i= 0; i < dragTexts.length; i++){
             dragTexts[i].opacityChange();
+        }
+        for (var i= 0; i < legendTexts.length; i++){
+            legendTexts[i].opacityChange();
         }
     }
 

@@ -149,17 +149,14 @@
         <div class="section" id = "section4">
             <div data-aos="fade-in" id="dugy-radial-fadein">
                 <h5 style="text-align: center;">LONELY IN THE CROWD</h5>
-                <div style="height:0px"></div>
                 <h3 class="cursive" style="text-align: center;">how long have we been alone?</h3>
                 <p style="text-align: center; margin-bottom: 10px"><em>We live in a splendid desert, where the stranger is lonely in the midst of a million of his/her race.<br>There are many people who have been lonely for a long, long time, more so than we have ever imagined.</em></p>
                 <div style="height:20px"></div>
                 <div  id='dugy-canvas-container'>
                     <canvas id="dugy-c"></canvas>
                 </div>
-
-                <div style="height:30px"></div>
-
-                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 30px">
+                <div style="height:10px"></div>
+                <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 0px">
                     <div class="btn-group btn-group-toggle" data-toggle="buttons" id='dugy-particle-category'>
                         <label class="btn btn-light">
                             <input type="radio" name="dugy-category-options" autocomplete="off" value='7'> All
@@ -201,13 +198,22 @@
                         <label class="btn btn-light">
                             <input type="radio" name="dugy-country-options" autocomplete="off" value='Japan-Lonely'> Japan
                         </label>
+                        <label disabled style="margin-right: 20px;" ></label>
+                    </div>
+
+                    <div class="btn-group btn-group-toggle" data-toggle="buttons" id='dugy-particle-color'>
+                        <label class="btn btn-light active">
+                            <input type="radio" name="dugy-color-options" autocomplete="off" value='UniformColor' checked > Uniform Color
+                        </label>
+                        <label class="btn btn-light">
+                            <input type="radio" name="dugy-color-options" autocomplete="off" value='ColorByLength' > Color by Length
+                        </label>
                     </div>
                 </div>
             </div>
         </div>
-        <div style="height:30px"></div>
-        <div class="section">
-            <div class="shortish">
+        <div class="section" data-aos="fade-in" >
+            <div class="dugy-shortish">
                 <canvas id="dugy-c-legend"></canvas>
                 <p><br>The visualization shows the duration of loneliness individuals experience on average, ranging from few months, all the way to years. <b>Among the 737 people who answered to this question from US,UK and Japan, about 25% said they have been alone for more than 10 years.</b></p>
 
@@ -220,7 +226,7 @@
 
         <!--The Scatter Plot Section-->
 
-        <div class="section"  id = "section5">
+        <div class="section"  data-aos="fade-in" id = "section5">
             <div class="line" style="margin: 150px 30vw 150px 30vw;"></div>
             <div style = "height:80px"></div>
             <div class="row align-items-center">
