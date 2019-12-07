@@ -16,6 +16,7 @@ function particlevisNew(){
     var loaded = false;
 
     document.addEventListener('aos:in', e => {
+        console.log(e)
         if(e.detail.id == 'dugy-radial-fadein' && loaded == true){
             //renderer.clear();
             console.log('in');
@@ -88,7 +89,7 @@ function particlevisNew(){
         font = fontData;
         textFont = new THREE.Font(font);
         resetStarFields(); 
-        loaded == true;      
+        loaded = true;      
     }
 
 
@@ -138,7 +139,6 @@ function particlevisNew(){
         for (var i=0; i < starLabels.length; i++){
             labelDict[starLabels[i].category.toString() + ' '+starLabels[i].country] = i;
         }
-        console.log(labelDict);
     }
 
 
@@ -160,12 +160,9 @@ function particlevisNew(){
     function updateSelection(){
         var candidateStars = [];
         var totalindex = howLongLonely.length - 1;
-        console.log(selectedCountry);
-        console.log(selectedCategory);
         if (selectedCategory == totalindex){
             // store 7 different stars for different categories
             candidateStars = [...Array(totalindex).keys()].map(x => null);
-            console.log(candidateStars);
             for (var i = 0; i< stars.length; i++){
                 if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
                     stars[i].fadeIn();
@@ -186,7 +183,6 @@ function particlevisNew(){
             Object.keys(labelDict).forEach((k) => {
                 var key = k.split(' ');
                 var v = labelDict[k];
-                console.log(key);
                 if (key[1] == selectedCountry){
                     var category = parseInt(key[0])
                     starLabels[v].fadeIn();
@@ -222,7 +218,6 @@ function particlevisNew(){
             });
             // fadein only the needed one
             var v = labelDict[selectedCategory.toString() + ' ' + selectedCountry]
-            console.log(v);
             starLabels[v].fadeIn();
             starLabels[v].resetCompanionStar(candidateStars[0]);
 
