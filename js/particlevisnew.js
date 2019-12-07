@@ -16,7 +16,6 @@ function particlevisNew(){
     var loaded = false;
 
     document.addEventListener('aos:in', e => {
-        console.log(e)
         if(e.detail.id == 'dugy-radial-fadein' && loaded == true){
             //renderer.clear();
             console.log('in');
@@ -196,7 +195,9 @@ function particlevisNew(){
             candidateStars.push(null);
 
             for (var i = 0; i< stars.length; i++){
-                if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
+                
+                if ((selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry) && 
+                selectedCategory == stars[i].category){
                     stars[i].fadeIn();
                     // compare with canditates
                     if (candidateStars[0] == null){
