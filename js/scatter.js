@@ -8,7 +8,7 @@ function runjiascatter() {
         top: 5,
         right: 150,
         bottom: 40,
-        left: 60
+        left: 20
     };
 
     var padding = 30;
