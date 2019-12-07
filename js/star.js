@@ -15,7 +15,7 @@ class Star{
     trailPointer = 0;
     // indicate if finished the first round of trail
     // which means the colors along the trail is fixed
-    trailColorPointer = 0
+    trailColorPointer = 0;
 
     wandertheta = 0;
     life = 0;
@@ -70,9 +70,10 @@ class Star{
             if(x == 0){
                 return new THREE.Color(0xffffff);
             }
-            else{return color;}
-            
+            else{return color;} 
         });
+
+        this.trail[this.trailPointer] = this.pos.clone(); 
     }
     wander(){
         var wanderR = 2.5;
@@ -118,13 +119,14 @@ class Star{
         }
     }
     updatePosInTrail(){
+        this.trailPointer += 1;
 
-        this.trail[this.trailPointer] = this.pos.clone(); 
-        this.trailPointer += 1
         // loop again
         if (this.trailPointer >= this.alllife){
             this.trailPointer -= this.alllife;
         }
+        this.trail[this.trailPointer] = this.pos.clone(); 
+
     }
 
     updateColorPointer(){
