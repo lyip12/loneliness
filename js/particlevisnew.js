@@ -27,11 +27,6 @@ function particlevisNew(){
 	var camera = new THREE.PerspectiveCamera(135, 2, 0.1, 1000 );//fov, aspect, near, far
 	camera.position.set(0,0,100);
     camera.lookAt( 0, 0, 0 );
-    
-    /*// layer control
-    for (var i = 0; i < 8; i++){
-        camera.layers.enable( i ); 
-    } */
 
     // toggle layer
 	$('#dugy-particle-category').change( function() {
@@ -62,15 +57,20 @@ function particlevisNew(){
     var legendStar = [];
     legendStarObj = [];
     var dragControls;
-    var sliderLength = 650;
+    var sliderLength = 600;
+    var maxLonelyTime = 540;
+    var cubeDepth = -25;
+    var cubeArray = [];
+    var dragMinLife = 0;
+    var dragMaxLife = maxLonelyTime;
 
     function initLegend(){
         legendStar = [];
         legendScene = new THREE.Scene();
-        var starTrail = new StarTrail(-10000,0,0,720,721,5,'All-Lonely');
+        var starTrail = new StarTrail(-10000,0,0,maxLonelyTime,maxLonelyTime,5,'All-Lonely');
         starTrail.starField.material.size = 10;
         starTrail.starField.material.needsUpdate = true;
-        starTrail.star.setStats(new THREE.Vector3(-sliderLength,0,-25), new THREE.Vector3(0.0,-0.2,0), new THREE.Vector3(0,0,0))
+        starTrail.star.setStats(new THREE.Vector3(-sliderLength,0,cubeDepth), new THREE.Vector3(0.0,-0.2,0), new THREE.Vector3(0,0,0))
         legendScene.add(starTrail.starField);
         legendStarObj.push(starTrail.starField);
         legendStar.push(starTrail);
@@ -79,28 +79,41 @@ function particlevisNew(){
 
     function legendUpdate(){
         for (var i = 0; i< legendStar.length; i++){
-            //legendStar[i].update();
-            if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < 650){
-                legendStar[i].advancedUpdate(1.2, 4, 0.4, new THREE.Vector3(650,0,-25));
+            //use array so that when its empty(not loaded), this won't excute
+            if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < sliderLength){
+                legendStar[i].advancedUpdate(1.2, 4, 0.4, new THREE.Vector3(sliderLength,0,cubeDepth));
             }
         }
+    }
+
+    function moveDrag(_minLife,_maxLife){
+        var left = ( cubeArray[0].position.x <= cubeArray[1].position.x)? 0:1;
+        var cubeleft = cubeArray[left];
+        var cuberight = cubeArray[1-left];
+
+        var x1 = THREE.Math.lerp(-sliderLength, sliderLength, _minLife * 1.0 / maxLonelyTime)
+        var x2 = THREE.Math.lerp(-sliderLength, sliderLength, _maxLife * 1.0 / maxLonelyTime)
+
+        cubeleft.position.set(x1,0,cubeDepth);
+        cuberight.position.set(x2,0,cubeDepth);
+
     }
 
 
     // Drag ------------------------------------------------------------------------------------
 
     function initDrag(){
+        cubeArray = [];
         var geometry = new THREE.BoxGeometry( 5, 50, 0.1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xff6666} );
-        var cube = new THREE.Mesh(geometry, material );
-        var cube2 = new THREE.Mesh(geometry, material);
-        cube.position.set(-sliderLength,0,-25);
-        cube2.position.set(sliderLength,0,-25)
-        legendScene.add(cube );
-        legendScene.add(cube2);
-        var cubeArray = [];
-        cubeArray.push(cube);
-        cubeArray.push(cube2);
+        var cubeleft = new THREE.Mesh(geometry, material );
+        var cuberight = new THREE.Mesh(geometry, material);
+        cubeleft.position.set(-sliderLength,0, cubeDepth);
+        cuberight.position.set(sliderLength,0,cubeDepth)
+        legendScene.add(cubeleft );
+        legendScene.add(cuberight);
+        cubeArray.push(cubeleft);
+        cubeArray.push(cuberight);
 
         dragControls = new DragControls( cubeArray, legendCamera, legendCanvas );
         // add event listener to highlight dragged objects
@@ -109,21 +122,19 @@ function particlevisNew(){
         } );
         dragControls.addEventListener( 'dragend', function ( event ) {
             event.object.material.color.set( 0xff6666 );
-            if(event.object.position.x > 650){
-                event.object.position.x = 650;
+            if(event.object.position.x > sliderLength){
+                event.object.position.x = sliderLength;
             }
             if(event.object.position.y > 0){
                 event.object.position.y = 0;
             }
-            if(event.object.position.x <- 650){
-                event.object.position.x = -650;
+            if(event.object.position.x <- sliderLength){
+                event.object.position.x = -sliderLength;
             }
-
             if(event.object.position.y < 0){
                 event.object.position.y = 0;
             }
         });
-
     }
    
    
@@ -134,7 +145,7 @@ function particlevisNew(){
     var categories = [];
     var countries = [];
     var howLongLonely = [];
-    var lonelyTime = [1,24,48,96,240,480,600];
+    var lonelyTime = [1,24,48,96,240,480,maxLonelyTime];
     var countryNames = {
         'US-Lonely':'United States',
         'UK-Lonely': 'United Kingdom',
@@ -198,8 +209,8 @@ function particlevisNew(){
             } 
         }
         initText();
-        updateSelection();
         initLegend();
+        updateSelection();
     }
 
 
@@ -244,12 +255,19 @@ function particlevisNew(){
     function updateSelection(){
         var candidateStars = [];
         var totalindex = howLongLonely.length - 1;
+        var minLife = 1000;
+        var maxLife = 0;
         if (selectedCategory == totalindex){
             // store 7 different stars for different categories
             candidateStars = [...Array(totalindex).keys()].map(x => null);
             for (var i = 0; i< stars.length; i++){
                 if (selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry){
                     stars[i].fadeIn();
+                    if (stars[i].star.lifetime < minLife){
+                        minLife = stars[i].star.lifetime
+                    }else if(stars[i].star.lifetime > maxLife){
+                        maxLife = stars[i].star.lifetime
+                    }
                     var type = stars[i].category
                     // decide if replace the current candidates in list
                     if (candidateStars[type] == null){
@@ -284,6 +302,11 @@ function particlevisNew(){
                 if ((selectedCountry == 'All-Lonely' || stars[i].country == selectedCountry) && 
                 selectedCategory == stars[i].category){
                     stars[i].fadeIn();
+                    if (stars[i].star.lifetime < minLife){
+                        minLife = stars[i].star.lifetime
+                    }else if(stars[i].star.lifetime > maxLife){
+                        maxLife = stars[i].star.lifetime
+                    }
                     // compare with canditates
                     if (candidateStars[0] == null){
                         candidateStars[0] = stars[i].star
@@ -306,8 +329,10 @@ function particlevisNew(){
             var v = labelDict[selectedCategory.toString() + ' ' + selectedCountry]
             starLabels[v].fadeIn();
             starLabels[v].resetCompanionStar(candidateStars[0]);
-
         }
+        dragMinLife = minLife;
+        dragMaxLife = maxLife;
+        moveDrag(dragMinLife,dragMaxLife);
     }
 
 

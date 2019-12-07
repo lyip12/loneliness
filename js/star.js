@@ -36,7 +36,7 @@ class Star{
     }
     
     get alpha() {
-        return this.life/this.lifetime;
+        return this.life * 1.0/this.lifetime;
       }
 
     get remain(){
@@ -72,7 +72,7 @@ class Star{
         this.trail = [...Array(this.alllife).keys()].map(x => new THREE.Vector3(0,10000,10000));
         this.trailColor = [...Array(this.alllife).keys()].map(x => {
             var color = Star.startColor.clone();
-            color.lerp(Star.destColor, 2 * Math.abs( Math.max(this.lifetime - x,0) / this.lifetime - 0.5));
+            color.lerp(Star.destColor, 2 * Math.abs( Math.max(this.lifetime - x,0) * 1.0 / this.lifetime - 0.5));
             if(x == 0){
                 return new THREE.Color(0xffffff);
             }
