@@ -32,6 +32,10 @@ Libraries:
     
     all code inside libraries folder
 
+Code Examples Taken From Internet:
+
     js/scroll.js
 
     js/dots.js
+
+    js/dragControl.js
