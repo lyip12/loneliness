@@ -30,16 +30,18 @@ function particlevisNew(){
 
     // toggle layer
     // using buttons
-	$('#dugy-particle-category').change( function() {
+	$('#dugy-particle-category').click( function() {
         selectedCategory = parseInt(document.querySelector('input[name="dugy-category-options"]:checked').value);
-        
+        updateSelection();
+    });
+    $('#dugy-particle-category').change( function() {
+        selectedCategory = parseInt(document.querySelector('input[name="dugy-category-options"]:checked').value);
         updateSelection();
     });
     $('#dugy-particle-country').change( function() {
         selectedCountry = document.querySelector('input[name="dugy-country-options"]:checked').value;
         updateSelection();
     });
-
 
     // Add Legend --------------------------------------------------------------------------------
     var legendCanvas = document.querySelector('#dugy-c-legend');
@@ -157,6 +159,17 @@ function particlevisNew(){
         dragControls.addEventListener( 'drag', function ( event ) {
             dragTexts[0].fadeOut();  // Try Drag
             dragTexts[1].fadeIn();  // Dragging
+
+            
+
+            var left = (cubeArray[0].position.x <= cubeArray[1].position.x)? 0:1;
+            var cubeleft = cubeArray[left];
+            var cuberight = cubeArray[1-left];
+
+            dragMinLife = Math.floor((cubeleft.position.x + sliderLength)/ (2 * sliderLength) * maxLonelyTime);
+            dragMaxLife = Math.ceil((cuberight.position.x + sliderLength)/ (2 * sliderLength) * maxLonelyTime);
+
+            updateSelectionDragging();
         })
         dragControls.addEventListener( 'hoveron', function ( event ) {
             dragTexts[0].fadeIn();  // Try Drag
@@ -170,7 +183,21 @@ function particlevisNew(){
     }
    
    
-
+    function updateSelectionDragging(){
+        for (var i = 0; i< stars.length; i++){
+            if ((selectedCountry == 'All-Lonely' || stars[i].category == selectedCountry ) 
+            && stars[i].star.lifetime >= dragMinLife 
+            && stars[i].star.lifetime <= dragMaxLife){
+                stars[i].fadeIn();
+            }else{
+                stars[i].fadeOut();
+            }
+        }
+        Object.keys(labelDict).forEach((k) => {
+            var v = labelDict[k];
+            starLabels[v].fadeOut();
+        });
+    }
 
 
     // particle vis
