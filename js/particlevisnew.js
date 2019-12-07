@@ -29,6 +29,7 @@ function particlevisNew(){
     camera.lookAt( 0, 0, 0 );
 
     // toggle layer
+    // using buttons
 	$('#dugy-particle-category').change( function() {
         selectedCategory = parseInt(document.querySelector('input[name="dugy-category-options"]:checked').value);
         
@@ -63,6 +64,7 @@ function particlevisNew(){
     var cubeArray = [];
     var dragMinLife = 0;
     var dragMaxLife = maxLonelyTime;
+    var dragTexts = [];
 
     function initLegend(){
         legendStar = [];
@@ -104,7 +106,8 @@ function particlevisNew(){
 
     function initDrag(){
         cubeArray = [];
-        var geometry = new THREE.BoxGeometry( 5, 50, 0.1 );
+        dragTexts = [];
+        var geometry = new THREE.BoxGeometry( 10, 60, 0.1 );
         var material = new THREE.MeshBasicMaterial( {color: 0xff6666} );
         var cubeleft = new THREE.Mesh(geometry, material );
         var cuberight = new THREE.Mesh(geometry, material);
@@ -115,12 +118,27 @@ function particlevisNew(){
         cubeArray.push(cubeleft);
         cubeArray.push(cuberight);
 
+        var star = new Star(0,0,0,10); // a temporary star   
+        var starlabel = new StarText(star,textFont,5,'Try Drag!', 0,5,'All-Lonely',new THREE.Vector3(0,10,0))
+        starlabel.setOpacity(0);
+        legendScene.add(starlabel.starText);
+        dragTexts.push(starlabel);
+        var starlabel2 = new StarText(star,textFont,5,'Dragging', 0,5,'All-Lonely',new THREE.Vector3(0,10,0))
+        starlabel2.setOpacity(0);
+        legendScene.add(starlabel2.starText);
+        dragTexts.push(starlabel2);
+
         dragControls = new DragControls( cubeArray, legendCamera, legendCanvas );
-        // add event listener to highlight dragged objects
-        dragControls.addEventListener( 'dragstart', function ( event ) {
+         // add event listener to highlight dragged objects
+         dragControls.addEventListener( 'dragstart', function ( event ) {
             event.object.material.color.set( 0xffffff );
+            dragTexts[0].fadeOut();  // Try Drag
+            dragTexts[1].fadeIn();  // Dragging
         } );
         dragControls.addEventListener( 'dragend', function ( event ) {
+            dragTexts[0].fadeOut();  // Try Drag
+            dragTexts[1].fadeOut();  // Dragging
+
             event.object.material.color.set( 0xff6666 );
             if(event.object.position.x > sliderLength){
                 event.object.position.x = sliderLength;
@@ -135,6 +153,20 @@ function particlevisNew(){
                 event.object.position.y = 0;
             }
         });
+            // using drag
+        dragControls.addEventListener( 'drag', function ( event ) {
+            dragTexts[0].fadeOut();  // Try Drag
+            dragTexts[1].fadeIn();  // Dragging
+        })
+        dragControls.addEventListener( 'hoveron', function ( event ) {
+            dragTexts[0].fadeIn();  // Try Drag
+            dragTexts[1].fadeOut();  // Dragging
+        })
+        dragControls.addEventListener( 'hoveroff', function ( event ) {
+            dragTexts[0].fadeOut();  // Try Drag
+            dragTexts[1].fadeOut();  // Dragging
+        })
+    
     }
    
    
@@ -342,6 +374,9 @@ function particlevisNew(){
         }
         for (var i= 0; i < starLabels.length; i++){
             starLabels[i].update();
+        }
+        for (var i= 0; i < dragTexts.length; i++){
+            dragTexts[i].opacityChange();
         }
     }
 

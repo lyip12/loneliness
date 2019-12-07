@@ -26,7 +26,7 @@ class StarText{
     static minOpacity = 0;
 
 
-    constructor(_companionStar,_textFont, _textSize, _textString, _z, _category,_country){
+    constructor(_companionStar,_textFont, _textSize, _textString, _z, _category,_country, _pos= new THREE.Vector3(0,0,-110)){
         this.companionStar = _companionStar;
         this.textFont = _textFont;
         this.textSize = _textSize;
@@ -34,6 +34,7 @@ class StarText{
         this.pos.z = _z;
         this.category = _category;
         this.country = _country;
+        this.pos = _pos;
         this.initialization();
     }
 
@@ -50,6 +51,8 @@ class StarText{
         this.textGeometry.computeBoundingBox();
         this.textGeometry.center();
         this.starText = new THREE.Mesh( this.textGeometry,this.texMat );
+        this.starText.position.x = this.pos.x;
+        this.starText.position.y = this.pos.y;
         this.starText.position.z = this.pos.z;
     }
 
@@ -66,6 +69,11 @@ class StarText{
 
     fadeIn(){
         this.fadingStage = 1;
+    }
+
+    setOpacity(_opacity){
+        this.texMat.opacity = _opacity;
+        this.texMat.needsUpdate = true;
     }
 
     opacityChange(){
