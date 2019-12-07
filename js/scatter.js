@@ -296,17 +296,17 @@ function runjiascatter() {
                 .text("Year: " + d.Year)
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+15)
+                .attr("y", height*4/5+5)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "9px")
                 .attr("font-weight", "300")
                 .attr("fill", "#ff6666")
 
             g.append("text")
-                .text("Age: " + d.Age + " ( ~" + d.Count + " entires )")
+                .text("Age: " + d.Age + " ( ~" + d.Count + " entries )")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+29)
+                .attr("y", height*4/5+15)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "9px")
                 .attr("font-weight", "300")
@@ -316,7 +316,7 @@ function runjiascatter() {
                 .text("Frequency: " + d.Value + " / Week")
                 .attr("class", "scattertooltip")
                 .attr("x", d3.mouse(this)[0]-40 + "px")
-                .attr("y", height*4/5+43)
+                .attr("y", height*4/5+25)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "9px")
                 .attr("font-weight", "300")
@@ -342,7 +342,9 @@ function runjiascatter() {
 
             var lineFunction = d3.line()
                 .x(function(d) {return ageScale(d.Age)+40; })
-                .y(function(d) {return lonelinessScale(d.Value);});
+                .y(function(d) {
+                    return lonelinessScale(d.Value);
+                });
 
              g.append("path")
                  .datum(displayData.filter(function(d){return d.Year==="all"}))
@@ -355,8 +357,8 @@ function runjiascatter() {
             g.append("text")
                 .text("Regression Value")
                 .attr("class", "scattertooltip")
-                .attr("x", width+30)
-                .attr("y", height/2+20)
+                .attr("x", width-40)
+                .attr("y", 30)
                 .attr("font-family", "'Roboto', sans-serif")
                 .attr("font-size", "9px")
                 .attr("font-weight", "300")
