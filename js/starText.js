@@ -16,6 +16,9 @@ class StarText{
     texMat = new THREE.MeshBasicMaterial( {
         color: this.textColor,
         transparent: true,
+        blending:THREE.AdditiveBlending,
+        depthTest: false,
+        depthWrite : false,
         side: THREE.DoubleSide,
         opacity:1.0
     } );

@@ -11,6 +11,7 @@ class StarTrail{
           depthTest: false, 
           size:5,
           blending:THREE.AdditiveBlending,
+          depthWrite : false,
           transparent:true,
           opacity:1.0
           /* blending: THREE.CustomBlending,
@@ -38,14 +39,18 @@ class StarTrail{
     fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
     static minOpacity = 0.1;
 
-    constructor(_x, _y, _z, _minLife, _maxLife, _category=5, _country='US-Lonely'){
+    alternativeColors = null;
+    useAlternativeColors = false;
+
+    constructor(_x, _y, _z, _minLife, _maxLife, _category=5, _country='US-Lonely', _alternativeColors=null){
         this.numStars = 2 * THREE.Math.randInt(_minLife, _maxLife);
-        this.star = new Star(_x,_y,_z,this.numStars / 2);
+        this.star = new Star(_x,_y,_z,this.numStars / 2, _alternativeColors);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
         this.starsColorBuffer = new Float32Array( this.numStars * 3 );
         //this.starsScaleBuffer = new Float32Array( this.numStars );
         this.category = _category;
         this.country = _country;
+        this.alternativeColors = _alternativeColors;
         this.initialization();
     }
 
@@ -73,7 +78,11 @@ class StarTrail{
 
     starFieldInit(){
 		this.starField = new THREE.Points( this.starsBufferGeometry, this.starMaterial);
-	}
+    }
+    
+    changeColor(_bool){
+        this.useAlternativeColors = _bool;
+    }
 
 	fadeOut(){
         this.fadingStage = -1;
@@ -150,8 +159,13 @@ class StarTrail{
             else{
                 var sequenceInTrail = (i <= this.star.pointer) ? this.star.pointer - i : this.star.pointer + this.star.alllife - i;
                 var sequenceInTrailColor  =  Math.max(this.star.colorPointer - sequenceInTrail , 0)
-                color = this.star.trailColor[sequenceInTrailColor];
+                if (this.useAlternativeColors == true){
+                    color = this.star.trailColor2[sequenceInTrailColor];
+                }else{
+                    color = this.star.trailColor[sequenceInTrailColor];
+                }
             }
+           
             if (i  == this.star.pointer || i == 0 ){
                 color = new THREE.Color(0xffffff);;
             }           

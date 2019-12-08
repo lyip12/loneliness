@@ -132,7 +132,7 @@ function runjiascatter() {
                     avgFltlnl.push(d.fltlnl);
                 }
             });
-            console.log(filteravg)
+            //console.log(filteravg)
 
             var meanfltlnl = d3.mean(avgFltlnl);
 
@@ -143,7 +143,7 @@ function runjiascatter() {
                 Year: "all"
             })
         }
-        console.log(displayData)
+        //console.log(displayData)
         updatescatter("all")
     })
 
@@ -290,7 +290,7 @@ function runjiascatter() {
             //                .style("opacity", 1)
             //                .attr("fill", "#ff6666")
 
-            console.log(this)
+            //console.log(this)
 
             g.append("text")
                 .text("Year: " + d.Year)
