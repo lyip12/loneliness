@@ -75,12 +75,12 @@ function particlevisNew(){
     var dragTexts = [];
     var legendTexts = [];
     var selectedColorMode = 'UniformColor';  // 'UniformColor' or 'ColorByLength'
-    
+    var alternativeColors = [new THREE.Color(0x914545), new THREE.Color(0x2e5385)]
     function initLegend(){
         // star trail
         legendStar = [];
         legendScene = new THREE.Scene();
-        var starTrail = new StarTrail(-10000,0,0,maxLonelyTime,maxLonelyTime,5,'All-Lonely');
+        var starTrail = new StarTrail(-10000,0,0,maxLonelyTime,maxLonelyTime,5,'All-Lonely',[new THREE.Color(0x914545), new THREE.Color(0x2e5385)]);
         starTrail.starField.material.size = 10;
         starTrail.starField.material.needsUpdate = true;
         starTrail.star.setStats(new THREE.Vector3(-sliderLength,0,cubeDepth), new THREE.Vector3(0.0,-0.2,0), new THREE.Vector3(0,0,0))
@@ -127,6 +127,9 @@ function particlevisNew(){
 
     function colorChannelChange(){
         var selector = (selectedColorMode == 'UniformColor')? 1 : 0;
+        var useAlternativeColors = (selectedColorMode == 'UniformColor')? false : true;
+
+
 
         for(var i=0; i<legendTexts.length; i++){
             if (i % 2 == selector){
@@ -135,14 +138,18 @@ function particlevisNew(){
                 legendTexts[i].fadeOut();
             }
         }
+
+        for (var i=0; i<legendStar.length; i++){
+            legendStar[i].changeColor(useAlternativeColors);
+        }
     }
     function getSliderX(_life)
     {
         return THREE.Math.lerp(-sliderLength, sliderLength, _life * 1.0 / maxLonelyTime)
     }
     function getColor(_life){
-        var color = Star.startColor.clone();
-        color.lerp(Star.destColor, THREE.Math.smoothstep(_life, 0,maxLonelyTime));
+        var color = alternativeColors[0].clone();
+        color.lerp(alternativeColors[1], THREE.Math.smoothstep(_life, 0,maxLonelyTime));
         return color;
     }
 
@@ -356,9 +363,9 @@ function particlevisNew(){
         var countryName = countryNames[_country];
         var message = null;
         if (_category != howLongLonely.length-2){
-           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report being lonely have been so for ' + howLongLonely[_category].Category + '.'; 
+           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report loneliness have been so for ' + howLongLonely[_category].Category + '.'; 
         }else{
-           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report being lonely are not sure/declined to answer about the details.'; 
+           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report loneliness lonely are not sure/declined to answer.'; 
         }
         return message;
     }

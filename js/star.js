@@ -12,7 +12,9 @@ class Star{
     // for records
     trail = [];
     trailColor = [];
+    trailColor2 = []
     trailPointer = 0;
+    alternativeTrailColors = null;
     // indicate if finished the first round of trail
     // which means the colors along the trail is fixed
     trailColorPointer = 0;
@@ -25,13 +27,14 @@ class Star{
 	static maxspeed = 1.2;
 	static maxforce = 0.03;
 
-	constructor(_x,_y,_z, _life){
+	constructor(_x,_y,_z, _life, _alternativeTrailColors = null){
 	this.pos.x = _x;
 	this.pos.y = _y;
     this.pos.z = _z;
     this.life = _life;
     this.life2 = 2 * _life;
     this.lifetime = _life;
+    this.alternativeTrailColors = _alternativeTrailColors;
     this.initTrail();
     }
     
@@ -78,6 +81,18 @@ class Star{
             }
             else{return color;} 
         });
+        if(this.alternativeTrailColors){
+        this.trailColor2 = [...Array(this.alllife).keys()].map(x => {
+            var color = this.alternativeTrailColors[0].clone();
+            color.lerp(this.alternativeTrailColors[1], x * 1.0 / this.alllife);
+            if(x == 0){
+                return new THREE.Color(0xffffff);
+            }
+            else{return color;} 
+        });
+
+
+        }
 
         this.trail[this.trailPointer] = this.pos.clone(); 
     }
