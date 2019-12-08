@@ -1,7 +1,7 @@
 https://codyhouse.co/gem/vertical-fixed-navigation-2
 
 jQuery(document).ready(function($){
-	var contentSections = $('.section'),
+	var contentSections = $('.nav-section'),
 		navigationItems = $('#cd-vertical-nav a');
 
 	//console.log(contentSections)
