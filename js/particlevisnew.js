@@ -269,7 +269,7 @@ function particlevisNew(){
     var starLabels = [];
     var font = null;
     var textFont = null;
-    var textSize = 20;
+    var textSize = 16;
     var labelDict = {};
 
     queue()
@@ -356,9 +356,9 @@ function particlevisNew(){
         var countryName = countryNames[_country];
         var message = null;
         if (_category != howLongLonely.length-2){
-           message = 'In '+ countryName + ', \nabout' + ' ' + percentage.toString() + '% of people reporting loneliness/isolation say \nthey have been lonely for ' + howLongLonely[_category].Category + ' .'; 
+           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report being lonely have been so for ' + howLongLonely[_category].Category + '.'; 
         }else{
-           message = 'In '+ countryName + ', \nabout' + ' ' + percentage.toString() + '% of people reporting loneliness/isolation \nare not sure/declined to answer how long they have been lonely.'; 
+           message = 'In '+ countryName + ', ~' + ' ' + percentage.toString() + '% of people \nwho report being lonely are not sure/declined to answer about the details.'; 
         }
         return message;
     }
