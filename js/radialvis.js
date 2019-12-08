@@ -9,9 +9,23 @@ function radialvisMain(){
         'living alone',
         'unemployed',
         'being discriminated',
-        'no supervisory',
-        'not belong to religion'
+        'no supervisory role',
+        'not belong to religion',
+        'being ethinic minority',
+        'being immigrants'
     ]
+
+    var factorExplainations =[
+        'Compare those who have no confidant with those who have at least one confidant.',
+        'Compare those who lives alone with those who do not live alone.',
+        'Compare those who was unemployed with those who had paid work in the past 7 days.',
+        'Compare those who feel being discriminated with those who do not.',
+        'Compare those who do not supervise the work of other employees with those who do.',
+        'Compare those who do not believe in a religion with those who do.',
+        'Compare those who are ethnic minority with those who are ethnic majority.',
+        'Compare those who are immigrants with those who are natives.'
+    ]
+
     var topFactors = [];
     var oddsRatioCountries;
     var oddsRatioStacked;
@@ -53,6 +67,10 @@ function radialvisMain(){
     var explainationContainer;
     var currentCountry = 'Europe';
     var displayCountry;
+
+    var radialtooltip;
+    var radialtooltiptext;
+    var tooltipContainer;
     // Load Data
     queue()
         .defer(d3.csv, "data/OddsRatioByFactor.csv")
@@ -92,6 +110,8 @@ function radialvisMain(){
         areaContainer = svg.append('g').attr('class','dugy-radial-area-container');
         axesContainer = svg.append('g').attr('class','dugy-radial-axes-container');
         labelContainer = svg.append('g').attr('class', 'dugy-radial-labels-container');
+        tooltipContainer = svg.append('g').attr('class', 'dugy-radial-tooltip-container');
+                       
 
         var stack = d3.stack().keys(oddsRatioCountries);
 
@@ -112,21 +132,39 @@ function radialvisMain(){
             .range([innerRadius,outerRadius]);
 
 
+        radialtooltip = tooltipContainer.append('rect')
+                        .attr("width", 270)
+                        .attr("height", 20)
+                        .attr("x", 0)
+                        .attr("y", 0)
+                        .attr("id", "dugy-radial-tooltip-rect")
+                        .style('fill','#171c25')
+                        .style('opacity',0)
+        radialtooltiptext = tooltipContainer.append('text')
+                    .attr('id', 'dugy-radial-tooltip-text')
+                    .style('fill','#8593b3')
+                    .attr('x', 8)
+                    .attr('y', 8)
+                    .style('font-size',6)
+                    .style("opacity",0)
+                    .attr('dy', '.35em');
+
+
         // text labels for factors
         oddsAxesLabels = labelContainer.selectAll(".dugy-radial-label")
             .data(oddsRatioDimensions, function(d,i){return i})
-            .enter().append('text')
-            .transition()
+            
+        oddsAxesLabels2 = oddsAxesLabels.enter().append('text')
+
+        oddsAxesLabels2.transition()
             .duration(800)
             .attr('x',0)
             .attr('y',function(d,i){
-
             if (angleScale(i)> 0.5 * Math.PI && angleScale(i) < 1.5* Math.PI ){
-               return outerRadius+10
+               return outerRadius+ 10
             }else{
-               return -outerRadius-10
+               return -outerRadius-5
             }
-            
             })
             .attr('class', 'dugy-radial-label')
             .attr("transform", function(d,i) { 
@@ -142,6 +180,16 @@ function radialvisMain(){
             .style('font-weight', '200')
             .style('text-anchor','middle')
             .style('font-size', '9px')
+
+        oddsAxesLabels2.on('mouseenter', function(d,i){
+            tooltipContainer.transition(10).attr('transform', `translate(${-50}, ${40})`);
+            radialtooltip.transition(1).style("opacity",1.0);
+            radialtooltiptext.transition(1).style("opacity",1.0).text(factorExplainations[i]);
+            })
+            .on('mouseleave',function(d,i){
+                radialtooltip.transition(1).style("opacity",0);
+                radialtooltiptext.transition(1).style("opacity",0);
+              }) 
 
         // axes
         circleCount = maxCircleCount;

@@ -297,7 +297,7 @@ function MatrixMain()
         }
 
         function highlightAge() {
-            console.log(matrixData["age"])
+            //console.log(matrixData["age"])
             circles
                 .data(matrixData["age"])
                 .classed('age-circle',true)
