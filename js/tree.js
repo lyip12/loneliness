@@ -1,6 +1,6 @@
 tree()
 
-//Example taken directly from https://bl.ocks.org/d3noob/80c100e35817395e88918627eeeac717 with edits
+//Example taken from https://bl.ocks.org/d3noob/80c100e35817395e88918627eeeac717 with edits
 
 function tree(){
 
