@@ -121,7 +121,9 @@ function particlevisNew(){
             //use array so that when its empty(not loaded), this won't excute
             if (legendStar[i].star.remain > 0 && legendStar[i].star.pos.x < sliderLength){
                 legendStar[i].advancedUpdate(1.0, 8, 0.4, new THREE.Vector3(sliderLength,0,cubeDepth));
-            }
+            }else{
+                legendStar[i].starFieldUpdate();
+            } 
         }
     }
 
