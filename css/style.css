@@ -395,6 +395,7 @@ ul {
     margin: 0;
     padding: 0;
 }
+
 /* No Touch devices */
 .cd-nav-trigger {
     display: none;
