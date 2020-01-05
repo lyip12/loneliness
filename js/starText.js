@@ -1,35 +1,12 @@
 // StarText Class
 class StarText{
-    textColor = new THREE.Color(0xffd6d6);
-    textFont = null;
-    textOpacity = 0.5;
-    textShapes = null;
-    companionStar = null
-    textString = "";
-    textGeometry = null;
-    pos = new THREE.Vector3(0,0,-110);
-
-    starText = null;
-    category = 5;
-    country = 'All-Lonely';
-
-    texMat = new THREE.MeshBasicMaterial( {
-        color: this.textColor,
-        transparent: true,
-        blending:THREE.AdditiveBlending,
-        depthTest: false,
-        depthWrite : false,
-        side: THREE.DoubleSide,
-        opacity:1.0
-    } );
-
-    // change
-    static fadingFactor = 0.1;
-    fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
-    static minOpacity = 0;
-
-
-    constructor(_companionStar,_textFont, _textSize, _textString, _z, _category,_country, _pos= new THREE.Vector3(0,0,-110)){
+    constructor(_companionStar,_textFont, _textSize, _textString, _z, _category, _country= 'All-Lonely', _pos= new THREE.Vector3(0,0,-110)){
+        this.textColor = new THREE.Color(0xffd6d6);
+        this.textOpacity = 0.5;
+        this.textShapes = null;
+        this.textGeometry = null;
+        this.pos = new THREE.Vector3(0,0,-110);
+        
         this.companionStar = _companionStar;
         this.textFont = _textFont;
         this.textSize = _textSize;
@@ -38,9 +15,30 @@ class StarText{
         this.category = _category;
         this.country = _country;
         this.pos = _pos;
+
+
+        this.texMat = new THREE.MeshBasicMaterial( {
+            color: this.textColor,
+            transparent: true,
+            blending:THREE.AdditiveBlending,
+            depthTest: false,
+            depthWrite : false,
+            side: THREE.DoubleSide,
+            opacity:1.0
+        } );
+        this.fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
+        this.starText = null;
+
         this.initialization();
     }
 
+    static get fadingFactor(){
+        return 0.1;
+    }
+
+    static get minOpacity(){
+        return 0.1;
+    }
     resetCompanionStar(_companionStar){
         this.companionStar = _companionStar;
     }

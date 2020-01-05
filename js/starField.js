@@ -1,59 +1,48 @@
 // StarTrail Class
 class StarTrail{
-    static startColor = new THREE.Color(0xff6666);
-    static destColor = new THREE.Color(0x161c26);
-
-    starTexture = new THREE.TextureLoader().load( "textures/TEX_Glow.png" );
-    starMaterial = new THREE.PointsMaterial( 
-        {  
-          vertexColors: THREE.VertexColors, 
-          map:this.starTexture, 
-          depthTest: false, 
-          size:5,
-          blending:THREE.AdditiveBlending,
-          depthWrite : false,
-          transparent:true,
-          opacity:1.0
-          /* blending: THREE.CustomBlending,
-          blendEquation: THREE.AddEquation,
-          blendSrc:  THREE.SrcAlphaFactor,
-          blendDst:  THREE.OneFactor, 
-          blendSrcAlpha: THREE.SrcAlphaFactor,
-          blendDstAlpha: THREE.OneMinusSrcAlphaFactor */
-        } );
-
-    star = null;
-    category = 5;
-    country = 'US-Lonely';
-
-    starsBufferGeometry = new THREE.BufferGeometry();
-    starsPositionBuffer = null;
-    starsColorBuffer = null;
-    starsScaleBuffer = null;
-    
-    numStars = 10;
-    starField = null;
-
-    // change
-    static fadingFactor = 0.1;
-    fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
-    static minOpacity = 0.1;
-
-    alternativeColors = null;
-    useAlternativeColors = false;
-
     constructor(_x, _y, _z, _minLife, _maxLife, _category=5, _country='US-Lonely', _alternativeColors=null){
         this.numStars = 2 * THREE.Math.randInt(_minLife, _maxLife);
         this.star = new Star(_x,_y,_z,this.numStars / 2, _alternativeColors);
         this.starsPositionBuffer = new Float32Array( this.numStars * 3 );
         this.starsColorBuffer = new Float32Array( this.numStars * 3 );
-        //this.starsScaleBuffer = new Float32Array( this.numStars );
         this.category = _category;
         this.country = _country;
         this.alternativeColors = _alternativeColors;
+
+        this.useAlternativeColors = false;
+        this.starTexture = new THREE.TextureLoader().load( "textures/TEX_Glow.png" );
+        this.starMaterial = new THREE.PointsMaterial( 
+            {  
+              vertexColors: THREE.VertexColors, 
+              map:this.starTexture, 
+              depthTest: false, 
+              size:5,
+              blending:THREE.AdditiveBlending,
+              depthWrite : false,
+              transparent:true,
+              opacity:1.0
+            } );
+        this.starsBufferGeometry = new THREE.BufferGeometry();
+        this.starField = null;
+        //fading
+        this.fadingStage = 0;   // -1 fading out, 0 do not change, 1 fading in
         this.initialization();
     }
+    static get startColor() {
+        return new THREE.Color(0xff6666);
+    }
 
+    static get destColor(){
+        return new THREE.Color(0x161c26);
+    }
+
+    static get fadingFactor(){
+        return 0.1;
+    }
+
+    static get minOpacity(){
+        return 0.1;
+    }
     /* initialize */
 
     initialization(){
@@ -66,13 +55,11 @@ class StarTrail{
 			this.starsPositionBuffer[i*3] = this.star.trail[i].x;
 			this.starsPositionBuffer[i*3 + 1] = this.star.trail[i].y;
 			this.starsPositionBuffer[i*3 + 2] = this.star.trail[i].z;
-			//this.starsScaleBuffer[i] = 1;
-			this.starsColorBuffer[i*3] = StarTrail.startColor.r;
+            this.starsColorBuffer[i*3] = StarTrail.startColor.r;
 			this.starsColorBuffer[i*3+1] = StarTrail.startColor.g;
 			this.starsColorBuffer[i*3+2] = StarTrail.startColor.b;
 		}
 		this.starsBufferGeometry.setAttribute( 'position', new THREE.BufferAttribute( this.starsPositionBuffer, 3 ) );
-		//this.starsBufferGeometry.setAttribute( 'size', new THREE.BufferAttribute( this.starsScaleBuffer, 1 ) );
 		this.starsBufferGeometry.setAttribute( 'color', new THREE.BufferAttribute( this.starsColorBuffer, 3) );
 	}
 
@@ -166,7 +153,7 @@ class StarTrail{
                 }
             }
            
-            if (i  == this.star.pointer || i == 0 ){
+            if (i  == this.star.pointer || (this.star.pointer == this.numStars - 1 && i == 0)|| (i == this.star.pointer + 1 && i < this.numStars)){
                 color = new THREE.Color(0xffffff);;
             }           
 			colors[i*3] = color.r;
@@ -175,7 +162,6 @@ class StarTrail{
 		}
 		this.starField.geometry.attributes.position.needsUpdate = true;
 		this.starField.geometry.attributes.color.needsUpdate = true;
-		//this.starField.geometry.attributes.size.needsUpdate = true;
 	}
 
 }
